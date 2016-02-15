@@ -8,7 +8,6 @@
   #script para verificar a distribuição
   #author: tonyhts
   #source: https://www.vivaolinux.com.br/topico/Comandos/Como-saber-se-uma-distro-e-rpm-ou-deb
-
   releases=("/etc/debian_version" "/etc/SuSE-release" "/etc/mandrake-release" \
   "/etc/fedora-release" "/etc/redhat-release" "/etc/gentoo-release"\
   "/etc/slackware-version" "/etc/arch-release")
