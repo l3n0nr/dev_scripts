@@ -15,6 +15,7 @@ sleep 5
 clear
 echo 'Pasta aberta, aguardando para fechar...'
 echo '----------------------------------------------------------'
-sudo thunar /opt/lampp/htdocs
+#sudo 
+thunar /opt/lampp/htdocs
 echo '----------------------------------------------------------'
 echo 'Finalizado!'
