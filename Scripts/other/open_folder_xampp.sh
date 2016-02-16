@@ -1,5 +1,5 @@
 clear
-echo 'Iniciando o servidor Samba, espere..'
+echo 'Iniciando o servidor Xampp, espere..'
 echo '------------------------------------'
 sudo /opt/lampp/lampp start
 
@@ -18,4 +18,3 @@ echo '----------------------------------------------------------'
 sudo thunar /opt/lampp/htdocs
 echo '----------------------------------------------------------'
 echo 'Finalizado!'
-

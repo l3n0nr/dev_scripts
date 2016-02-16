@@ -1,6 +1,6 @@
 
 clear
-echo 'Iniciando o servidor Samba, espere..'
+echo 'Iniciando o servidor Xampp, espere..'
 echo '------------------------------------'
 echo
 sudo /opt/lampp/lampp start
@@ -10,4 +10,3 @@ echo 'Serviço iniciado com sucesso!'
 echo '------------------------------------'
 sleep 15
 clear
-
