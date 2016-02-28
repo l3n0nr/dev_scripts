@@ -30,7 +30,7 @@ if [ "$valor" == "s" ]; then
 	echo "| ======================================================= |"
 		echo 0 >  /sys/class/rfkill/rfkill0/state
 	echo
-	echo "A partir de agora, o seu computador irá consumir menos recursos.."
+	echo "A partir de agora, o seu computador irá consumir menos recursos e talvez a sua bateria irá durar mais.."
 	#echo "Caso mantenha o uso do notebook constante e com poucas tarefas rodando em paralelo."
 	echo
 else
