@@ -1,0 +1,6 @@
+#testando rotina
+
+while true
+{
+  
+}
