@@ -14,7 +14,7 @@
       SRCDIR="IFF"
 
     #diretório de destino do backup
-      DSTDIR="/home/lenonr/Dropbox/Backup_Pendrive"
+      DSTDIR="/home/lenonr/Dropbox/Backup_Pendrive/"
 
     #data atual
       DATA=`date +%x-%k%M%S`
@@ -27,7 +27,7 @@
       echo "---------------------------------------------"
 
     #esperando alguns segundos
-      sleep 5
+      #sleep 5
 
     #criar o arquivo full-data.tar no diretório de destino
       ARQ=$DSTDIR/backup-$DATA.tar.gz
