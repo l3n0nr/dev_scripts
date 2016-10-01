@@ -1,0 +1,1 @@
+sudo fsck /dev/sda2 -y -C -f && sudo fsck /dev/sda3 -y -C -f && reboot

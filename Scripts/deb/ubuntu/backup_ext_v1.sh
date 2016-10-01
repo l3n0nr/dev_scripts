@@ -15,8 +15,23 @@
     #esperando alguns segundos
       sleep 2
   }
+  
+  destrofull()
+  {         
+	rm -rf /home/lenonr/Dropbox/Backup_Pendrive/IFF
+        echo "Arquivo mais antigo eliminado!"
+  }
+
+  #chamando funcao para buscar os caminhos dos arquivos
+  #  dadosfull
 
   #chamando funcao para realizar o backup dos dados
-    dadosfull
+ #   backupfull
+
+  #chamando funcao que realiza limpeza dos arquivos existentes
+   destrofull
+
+  #chamando funcao para realizar o backup dos dados
+   dadosfull
 
 
