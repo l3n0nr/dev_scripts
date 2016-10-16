@@ -1,0 +1,8 @@
+//Depois de pausar o reprodutor, ele não reproduz mais as musicas mesmo que aparente(tempo da musica vai avançando), 
+porém depois de um tempo ele trava até ser fechado automaticamente. 
+
+1193046 - rhytmbox
+
+//Não consegui encontrar a solução ainda.
+
+Solução encontrada, foi trocar pelo Clementine.

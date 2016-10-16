@@ -1,0 +1,21 @@
+Runlevels
+-----------------------------------
+Linux Standard Base
+0 - Desliga o computador: halt, shutdown -h, poweroff;
+1 - Mono-usuário sem rede;
+2 - Multi-usuário sem rede;
+3 - Multi-usuário com rede;
+4 - "Propositos especiais";
+5 - Servidor Gráfico;
+6 - Reinicia a computador: reboot, shutdown -r;
+-----------------------------------
+
+Comandos interessantes
+/sbin/init --help
+man runlevel
+man 1 systemctl
+man 1 systemd
+init --help
+telinit --help
+man 8 telinit
+man 1 wall
