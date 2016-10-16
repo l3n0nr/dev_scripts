@@ -1,0 +1,4 @@
+#Erro do não reconhecimento do leitor de temperatura do HDD na interface XFCE
+
+-sudo chmod u+s /usr/sbin/hddtemp
+

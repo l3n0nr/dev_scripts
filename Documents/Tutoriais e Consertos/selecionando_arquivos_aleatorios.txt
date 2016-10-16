@@ -1,0 +1,12 @@
+#Sorteando um arquivo qualquer dentro de um diretorio para abrir
+
+#Exemplo: man $(ls /caminho | shuf | head -n1)
+
+#Para abrir um arquivo aleatorio dentro da pasta /bin, basta digitar..
+
+man $(ls /bin |shuf | head -n1)
+
+
+
+
+
