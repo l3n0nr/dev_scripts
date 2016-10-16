@@ -1,21 +1,18 @@
 clear
 echo 'Iniciando o servidor Xampp, espere..'
 echo '------------------------------------'
+sleep 3
 sudo /opt/lampp/lampp start
-
-clear
-echo 'Serviço iniciado com sucesso!'
-echo '------------------------------------'
-sleep 15
 clear
 
 echo ' Abrindo pasta do XAMP em modo administrador......'
 echo '----------------------------------------------------------'
-sleep 5
-clear
-echo 'Pasta aberta, aguardando para fechar...'
-echo '----------------------------------------------------------'
-#sudo 
-thunar /opt/lampp/htdocs
-echo '----------------------------------------------------------'
-echo 'Finalizado!'
+sleep 3
+thunar /opt/lampp/htdocs && firefox http://localhost/dev_bootstrap || exit
+
+#echo 'Iniciando Firefox'
+#echo '----------------------------------------------------------'
+#sleep 3
+#clear
+
+#exit
