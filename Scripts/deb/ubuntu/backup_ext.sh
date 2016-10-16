@@ -74,22 +74,16 @@
   }
 
   procuraedestroifull()
-  {
-    #apagando arquivos mais antigos (a mais de 20 dias que existe)
-      find $DSTDIR -name "f*" -ctime $TIME_BKCP -exec rm -f {} ";"
-         if [ $? -eq 0 ] ; then
-            echo "OBS: Arquivo de backup mais antigo eliminado!"
-            echo ""
-         else
-            echo "Erro durante a busca e destruição do backup antigo!"
-         fi
+  {         
+	rm -rf /home/lenonr/Dropbox/Backup_Pendrive/IFF
+        echo "Arquivo mais antigo eliminado!"
   }
 
   #chamando funcao para buscar os caminhos dos arquivos
-    dadosfull
+  #  dadosfull
 
   #chamando funcao para realizar o backup dos dados
-    backupfull
+ #   backupfull
 
   #chamando funcao que realiza limpeza dos arquivos existentes
     procuraedestroifull
