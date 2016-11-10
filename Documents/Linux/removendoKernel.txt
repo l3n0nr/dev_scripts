@@ -1,0 +1,6 @@
+#primeiro deve-se entrar em modo root
+#depois executa-se este comando 
+dpkg -l | grep linux-image
+
+#posteriormente basta remover o kernel escolhido
+dpkg -l | grep linux-image-"versao"

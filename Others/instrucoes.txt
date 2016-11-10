@@ -1,3 +1,0 @@
-#É necessário entrar no seguinte diretório /home/lenonr/.local/share/xfpanel-switch/;
-#Depois basta colocar a pasta "padrao.tar.bz2" neste diretório;
-#Agora você precisa carregar o arquivo na interface do Xfce4... mas não sei como ainda

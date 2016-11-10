@@ -1,4 +1,0 @@
-<http://www.if-not-true-then-false.com/2010/install-apache-php-on-fedora-centos-red-hat-rhel/>
-
-<https://www.digitalocean.com/community/tutorials/how-to-install-lamp-linux-apache-mysql-php-on-fedora>
-

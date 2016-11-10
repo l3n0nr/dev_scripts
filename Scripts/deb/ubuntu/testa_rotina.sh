@@ -1,6 +1,0 @@
-#testando rotina
-
-while true
-{
-  
-}

@@ -1,5 +1,5 @@
 #Comando usado para verificar quais itens estão instalados no computador
-$sudo dpkd -l > listaAll.txt
+$sudo dpkg -l > listaAll.txt
 
 #Comando para mostrar apenas nomes dos itens instalados
 $dpkg --get-selections | awk '{if ($2=="install") print $1}' > listaResm.list 
