@@ -37,7 +37,7 @@ auto_config()
 	#programas: instalando componentes do xfce4, xampp, programas essenciais para o uso, prelink, preload e deborphan
 		xfce
 			sleep 1
-		#xampp
+		xampp
 			sleep 1
 		install_essencials
 			sleep 1
@@ -107,13 +107,15 @@ xfce()
 
 xampp()
 {
+	#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o processo
 	clear
 	echo "Instalando XAMPP em sua máquina"
 	echo "----------------------------------------------------------------------"
 	wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
 	echo "Realizando a instalação..."
 	echo "---------------------"
-	sudo ./xammp-installer.run
+	chmod +x xampp-installer.run
+	sudo ./xampp-installer.run
 	echo "Espere..."
 	echo "---------------------"
 	echo "Iniciando XAMPP"
