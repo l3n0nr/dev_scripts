@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+################################################################################
 #30/11/2015
 #Script irá tentar fazer uma limpeza no sistema operacional
 #Removedo arquivos que não estão sendo utilizados (cache de Terminal, lib
@@ -9,9 +9,28 @@
 #
 #por Flávio Oliveira (flávio dicas)
 #contato: oliveiradeflavio@gmail.com http://youtube.com/flaviodicas
+################################################################################
 
-#script modificado e projetado para utilização  xubuntu 16.10
-#author: lenonr - lenonrmsouza@gmail.com
+#Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
+#	-Xubuntu 16.04
+	
+#Algumas de suas funcionalidades
+#	-Instalar PPA's ao sistema;
+#	-Atualizar repositórios e pacotes;
+#	-Instalar programas essenciais e outros opcionais no sistema;
+#	-Realizar a configuração e otimização de diversos aspectos do sistema;
+
+#Estruturar
+#	-Verificar a autorização do usuário, para realização das tarefas.
+#	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
+#		//implementar
+#	-Perguntar quais tarefas, ele deseja realizar. 
+#		//implementar
+	
+#autor: lenonrmsouza@gmail.com
+#versão: 0.7
+#Link: Pasta dos programas <>
+################################################################################
 
 #verificando se é ROOT
 if [[ `id -u` -ne 0 ]]; then
@@ -127,13 +146,31 @@ xampp()
 install_essencials()
 {
 	clear
-	echo "Instalando Programas essenciais..."
+	echo "Instalando Programas..."
 	echo "----------------------------------------------------------------------"
-	sudo apt-get install libreoffice firefox gimp git lm-sensors stellarium texmaker wine playonlinux vlc gimp gparted gnome-terminal tlp clementine -y --force-yes 
-	
+	#programas essenciais
+		sudo apt-get install libreoffice firefox vlc gparted tlp rar -y --force-yes
+			
 	#instalando java
-	sudo apt-get install oracle-java8-installer -y
+		sudo apt-get install oracle-java8-installer -y
 }
+
+install_others()
+{	
+	#outros programas
+		sudo apt-get install git lm-sensors stellarium texmaker gnome-terminal clementine -y --force-yes 
+	
+	#instalando gimp
+		sudo apt-get install gimp* -y
+			#copiando pasta do autoconfig da interface do gimp, para a home do usuario
+			#cp GIMP/.fonts/ /home/$SUDO_USER && cp GIMP/.gimp-2.8/ /home/$SUDO_USER
+}
+
+install_wine()
+{	
+	#instalando wine-playonlinux
+		sudo apt-get install wine playonlinux -y
+}		
 
 prelink_preload_deborphan()
 {
@@ -145,7 +182,7 @@ prelink_preload_deborphan()
 	#deborphan = remove pacotes obsoletos do sistema, principalmente após as atualizações de programas
 	echo "-------------------"
 	sudo apt install prelink preload -y 1>/dev/null 2>/dev/stdout
-	sudo apt-get install deborphan
+	sudo apt-get install deborphan -y
 
 	echo "Configurando Deborphan..."
 	sudo deborphan | xargs sudo apt-get -y remove --purge &&
@@ -230,32 +267,33 @@ cleaning_ubuntu()
 	echo "----------------------------------------------------------------------"
 	clear
 	if which -a prelink && which -a deborphan; then
-	clear
-	echo "Esvaziando a Lixeira"
-	rm -rf /home/$SUDO_USER/.local/share/Trash/files/*
-	echo "--------------------------------------------"
-	echo "Esvaziando os Arquivos Temporários (pasta tmp)"
-	rm -rf /var/tmp/*
-	echo "--------------------------------------------"
-	echo "Excluindo Arquivos Inúteis do Cache do Gerenciador de Pacotes (apt)"
-	apt-get clean -y
-	echo "--------------------------------------------"
-	echo "Excluindo Pacotes Velhos que não tem utilidade para o Sistema"
-	apt-get autoremove -y
-	echo "--------------------------------------------"
-	echo "Excluindo Pacotes Duplicados"
-	apt-get autoclean -y
-	echo "--------------------------------------------"
-	echo "Reparando Pacotes com Problemas"
-	dpkg --configure -a
-	echo "--------------------------------------------"
-	echo "Removendo Pacotes Órfãos"
-	apt-get remove $(deborphan) -y ; apt-get autoremove -y
-	echo "--------------------------------------------"
-	echo "Removendo Arquivos (.bak, ~, .tmp) da pasta Home"
-	for i in *~ *.bak *.tmp; do
-		find $HOME -iname "$i" -exec rm -f {} \;
+		clear
+		echo "Esvaziando a Lixeira"
+		rm -rf /home/$SUDO_USER/.local/share/Trash/files/*
+		echo "--------------------------------------------"
+		echo "Esvaziando os Arquivos Temporários (pasta tmp)"
+		rm -rf /var/tmp/*
+		echo "--------------------------------------------"
+		echo "Excluindo Arquivos Inúteis do Cache do Gerenciador de Pacotes (apt)"
+		apt-get clean -y
+		echo "--------------------------------------------"
+		echo "Excluindo Pacotes Velhos que não tem utilidade para o Sistema"
+		apt-get autoremove -y
+		echo "--------------------------------------------"
+		echo "Excluindo Pacotes Duplicados"
+		apt-get autoclean -y
+		echo "--------------------------------------------"
+		echo "Reparando Pacotes com Problemas"
+		dpkg --configure -a
+		echo "--------------------------------------------"
+		echo "Removendo Pacotes Órfãos"
+		apt-get remove $(deborphan) -y ; apt-get autoremove -y
+		echo "--------------------------------------------"
+		echo "Removendo Arquivos (.bak, ~, .tmp) da pasta Home"
+		for i in *~ *.bak *.tmp; do
+			find $HOME -iname "$i" -exec rm -f {} \;
 	done
+	
 	echo "--------------------------------------------"
 	echo "Otimizando as Bibliotecas dos Programas"
 	/etc/cron.daily/prelink
@@ -312,7 +350,19 @@ reboot()
 
 remove_programs()
 {
+	clear
+	echo "Removendo programas automaticamente"
+	echo "----------------------------------------------------------------------"
 	sudo apt autoremove thunderbird xfburn pidgin -y
+	sudo apt purge thunderbird xfburn pidgin -y
+}
+
+corrige_erros()
+{
+	clear
+	echo "Corrigindo possiveis erros no Sistema"
+	echo "----------------------------------------------------------------------"
+	sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
 }
 
 #mostrando mensagem inicial
