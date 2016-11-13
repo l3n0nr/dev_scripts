@@ -24,7 +24,10 @@
 #	-Verificar a autorização do usuário, para realização das tarefas.
 #	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
 #		//implementar
+#	-Verifica qual o tipo de interação o usuário deseja realizar
+#		Exemplo: Deseja escolher as aplicações que serão instaladas ou prefere realizar a instalação padrão que contem os seguintes programas(listar os programas que irão ser instalados)
 #	-Perguntar quais tarefas, ele deseja realizar. 
+#		Exemplo: Deseja instalar o programa X, registra as respostas para que posteriormente seja realizada a instalação sem interatividade.		
 #		//implementar
 	
 #autor: lenonrmsouza@gmail.com
@@ -41,35 +44,6 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
-
-#criando função global, que inicia todas as outras
-auto_config()
-{
-	echo "INICIANDO AS TAREFAS"
-	#sistema: atualizando sistema, adicionando ppa's e codecs de media
-		add_ppa
-			sleep 1
-		update_system
-			sleep 1	
-		codecs
-			sleep 1
-	#programas: instalando componentes do xfce4, xampp, programas essenciais para o uso, prelink, preload e deborphan
-		xfce
-			sleep 1
-		xampp
-			sleep 1
-		install_essencials
-			sleep 1
-		remove_programs
-			sleep 1
-		prelink_preload_deborphan
-	#otimizando: configurando swap, limpando sistema e reiniciando
-		swap
-			sleep 1
-		cleaning_ubuntu
-		reboot	
-			sleep 1
-}
 
 #funcao para atualizar o sistema
 update_system()
@@ -124,7 +98,7 @@ xfce()
 	 sudo chmod u+s /usr/sbin/hddtemp
 }
 
-xampp()
+program_xampp()
 {
 	#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o processo
 	clear
@@ -143,7 +117,7 @@ xampp()
 	rm xampp-installer.run
 }
 
-install_essencials()
+programs_essencials()
 {
 	clear
 	echo "Instalando Programas..."
@@ -155,7 +129,7 @@ install_essencials()
 		sudo apt-get install oracle-java8-installer -y
 }
 
-install_others()
+programs_others()
 {	
 	#outros programas
 		sudo apt-get install git lm-sensors stellarium texmaker gnome-terminal clementine -y --force-yes 
@@ -166,13 +140,13 @@ install_others()
 			#cp GIMP/.fonts/ /home/$SUDO_USER && cp GIMP/.gimp-2.8/ /home/$SUDO_USER
 }
 
-install_wine()
+programs_game()
 {	
 	#instalando wine-playonlinux
 		sudo apt-get install wine playonlinux -y
 }		
 
-prelink_preload_deborphan()
+programs_prelink_preload_deborphan()
 {
 	clear
 	echo
@@ -357,12 +331,49 @@ remove_programs()
 	sudo apt purge thunderbird xfburn pidgin -y
 }
 
-corrige_erros()
+correct_errors()
 {
 	clear
 	echo "Corrigindo possiveis erros no Sistema"
 	echo "----------------------------------------------------------------------"
 	sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
+}
+
+#criando função global, que inicia todas as outras
+auto_config()
+{
+	echo "INICIANDO AS TAREFAS"
+	#sistema
+		add_ppa
+			sleep 1
+		update_system
+			sleep 1	
+		codecs
+			sleep 1
+	#programas
+		xfce
+			sleep 1
+		program_xampp
+			sleep 1
+		programs__essencials
+			sleep 1
+		programs__others
+			sleep 1
+		programs__game
+			sleep 1	
+		#remove_programs
+			sleep 1
+		program_prelink_preload_deborphan
+		
+	#otimizações
+		correct_errors
+			sleep 1
+		swap
+			sleep 1			
+		cleaning_ubuntu
+			sleep 1
+		reboot	
+			sleep 1
 }
 
 #mostrando mensagem inicial
