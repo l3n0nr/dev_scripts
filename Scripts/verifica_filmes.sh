@@ -1,2 +1,0 @@
-#script desenvolvido para gerar uma lista de filmes em um arquivo de texto, que o usuário possui na máquina para possiveis consultas.
-ls /media/lenonr/lenonr-500GB/Arquivos/Filmes/ | grep - > Lista_Filmes.txt
