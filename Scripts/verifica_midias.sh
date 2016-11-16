@@ -2,7 +2,7 @@
 	ls /media/lenonr/lenonr-500GB/Arquivos/Filmes/ | grep - > /media/lenonr/lenonr-500GB/Arquivos/Filmes/Lista_Filmes.txt
 
 #seriados
-	tree -f /media/lenonr/lenonr-500GB/Arquivos/Seriados/ > /media/lenonr/lenonr-500GB/Arquivos/Outros/Lista_Seriados.txt
+	tree -f /media/lenonr/lenonr-500GB/Arquivos/Seriados/ > /media/lenonr/lenonr-500GB/Arquivos/Seriados/Lista_Seriados.txt
 	
 #musicas
 	tree -f /home/lenonr/Music/Musicas/ > /media/lenonr/lenonr-500GB/Arquivos/Outros/Lista_Musicas.txt	
