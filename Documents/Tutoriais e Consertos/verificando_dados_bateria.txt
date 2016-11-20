@@ -1,8 +1,0 @@
-#instalando programa
-$sudo apt install dmidecode
-
-#rodando para informações básicas
-$dmidecode -t 22
-
-#informações detalhadas
-upower -i `upower -e | grep 'BAT'`

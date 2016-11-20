@@ -1,14 +1,29 @@
 #!/bin/bash
 ################################################################################
-#30/11/2015
-#Script irá tentar fazer uma limpeza no sistema operacional
-#Removedo arquivos que não estão sendo utilizados (cache de Terminal, lib
-#sem uso, etc)
-#será preciso instalar dois programas para concluir a limpeza (Deborphan
-#e Prelink)
 #
-#por Flávio Oliveira (flávio dicas)
-#contato: oliveiradeflavio@gmail.com http://youtube.com/flaviodicas
+###################
+#FONTES DE PESQUISA
+###################
+#
+################################################################################
+#por oliveiradeflavio(Flávio Oliveira)
+#	contato: <github.com/oliveiradeflavio/scripts-linux>
+#
+#por gmanson(Gabriel Manson)
+#	contato: <github.com/gmasson/welcome-debian>
+################################################################################
+#
+################################################
+#
+#por lenonr(Lenon Ricardo) - 
+#	contato: <github.com/lenonr/dev_scripts>
+#
+################################################
+#
+############################
+#versão do script: Alpha 0.9 
+############################
+
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
@@ -30,8 +45,6 @@
 #		Exemplo: Deseja instalar o programa X, registra as respostas para que posteriormente seja realizada a instalação sem interatividade.		
 #		//implementar
 	
-#autor: lenonrmsouza@gmail.com
-#versão: 0.7
 #Link: Pasta dos programas <>
 ################################################################################
 
@@ -44,7 +57,16 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
+######VERIFICANDO QUAIS PROGRAMAS O USUARIO DESEJA QUE SEJAM INSTALADOS
+firefox() 
+{
+	clear
+	echo ""
+	echo "Deseja instalar o firefox? (s/n)"
+	read -p "?? " firefox;
+}
 
+####RESCREVER - INICIO
 #funcao para atualizar o sistema
 update_system()
 {
@@ -123,11 +145,12 @@ programs_essencials()
 	echo "Instalando Programas..."
 	echo "----------------------------------------------------------------------"
 	#programas essenciais
-		sudo apt-get install libreoffice firefox vlc gparted tlp rar -y --force-yes
+		sudo apt-get install libreoffice vlc gparted tlp rar -y --force-yes
 			
 	#instalando java
 		sudo apt-get install oracle-java8-installer -y
 }
+
 
 programs_others()
 {	
@@ -338,11 +361,37 @@ correct_errors()
 	echo "----------------------------------------------------------------------"
 	sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
 }
+####RESCREVER - FIM
+
+install_yes()
+{
+	#relatorio de instalacao
+	echo "Os seguintes programas serão instalados..."
+	if [[ $firefox == "s" ]]; then
+  		echo "Firefox,"
+  		sudo apt install firefox -y
+	fi
+}
+
+install_no()
+{
+	#relatorio de instalacao
+	echo "Os seguintes programas não serão instalados..."
+	if [[ $firefox == "" ]n]; then
+  		echo "Firefox,"
+	fi
+}
 
 #criando função global, que inicia todas as outras
 auto_config()
 {
 	echo "INICIANDO AS TAREFAS"
+		##verificano se usuario deseja realizar a instalacao de 
+		firefox
+			sleep 1	
+
+####
+####RESCREVER - INICIO
 	#sistema
 		add_ppa
 			sleep 1
@@ -374,6 +423,7 @@ auto_config()
 			sleep 1
 		reboot	
 			sleep 1
+####RESCREVER - FIM			
 }
 
 #mostrando mensagem inicial
