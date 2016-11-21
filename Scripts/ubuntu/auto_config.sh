@@ -66,6 +66,14 @@ firefox()
 	read -p "?? " firefox;
 }
 
+steam()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o firefox? (s/n)"
+	read -p "?? " steam;
+}
+
 ####RESCREVER - INICIO
 #funcao para atualizar o sistema
 update_system()
@@ -371,14 +379,22 @@ install_yes()
   		echo "Firefox,"
   		sudo apt install firefox -y
 	fi
+	
+	if [[ $steam == "s" ]]; then	
+ 	echo "Steam, (Ele irá precisar da sua atenção)"
+ 		sudo apt-get install steam -y
+	fi
 }
 
 install_no()
 {
 	#relatorio de instalacao
 	echo "Os seguintes programas não serão instalados..."
-	if [[ $firefox == "" ]n]; then
+	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
+	fi
+	if [[ $steam == "n" ]]; then	
+ 	echo "Steam, "
 	fi
 }
 
@@ -389,6 +405,8 @@ auto_config()
 		##verificano se usuario deseja realizar a instalacao de 
 		firefox
 			sleep 1	
+		steam
+			sleep 1
 
 ####
 ####RESCREVER - INICIO
