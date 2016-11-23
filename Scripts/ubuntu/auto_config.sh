@@ -70,7 +70,7 @@ steam()
 {
 	clear
 	echo ""
-	echo "Deseja instalar o firefox? (s/n)"
+	echo "Deseja instalar o steam? (s/n)"
 	read -p "?? " steam;
 }
 
@@ -392,7 +392,7 @@ install_yes()
 		sudo /opt/lampp/lampp start
 		rm xampp-installer.run
 	fi
-}
+
 }
 
 install_no()
@@ -423,36 +423,36 @@ auto_config()
 ####
 ####RESCREVER - INICIO
 	#sistema
-		add_ppa
-			sleep 1
-		update_system
-			sleep 1	
-		codecs
-			sleep 1
+		#add_ppa
+		#	sleep 1
+		#update_system
+		#	sleep 1	
+		#codecs
+		#	sleep 1
 	#programas
-		xfce
-			sleep 1
-		program_xampp
-			sleep 1
-		programs__essencials
-			sleep 1
-		programs__others
-			sleep 1
-		programs__game
-			sleep 1	
+		#xfce
+		#	sleep 1
+		#program_xampp
+		#	sleep 1
+		#programs__essencials
+		#	sleep 1
+		#programs__others
+		#	sleep 1
+		#programs__game
+		#	sleep 1	
 		#remove_programs
-			sleep 1
-		program_prelink_preload_deborphan
+		#	sleep 1
+		#program_prelink_preload_deborphan
 		
 	#otimizações
-		correct_errors
-			sleep 1
-		swap
-			sleep 1			
-		cleaning_ubuntu
-			sleep 1
-		reboot	
-			sleep 1
+		#correct_errors
+		#	sleep 1
+		#swap
+		#	sleep 1			
+		#cleaning_ubuntu
+		#	sleep 1
+		#reboot	
+		#	sleep 1
 ####RESCREVER - FIM			
 }
 
