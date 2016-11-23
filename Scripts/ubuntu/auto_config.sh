@@ -369,18 +369,21 @@ install_yes()
 	#relatorio de instalacao
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
+	#instalando o firefox
 	if [[ $firefox == "s" ]]; then		
 		clear
   		echo "Firefox, "
   		sudo apt install firefox -y
 	fi
 	
+	#instalando o steam
 	if [[ $steam == "s" ]]; then	
 		clear
 	 	echo "Steam"
  		sudo apt-get install steam -y
 	fi
 	
+	#instalando o xampp
 	if [[ $xampp == "s" ]]; then	
 		clear
 	 	echo "Xampp, (Ele irá precisar da sua atenção)"
@@ -400,6 +403,7 @@ install_yes()
 		rm xampp-installer.run
 	fi
 	
+	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then	
 		echo "Corrigindo possiveis erros no Sistema"
 		echo "----------------------------------------------------------------------"
