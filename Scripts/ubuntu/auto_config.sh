@@ -363,8 +363,10 @@ correct_errors()
 
 install_yes()
 {
+	clear
 	#relatorio de instalacao
 	echo "Os seguintes programas serão instalados..."
+	echo "----------------------------------------------"
 	if [[ $firefox == "s" ]]; then
   		echo "Firefox,"
   		sudo apt install firefox -y
@@ -397,8 +399,10 @@ install_yes()
 
 install_no()
 {
+	clear
 	#relatorio de instalacao
 	echo "Os seguintes programas não serão instalados..."
+	echo "----------------------------------------------"
 	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
 	fi
@@ -415,11 +419,13 @@ auto_config()
 {
 	echo "INICIANDO AS TAREFAS"
 		##verificano se usuario deseja realizar a instalacao de 
-		firefox
-			sleep 1	
-		steam
-			sleep 1
-
+			firefox
+			steam
+			xampp
+		
+		#verifica programas
+			install_yes
+			install_no
 ####
 ####RESCREVER - INICIO
 	#sistema
