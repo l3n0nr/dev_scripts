@@ -128,6 +128,14 @@ corrigeerros()
 	read -p "??" corrigeerros;
 }
 
+swap()
+{
+	clear
+	echo ""
+	echo "Deseja otimizar a utilização da swap?"
+	read -p "??" swap;
+}
+
 reinicia()
 {
 	clear
@@ -276,38 +284,6 @@ programs_prelink_preload_deborphan()
 	fi
 }
 
-swap()
-{
-	clear
-	echo "Configurando a Swap"
-	echo "-------------------"
-	memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
-	memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
-	background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
-	ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
-	clear
-	echo "Diminuindo a Prioridade de uso da memória SWAP"
-	echo
-	if [[ $memoswap == "vm.swappiness=10" ]]; then
-		echo "Otimizando..."
-		/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
-
-	elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
-		echo "Otimizando..."
-		/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
-
-	elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
-		echo "Otimizando..."
-		/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
-
-	elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
-		echo "Otimizando..."
-		/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
-	else
-		echo "Não há nada para ser otimizado"
-		echo "Isso porque já foi otimizado anteriormente!"
-	fi
-}
 
 cleaning_ubuntu()
 {
@@ -374,18 +350,6 @@ cleaning_ubuntu()
 	fi
 }
 
-
-
-remove_programs()
-{
-	clear
-	echo "Removendo programas automaticamente"
-	echo "----------------------------------------------------------------------"
-	sudo apt autoremove thunderbird xfburn pidgin -y
-	sudo apt purge thunderbird xfburn pidgin -y
-}
-
-
 ####RESCREVER - FIM
 
 install_yes()
@@ -433,8 +397,37 @@ install_yes()
 		echo "Corrigindo possiveis erros no Sistema"
 		echo "----------------------------------------------------------------------"
 		sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
-
 	fi
+	
+	#otimizando uso da swap
+	if [[ $swap == "s" ]]; then	
+		clear
+		echo "Configurando a Swap"
+		echo "-------------------"
+		memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
+		memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
+		background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
+		ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
+		clear
+		echo "Diminuindo a Prioridade de uso da memória SWAP"
+		echo
+		if [[ $memoswap == "vm.swappiness=10" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
+		elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
+		elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
+		elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
+		else
+			echo "Não há nada para ser otimizado"
+			echo "Isso porque já foi otimizado anteriormente!"
+	fi
+
 	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
@@ -462,6 +455,9 @@ install_no()
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
 	fi
+	if [[ $Swap == "n" ]]; then	
+	 	echo "Swap, "
+	fi
 	
 	if [[ $reinicia == "n" ]]; then	
 		echo "Máquina não será reiniciada agora!"
@@ -472,15 +468,20 @@ install_no()
 auto_config()
 {
 	echo "INICIANDO AS TAREFAS"
-		##verificano se usuario deseja realizar a instalacao de 
+		##verificando se usuario deseja realizar
 			firefox
 			steam
 			xampp
+
+		#corrindo problemas
 			corrigeerros
+			swap
 		
 		#verifica programas
 			install_yes
 			install_no
+			
+		reinicia
 ####
 ####RESCREVER - INICIO
 	#sistema
@@ -512,8 +513,6 @@ auto_config()
 		#	sleep 1			
 		#cleaning_ubuntu
 		#	sleep 1
-		#reboot	
-		#	sleep 1
 ####RESCREVER - FIM			
 }
 
@@ -537,3 +536,4 @@ read -n1 -p "Para continuar escolha s(sim) ou n(não)  " escolha
 			exit
 			;;
 	esac
+	;;
