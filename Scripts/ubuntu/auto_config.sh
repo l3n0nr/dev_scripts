@@ -28,6 +28,47 @@
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
 #	-Xubuntu 16.04
+
+#FUNCOES FUNCIONANDO	
+#Instalação	
+#	Firefox
+#	Steam
+#	Xampp
+#
+#Correção
+#	CorrigindoErros
+#
+#
+#
+#FUNCOES QUE PRECISANDO SER IMPLEMENTADAS
+#Instalação
+#	Ppa's
+#	Codec's
+#	Xfce
+#	Libreoffice
+#	Vlc
+#	Gparted
+#	Tlp
+#	Rar
+#	Java(oracle-java8)
+#	Git
+#	Lm-sensors
+#	Stellarium
+#	Texmaker
+#	Gnome-terminal
+#	Clementine
+#	Gimp
+#	Wine/Playonlinux
+#	
+#Correção
+#	Swap
+#	Prelink
+#	Preload
+#	Deborphan
+#	
+#Limpeza
+#	Cleaning_Ubuntu(espeficar passos aqui)...
+#	
 	
 #Algumas de suas funcionalidades
 #	-Instalar PPA's ao sistema;
@@ -38,12 +79,6 @@
 #Estruturar
 #	-Verificar a autorização do usuário, para realização das tarefas.
 #	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
-#		//implementar
-#	-Verifica qual o tipo de interação o usuário deseja realizar
-#		Exemplo: Deseja escolher as aplicações que serão instaladas ou prefere realizar a instalação padrão que contem os seguintes programas(listar os programas que irão ser instalados)
-#	-Perguntar quais tarefas, ele deseja realizar. 
-#		Exemplo: Deseja instalar o programa X, registra as respostas para que posteriormente seja realizada a instalação sem interatividade.		
-#		//implementar
 	
 #Link: Pasta dos programas <>
 ################################################################################
