@@ -74,6 +74,14 @@ steam()
 	read -p "?? " steam;
 }
 
+xampp()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o xampp? (s/n)"
+	read -p "?? " xampp;
+}
+
 ####RESCREVER - INICIO
 #funcao para atualizar o sistema
 update_system()
@@ -128,24 +136,6 @@ xfce()
 	 sudo chmod u+s /usr/sbin/hddtemp
 }
 
-program_xampp()
-{
-	#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o processo
-	clear
-	echo "Instalando XAMPP em sua máquina"
-	echo "----------------------------------------------------------------------"
-	wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
-	echo "Realizando a instalação..."
-	echo "---------------------"
-	chmod +x xampp-installer.run
-	sudo ./xampp-installer.run
-	echo "Espere..."
-	echo "---------------------"
-	echo "Iniciando XAMPP"
-	echo "---------------------"
-	sudo /opt/lampp/lampp start
-	rm xampp-installer.run
-}
 
 programs_essencials()
 {
@@ -381,9 +371,28 @@ install_yes()
 	fi
 	
 	if [[ $steam == "s" ]]; then	
- 	echo "Steam, (Ele irá precisar da sua atenção)"
+ 	echo "Steam"
  		sudo apt-get install steam -y
 	fi
+	
+	if [[ $xampp == "s" ]]; then	
+	 	echo "Xampp, (Ele irá precisar da sua atenção)"
+		#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o 	processo
+		echo "Instalando XAMPP em sua máquina"
+		echo "----------------------------------------------------------------------"
+		wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
+		echo "Realizando a instalação..."
+		echo "---------------------"
+		chmod +x xampp-installer.run
+		sudo ./xampp-installer.run
+		echo "Espere..."
+		echo "---------------------"
+		echo "Iniciando XAMPP"
+		echo "---------------------"
+		sudo /opt/lampp/lampp start
+		rm xampp-installer.run
+	fi
+}
 }
 
 install_no()
@@ -394,7 +403,10 @@ install_no()
   		echo "Firefox,"
 	fi
 	if [[ $steam == "n" ]]; then	
- 	echo "Steam, "
+	 	echo "Steam, "
+	fi
+	if [[ $xampp == "n" ]]; then	
+	 	echo "Xampp, "
 	fi
 }
 
