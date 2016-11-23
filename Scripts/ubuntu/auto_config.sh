@@ -39,7 +39,10 @@
 #	CorrigindoErros
 #
 #
+#Limpeza
+#Reinicialização
 #
+
 #FUNCOES QUE PRECISANDO SER IMPLEMENTADAS
 #Instalação
 #	Ppa's
@@ -123,6 +126,14 @@ corrigeerros()
 	echo ""
 	echo "Deseja corrigir possíveis erros em sua distribuição? (s/n)"
 	read -p "??" corrigeerros;
+}
+
+reinicia()
+{
+	clear
+	echo ""
+	echo "Deseja reiniciar a máquina agora, para concluir a instalação? (s/n)"
+	read -p "??" reinicia;
 }
 
 ####RESCREVER - INICIO
@@ -363,28 +374,7 @@ cleaning_ubuntu()
 	fi
 }
 
-reboot()
-{
-	clear
-	echo -e "É necessário reiniciar a máquina, para concluir as alterações!"
-	read -p "Deseja reiniciar ? s/n: " -n1 escolha
-	case $escolha in
-		s|S) echo
-			sudo reboot
-			;;
-		n|N) echo
-			echo "Ok!"
-			echo "As alterações só serão realizadas quando você reiniciar a máquina."
-			sleep 3
-			exit
-			;;
-		*) echo
-			echo Alternativas incorretas ... Saindo!!!
-			sleep 1
-			exit
-			;;
-	esac
-}
+
 
 remove_programs()
 {
@@ -445,6 +435,13 @@ install_yes()
 		sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
 
 	fi
+	
+	#reiniciando a maquina
+	if [[ $reinicia == "s" ]]; then	
+		#reiniciando a maquina em dois minutos
+#VERIFICAR	sudo reboot -t 120 
+		sudo reboot
+	fi	
 }
 
 install_no()
@@ -464,6 +461,10 @@ install_no()
 	fi
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
+	fi
+	
+	if [[ $reinicia == "n" ]]; then	
+		echo "Máquina não será reiniciada agora!"
 	fi
 }
 
