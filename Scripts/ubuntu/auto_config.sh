@@ -82,6 +82,14 @@ xampp()
 	read -p "?? " xampp;
 }
 
+corrigeerros()
+{
+	clear
+	echo ""
+	echo "Deseja corrigir possíveis erros em sua distribuição? (s/n)"
+	read -p "??" corrigeerros;
+}
+
 ####RESCREVER - INICIO
 #funcao para atualizar o sistema
 update_system()
@@ -352,32 +360,29 @@ remove_programs()
 	sudo apt purge thunderbird xfburn pidgin -y
 }
 
-correct_errors()
-{
-	clear
-	echo "Corrigindo possiveis erros no Sistema"
-	echo "----------------------------------------------------------------------"
-	sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
-}
+
 ####RESCREVER - FIM
 
 install_yes()
 {
 	clear
 	#relatorio de instalacao
-	echo "Os seguintes programas serão instalados..."
+	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
-	if [[ $firefox == "s" ]]; then
-  		echo "Firefox,"
+	if [[ $firefox == "s" ]]; then		
+		clear
+  		echo "Firefox, "
   		sudo apt install firefox -y
 	fi
 	
 	if [[ $steam == "s" ]]; then	
- 	echo "Steam"
+		clear
+	 	echo "Steam"
  		sudo apt-get install steam -y
 	fi
 	
 	if [[ $xampp == "s" ]]; then	
+		clear
 	 	echo "Xampp, (Ele irá precisar da sua atenção)"
 		#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o 	processo
 		echo "Instalando XAMPP em sua máquina"
@@ -394,14 +399,20 @@ install_yes()
 		sudo /opt/lampp/lampp start
 		rm xampp-installer.run
 	fi
+	
+	if [[ $corrigeerros == "s" ]]; then	
+		echo "Corrigindo possiveis erros no Sistema"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
 
+	fi
 }
 
 install_no()
 {
 	clear
 	#relatorio de instalacao
-	echo "Os seguintes programas não serão instalados..."
+	echo "As seguintes tarefas não serão realizadas..."
 	echo "----------------------------------------------"
 	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
@@ -411,6 +422,9 @@ install_no()
 	fi
 	if [[ $xampp == "n" ]]; then	
 	 	echo "Xampp, "
+	fi
+	if [[ $corrigeerros == "n" ]]; then	
+	 	echo "Corrigindo Erros, "
 	fi
 }
 
@@ -422,6 +436,7 @@ auto_config()
 			firefox
 			steam
 			xampp
+			corrigeerros
 		
 		#verifica programas
 			install_yes
