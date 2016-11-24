@@ -35,6 +35,7 @@
 #	Steam
 #	Xampp
 #	Spofity
+#	Icones/Temas Mac
 #
 #Correção
 #	CorrigindoErros
@@ -127,6 +128,14 @@ spotify()
 	echo ""
 	echo "Deseja instalar o spotify? (s/n)"
 	read -p "??" spotify;
+}
+
+mac()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o tema e ícones do MAC OS X? (s/n)"
+	read -p "??" mac;
 }
 
 corrigeerros()
@@ -409,7 +418,15 @@ install_yes()
 		sudo apt-get update
 		sudo apt-get install spotify-client
 	fi	
-		
+	
+	if [[$mac == "s"]]; then
+		echo "Instalando icones do MacOS X"
+		sudo add-apt-repository ppa:noobslab/macbuntu -y
+		sudo apt-get update
+		sudo apt-get install macbuntu-os-icons-lts-v7		
+		sudo apt-get install macbuntu-os-ithemes-lts-v7
+	fi
+	
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then	
 		echo "Corrigindo possiveis erros no Sistema"
@@ -473,6 +490,9 @@ install_no()
 	if [[ $spotify == "n" ]]; then	
 	 	echo "Spotity, "
 	fi
+	if [[ $mac == "n" ]]; then	
+	 	echo "Mac, "
+	fi
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
 	fi
@@ -494,6 +514,7 @@ auto_config()
 			steam
 			xampp
 			spotify
+			mac
 
 		#corrindo problemas
 			corrigeerros
