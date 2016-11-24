@@ -1,4 +1,0 @@
-#localização do arquivo com o nome da maquina
-	/etc/hostname
-
-#para alterar o nome, basta abrir o arquivo "hostname" com um editor de texto e depois reiniciar

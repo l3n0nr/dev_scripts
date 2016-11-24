@@ -1,3 +1,0 @@
-#Maneira de configurar o Monitor de mensagens do Xfce4 para verificar o gmail
-
-<https://support.google.com/mail/troubleshooter/1668960?hl=pt-BR&rd=1>
