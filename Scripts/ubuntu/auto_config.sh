@@ -34,6 +34,7 @@
 #	Firefox
 #	Steam
 #	Xampp
+#	Spofity
 #
 #Correção
 #	CorrigindoErros
@@ -118,6 +119,14 @@ xampp()
 	echo ""
 	echo "Deseja instalar o xampp? (s/n)"
 	read -p "?? " xampp;
+}
+
+spotify()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o spotify? (s/n)"
+	read -p "??" spotify;
 }
 
 corrigeerros()
@@ -392,6 +401,15 @@ install_yes()
 		rm xampp-installer.run
 	fi
 	
+	if [[$spotify == "s"]]; then
+		echo "Instalando Spotify"
+		echo "----------------------------------------------------------------------"
+		sudo sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
+	     	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+		sudo apt-get update
+		sudo apt-get install spotify-client
+	fi	
+		
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then	
 		echo "Corrigindo possiveis erros no Sistema"
@@ -452,10 +470,13 @@ install_no()
 	if [[ $xampp == "n" ]]; then	
 	 	echo "Xampp, "
 	fi
+	if [[ $spotify == "n" ]]; then	
+	 	echo "Spotity, "
+	fi
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
 	fi
-	if [[ $Swap == "n" ]]; then	
+	if [[ $swap == "n" ]]; then	
 	 	echo "Swap, "
 	fi
 	
@@ -472,6 +493,7 @@ auto_config()
 			firefox
 			steam
 			xampp
+			spotify
 
 		#corrindo problemas
 			corrigeerros
