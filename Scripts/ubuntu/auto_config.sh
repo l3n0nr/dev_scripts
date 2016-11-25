@@ -27,6 +27,9 @@
 #versão do script: Alpha 0.11
 #############################
 #
+##################Alpha: 0.*#
+##################Beta: 1.* #
+#
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
