@@ -369,7 +369,6 @@ cleaning_ubuntu()
 }
 
 ####RESCREVER - FIM
-
 install_yes()
 {
 	clear
@@ -431,10 +430,18 @@ install_yes()
 	if [[ $corrigeerros == "s" ]]; then	
 		echo "Corrigindo possiveis erros no Sistema"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get check && sudo dpkg --configure -a && sudo apt-get -f install && sudo apt-get -f remove && sudo apt-get autoremove && sudo apt-get clean && sudo apt-get install auto-apt && sudo auto-apt update-local && sudo auto-apt update && sudo auto-apt updatedb
+		sudo apt-get check && 
+		sudo dpkg --configure -a && 
+		sudo apt-get -f install && 
+		sudo apt-get -f remove && 
+		sudo apt-get autoremove && 
+		sudo apt-get clean && 
+		sudo apt-get install auto-apt && 
+		sudo auto-apt update-local && 
+		sudo auto-apt update && 
+		sudo auto-apt updatedb
 	fi
 	
-	#otimizando uso da swap
 	if [[ $swap == "s" ]]; then	
 		clear
 		echo "Configurando a Swap"
@@ -461,6 +468,7 @@ install_yes()
 		else
 			echo "Não há nada para ser otimizado"
 			echo "Isso porque já foi otimizado anteriormente!"
+		fi
 	fi
 
 	
