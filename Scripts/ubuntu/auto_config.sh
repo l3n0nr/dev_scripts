@@ -415,6 +415,7 @@ install_yes()
 	fi
 	
 	if [[$spotify == "s"]]; then
+		clear
 		echo "Instalando Spotify"
 		echo "----------------------------------------------------------------------"
 		sudo sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
@@ -424,6 +425,7 @@ install_yes()
 	fi	
 	
 	if [[$mac == "s"]]; then
+		clear
 		echo "Instalando icones do MacOS X"
 		sudo add-apt-repository ppa:noobslab/macbuntu -y
 		sudo apt-get update
@@ -446,7 +448,8 @@ install_yes()
 	fi
 	
 	#corrigindo possiveis erros no sistema
-	if [[ $corrigeerros == "s" ]]; then	
+	if [[ $corrigeerros == "s" ]]; then
+		clear	
 		echo "Corrigindo possiveis erros no Sistema"
 		echo "----------------------------------------------------------------------"
 		sudo apt-get check && 
@@ -515,7 +518,7 @@ install_no()
 	 	echo "Xampp, "
 	fi
 	if [[ $spotify == "n" ]]; then	
-	 	echo "Spotity, "
+	 	echo "Spotify, "
 	fi
 	if [[ $mac == "n" ]]; then	
 	 	echo "Mac, "
@@ -556,7 +559,7 @@ auto_config()
 			install_yes
 			install_no
 			
-		reinicia
+#		reinicia
 ####
 ####RESCREVER - INICIO
 	#sistema
