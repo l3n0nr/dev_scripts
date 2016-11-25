@@ -31,18 +31,21 @@
 
 #FUNCOES FUNCIONANDO	
 #Instalação	
-#	Firefox
-#	Steam
-#	Xampp
-#	Spofity
-#	Icones/Temas Mac
-#	Codec's
+#	[1]Firefox
+#	[2]Steam
+#	[3]Xampp
+#	[4]Spofity
+#	[5]Icones/Temas Mac
+#	[6]Codec's
+#	[7]Gimp
 #
 #Correção
 #	CorrigindoErros
 #
 #
 #Limpeza
+#	
+#
 #Reinicialização
 #
 
@@ -154,6 +157,14 @@ gimp()
 	read -p "??" gimp;
 }
 
+xfce()
+{
+	clear
+	echo ""
+	echo "Deseja instalar componentes adicionais do XFCE em sua máquina (s/n)?"
+	read -p "??" xfce;
+}
+
 corrigeerros()
 {
 	clear
@@ -214,18 +225,6 @@ add_ppa()
 		add-apt-repository ppa:ubuntu-wine/ppa -y
 	fi
 }
-
-
-
-xfce()
-{
-	clear
-	echo "Instalando componentes XFCE4"
-	echo "----------------------------------------------------------------------"
-	sudo apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
-	 sudo chmod u+s /usr/sbin/hddtemp
-}
-
 
 programs_essencials()
 {
@@ -447,6 +446,14 @@ install_yes()
 		sudo apt-get install gimp* -y
 	fi
 	
+	if [[$gimp == "s"]]; then
+		clear
+		echo "Instalando Adicionais do XFCE4"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+		 sudo chmod u+s /usr/sbin/hddtemp	
+	fi
+	
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then
 		clear	
@@ -526,6 +533,12 @@ install_no()
 	if [[ $codecs == "n" ]]; then	
 		echo "Codecs ,"
 	fi
+	if [[ $gimp == "n" ]]; then	
+		echo "Gimp ,"
+	fi
+	if [[ $xfce == "n" ]]; then	
+		echo "Xfce ,"
+	fi
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
 	fi
@@ -550,6 +563,7 @@ auto_config()
 			mac
 			codecs
 			gimp
+			xfce
 
 		#corrindo problemas
 			corrigeerros
