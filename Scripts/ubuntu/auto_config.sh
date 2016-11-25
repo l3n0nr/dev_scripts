@@ -39,6 +39,7 @@
 #	[6]Codec's
 #	[7]Gimp
 #	[8]XFCE
+#	[9]Java 8
 #
 #Correção
 #	CorrigindoErros
@@ -641,28 +642,17 @@ auto_config()
 		#	sleep 1
 		#update_system
 		#	sleep 1	
-		#codecs
-		#	sleep 1
-	#programas
-		#xfce
-		#	sleep 1
 		#program_xampp
 		#	sleep 1
 		#programs__essencials
 		#	sleep 1
 		#programs__others
 		#	sleep 1
-		#programs__game
-		#	sleep 1	
 		#remove_programs
 		#	sleep 1
 		#program_prelink_preload_deborphan
 		
-	#otimizações
-		#correct_errors
-		#	sleep 1
-		#swap
-		#	sleep 1			
+	#otimizações		
 		#cleaning_ubuntu
 		#	sleep 1
 ####RESCREVER - FIM			
