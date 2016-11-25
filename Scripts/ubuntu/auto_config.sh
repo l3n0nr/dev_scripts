@@ -38,6 +38,7 @@
 #	[5]Icones/Temas Mac
 #	[6]Codec's
 #	[7]Gimp
+#	[8]XFCE
 #
 #Correção
 #	CorrigindoErros
@@ -165,6 +166,22 @@ xfce()
 	read -p "??" xfce;
 }
 
+wine()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o wine (s/n)?"
+	read -p "??" wine;
+}
+
+playonlinux()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o playonlinux (s/n)?"
+	read -p "??" playonlinux;
+}
+
 corrigeerros()
 {
 	clear
@@ -244,13 +261,7 @@ programs_others()
 	#outros programas
 		sudo apt-get install git lm-sensors stellarium texmaker gnome-terminal clementine -y --force-yes 
 }
-
-programs_game()
-{	
-	#instalando wine-playonlinux
-		sudo apt-get install wine playonlinux -y
-}		
-
+	
 programs_prelink_preload_deborphan()
 {
 	clear
@@ -454,6 +465,20 @@ install_yes()
 		 sudo chmod u+s /usr/sbin/hddtemp	
 	fi
 	
+	if [[$wine == "s"]]; then
+		clear
+		echo "Instalando Wine"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get install wine* -y
+	fi
+	
+	if [[$playonlinux == "s"]]; then
+		clear
+		echo "Instalando Playonlinux"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get install playonlinux* -y
+	fi
+	
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then
 		clear	
@@ -539,6 +564,13 @@ install_no()
 	if [[ $xfce == "n" ]]; then	
 		echo "Xfce ,"
 	fi
+	if [[ $wine == "n" ]]; then	
+		echo "Wine ,"
+	fi
+	if [[ $playonlinux == "n" ]]; then	
+		echo "PlayonLinux ,"
+	fi
+	
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
 	fi
@@ -564,6 +596,8 @@ auto_config()
 			codecs
 			gimp
 			xfce
+			wine
+			playonlinux
 
 		#corrindo problemas
 			corrigeerros
