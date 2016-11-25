@@ -21,7 +21,7 @@
 ################################################
 #
 ############################
-#versão do script: Alpha 1.0 
+#versão do script: Alpha 1.1 
 ############################
 
 ################################################################################
@@ -560,23 +560,27 @@ auto_config()
 }
 
 #mostrando mensagem inicial
-clear
-echo "Bem vindo ao script de automação de tarefas em Linux"
-echo "Ele irá realizar os seguintes passos"
-read -n1 -p "Para continuar escolha s(sim) ou n(não)  " escolha
-	case $escolha in
-		s|S) echo
-			auto_config
-			;;
-		n|N) echo
-			echo Finalizando o script...
-			sleep 1
-			exit
-			;;
-		*) echo
-			echo Alternativa incorreta!! Saindo...
-			sleep 1
-			exit
-			;;
-	esac
-	;;
+menu()
+{
+	clear
+	echo "Bem vindo ao script de automação de tarefas em Linux"
+	echo "Ele irá realizar os seguintes passos"
+	read -n1 -p "Para continuar escolha s(sim) ou n(não)  " escolha
+		case $escolha in
+			s|S) echo
+				auto_config
+				;;
+			n|N) echo
+				echo Finalizando o script...
+				sleep 1
+				exit
+				;;
+			*) echo
+				echo Alternativa incorreta!! 
+				sleep 1
+				menu
+				exit
+				;;
+		esac
+}
+menu
