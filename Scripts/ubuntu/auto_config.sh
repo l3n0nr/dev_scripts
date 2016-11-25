@@ -182,12 +182,29 @@ playonlinux()
 	echo "Deseja instalar o playonlinux (s/n)?"
 	read -p "??" playonlinux;
 }
+
 java()
 {
 	clear
 	echo ""
 	echo "Deseja instalar o Java 8 (s/n)?"
 	read -p "??" java;
+}
+
+redshift()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Red Shift (s/n)?"
+	read -p "??" redshift;
+}
+
+flux()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Flux (s/n)?"
+	read -p "??" flux;
 }
 
 corrigeerros()
@@ -501,6 +518,14 @@ install_yes()
 		sudo apt-get install oracle-java8-installer -y
 	fi
 	
+	#instalando o redshift
+	if [['$redshift' == "s"]]; then
+		clear
+		echo "Instalando o Redshift"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get install redshift gtk-redshift -y
+	fi
+		
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then
 		clear	
@@ -596,6 +621,9 @@ install_no()
 	if [[ $java == "n" ]]; then	
 		echo "Java 8,"
 	fi
+	if [[ $redshift == "n" ]]; then	
+		echo "Redshift,"
+	fi
 	
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
@@ -627,6 +655,7 @@ auto_config()
 			wine
 			playonlinux
 			java
+			redshift
 
 		#corrindo problemas
 			corrigeerros
