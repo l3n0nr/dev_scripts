@@ -142,8 +142,16 @@ codecs()
 {
 	clear
 	echo ""
-	echo "Deseja instalar codecs em seu sistema (s/n)?"
+	echo "Deseja instalar codecs multimidia em seu sistema (s/n)?"
 	read -p "??" codecs;
+}
+
+gimp()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Gimp em seu sistema (s/n)?"
+	read -p "??" gimp;
 }
 
 corrigeerros()
@@ -236,11 +244,6 @@ programs_others()
 {	
 	#outros programas
 		sudo apt-get install git lm-sensors stellarium texmaker gnome-terminal clementine -y --force-yes 
-	
-	#instalando gimp
-		sudo apt-get install gimp* -y
-			#copiando pasta do autoconfig da interface do gimp, para a home do usuario
-			#cp GIMP/.fonts/ /home/$SUDO_USER && cp GIMP/.gimp-2.8/ /home/$SUDO_USER
 }
 
 programs_game()
@@ -435,6 +438,13 @@ install_yes()
 		sudo apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
 	fi
 	
+	if [[$gimp == "s"]]; then
+		clear
+		echo "Instalando o Gimp"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get install gimp* -y
+	fi
+	
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then	
 		echo "Corrigindo possiveis erros no Sistema"
@@ -510,8 +520,8 @@ install_no()
 	if [[ $mac == "n" ]]; then	
 	 	echo "Mac, "
 	fi
-	if [[$codecs == "n"]]; then	
-		echo "Codecs,"
+	if [[ $codecs == "n" ]]; then	
+		echo "Codecs ,"
 	fi
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
@@ -536,6 +546,7 @@ auto_config()
 			spotify
 			mac
 			codecs
+			gimp
 
 		#corrindo problemas
 			corrigeerros
