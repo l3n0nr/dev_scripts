@@ -453,7 +453,7 @@ install_yes()
 	fi
 	
 	#instalando o spotify
-	if [[$spotify == "s"]]; then
+	if [[ $spotify == "s" ]]; then
 		clear
 		echo "Instalando Spotify"
 		echo "----------------------------------------------------------------------"
@@ -464,7 +464,7 @@ install_yes()
 	fi	
 	
 	#instalando icones e temas do MAC OS X
-	if [[$mac == "s"]]; then
+	if [[ $mac == "s" ]]; then
 		clear
 		echo "Instalando icones e temas do MacOS X"
 		sudo add-apt-repository ppa:noobslab/macbuntu -y
@@ -474,7 +474,7 @@ install_yes()
 	fi
 	
 	#instalando pacotes multimidias
-	if [[$codecs == "s"]]; then	
+	if [[ $codecs == "s" ]]; then	
 		clear
 		echo "Instalando Pacotes Multimidias (Codecs)"
 		echo "----------------------------------------------------------------------"
@@ -482,7 +482,7 @@ install_yes()
 	fi
 	
 	#instalando o gimp
-	if [[$gimp == "s"]]; then
+	if [[ $gimp == "s" ]]; then
 		clear
 		echo "Instalando o Gimp"
 		echo "----------------------------------------------------------------------"
@@ -490,7 +490,7 @@ install_yes()
 	fi
 	
 	#instalando os componentes do xfce
-	if [[$xfce == "s"]]; then
+	if [[ $xfce == "s" ]]; then
 		clear
 		echo "Instalando Adicionais do XFCE4"
 		echo "----------------------------------------------------------------------"
@@ -499,7 +499,7 @@ install_yes()
 	fi
 	
 	#instalando o wine
-	if [[$wine == "s"]]; then
+	if [[ $wine == "s" ]]; then
 		clear
 		echo "Instalando Wine"
 		echo "----------------------------------------------------------------------"
@@ -507,7 +507,7 @@ install_yes()
 	fi
 	
 	#instalando o playonlinux
-	if [[$playonlinux == "s"]]; then
+	if [[ $playonlinux == "s" ]]; then
 		clear
 		echo "Instalando o Playonlinux"
 		echo "----------------------------------------------------------------------"
@@ -515,7 +515,7 @@ install_yes()
 	fi
 	
 	#instalando o java8
-	if [['$java' == "s"]]; then
+	if [[ $java == "s" ]]; then
 		clear
 		echo "Instalando o Java 8"
 		echo "----------------------------------------------------------------------"
@@ -523,7 +523,7 @@ install_yes()
 	fi
 	
 	#instalando o redshift
-	if [['$redshift' == "s"]]; then
+	if [[ $redshift == "s" ]]; then
 		clear
 		echo "Instalando o Redshift"
 		echo "----------------------------------------------------------------------"
@@ -531,7 +531,7 @@ install_yes()
 	fi
 	
 	#instalando o flux
-	if [['$flux' == "s"]]; then
+	if [[ $flux == "s" ]]; then
 		clear
 		echo "Instalando o Flux"
 		echo "----------------------------------------------------------------------"
@@ -550,16 +550,16 @@ install_yes()
 		clear	
 		echo "Corrigindo possiveis erros no Sistema"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get check && 
-		sudo dpkg --configure -a && 
+		sudo apt-get check -y && 
+		sudo dpkg --configure -a -y && 
 		sudo apt-get -f install && 
-		sudo apt-get -f remove && 
-		sudo apt-get autoremove && 
-		sudo apt-get clean && 
-		sudo apt-get install auto-apt && 
-		sudo auto-apt update-local && 
+		sudo apt-get -f remove -y && 
+		sudo apt-get autoremove -y && 
+		sudo apt-get clean -y && 
+		sudo apt-get install auto-apt -y && 
+		sudo auto-apt update-local -y && 
 		sudo auto-apt update && 
-		sudo auto-apt updatedb
+		sudo auto-apt updatedb -y
 	fi
 	
 	#configurando a swap
