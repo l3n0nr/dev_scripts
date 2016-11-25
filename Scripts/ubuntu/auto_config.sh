@@ -430,6 +430,7 @@ install_yes()
 		rm xampp-installer.run
 	fi
 	
+	#instalando o spotify
 	if [[$spotify == "s"]]; then
 		clear
 		echo "Instalando Spotify"
@@ -440,22 +441,25 @@ install_yes()
 		sudo apt-get install spotify-client
 	fi	
 	
+	#instalando icones e temas do MAC OS X
 	if [[$mac == "s"]]; then
 		clear
-		echo "Instalando icones do MacOS X"
+		echo "Instalando icones e temas do MacOS X"
 		sudo add-apt-repository ppa:noobslab/macbuntu -y
 		sudo apt-get update
 		sudo apt-get install macbuntu-os-icons-lts-v7		
 		sudo apt-get install macbuntu-os-ithemes-lts-v7
 	fi
 	
+	#instalando pacotes multimidias
 	if [[$codecs == "s"]]; then	
 		clear
-		echo "Instalando Pacote de Multimedia (Codecs)"
+		echo "Instalando Pacotes Multimidias (Codecs)"
 		echo "----------------------------------------------------------------------"
 		sudo apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
 	fi
 	
+	#instalando o gimp
 	if [[$gimp == "s"]]; then
 		clear
 		echo "Instalando o Gimp"
@@ -463,7 +467,8 @@ install_yes()
 		sudo apt-get install gimp* -y
 	fi
 	
-	if [[$gimp == "s"]]; then
+	#instalando os componentes do xfce
+	if [[$xfce == "s"]]; then
 		clear
 		echo "Instalando Adicionais do XFCE4"
 		echo "----------------------------------------------------------------------"
@@ -471,6 +476,7 @@ install_yes()
 		 sudo chmod u+s /usr/sbin/hddtemp	
 	fi
 	
+	#instalando o wine
 	if [[$wine == "s"]]; then
 		clear
 		echo "Instalando Wine"
@@ -478,6 +484,7 @@ install_yes()
 		sudo apt-get install wine* -y
 	fi
 	
+	#instalando o playonlinux
 	if [[$playonlinux == "s"]]; then
 		clear
 		echo "Instalando o Playonlinux"
@@ -485,6 +492,7 @@ install_yes()
 		sudo apt-get install playonlinux* -y
 	fi
 	
+	#instalando o java8
 	if [['$java' == "s"]]; then
 		clear
 		echo "Instalando o Java 8"
@@ -509,6 +517,7 @@ install_yes()
 		sudo auto-apt updatedb
 	fi
 	
+	#configurando a swap
 	if [[ $swap == "s" ]]; then	
 		clear
 		echo "Configurando a Swap"
