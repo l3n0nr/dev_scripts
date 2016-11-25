@@ -4,7 +4,10 @@ install_flux()
 	sudo apt-get install git python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1 -y
 
 	#realizando download do flux
-	sudo rm -rf /usr/local/lib/python2.7/dist-packages/{fluxgui/,f.lux_indicator*} && sudo rm /usr/local/share/icons/hicolor/scalable/apps/fluxgui.* && sudo rm /usr/local/share/applications/fluxgui.desktop && sudo rm /usr/local/bin/{xflux,fluxgui} && rm -rf ~/.gconf/apps/fluxgui/cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui && python download-xflux.py && python setup.py install && python setup.py install --user
+	cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui && 
+
+	#executando instalacao
+	python download-xflux.py && python setup.py install && python setup.py install --user
 }
 
 uninstall_flux()
