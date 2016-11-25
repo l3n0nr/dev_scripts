@@ -181,6 +181,13 @@ playonlinux()
 	echo "Deseja instalar o playonlinux (s/n)?"
 	read -p "??" playonlinux;
 }
+java()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Java 8 (s/n)?"
+	read -p "??" java;
+}
 
 corrigeerros()
 {
@@ -251,8 +258,6 @@ programs_essencials()
 	#programas essenciais
 		sudo apt-get install libreoffice vlc gparted tlp rar -y --force-yes
 			
-	#instalando java
-		sudo apt-get install oracle-java8-installer -y
 }
 
 
@@ -390,6 +395,7 @@ install_yes()
 	#relatorio de instalacao
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
+	
 	#instalando o firefox
 	if [[ $firefox == "s" ]]; then		
 		clear
@@ -474,9 +480,16 @@ install_yes()
 	
 	if [[$playonlinux == "s"]]; then
 		clear
-		echo "Instalando Playonlinux"
+		echo "Instalando o Playonlinux"
 		echo "----------------------------------------------------------------------"
 		sudo apt-get install playonlinux* -y
+	fi
+	
+	if [['$java' == "s"]]; then
+		clear
+		echo "Instalando o Java 8"
+		echo "----------------------------------------------------------------------"
+		sudo apt-get install oracle-java8-installer -y
 	fi
 	
 	#corrigindo possiveis erros no sistema
@@ -556,19 +569,22 @@ install_no()
 	 	echo "Mac, "
 	fi
 	if [[ $codecs == "n" ]]; then	
-		echo "Codecs ,"
+		echo "Codecs,"
 	fi
 	if [[ $gimp == "n" ]]; then	
-		echo "Gimp ,"
+		echo "Gimp,"
 	fi
 	if [[ $xfce == "n" ]]; then	
-		echo "Xfce ,"
+		echo "Xfce,"
 	fi
 	if [[ $wine == "n" ]]; then	
-		echo "Wine ,"
+		echo "Wine,"
 	fi
 	if [[ $playonlinux == "n" ]]; then	
-		echo "PlayonLinux ,"
+		echo "PlayonLinux,"
+	fi
+	if [[ $java == "n" ]]; then	
+		echo "Java 8,"
 	fi
 	
 	if [[ $corrigeerros == "n" ]]; then	
@@ -598,6 +614,7 @@ auto_config()
 			xfce
 			wine
 			playonlinux
+			java
 
 		#corrindo problemas
 			corrigeerros
