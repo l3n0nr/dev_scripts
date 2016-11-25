@@ -5,7 +5,6 @@
 #FONTES DE PESQUISA
 ###################
 #
-################################################################################
 #por oliveiradeflavio(Flávio Oliveira)
 #	contato: <github.com/oliveiradeflavio/scripts-linux>
 #
@@ -13,17 +12,21 @@
 #	contato: <github.com/gmasson/welcome-debian>
 ################################################################################
 #
-################################################
+################################################################################
+#
+#############
+#DESENVOLVIDO
+#############
 #
 #por lenonr(Lenon Ricardo) - 
 #	contato: <github.com/lenonr/dev_scripts>
 #
-################################################
+################################################################################
 #
 ############################
-#versão do script: Alpha 1.6 
+#versão do script: Alpha 1.9
 ############################
-
+#
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
@@ -42,7 +45,7 @@
 #	[9]Java 8
 #
 #Correção
-#	CorrigindoErros
+#	CorrigindoErros(especificar melhorar)
 #
 #
 #Limpeza
@@ -60,14 +63,12 @@
 #	Gparted
 #	Tlp
 #	Rar
-#	Java(oracle-java8)
 #	Git
 #	Lm-sensors
 #	Stellarium
 #	Texmaker
 #	Gnome-terminal
 #	Clementine
-#	Gimp
 #	Wine/Playonlinux
 #	
 #Correção
@@ -86,19 +87,18 @@
 #	-Instalar programas essenciais e outros opcionais no sistema;
 #	-Realizar a configuração e otimização de diversos aspectos do sistema;
 
-#Estruturar
-#	-Verificar a autorização do usuário, para realização das tarefas.
+#ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
+#	-Possibilitar ao usuário o cancelamento dos programas selecionados para instalação, dentro de um tempo pré-determinado(10 seg.)
 	
-#Link: Pasta dos programas <>
 ################################################################################
 
-#verificando se é ROOT
+#verificando se o usuário é ROOT
 if [[ `id -u` -ne 0 ]]; then
 	echo
 		echo "Você precisa ter poderes administrativos (root)"
 		echo "O script está sendo finalizado ..."
-		sleep 4
+		sleep 3
 		exit
 fi
 
@@ -607,6 +607,8 @@ install_no()
 	if [[ $reinicia == "n" ]]; then	
 		echo "Máquina não será reiniciada agora!"
 	fi
+	
+	echo "----------------------------------------------"
 }
 
 #criando função global, que inicia todas as outras
