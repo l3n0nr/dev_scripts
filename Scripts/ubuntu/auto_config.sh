@@ -43,6 +43,8 @@
 #	[7]Gimp
 #	[8]XFCE
 #	[9]Java 8
+#	[10]Redshift
+#	[11]Flux
 #
 #Correção
 #	CorrigindoErros(especificar melhorar)
@@ -525,6 +527,21 @@ install_yes()
 		echo "----------------------------------------------------------------------"
 		sudo apt-get install redshift gtk-redshift -y
 	fi
+	
+	#instalando o flux
+	if [['$flux' == "s"]]; then
+		clear
+		echo "Instalando o Flux"
+		echo "----------------------------------------------------------------------"
+		#instalando dependencias
+		sudo apt-get install git python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1 -y
+
+		#realizando download do flux
+		cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui && 
+
+		#executando instalacao
+		python download-xflux.py && python setup.py install && python setup.py install --user
+	fi
 		
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then
@@ -624,6 +641,9 @@ install_no()
 	if [[ $redshift == "n" ]]; then	
 		echo "Redshift,"
 	fi
+	if [[ $flux == "n" ]]; then	
+		echo "Flux,"
+	fi
 	
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
@@ -656,6 +676,7 @@ auto_config()
 			playonlinux
 			java
 			redshift
+			flux
 
 		#corrindo problemas
 			corrigeerros
