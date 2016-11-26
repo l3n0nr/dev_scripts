@@ -222,6 +222,14 @@ libreoffice()
 	read -p "??" libreoffice;
 }
 
+vlc()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o VLC (s/n)?"
+	read -p "??" vlc;
+}
+
 update()
 {
 	clear
@@ -269,8 +277,7 @@ programs_essencials()
 	echo "Instalando Programas..."
 	echo "----------------------------------------------------------------------"
 	#programas essenciais
-		sudo apt-get install  vlc gparted tlp rar -y --force-yes
-			
+		sudo apt-get install vlc gparted tlp rar -y --force-yes		
 }
 
 
@@ -560,6 +567,11 @@ install_yes()
 		#instalando libreoffice
 		apt install libreoffice* -y
 	fi
+	
+	if [[ $vlc == "s" ]]; then
+		#instalando o vlc
+		apt install vlc* -y
+	fi
 		
 	#atualizando os repositórios
 	if [[ $update == "s" ]]; then
@@ -687,6 +699,9 @@ install_no()
 	if [[ $libreoffice == "n" ]]; then	
 		echo "Libreoffice,"
 	fi
+	if [[ $vlc == "n" ]]; then	
+		echo "Vlc,"
+	fi
 	
 	if [[ $update == "n" ]]; then	
 	 	echo "Atualizando repositórios, "
@@ -739,6 +754,7 @@ auto_config()
 			nodejs
 			atom
 			libreoffice
+			vlc
 		
 		#verifica programas
 			install_yes
