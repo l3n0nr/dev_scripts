@@ -49,6 +49,7 @@
 #	[10]Redshift
 #	[11]Flux
 #	[12]NodeJS
+#	[13]Atom
 #
 #Correção
 #	CorrigindoErros(especificar melhorar)
@@ -218,6 +219,14 @@ nodejs()
 	echo ""
 	echo "Deseja instalar o NodeJS (s/n)?"
 	read -p "??" nodejs;
+}
+
+atom()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Atom (s/n)?"
+	read -p "??" atom;
 }
 
 corrigeerros()
@@ -554,12 +563,23 @@ install_yes()
 		python download-xflux.py && python setup.py install && python setup.py install --user
 	fi
 	
+	#instalando o nodejs
 	if [[ $nodejs == "s" ]]; then
 		#instalando npm
 		sudo apt install nodejs npm -y
 
 		#configurando o npm
 		sudo npm -g install express knex pg bower	
+	fi
+	
+	#instalando o atom
+	if [[ $atom == "s" ]]; then
+		#baixando o atom
+#VERIFICAR	wget https://atom.io/download/deb
+		#executando o arquivo
+#VERIFICAR	sudo dpkg -i atom-amd64.deb
+		#removendo o arquivo
+#VERIFICAR	rm atom-amd64.deb
 	fi
 		
 	#corrigindo possiveis erros no sistema
@@ -666,6 +686,9 @@ install_no()
 	if [[ $nodejs == "n" ]]; then	
 		echo "NodeJS,"
 	fi
+	if [[ $atom == "n" ]]; then	
+		echo "Atom,"
+	fi
 	
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
@@ -700,6 +723,7 @@ auto_config()
 			redshift
 			flux
 			nodejs
+			atom
 
 		#corrindo problemas
 			corrigeerros
