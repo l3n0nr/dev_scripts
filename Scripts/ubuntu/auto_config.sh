@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.11
+#versão do script: Alpha 0.12
 #############################
 #
 ##################Alpha: 0.*#
@@ -48,6 +48,7 @@
 #	[9]Java 8
 #	[10]Redshift
 #	[11]Flux
+#	[12]NodeJS
 #
 #Correção
 #	CorrigindoErros(especificar melhorar)
@@ -209,6 +210,14 @@ flux()
 	echo ""
 	echo "Deseja instalar o Flux (s/n)?"
 	read -p "??" flux;
+}
+
+nodejs()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o NodeJS (s/n)?"
+	read -p "??" nodejs;
 }
 
 corrigeerros()
@@ -469,8 +478,8 @@ install_yes()
 		echo "Instalando icones e temas do MacOS X"
 		sudo add-apt-repository ppa:noobslab/macbuntu -y
 		sudo apt-get update
-		sudo apt-get install macbuntu-os-icons-lts-v7		
-		sudo apt-get install macbuntu-os-ithemes-lts-v7
+		sudo apt-get install macbuntu-os-icons-lts-v7 -y		
+		sudo apt-get install macbuntu-os-ithemes-lts-v7 -y
 	fi
 	
 	#instalando pacotes multimidias
@@ -543,6 +552,14 @@ install_yes()
 
 		#executando instalacao
 		python download-xflux.py && python setup.py install && python setup.py install --user
+	fi
+	
+	if [[ $nodejs == "s" ]]; then
+		#instalando npm
+		sudo apt install nodejs npm -y
+
+		#configurando o npm
+		sudo npm -g install express knex pg bower	
 	fi
 		
 	#corrigindo possiveis erros no sistema
@@ -646,6 +663,9 @@ install_no()
 	if [[ $flux == "n" ]]; then	
 		echo "Flux,"
 	fi
+	if [[ $nodejs == "n" ]]; then	
+		echo "NodeJS,"
+	fi
 	
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
@@ -679,6 +699,7 @@ auto_config()
 			java
 			redshift
 			flux
+			nodejs
 
 		#corrindo problemas
 			corrigeerros
