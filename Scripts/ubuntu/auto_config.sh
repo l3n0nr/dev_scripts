@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.17
+#versão do script: Alpha 0.18
 #############################
 #
 ##################Alpha: 0.*#
@@ -58,9 +58,9 @@
 #	[+]Flux
 #	[+]NodeJS
 #	[+]Atom
+#	[+]Libreoffice
 #	[-]Ppa's	
 #	[-]Xfce
-#	[-]Libreoffice
 #	[-]Vlc
 #	[-]Gparted
 #	[-]Tlp
@@ -214,6 +214,14 @@ atom()
 	read -p "??" atom;
 }
 
+libreoffice()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o LibreOffice (s/n)?"
+	read -p "??" libreoffice;
+}
+
 update()
 {
 	clear
@@ -255,43 +263,13 @@ reinicia()
 }
 
 ####RESCREVER - INICIO
-#funcao para atualizar o sistema
-
-
-add_ppa()
-{
-	clear
-	echo "Adicionando PPA's"
-	echo "----------------------------------------------------------------------"
-	if [ -e "$DIR libreoffice-ppa-trusty.list" ]; then
-		echo "Sistema já contém o PPA LIBREOFFICE"
-		sleep 1
-	else
-		add-apt-repository ppa:libreoffice/ppa -y
-	fi
-
-	if [ -e "$DIR webupd8team-java-trusty.list" ]; then
-		echo "Sistema já contém o PPA JAVA (WEB/JDK)"
-		sleep 1
-	else
-		add-apt-repository ppa:webupd8team/java -y
-	fi
-
-	if [ -e "$DIR ubuntu-wine-ppa-trusty.list" ]; then
-		echo "Sistema já contém o PPA WINE"
-		sleep 1
-	else
-		add-apt-repository ppa:ubuntu-wine/ppa -y
-	fi
-}
-
 programs_essencials()
 {
 	clear
 	echo "Instalando Programas..."
 	echo "----------------------------------------------------------------------"
 	#programas essenciais
-		sudo apt-get install libreoffice vlc gparted tlp rar -y --force-yes
+		sudo apt-get install  vlc gparted tlp rar -y --force-yes
 			
 }
 
@@ -435,14 +413,14 @@ install_yes()
 	if [[ $firefox == "s" ]]; then		
 		clear
   		echo "Firefox, "
-  		sudo apt install firefox -y
+  		apt install firefox -y
 	fi
 	
 	#instalando o steam
 	if [[ $steam == "s" ]]; then	
 		clear
 	 	echo "Steam"
- 		sudo apt-get install steam -y
+ 		apt-get install steam -y
 	fi
 	
 	#instalando o xampp
@@ -456,12 +434,7 @@ install_yes()
 		echo "Realizando a instalação..."
 		echo "---------------------"
 		chmod +x xampp-installer.run
-		sudo ./xampp-installer.run
-		echo "Espere..."
-		echo "---------------------"
-		echo "Iniciando XAMPP"
-		echo "---------------------"
-		sudo /opt/lampp/lampp start
+		./xampp-installer.run
 		rm xampp-installer.run
 	fi
 	
@@ -470,20 +443,20 @@ install_yes()
 		clear
 		echo "Instalando Spotify"
 		echo "----------------------------------------------------------------------"
-		sudo sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
-	     	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
-		sudo apt-get update
-		sudo apt-get install spotify-client
+		sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
+	     	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+		apt-get update
+		apt-get install spotify-client
 	fi	
 	
 	#instalando icones e temas do MAC OS X
 	if [[ $mac == "s" ]]; then
 		clear
-		echo "Instalando icones e temas do MacOS X"
-		sudo add-apt-repository ppa:noobslab/macbuntu -y
-		sudo apt-get update
-		sudo apt-get install macbuntu-os-icons-lts-v7 -y		
-		sudo apt-get install macbuntu-os-ithemes-lts-v7 -y
+		"Instalando icones e temas do MacOS X"
+		add-apt-repository ppa:noobslab/macbuntu -y
+		apt-get update
+		apt-get install macbuntu-os-icons-lts-v7 -y		
+		apt-get install macbuntu-os-ithemes-lts-v7 -y
 	fi
 	
 	#instalando pacotes multimidias
@@ -491,7 +464,7 @@ install_yes()
 		clear
 		echo "Instalando Pacotes Multimidias (Codecs)"
 		echo "----------------------------------------------------------------------"
-		sudo apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
+		apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
 	fi
 	
 	#instalando o gimp
@@ -499,7 +472,7 @@ install_yes()
 		clear
 		echo "Instalando o Gimp"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get install gimp* -y
+		apt-get install gimp* -y
 	fi
 	
 	#instalando os componentes do xfce
@@ -507,8 +480,8 @@ install_yes()
 		clear
 		echo "Instalando Adicionais do XFCE4"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
-		 sudo chmod u+s /usr/sbin/hddtemp	
+		apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+		chmod u+s /usr/sbin/hddtemp	
 	fi
 	
 	#instalando o wine
@@ -516,7 +489,8 @@ install_yes()
 		clear
 		echo "Instalando Wine"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get install wine* -y
+		add-apt-repository ppa:ubuntu-wine/ppa -y
+		apt-get install wine* -y
 	fi
 	
 	#instalando o playonlinux
@@ -524,7 +498,7 @@ install_yes()
 		clear
 		echo "Instalando o Playonlinux"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get install playonlinux* -y
+		apt-get install playonlinux* -y
 	fi
 	
 	#instalando o java8
@@ -532,7 +506,8 @@ install_yes()
 		clear
 		echo "Instalando o Java 8"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get install oracle-java8-installer -y
+		add-apt-repository ppa:webupd8team/java -y
+		apt-get install oracle-java8-installer -y
 	fi
 	
 	#instalando o redshift
@@ -540,7 +515,7 @@ install_yes()
 		clear
 		echo "Instalando o Redshift"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get install redshift gtk-redshift -y
+		apt-get install redshift gtk-redshift -y
 	fi
 	
 	#instalando o flux
@@ -549,7 +524,7 @@ install_yes()
 		echo "Instalando o Flux"
 		echo "----------------------------------------------------------------------"
 		#instalando dependencias
-		sudo apt-get install git python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1 -y
+		apt-get install git python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1 -y
 
 		#realizando download do flux
 		cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui && 
@@ -561,10 +536,10 @@ install_yes()
 	#instalando o nodejs
 	if [[ $nodejs == "s" ]]; then
 		#instalando npm
-		sudo apt install nodejs npm -y
+		apt install nodejs npm -y
 
 		#configurando o npm
-		sudo npm -g install express knex pg bower	
+		npm -g install express knex pg bower	
 	fi
 	
 	#instalando o atom
@@ -576,6 +551,14 @@ install_yes()
 		#removendo o arquivo
 #VERIFICAR	rm atom-amd64.deb
 		echo "VERIFICAR";
+	fi
+	
+	#instalando o libreoffice
+	if [[ $libreoffice == "s" ]]; then
+		#adicionando ppa		
+		add-apt-repository ppa:libreoffice/ppa -y
+		#instalando libreoffice
+		apt install libreoffice* -y
 	fi
 		
 	#atualizando os repositórios
@@ -591,7 +574,7 @@ install_yes()
 		clear	
 		echo "Atualizando os programas da máquina"
 		echo "----------------------------------------------------------------------"
-		sudo apt upgrade -y
+		apt upgrade -y
 	fi		
 		
 	#corrigindo possiveis erros no sistema
@@ -599,16 +582,16 @@ install_yes()
 		clear	
 		echo "Corrigindo possiveis erros no Sistema"
 		echo "----------------------------------------------------------------------"
-		sudo apt-get check -y && 
-		sudo dpkg --configure -a -y && 
-		sudo apt-get -f install && 
-		sudo apt-get -f remove -y && 
-		sudo apt-get autoremove -y && 
-		sudo apt-get clean -y && 
-		sudo apt-get install auto-apt -y && 
-		sudo auto-apt update-local -y && 
-		sudo auto-apt update && 
-		sudo auto-apt updatedb -y
+		apt-get check -y && 
+		dpkg --configure -a -y && 
+		apt-get -f install && 
+		apt-get -f remove -y && 
+		apt-get autoremove -y && 
+		apt-get clean -y && 
+		apt-get install auto-apt -y && 
+		auto-apt update-local -y && 
+		auto-apt update && 
+		auto-apt updatedb -y
 	fi
 	
 	#configurando a swap
@@ -646,7 +629,7 @@ install_yes()
 	if [[ $reinicia == "s" ]]; then	
 		#reiniciando a maquina em dois minutos
 #VERIFICAR	sudo reboot -t 120 
-		sudo reboot
+		reboot
 	fi	
 }
 
@@ -701,6 +684,9 @@ install_no()
 	if [[ $atom == "n" ]]; then	
 		echo "Atom,"
 	fi
+	if [[ $libreoffice == "n" ]]; then	
+		echo "Libreoffice,"
+	fi
 	
 	if [[ $update == "n" ]]; then	
 	 	echo "Atualizando repositórios, "
@@ -752,6 +738,7 @@ auto_config()
 			flux
 			nodejs
 			atom
+			libreoffice
 		
 		#verifica programas
 			install_yes
@@ -761,8 +748,6 @@ auto_config()
 ####
 ####RESCREVER - INICIO
 	#sistema
-		#add_ppa
-		#	sleep 1
 		#update_system
 		#	sleep 1	
 		#program_xampp
