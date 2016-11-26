@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.12
+#versão do script: Alpha 0.17
 #############################
 #
 ##################Alpha: 0.*#
@@ -36,24 +36,25 @@
 #	-Xubuntu 16.04
 
 #FUNCOES FUNCIONANDO	
+#Correções
+#	[+]Update
+#	[+]Upgrade
+#	[+]CorrigindoErros(especificar melhorar)
+#		[+]Swap
 #Instalação	
-#	[1]Firefox
-#	[2]Steam
-#	[3]Xampp
-#	[4]Spofity
-#	[5]Icones/Temas Mac
-#	[6]Codec's
-#	[7]Gimp
-#	[8]XFCE
-#	[9]Java 8
-#	[10]Redshift
-#	[11]Flux
-#	[12]NodeJS
-#	[13]Atom
-#
-#Correção
-#	CorrigindoErros(especificar melhorar)
-#
+#	[+]Firefox
+#	[+]Steam
+#	[+]Xampp
+#	[+]Spofity
+#	[+]Icones/Temas Mac
+#	[+]Codec's
+#	[+]Gimp
+#	[+]XFCE
+#	[+]Java 8
+#	[+]Redshift
+#	[+]Flux
+#	[+]NodeJS
+#	[+]Atom
 #
 #Limpeza
 #	
