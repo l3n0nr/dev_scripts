@@ -76,7 +76,7 @@
 #	
 #
 #Reinicialização
-#	
+#	[+]Reinicia
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
