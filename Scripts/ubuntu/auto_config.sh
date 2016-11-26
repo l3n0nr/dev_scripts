@@ -35,12 +35,15 @@
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
 #	-Xubuntu 16.04
 
-#FUNCOES FUNCIONANDO	
+#FUNCOES 	
 #Correções
 #	[+]Update
 #	[+]Upgrade
 #	[+]CorrigindoErros(especificar melhorar)
 #		[+]Swap
+#		[-]Prelink
+#		[-]Preload
+#		[-]Deborphan
 #Instalação	
 #	[+]Firefox
 #	[+]Steam
@@ -55,44 +58,25 @@
 #	[+]Flux
 #	[+]NodeJS
 #	[+]Atom
+#	[-]Ppa's	
+#	[-]Xfce
+#	[-]Libreoffice
+#	[-]Vlc
+#	[-]Gparted
+#	[-]Tlp
+#	[-]Rar
+#	[-]Git
+#	[-]Lm-sensors
+#	[-]Stellarium
+#	[-]Texmaker
+#	[-]Gnome-terminal
+#	[-]Clementine
 #
 #Limpeza
 #	
 #
 #Reinicialização
-#
-
-#FUNCOES QUE PRECISANDO SER IMPLEMENTADAS
-#Instalação
-#	Ppa's	
-#	Xfce
-#	Libreoffice
-#	Vlc
-#	Gparted
-#	Tlp
-#	Rar
-#	Git
-#	Lm-sensors
-#	Stellarium
-#	Texmaker
-#	Gnome-terminal
-#	Clementine
 #	
-#Correção
-#	Swap
-#	Prelink
-#	Preload
-#	Deborphan
-#	
-#Limpeza
-#	Cleaning_Ubuntu(espeficar passos aqui)...
-#	
-	
-#Algumas de suas funcionalidades
-#	-Instalar PPA's ao sistema;
-#	-Atualizar repositórios e pacotes;
-#	-Instalar programas essenciais e outros opcionais no sistema;
-#	-Realizar a configuração e otimização de diversos aspectos do sistema;
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
