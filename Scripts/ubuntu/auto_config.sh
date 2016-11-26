@@ -420,7 +420,7 @@ install_yes()
 	if [[ $steam == "s" ]]; then	
 		clear
 	 	echo "Steam"
- 		apt-get install steam -y
+ 		apt install steam -y
 	fi
 	
 	#instalando o xampp
@@ -445,7 +445,7 @@ install_yes()
 		echo "----------------------------------------------------------------------"
 		sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
 	     	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
-		apt-get update
+		apt update
 		apt-get install spotify-client
 	fi	
 	
@@ -454,7 +454,7 @@ install_yes()
 		clear
 		"Instalando icones e temas do MacOS X"
 		add-apt-repository ppa:noobslab/macbuntu -y
-		apt-get update
+		apt update
 		apt-get install macbuntu-os-icons-lts-v7 -y		
 		apt-get install macbuntu-os-ithemes-lts-v7 -y
 	fi
