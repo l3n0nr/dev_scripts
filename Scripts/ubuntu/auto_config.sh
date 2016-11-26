@@ -580,6 +580,7 @@ install_yes()
 #VERIFICAR	sudo dpkg -i atom-amd64.deb
 		#removendo o arquivo
 #VERIFICAR	rm atom-amd64.deb
+		echo "VERIFICAR";
 	fi
 		
 	#corrigindo possiveis erros no sistema
