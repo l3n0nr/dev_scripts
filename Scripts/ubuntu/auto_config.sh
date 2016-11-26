@@ -229,6 +229,22 @@ atom()
 	read -p "??" atom;
 }
 
+update()
+{
+	clear
+	echo ""
+	echo "Deseja atualizar os repositórios de sua máquina (s/n)?"
+	read -p "??" update;
+}
+
+upgrade()
+{
+	clear
+	echo ""
+	echo "Deseja atualizar os programas de sua máquina (s/n)?"
+	read -p "??" upgrade;
+}
+
 corrigeerros()
 {
 	clear
@@ -255,13 +271,7 @@ reinicia()
 
 ####RESCREVER - INICIO
 #funcao para atualizar o sistema
-update_system()
-{
-	clear
-	echo "Atualizando Programas para versão mais recente"
-	echo "----------------------------------------------------------------------"
-	sudo apt-get update && sudo apt-get dist-upgrade -y	
-}
+
 
 add_ppa()
 {
@@ -583,6 +593,22 @@ install_yes()
 		echo "VERIFICAR";
 	fi
 		
+	#atualizando os repositórios
+	if [[ $update == "s" ]]; then
+		clear	
+		echo "Atualizando os repositórios na máquina"
+		echo "----------------------------------------------------------------------"
+		sudo apt update 
+	fi
+	
+	#atualizando os programas
+	if [[ $upgrade == "s" ]]; then
+		clear	
+		echo "Atualizando os programas da máquina"
+		echo "----------------------------------------------------------------------"
+		sudo apt upgrade -y
+	fi		
+		
 	#corrigindo possiveis erros no sistema
 	if [[ $corrigeerros == "s" ]]; then
 		clear	
@@ -691,9 +717,18 @@ install_no()
 		echo "Atom,"
 	fi
 	
+	if [[ $update == "n" ]]; then	
+	 	echo "Atualizando repositórios, "
+	fi
+	
+	if [[ $update == "n" ]]; then	
+	 	echo "Atualizando programas, "
+	fi
+	
 	if [[ $corrigeerros == "n" ]]; then	
 	 	echo "Corrigindo Erros, "
 	fi
+	
 	if [[ $swap == "n" ]]; then	
 	 	echo "Swap, "
 	fi
@@ -709,7 +744,14 @@ install_no()
 auto_config()
 {
 	echo "INICIANDO AS TAREFAS"
+		#correções
+			update
+			upgrade
+			corrigeerros
+			swap
+			
 		##verificando se usuario deseja realizar
+			update
 			firefox
 			steam
 			xampp
@@ -725,10 +767,6 @@ auto_config()
 			flux
 			nodejs
 			atom
-
-		#corrindo problemas
-			corrigeerros
-			swap
 		
 		#verifica programas
 			install_yes
