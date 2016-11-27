@@ -21,6 +21,13 @@
 #por lenonr(Lenon Ricardo) - 
 #	contato: <github.com/lenonr/dev_scripts>
 #
+###################
+#
+#	If I have seen further it is by standing on the shoulders of Giants.
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)
+#							~Isaac Newton
+#
+###################
 ################################################################################
 #
 #############################
