@@ -833,13 +833,12 @@ install_no()
 auto_config()
 {
 	echo "INICIANDO AS TAREFAS"
-		#correções
+		#chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
 			update
 			upgrade
 			corrigeerros
 			swap
 			
-		##verificando se usuario deseja realizar
 			update
 			firefox
 			steam
@@ -863,7 +862,7 @@ auto_config()
 			gparted
 			tlp
 		
-		#verifica programas
+		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
 			install_no
 }
