@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.19
+#versão do script: Alpha 0.21
 #############################
 #
 ##################Alpha: 0.*#
@@ -60,8 +60,8 @@
 #	[+]Atom
 #	[+]Libreoffice
 #	[+]Netbeans
-#	[-]Ppa's	
-#	[-]Vlc
+#	[+]Vlc	
+#	[+]Clementine
 #	[-]Gparted
 #	[-]Tlp
 #	[-]Rar
@@ -70,7 +70,6 @@
 #	[-]Stellarium
 #	[-]Texmaker
 #	[-]Gnome-terminal
-#	[-]Clementine
 #
 #Limpeza
 #	
@@ -93,7 +92,42 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
-######VERIFICANDO QUAIS PROGRAMAS O USUARIO DESEJA QUE SEJAM INSTALADOS
+########################################################################
+######CORREÇÃO SISTEMA
+update()
+{
+	clear
+	echo ""
+	echo "Deseja atualizar os repositórios de sua máquina (s/n)?"
+	read -p "??" update;
+}
+
+upgrade()
+{
+	clear
+	echo ""
+	echo "Deseja atualizar os programas de sua máquina (s/n)?"
+	read -p "??" upgrade;
+}
+
+corrigeerros()
+{
+	clear
+	echo ""
+	echo "Deseja corrigir possíveis erros em sua distribuição? (s/n)"
+	read -p "??" corrigeerros;
+}
+
+swap()
+{
+	clear
+	echo ""
+	echo "Deseja otimizar a utilização da swap?"
+	read -p "??" swap;
+}
+
+########################################################################
+######INSTALANDO PROGRAMAS
 firefox() 
 {
 	clear
@@ -238,38 +272,16 @@ netbeans()
 	read -p "??" netbeans;
 }
 
-update()
+clementine()
 {
 	clear
 	echo ""
-	echo "Deseja atualizar os repositórios de sua máquina (s/n)?"
-	read -p "??" update;
+	echo "Deseja instalar o Clementine (s/n)?"
+	read -p "??" clementine;
 }
 
-upgrade()
-{
-	clear
-	echo ""
-	echo "Deseja atualizar os programas de sua máquina (s/n)?"
-	read -p "??" upgrade;
-}
-
-corrigeerros()
-{
-	clear
-	echo ""
-	echo "Deseja corrigir possíveis erros em sua distribuição? (s/n)"
-	read -p "??" corrigeerros;
-}
-
-swap()
-{
-	clear
-	echo ""
-	echo "Deseja otimizar a utilização da swap?"
-	read -p "??" swap;
-}
-
+########################################################################
+######REINICIANDO
 reinicia()
 {
 	clear
@@ -285,7 +297,7 @@ programs_essencials()
 	echo "Instalando Programas..."
 	echo "----------------------------------------------------------------------"
 	#programas essenciais
-		sudo apt-get install vlc gparted tlp rar -y --force-yes		
+		sudo apt-get install gparted tlp rar -y --force-yes		
 }
 
 
@@ -423,7 +435,74 @@ install_yes()
 	#relatorio de instalacao
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
+
+########################################################################
+######CORREÇÃO SISTEMA		
+	#atualizando os repositórios
+	if [[ $update == "s" ]]; then
+		clear	
+		echo "Atualizando os repositórios na máquina"
+		echo "----------------------------------------------------------------------"
+		sudo apt update 
+	fi
 	
+	#atualizando os programas
+	if [[ $upgrade == "s" ]]; then
+		clear	
+		echo "Atualizando os programas da máquina"
+		echo "----------------------------------------------------------------------"
+		apt upgrade -y
+	fi		
+		
+	#corrigindo possiveis erros no sistema
+	if [[ $corrigeerros == "s" ]]; then
+		clear	
+		echo "Corrigindo possiveis erros no Sistema"
+		echo "----------------------------------------------------------------------"
+		apt-get check -y && 
+		dpkg --configure -a -y && 
+		apt-get -f install && 
+		apt-get -f remove -y && 
+		apt-get autoremove -y && 
+		apt-get clean -y && 
+		apt-get install auto-apt -y && 
+		auto-apt update-local -y && 
+		auto-apt update && 
+		auto-apt updatedb -y
+	fi
+	
+	#configurando a swap
+	if [[ $swap == "s" ]]; then	
+		clear
+		echo "Configurando a Swap"
+		echo "-------------------"
+		memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
+		memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
+		background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
+		ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
+		clear
+		echo "Diminuindo a Prioridade de uso da memória SWAP"
+		echo
+		if [[ $memoswap == "vm.swappiness=10" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
+		elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
+		elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
+		elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
+			echo "Otimizando..."
+			/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
+		else
+			echo "Não há nada para ser otimizado"
+			echo "Isso porque já foi otimizado anteriormente!"
+		fi
+	fi
+
+########################################################################
+######INSTALANDO PROGRAMAS
 	#instalando o firefox
 	if [[ $firefox == "s" ]]; then		
 		clear
@@ -592,71 +671,14 @@ install_yes()
 		./netbeans-8.2-linux.sh
 		rm netbeans-8.2-linux.sh
 	fi
-		
-	#atualizando os repositórios
-	if [[ $update == "s" ]]; then
-		clear	
-		echo "Atualizando os repositórios na máquina"
-		echo "----------------------------------------------------------------------"
-		sudo apt update 
+	
+	if [[ $clementine == "s" ]]; then
+		#instalando o clementine
+		apt install clementine* -y
 	fi
 	
-	#atualizando os programas
-	if [[ $upgrade == "s" ]]; then
-		clear	
-		echo "Atualizando os programas da máquina"
-		echo "----------------------------------------------------------------------"
-		apt upgrade -y
-	fi		
-		
-	#corrigindo possiveis erros no sistema
-	if [[ $corrigeerros == "s" ]]; then
-		clear	
-		echo "Corrigindo possiveis erros no Sistema"
-		echo "----------------------------------------------------------------------"
-		apt-get check -y && 
-		dpkg --configure -a -y && 
-		apt-get -f install && 
-		apt-get -f remove -y && 
-		apt-get autoremove -y && 
-		apt-get clean -y && 
-		apt-get install auto-apt -y && 
-		auto-apt update-local -y && 
-		auto-apt update && 
-		auto-apt updatedb -y
-	fi
-	
-	#configurando a swap
-	if [[ $swap == "s" ]]; then	
-		clear
-		echo "Configurando a Swap"
-		echo "-------------------"
-		memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
-		memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
-		background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
-		ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
-		clear
-		echo "Diminuindo a Prioridade de uso da memória SWAP"
-		echo
-		if [[ $memoswap == "vm.swappiness=10" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
-		elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
-		elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
-		elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
-		else
-			echo "Não há nada para ser otimizado"
-			echo "Isso porque já foi otimizado anteriormente!"
-		fi
-	fi
-
-	
+########################################################################
+######REINICIANDO	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
 		#reiniciando a maquina em dois minutos
@@ -670,7 +692,26 @@ install_no()
 	clear
 	#relatorio de instalacao
 	echo "As seguintes tarefas não serão realizadas..."
-	echo "----------------------------------------------"
+	echo "----------------------------------------------"	
+########################################################################
+######CORREÇÃO SISTEMA			
+	if [[ $update == "n" ]]; then	
+	 	echo "Atualizando repositórios, "
+	fi
+	
+	if [[ $update == "n" ]]; then	
+	 	echo "Atualizando programas, "
+	fi
+	
+	if [[ $corrigeerros == "n" ]]; then	
+	 	echo "Corrigindo Erros, "
+	fi
+	
+	if [[ $swap == "n" ]]; then	
+	 	echo "Swap, "
+	fi	
+########################################################################
+######INSTALANDO PROGRAMAS		
 	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
 	fi
@@ -743,22 +784,12 @@ install_no()
 		echo "Netbeans,"
 	fi
 	
-	if [[ $update == "n" ]]; then	
-	 	echo "Atualizando repositórios, "
+	if [[ $clementine == "n" ]]; then	
+		echo "Clementine,"
 	fi
-	
-	if [[ $update == "n" ]]; then	
-	 	echo "Atualizando programas, "
-	fi
-	
-	if [[ $corrigeerros == "n" ]]; then	
-	 	echo "Corrigindo Erros, "
-	fi
-	
-	if [[ $swap == "n" ]]; then	
-	 	echo "Swap, "
-	fi
-	
+
+########################################################################
+######REINICIANDO
 	if [[ $reinicia == "n" ]]; then	
 		echo "Máquina não será reiniciada agora!"
 	fi
@@ -796,6 +827,7 @@ auto_config()
 			libreoffice
 			vlc
 			netbeans
+			clementine
 		
 		#verifica programas
 			install_yes
