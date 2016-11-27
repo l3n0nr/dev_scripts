@@ -14,9 +14,9 @@
 #
 ################################################################################
 #
-#############
-#DESENVOLVIDO
-#############
+###################
+#DESENVOLVIDO POR
+###################
 #
 #por lenonr(Lenon Ricardo) - 
 #	contato: <github.com/lenonr/dev_scripts>
@@ -278,6 +278,14 @@ clementine()
 	echo ""
 	echo "Deseja instalar o Clementine (s/n)?"
 	read -p "??" clementine;
+}
+
+gparted()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Gparted (s/n)?"
+	read -p "??" gparted;
 }
 
 ########################################################################
@@ -677,6 +685,11 @@ install_yes()
 		apt install clementine* -y
 	fi
 	
+	if [[ $gparted == "s" ]]; then
+		#instalando o gparted
+		apt install gparted* -y
+	fi
+	
 ########################################################################
 ######REINICIANDO	
 	#reiniciando a maquina
@@ -787,6 +800,10 @@ install_no()
 	if [[ $clementine == "n" ]]; then	
 		echo "Clementine,"
 	fi
+	
+	if [[ $gparted == "n" ]]; then	
+		echo "Gparted,"
+	fi
 
 ########################################################################
 ######REINICIANDO
@@ -828,31 +845,11 @@ auto_config()
 			vlc
 			netbeans
 			clementine
+			gparted
 		
 		#verifica programas
 			install_yes
 			install_no
-			
-#		reinicia
-####
-####RESCREVER - INICIO
-	#sistema
-		#update_system
-		#	sleep 1	
-		#program_xampp
-		#	sleep 1
-		#programs__essencials
-		#	sleep 1
-		#programs__others
-		#	sleep 1
-		#remove_programs
-		#	sleep 1
-		#program_prelink_preload_deborphan
-		
-	#otimizações		
-		#cleaning_ubuntu
-		#	sleep 1
-####RESCREVER - FIM			
 }
 
 #mostrando mensagem inicial
