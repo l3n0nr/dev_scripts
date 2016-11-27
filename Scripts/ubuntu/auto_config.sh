@@ -891,6 +891,9 @@ auto_config()
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
 			install_no
+			
+	echo "TAREFAS FINALIZADAS, SAINDO.."		
+	clear
 }
 
 #mostrando mensagem inicial
