@@ -65,7 +65,7 @@
 #	[+]Gparted
 #	[+]Tlp
 #	[+]Rar
-#	[-]Git
+#	[+]Git
 #	[-]Lm-sensors
 #	[-]Stellarium
 #	[-]Texmaker
@@ -302,6 +302,14 @@ rar()
 	echo ""
 	echo "Deseja instalar o Rar (s/n)?"
 	read -p "??" rar;
+}
+
+git()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Git (s/n)?"
+	read -p "??" git;
 }
 
 ########################################################################
@@ -704,6 +712,11 @@ install_yes()
 		apt install rar* -y
 	fi
 	
+	if [[ $git == "s" ]]; then
+		#instalando o tlp
+		apt install git -y
+	fi
+	
 ######REINICIANDO	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
@@ -826,6 +839,10 @@ install_no()
 	if [[ $rar == "n" ]]; then	
 		echo "Rar,"
 	fi
+	
+	if [[ $git == "n" ]]; then	
+		echo "Git,"
+	fi
 
 ########################################################################
 ######REINICIANDO
@@ -869,6 +886,7 @@ auto_config()
 			gparted
 			tlp
 			rar
+			git
 		
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
