@@ -59,6 +59,7 @@
 #	[+]NodeJS
 #	[+]Atom
 #	[+]Libreoffice
+#	[+]Netbeans
 #	[-]Ppa's	
 #	[-]Xfce
 #	[-]Vlc
@@ -228,6 +229,14 @@ vlc()
 	echo ""
 	echo "Deseja instalar o VLC (s/n)?"
 	read -p "??" vlc;
+}
+
+netbeans()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Netbeans (s/n)?"
+	read -p "??" netbeans;
 }
 
 update()
@@ -572,6 +581,18 @@ install_yes()
 		#instalando o vlc
 		apt install vlc* -y
 	fi
+	
+	if [[ $netbeans == "s" ]]; then
+		#instalando o netbeans
+		echo "Baixando o Netbeans"
+		echo "----------------------------------------------------------------------"
+		wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
+		echo "Realizando a instalação..."
+		echo "----------------------------------------------------------------------"
+		chmod +x netbeans-8.2-linux.sh
+		./netbeans-8.2-linux.sh
+		rm netbeans-8.2-linux.sh
+	fi
 		
 	#atualizando os repositórios
 	if [[ $update == "s" ]]; then
@@ -654,53 +675,73 @@ install_no()
 	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
 	fi
+	
 	if [[ $steam == "n" ]]; then	
 	 	echo "Steam, "
 	fi
+	
 	if [[ $xampp == "n" ]]; then	
 	 	echo "Xampp, "
 	fi
+	
 	if [[ $spotify == "n" ]]; then	
 	 	echo "Spotify, "
 	fi
+	
 	if [[ $mac == "n" ]]; then	
 	 	echo "Mac, "
 	fi
+	
 	if [[ $codecs == "n" ]]; then	
 		echo "Codecs,"
 	fi
+	
 	if [[ $gimp == "n" ]]; then	
 		echo "Gimp,"
 	fi
+	
 	if [[ $xfce == "n" ]]; then	
 		echo "Xfce,"
 	fi
+	
 	if [[ $wine == "n" ]]; then	
 		echo "Wine,"
 	fi
+	
 	if [[ $playonlinux == "n" ]]; then	
 		echo "PlayonLinux,"
 	fi
+	
 	if [[ $java == "n" ]]; then	
 		echo "Java 8,"
 	fi
+	
 	if [[ $redshift == "n" ]]; then	
 		echo "Redshift,"
 	fi
+	
 	if [[ $flux == "n" ]]; then	
 		echo "Flux,"
 	fi
+	
 	if [[ $nodejs == "n" ]]; then	
 		echo "NodeJS,"
 	fi
+	
 	if [[ $atom == "n" ]]; then	
 		echo "Atom,"
 	fi
+	
 	if [[ $libreoffice == "n" ]]; then	
 		echo "Libreoffice,"
 	fi
+	
 	if [[ $vlc == "n" ]]; then	
 		echo "Vlc,"
+	fi
+	
+	if [[ $netbeans == "n" ]]; then
+		echo "Netbeans,"
 	fi
 	
 	if [[ $update == "n" ]]; then	
@@ -755,6 +796,7 @@ auto_config()
 			atom
 			libreoffice
 			vlc
+			netbeans
 		
 		#verifica programas
 			install_yes
