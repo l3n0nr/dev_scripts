@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.21
+#versão do script: Alpha 0.25
 #############################
 #
 ##################Alpha: 0.*#
@@ -66,10 +66,10 @@
 #	[+]Tlp
 #	[+]Rar
 #	[+]Git
-#	[-]Lm-sensors
-#	[-]Stellarium
-#	[-]Texmaker
-#	[-]Gnome-terminal
+#	[+]Lm-sensors
+#	[+]Stellarium
+#	[+]Texmaker
+#	[+]Gnome-terminal
 #
 #Limpeza
 #	
@@ -320,6 +320,30 @@ lmsensors()
 	read -p "??" lmsensors;
 }
 
+stellarium()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Stellarium (s/n)?"
+	read -p "??" stellarium;
+}
+
+texmaker()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Texmaker (s/n)?"
+	read -p "??" texmaker;
+}
+
+gnometerminal()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Gnome-Terminal (s/n)?"
+	read -p "??" gnometerminal;
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -331,12 +355,6 @@ reinicia()
 }
 
 ####RESCREVER - INICIO
-programs_others()
-{	
-	#outros programas
-		sudo apt-get install lm-sensors stellarium texmaker gnome-terminal -y --force-yes 
-}
-	
 programs_prelink_preload_deborphan()
 {
 	clear
@@ -730,6 +748,21 @@ install_yes()
 		apt install lm-sensors -y
 	fi
 	
+	if [[ $stellarium == "s" ]]; then
+		#instalando o tlp
+		apt install stellarium* -y
+	fi
+	
+	if [[ $texmaker == "s" ]]; then
+		#instalando o tlp
+		apt install texmaker* -y
+	fi
+	
+	if [[ $gnometerminal == "s" ]]; then
+		#instalando o tlp
+		apt install gnometerminal* -y
+	fi
+	
 ######REINICIANDO	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
@@ -860,6 +893,18 @@ install_no()
 	if [[ $lmsensors == "n" ]]; then	
 		echo "Lm-sensors,"
 	fi
+	
+	if [[ $stellarium == "n" ]]; then	
+		echo "Stellarium,"
+	fi
+	
+	if [[ $texmaker == "n" ]]; then	
+		echo "Texmaker,"
+	fi
+	
+	if [[ $gnometerminal == "n" ]]; then	
+		echo "Gnome-Terminal,"
+	fi
 
 ########################################################################
 ######REINICIANDO
@@ -905,6 +950,9 @@ auto_config()
 			rar
 			git
 			lmsensors
+			stellarium
+			texmaker
+			gnometerminal
 		
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
