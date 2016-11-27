@@ -288,6 +288,14 @@ gparted()
 	read -p "??" gparted;
 }
 
+tlp()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Tlp (s/n)?"
+	read -p "??" tlp;
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -305,7 +313,7 @@ programs_essencials()
 	echo "Instalando Programas..."
 	echo "----------------------------------------------------------------------"
 	#programas essenciais
-		sudo apt-get install gparted tlp rar -y --force-yes		
+		sudo apt-get install tlp rar -y --force-yes		
 }
 
 
@@ -444,7 +452,6 @@ install_yes()
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
 
-########################################################################
 ######CORREÇÃO SISTEMA		
 	#atualizando os repositórios
 	if [[ $update == "s" ]]; then
@@ -509,7 +516,6 @@ install_yes()
 		fi
 	fi
 
-########################################################################
 ######INSTALANDO PROGRAMAS
 	#instalando o firefox
 	if [[ $firefox == "s" ]]; then		
@@ -690,7 +696,11 @@ install_yes()
 		apt install gparted* -y
 	fi
 	
-########################################################################
+	if [[ $tlp == "s" ]]; then
+		#instalando o tlp
+		apt install tlp* -y
+	fi
+	
 ######REINICIANDO	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
@@ -700,13 +710,14 @@ install_yes()
 	fi	
 }
 
+########################################################################
 install_no()
 {
 	clear
 	#relatorio de instalacao
 	echo "As seguintes tarefas não serão realizadas..."
 	echo "----------------------------------------------"	
-########################################################################
+	
 ######CORREÇÃO SISTEMA			
 	if [[ $update == "n" ]]; then	
 	 	echo "Atualizando repositórios, "
@@ -804,6 +815,10 @@ install_no()
 	if [[ $gparted == "n" ]]; then	
 		echo "Gparted,"
 	fi
+	
+	if [[ $tlp == "n" ]]; then	
+		echo "Tlp,"
+	fi
 
 ########################################################################
 ######REINICIANDO
@@ -846,6 +861,7 @@ auto_config()
 			netbeans
 			clementine
 			gparted
+			tlp
 		
 		#verifica programas
 			install_yes
