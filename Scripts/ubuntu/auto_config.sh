@@ -312,6 +312,14 @@ git()
 	read -p "??" git;
 }
 
+lmsensors()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Lm-Sensors (s/n)?"
+	read -p "??" lmsensors;
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -326,7 +334,7 @@ reinicia()
 programs_others()
 {	
 	#outros programas
-		sudo apt-get install git lm-sensors stellarium texmaker gnome-terminal clementine -y --force-yes 
+		sudo apt-get install lm-sensors stellarium texmaker gnome-terminal -y --force-yes 
 }
 	
 programs_prelink_preload_deborphan()
@@ -717,6 +725,11 @@ install_yes()
 		apt install git -y
 	fi
 	
+	if [[ $lmsensors == "s" ]]; then
+		#instalando o tlp
+		apt install lm-sensors -y
+	fi
+	
 ######REINICIANDO	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
@@ -843,6 +856,10 @@ install_no()
 	if [[ $git == "n" ]]; then	
 		echo "Git,"
 	fi
+	
+	if [[ $lmsensors == "n" ]]; then	
+		echo "Lm-sensors,"
+	fi
 
 ########################################################################
 ######REINICIANDO
@@ -887,6 +904,7 @@ auto_config()
 			tlp
 			rar
 			git
+			lmsensors
 		
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
