@@ -62,9 +62,9 @@
 #	[+]Netbeans
 #	[+]Vlc	
 #	[+]Clementine
-#	[-]Gparted
-#	[-]Tlp
-#	[-]Rar
+#	[+]Gparted
+#	[+]Tlp
+#	[+]Rar
 #	[-]Git
 #	[-]Lm-sensors
 #	[-]Stellarium
@@ -296,6 +296,14 @@ tlp()
 	read -p "??" tlp;
 }
 
+rar()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Rar (s/n)?"
+	read -p "??" rar;
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -307,16 +315,6 @@ reinicia()
 }
 
 ####RESCREVER - INICIO
-programs_essencials()
-{
-	clear
-	echo "Instalando Programas..."
-	echo "----------------------------------------------------------------------"
-	#programas essenciais
-		sudo apt-get install tlp rar -y --force-yes		
-}
-
-
 programs_others()
 {	
 	#outros programas
@@ -701,6 +699,11 @@ install_yes()
 		apt install tlp* -y
 	fi
 	
+	if [[ $rar == "s" ]]; then
+		#instalando o tlp
+		apt install rar* -y
+	fi
+	
 ######REINICIANDO	
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then	
@@ -819,6 +822,10 @@ install_no()
 	if [[ $tlp == "n" ]]; then	
 		echo "Tlp,"
 	fi
+	
+	if [[ $rar == "n" ]]; then	
+		echo "Rar,"
+	fi
 
 ########################################################################
 ######REINICIANDO
@@ -861,6 +868,7 @@ auto_config()
 			clementine
 			gparted
 			tlp
+			rar
 		
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
