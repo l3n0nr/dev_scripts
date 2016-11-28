@@ -479,7 +479,6 @@ cleaning_ubuntu()
 ####RESCREVER - FIM
 install_yes()
 {
-	clear
 	#relatorio de instalacao
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
@@ -708,7 +707,7 @@ install_yes()
 	
 	if [[ $netbeans == "s" ]]; then
 		#instalando o netbeans
-		echo "Baixando o Netbeans"
+		echo "Baixando o Netbeans(Este programa precisará de atenção)"
 		echo "----------------------------------------------------------------------"
 		wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
 		echo "Realizando a instalação..."
@@ -775,7 +774,6 @@ install_yes()
 ########################################################################
 install_no()
 {
-	clear
 	#relatorio de instalacao
 	echo "As seguintes tarefas não serão realizadas..."
 	echo "----------------------------------------------"	
