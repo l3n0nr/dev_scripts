@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.28
+#versão do script: Alpha 0.30
 #############################
 #
 ##################Alpha: 0.*#
@@ -79,6 +79,7 @@
 #	[-] Excluindo pacotes antigos
 #	[-]	Excluindo pacotes orfaõs
 #	[+] Removendo arquivos temporários
+# [+] Arquivos obsoletos
 #	[+] Kernel's antigos
 #
 #Reinicialização
@@ -151,6 +152,14 @@ temporario()
 	echo ""
 	echo "Deseja remover os arquivos temporários do sistema operacional (s/n)?"
 	read -p "??" temporario
+}
+
+obsoleto()
+{
+	clear
+	echo ""
+	echo "Deseja remover os arquivos obsoletos do sistema operacional (s/n)?"
+	read -p "??" obsoleto
 }
 
 ########################################################################
@@ -598,6 +607,13 @@ install_yes()
 			find ~/.thumbnails -type f -atime +2 -exec rm -Rf {} \+
 		fi
 
+		if [[ $obsoleto == "s" ]]; then
+			clear
+			echo "Removendo os arquivos obsoletos do sistema"
+			echo "-----------------------------------------"
+			apt-get clean && apt-get autoclean
+		fi
+
 	######INSTALANDO PROGRAMAS
 		#instalando o firefox
 		if [[ $firefox == "s" ]]; then
@@ -861,6 +877,10 @@ install_no()
 		echo "Removendo arquivos temporários,"
 	fi
 
+	if [[ $obsoleto == "n" ]]; then
+		echo "Removendo arquivos obsoletos,"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -992,6 +1012,7 @@ auto_config()
 
 			kernel
 			temporario
+			obsoleto
 
 			update
 			firefox
