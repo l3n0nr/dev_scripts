@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.31
+#versão do script: Alpha 0.32
 #############################
 #
 ##################Alpha: 0.*#
@@ -75,9 +75,9 @@
 #
 #Limpeza
 #	[+] Lixeira
-#	[-] Firefox
-#		[-] Cache
-#		[-] Cookies
+#	[+] Firefox
+#		[+] Cache
+#		[+] Cookies
 #	[-] Excluindo pacotes antigos
 #	[-]	Excluindo pacotes orfaõs
 #	[+] Removendo arquivos temporários
@@ -178,6 +178,14 @@ firefoxcache()
 	echo ""
 	echo "Deseja realizar a limpeza no Cache do navegador Firefox (s/n)?"
 	read -p "??" firefoxcache
+}
+
+firefoxcookie()
+{
+	clear
+	echo ""
+	echo "Deseja realizar a limpeza nos cookies no navegador Firefox (s/n)?"
+	read -p "??" firefoxcookie
 }
 
 ########################################################################
@@ -641,10 +649,17 @@ install_yes()
 
 		if [[ $firefoxcache == "s" ]]; then
 			clear
-			echo "Realizada a limpeza no cache no navegador Firefox"
+			echo "Realizando a limpeza no cache no navegador Firefox"
 			echo "--------------------------------------"
 			rm - Rf ~/.mozilla/firefox/*.default/*.sqlite
 			rm -Rf ~/.cache/mozilla/firefox/*.default/*
+		fi
+
+		if [[ $firefoxcookie == "s" ]]; then
+			clear
+			echo "Realizando a limpeza nos cookies no navegador Firefox"
+			echo "--------------------------------------"
+			rm -Rf ~/.mozilla/firefox/*.default/cookies.sqlite
 		fi
 
 	######INSTALANDO PROGRAMAS
@@ -921,6 +936,10 @@ install_no()
 		echo "Limpeza no cache do Firefox"
 	fi
 
+	if [[ $firefoxcookie == "n" ]]; then
+		echo "Limpeza nos cookies do Firefox"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1055,6 +1074,7 @@ auto_config()
 			obsoleto
 			lixeira
 			firefoxcache
+			firefoxcookie
 
 			update
 			firefox
