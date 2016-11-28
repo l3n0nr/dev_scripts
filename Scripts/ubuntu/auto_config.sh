@@ -568,6 +568,7 @@ install_yes()
 			echo "Atualizando os programas da máquina"
 			echo "----------------------------------------------------------------------"
 			apt upgrade -y
+			apt-get dist-upgrade
 		fi
 
 		#corrigindo possiveis erros no sistema
