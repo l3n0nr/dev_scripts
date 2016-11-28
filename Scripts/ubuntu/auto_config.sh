@@ -78,6 +78,8 @@
 #	[-] Excluindo pacotes antigos
 #	[-]	Excluindo pacotes orfaõs
 #	[-] Removendo arquivos temporários
+#	[+] Kernel's antigos
+#
 #Reinicialização
 #	[+]Reinicia
 
@@ -130,6 +132,16 @@ swap()
 	echo ""
 	echo "Deseja otimizar a utilização da swap?"
 	read -p "??" swap;
+}
+
+########################################################################
+######LIMPANDO A MÁQUINA
+kernel()
+{
+	clear
+	echo ""
+	echo "Deseja realizar uma limpeza nos seus antigos kernel's (s/n)?"
+	read -p "??" kernel
 }
 
 ########################################################################
@@ -355,7 +367,7 @@ reaver()
 	clear
 	echo ""
 	echo "Deseja instalar o Reaver (s/n)?"
-	read -p "??" rea
+	read -p "??" reaver
 }
 
 ########################################################################
@@ -558,6 +570,12 @@ install_yes()
 				echo "Não há nada para ser otimizado"
 				echo "Isso porque já foi otimizado anteriormente!"
 			fi
+		fi
+
+######LIMPANDO A MAQUINA
+		if [[ $kernel == "s" ]]; then
+			#removendo kernel's antigos
+			dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^]*\).*/\1/;/[0-9]/!d' | xargs apt-get -y purge
 		fi
 
 	######INSTALANDO PROGRAMAS
@@ -811,6 +829,14 @@ install_no()
 	if [[ $swap == "n" ]]; then
 	 	echo "Swap, "
 	fi
+
+
+########################################################################
+######LIMPANDO A MAQUINA
+	if [[ $kernel == "n" ]]; then
+		echo "Removendo kernel's antigos,"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -939,6 +965,8 @@ auto_config()
 			upgrade
 			corrigeerros
 			swap
+
+			kernel
 
 			update
 			firefox
