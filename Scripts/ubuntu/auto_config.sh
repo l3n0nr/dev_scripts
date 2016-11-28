@@ -76,6 +76,8 @@
 #Limpeza
 #	[+] Lixeira
 #	[-] Firefox
+#		[-] Cache
+#		[-] Cookies
 #	[-] Excluindo pacotes antigos
 #	[-]	Excluindo pacotes orfaõs
 #	[+] Removendo arquivos temporários
@@ -168,6 +170,14 @@ lixeira()
 	echo ""
 	echo "Deseja apagar todos os arquivos da Lixeira (s/n)?"
 	read -p "??" lixeira
+}
+
+firefoxcache()
+{
+	clear
+	echo ""
+	echo "Deseja realizar a limpeza no Cache do navegador Firefox (s/n)?"
+	read -p "??" firefoxcache
 }
 
 ########################################################################
@@ -629,6 +639,14 @@ install_yes()
 			rm -Rf ~/.local/share/Trash/files/*
 		fi
 
+		if [[ $firefoxcache == "s" ]]; then
+			clear
+			echo "Realizada a limpeza no cache no navegador Firefox"
+			echo "--------------------------------------"
+			rm - Rf ~/.mozilla/firefox/*.default/*.sqlite
+			rm -Rf ~/.cache/mozilla/firefox/*.default/*
+		fi
+
 	######INSTALANDO PROGRAMAS
 		#instalando o firefox
 		if [[ $firefox == "s" ]]; then
@@ -899,6 +917,10 @@ install_no()
 		echo "Removeno arquivos da Lixeira,"
 	fi
 
+	if [[ $firefoxcache == "n" ]]; then
+		echo "Limpeza no cache do Firefox"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1032,6 +1054,7 @@ auto_config()
 			temporario
 			obsoleto
 			lixeira
+			firefoxcache
 
 			update
 			firefox
