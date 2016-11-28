@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.30
+#versão do script: Alpha 0.31
 #############################
 #
 ##################Alpha: 0.*#
@@ -74,7 +74,7 @@
 #	[+]Reaver
 #
 #Limpeza
-#	[-] Lixeira
+#	[+] Lixeira
 #	[-] Firefox
 #	[-] Excluindo pacotes antigos
 #	[-]	Excluindo pacotes orfaõs
@@ -160,6 +160,14 @@ obsoleto()
 	echo ""
 	echo "Deseja remover os arquivos obsoletos do sistema operacional (s/n)?"
 	read -p "??" obsoleto
+}
+
+lixeira()
+{
+	clear
+	echo ""
+	echo "Deseja apagar todos os arquivos da Lixeira (s/n)?"
+	read -p "??" lixeira
 }
 
 ########################################################################
@@ -614,6 +622,13 @@ install_yes()
 			apt-get clean && apt-get autoclean
 		fi
 
+		if [[ $lixeira == "s" ]]; then
+			clear
+			echo "Removendo todos os arquivos da Lixeira"
+			echo "--------------------------------------"
+			rm -Rf ~/.local/share/Trash/files/*
+		fi
+
 	######INSTALANDO PROGRAMAS
 		#instalando o firefox
 		if [[ $firefox == "s" ]]; then
@@ -866,7 +881,6 @@ install_no()
 	 	echo "Swap, "
 	fi
 
-
 ########################################################################
 ######LIMPANDO A MAQUINA
 	if [[ $kernel == "n" ]]; then
@@ -879,6 +893,10 @@ install_no()
 
 	if [[ $obsoleto == "n" ]]; then
 		echo "Removendo arquivos obsoletos,"
+	fi
+
+	if [[ $lixeira == "n" ]]; then
+		echo "Removeno arquivos da Lixeira,"
 	fi
 
 ########################################################################
@@ -1013,6 +1031,7 @@ auto_config()
 			kernel
 			temporario
 			obsoleto
+			lixeira
 
 			update
 			firefox
