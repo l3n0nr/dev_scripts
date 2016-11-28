@@ -685,11 +685,11 @@ install_yes()
 	#instalando o atom
 	if [[ $atom == "s" ]]; then
 		#baixando o atom
-#VERIFICAR	wget https://atom.io/download/deb
+		wget https://atom.io/download/deb -O atom-amd64.deb
 		#executando o arquivo
-#VERIFICAR	sudo dpkg -i atom-amd64.deb
+		dpkg -i atom-amd64.deb
 		#removendo o arquivo
-#VERIFICAR	rm atom-amd64.deb
+		rm atom-amd64.deb
 		echo "VERIFICAR";
 	fi
 	
