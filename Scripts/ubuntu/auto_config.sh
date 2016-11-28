@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.26
+#versão do script: Alpha 0.28
 #############################
 #
 ##################Alpha: 0.*#
@@ -38,6 +38,7 @@
 #FUNCOES
 #Correções
 #	[+]Update
+#		[+]Update-Grud
 #	[+]Upgrade
 #	[+]CorrigindoErros
 #		[+]Swap
@@ -514,7 +515,8 @@ install_yes()
 			clear
 			echo "Atualizando os repositórios na máquina"
 			echo "----------------------------------------------------------------------"
-			sudo apt update
+			apt update
+			update-grub
 		fi
 
 		#atualizando os programas
