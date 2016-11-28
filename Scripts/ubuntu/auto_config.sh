@@ -78,7 +78,7 @@
 #	[-] Firefox
 #	[-] Excluindo pacotes antigos
 #	[-]	Excluindo pacotes orfaõs
-#	[-] Removendo arquivos temporários
+#	[+] Removendo arquivos temporários
 #	[+] Kernel's antigos
 #
 #Reinicialização
@@ -143,6 +143,14 @@ kernel()
 	echo ""
 	echo "Deseja realizar uma limpeza nos seus antigos kernel's (s/n)?"
 	read -p "??" kernel
+}
+
+temporario()
+{
+	clear
+	echo ""
+	echo "Deseja remover os arquivos temporários do sistema operacional (s/n)?"
+	read -p "??" temporario
 }
 
 ########################################################################
@@ -576,8 +584,18 @@ install_yes()
 
 ######LIMPANDO A MAQUINA
 		if [[ $kernel == "s" ]]; then
+			clear
+			echo "Removendo os kernel's temporários do sistema"
+			echo "--------------------------------------------"
 			#removendo kernel's antigos
 			dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^]*\).*/\1/;/[0-9]/!d' | xargs apt-get -y purge
+		fi
+
+		if [[ $temporario == "s" ]]; then
+			clear
+			echo "Removendo arquivos temporários do sistema"
+			echo "-----------------------------------------"
+			find ~/.thumbnails -type f -atime +2 -exec rm -Rf {} \+
 		fi
 
 	######INSTALANDO PROGRAMAS
@@ -839,6 +857,10 @@ install_no()
 		echo "Removendo kernel's antigos,"
 	fi
 
+	if [[ $temporario == "n" ]]; then
+		echo "Removendo arquivos temporários,"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -969,6 +991,7 @@ auto_config()
 			swap
 
 			kernel
+			temporario
 
 			update
 			firefox
