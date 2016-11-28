@@ -39,7 +39,7 @@
 #Correções
 #	[+]Update
 #	[+]Upgrade
-#	[+]CorrigindoErros(especificar melhorar)
+#	[+]CorrigindoErros
 #		[+]Swap
 #		[-]Prelink
 #		[-]Preload
@@ -73,13 +73,18 @@
 #	[+]Reaver
 #
 #Limpeza
-#
-#
+#	[-] Lixeira
+#	[-] Firefox
+#	[-] Excluindo pacotes antigos
+#	[-]	Excluindo pacotes orfaõs
+#	[-] Removendo arquivos temporários
 #Reinicialização
 #	[+]Reinicia
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
-#	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
+#	-Identificar qual a distribuição o usuário está utilizando, dessa forma realizar a instalação dos programas especificos para ela.
+#	-Criar um menu para selecionar qual tipo de ação que o usuário deseja realizar como, [1]- Instalar programas [2]- Corrigir erros no sistema, [3]- Limpar o sistema, [4]- Reiniciar o sistema
+# -Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #	-Possibilitar ao usuário o cancelamento dos programas selecionados para instalação, dentro de um tempo pré-determinado(10 seg.)
 
 ################################################################################
