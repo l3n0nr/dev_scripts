@@ -18,13 +18,13 @@
 #DESENVOLVIDO POR
 ###################
 #
-#por lenonr(Lenon Ricardo) - 
+#por lenonr(Lenon Ricardo) -
 #	contato: <github.com/lenonr/dev_scripts>
 #
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.25
+#versão do script: Alpha 0.26
 #############################
 #
 ##################Alpha: 0.*#
@@ -35,7 +35,7 @@
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
 #	-Xubuntu 16.04
 
-#FUNCOES 	
+#FUNCOES
 #Correções
 #	[+]Update
 #	[+]Upgrade
@@ -44,7 +44,7 @@
 #		[-]Prelink
 #		[-]Preload
 #		[-]Deborphan
-#Instalação	
+#Instalação
 #	[+]Firefox
 #	[+]Steam
 #	[+]Xampp
@@ -60,7 +60,7 @@
 #	[+]Atom
 #	[+]Libreoffice
 #	[+]Netbeans
-#	[+]Vlc	
+#	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
 #	[+]Tlp
@@ -70,9 +70,10 @@
 #	[+]Stellarium
 #	[+]Texmaker
 #	[+]Gnome-terminal
+#	[+]Reaver
 #
 #Limpeza
-#	
+#
 #
 #Reinicialização
 #	[+]Reinicia
@@ -80,7 +81,7 @@
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição e dessa forma realizar a instalação dos programas especificos para ela.
 #	-Possibilitar ao usuário o cancelamento dos programas selecionados para instalação, dentro de um tempo pré-determinado(10 seg.)
-	
+
 ################################################################################
 
 #verificando se o usuário é ROOT
@@ -128,7 +129,7 @@ swap()
 
 ########################################################################
 ######INSTALANDO PROGRAMAS
-firefox() 
+firefox()
 {
 	clear
 	echo ""
@@ -344,6 +345,14 @@ gnometerminal()
 	read -p "??" gnometerminal;
 }
 
+reaver()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Reaver (s/n)?"
+	read -p "??" rea
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -410,7 +419,6 @@ programs_prelink_preload_deborphan()
 	fi
 }
 
-
 cleaning_ubuntu()
 {
 	clear
@@ -444,7 +452,7 @@ cleaning_ubuntu()
 		for i in *~ *.bak *.tmp; do
 			find $HOME -iname "$i" -exec rm -f {} \;
 	done
-	
+
 	echo "--------------------------------------------"
 	echo "Otimizando as Bibliotecas dos Programas"
 	/etc/cron.daily/prelink
@@ -483,433 +491,437 @@ install_yes()
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
 
-######CORREÇÃO SISTEMA		
-	#atualizando os repositórios
-	if [[ $update == "s" ]]; then
-		clear	
-		echo "Atualizando os repositórios na máquina"
-		echo "----------------------------------------------------------------------"
-		sudo apt update 
-	fi
-	
-	#atualizando os programas
-	if [[ $upgrade == "s" ]]; then
-		clear	
-		echo "Atualizando os programas da máquina"
-		echo "----------------------------------------------------------------------"
-		apt upgrade -y
-	fi		
-		
-	#corrigindo possiveis erros no sistema
-	if [[ $corrigeerros == "s" ]]; then
-		clear	
-		echo "Corrigindo possiveis erros no Sistema"
-		echo "----------------------------------------------------------------------"
-		apt-get check -y && 
-		dpkg --configure -a -y && 
-		apt-get -f install && 
-		apt-get -f remove -y && 
-		apt-get autoremove -y && 
-		apt-get clean -y && 
-		apt-get install auto-apt -y && 
-		auto-apt update-local -y && 
-		auto-apt update && 
-		auto-apt updatedb -y
-	fi
-	
-	#configurando a swap
-	if [[ $swap == "s" ]]; then	
-		clear
-		echo "Configurando a Swap"
-		echo "-------------------"
-		memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
-		memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
-		background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
-		ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
-		clear
-		echo "Diminuindo a Prioridade de uso da memória SWAP"
-		echo
-		if [[ $memoswap == "vm.swappiness=10" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
-		elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
-		elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
-		elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
-			echo "Otimizando..."
-			/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
-		else
-			echo "Não há nada para ser otimizado"
-			echo "Isso porque já foi otimizado anteriormente!"
+	######CORREÇÃO SISTEMA
+		#atualizando os repositórios
+		if [[ $update == "s" ]]; then
+			clear
+			echo "Atualizando os repositórios na máquina"
+			echo "----------------------------------------------------------------------"
+			sudo apt update
 		fi
-	fi
 
-######INSTALANDO PROGRAMAS
-	#instalando o firefox
-	if [[ $firefox == "s" ]]; then		
-		clear
-  		echo "Firefox, "
-  		apt install firefox -y
-	fi
-	
-	#instalando o steam
-	if [[ $steam == "s" ]]; then	
-		clear
-	 	echo "Steam"
- 		apt install steam -y
-	fi
-	
-	#instalando o xampp
-	if [[ $xampp == "s" ]]; then	
-		clear
-	 	echo "Xampp, (Ele irá precisar da sua atenção)"
-		#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o 	processo
-		echo "Instalando XAMPP em sua máquina"
-		echo "----------------------------------------------------------------------"
-		wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
-		echo "Realizando a instalação..."
-		echo "---------------------"
-		chmod +x xampp-installer.run
-		./xampp-installer.run
-		rm xampp-installer.run
-	fi
-	
-	#instalando o spotify
-	if [[ $spotify == "s" ]]; then
-		clear
-		echo "Instalando Spotify"
-		echo "----------------------------------------------------------------------"
-		sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
-	     	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
-		apt update
-		apt-get install spotify-client
-	fi	
-	
-	#instalando icones e temas do MAC OS X
-	if [[ $mac == "s" ]]; then
-		clear
-		"Instalando icones e temas do MacOS X"
-		add-apt-repository ppa:noobslab/macbuntu -y
-		apt update
-		apt-get install macbuntu-os-icons-lts-v7 -y		
-		apt-get install macbuntu-os-ithemes-lts-v7 -y
-	fi
-	
-	#instalando pacotes multimidias
-	if [[ $codecs == "s" ]]; then	
-		clear
-		echo "Instalando Pacotes Multimidias (Codecs)"
-		echo "----------------------------------------------------------------------"
-		apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
-	fi
-	
-	#instalando o gimp
-	if [[ $gimp == "s" ]]; then
-		clear
-		echo "Instalando o Gimp"
-		echo "----------------------------------------------------------------------"
-		apt-get install gimp* -y
-	fi
-	
-	#instalando os componentes do xfce
-	if [[ $xfce == "s" ]]; then
-		clear
-		echo "Instalando Adicionais do XFCE4"
-		echo "----------------------------------------------------------------------"
-		apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
-		chmod u+s /usr/sbin/hddtemp	
-	fi
-	
-	#instalando o wine
-	if [[ $wine == "s" ]]; then
-		clear
-		echo "Instalando Wine"
-		echo "----------------------------------------------------------------------"
-		add-apt-repository ppa:ubuntu-wine/ppa -y
-		apt-get install wine* -y
-	fi
-	
-	#instalando o playonlinux
-	if [[ $playonlinux == "s" ]]; then
-		clear
-		echo "Instalando o Playonlinux"
-		echo "----------------------------------------------------------------------"
-		apt-get install playonlinux* -y
-	fi
-	
-	#instalando o java8
-	if [[ $java == "s" ]]; then
-		clear
-		echo "Instalando o Java 8"
-		echo "----------------------------------------------------------------------"
-		add-apt-repository ppa:webupd8team/java -y
-		apt-get install oracle-java8-installer -y
-	fi
-	
-	#instalando o redshift
-	if [[ $redshift == "s" ]]; then
-		clear
-		echo "Instalando o Redshift"
-		echo "----------------------------------------------------------------------"
-		apt-get install redshift gtk-redshift -y
-	fi
-	
-	#instalando o flux
-	if [[ $flux == "s" ]]; then
-		clear
-		echo "Instalando o Flux"
-		echo "----------------------------------------------------------------------"
-		#instalando dependencias
-		apt-get install git python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1 -y
+		#atualizando os programas
+		if [[ $upgrade == "s" ]]; then
+			clear
+			echo "Atualizando os programas da máquina"
+			echo "----------------------------------------------------------------------"
+			apt upgrade -y
+		fi
 
-		#realizando download do flux
-		cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui && 
+		#corrigindo possiveis erros no sistema
+		if [[ $corrigeerros == "s" ]]; then
+			clear
+			echo "Corrigindo possiveis erros no Sistema"
+			echo "----------------------------------------------------------------------"
+			apt-get check -y &&
+			dpkg --configure -a -y &&
+			apt-get -f install &&
+			apt-get -f remove -y &&
+			apt-get autoremove -y &&
+			apt-get clean -y &&
+			apt-get install auto-apt -y &&
+			auto-apt update-local -y &&
+			auto-apt update &&
+			auto-apt updatedb -y
+		fi
 
-		#executando instalacao
-		python download-xflux.py && python setup.py install && python setup.py install --user
-	fi
-	
-	#instalando o nodejs
-	if [[ $nodejs == "s" ]]; then
-		#instalando npm
-		apt install nodejs npm -y
+		#configurando a swap
+		if [[ $swap == "s" ]]; then
+			clear
+			echo "Configurando a Swap"
+			echo "-------------------"
+			memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
+			memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
+			background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
+			ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
+			clear
+			echo "Diminuindo a Prioridade de uso da memória SWAP"
+			echo
+			if [[ $memoswap == "vm.swappiness=10" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
+			elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
+			elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
+			elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
+			else
+				echo "Não há nada para ser otimizado"
+				echo "Isso porque já foi otimizado anteriormente!"
+			fi
+		fi
 
-		#configurando o npm
-		npm -g install express knex pg bower	
-	fi
-	
-	#instalando o atom
-	if [[ $atom == "s" ]]; then
-		#baixando o atom
-		wget https://atom.io/download/deb -O atom-amd64.deb
-		#executando o arquivo
-		dpkg -i atom-amd64.deb
-		#removendo o arquivo
-		rm atom-amd64.deb
-		echo "VERIFICAR";
-	fi
-	
-	#instalando o libreoffice
-	if [[ $libreoffice == "s" ]]; then
-		#adicionando ppa		
-		add-apt-repository ppa:libreoffice/ppa -y
-		#instalando libreoffice
-		apt install libreoffice* -y
-	fi
-	
-	if [[ $vlc == "s" ]]; then
-		#instalando o vlc
-		apt install vlc* -y
-	fi
-	
-	if [[ $netbeans == "s" ]]; then
-		#instalando o netbeans
-		echo "Baixando o Netbeans(Este programa precisará de atenção)"
-		echo "----------------------------------------------------------------------"
-		wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
-		echo "Realizando a instalação..."
-		echo "----------------------------------------------------------------------"
-		chmod +x netbeans-8.2-linux.sh
-		./netbeans-8.2-linux.sh
-		rm netbeans-8.2-linux.sh
-	fi
-	
-	if [[ $clementine == "s" ]]; then
-		#instalando o clementine
-		apt install clementine* -y
-	fi
-	
-	if [[ $gparted == "s" ]]; then
-		#instalando o gparted
-		apt install gparted* -y
-	fi
-	
-	if [[ $tlp == "s" ]]; then
-		#instalando o tlp
-		apt install tlp* -y
-	fi
-	
-	if [[ $rar == "s" ]]; then
-		#instalando o tlp
-		apt install rar* -y
-	fi
-	
-	if [[ $git == "s" ]]; then
-		#instalando o tlp
-		apt install git -y
-	fi
-	
-	if [[ $lmsensors == "s" ]]; then
-		#instalando o tlp
-		apt install lm-sensors -y
-	fi
-	
-	if [[ $stellarium == "s" ]]; then
-		#instalando o tlp
-		apt install stellarium* -y
-	fi
-	
-	if [[ $texmaker == "s" ]]; then
-		#instalando o tlp
-		apt install texmaker* -y
-	fi
-	
-	if [[ $gnometerminal == "s" ]]; then
-		#instalando o tlp
-		apt install gnometerminal* -y
-	fi
-	
-######REINICIANDO	
-	#reiniciando a maquina
-	if [[ $reinicia == "s" ]]; then	
-		#reiniciando a maquina em dois minutos
-#VERIFICAR	sudo reboot -t 120 
-		reboot
-	fi	
-}
+	######INSTALANDO PROGRAMAS
+		#instalando o firefox
+		if [[ $firefox == "s" ]]; then
+				clear
+	  		echo "Firefox, "
+	  		apt install firefox -y
+		fi
+
+		#instalando o steam
+		if [[ $steam == "s" ]]; then
+			clear
+		 	echo "Steam"
+	 		apt install steam -y
+		fi
+
+		#instalando o xampp
+		if [[ $xampp == "s" ]]; then
+			clear
+		 	echo "Xampp, (Ele irá precisar da sua atenção)"
+			#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o 	processo
+			echo "Instalando XAMPP em sua máquina"
+			echo "----------------------------------------------------------------------"
+			wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
+			echo "Realizando a instalação..."
+			echo "---------------------"
+			chmod +x xampp-installer.run
+			./xampp-installer.run
+			rm xampp-installer.run
+		fi
+
+		#instalando o spotify
+		if [[ $spotify == "s" ]]; then
+			clear
+			echo "Instalando Spotify"
+			echo "----------------------------------------------------------------------"
+			sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
+		     	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+			apt update
+			apt-get install spotify-client
+		fi
+
+		#instalando icones e temas do MAC OS X
+		if [[ $mac == "s" ]]; then
+			clear
+			"Instalando icones e temas do MacOS X"
+			add-apt-repository ppa:noobslab/macbuntu -y
+			apt update
+			apt-get install macbuntu-os-icons-lts-v7 -y
+			apt-get install macbuntu-os-ithemes-lts-v7 -y
+		fi
+
+		#instalando pacotes multimidias
+		if [[ $codecs == "s" ]]; then
+			clear
+			echo "Instalando Pacotes Multimidias (Codecs)"
+			echo "----------------------------------------------------------------------"
+			apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
+		fi
+
+		#instalando o gimp
+		if [[ $gimp == "s" ]]; then
+			clear
+			echo "Instalando o Gimp"
+			echo "----------------------------------------------------------------------"
+			apt-get install gimp* -y
+		fi
+
+		#instalando os componentes do xfce
+		if [[ $xfce == "s" ]]; then
+			clear
+			echo "Instalando Adicionais do XFCE4"
+			echo "----------------------------------------------------------------------"
+			apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+			chmod u+s /usr/sbin/hddtemp
+		fi
+
+		#instalando o wine
+		if [[ $wine == "s" ]]; then
+			clear
+			echo "Instalando Wine"
+			echo "----------------------------------------------------------------------"
+			add-apt-repository ppa:ubuntu-wine/ppa -y
+			apt-get install wine* -y
+		fi
+
+		#instalando o playonlinux
+		if [[ $playonlinux == "s" ]]; then
+			clear
+			echo "Instalando o Playonlinux"
+			echo "----------------------------------------------------------------------"
+			apt-get install playonlinux* -y
+		fi
+
+		#instalando o java8
+		if [[ $java == "s" ]]; then
+			clear
+			echo "Instalando o Java 8"
+			echo "----------------------------------------------------------------------"
+			add-apt-repository ppa:webupd8team/java -y
+			apt-get install oracle-java8-installer -y
+		fi
+
+		#instalando o redshift
+		if [[ $redshift == "s" ]]; then
+			clear
+			echo "Instalando o Redshift"
+			echo "----------------------------------------------------------------------"
+			apt-get install redshift gtk-redshift -y
+		fi
+
+		#instalando o flux
+		if [[ $flux == "s" ]]; then
+			clear
+			echo "Instalando o Flux"
+			echo "----------------------------------------------------------------------"
+			#instalando dependencias
+			apt-get install git python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1 -y
+
+			#realizando download do flux
+			cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui &&
+
+			#executando instalacao
+			python download-xflux.py && python setup.py install && python setup.py install --user
+		fi
+
+		#instalando o nodejs
+		if [[ $nodejs == "s" ]]; then
+			#instalando npm
+			apt install nodejs npm -y
+
+			#configurando o npm
+			npm -g install express knex pg bower
+		fi
+
+		#instalando o atom
+		if [[ $atom == "s" ]]; then
+			#baixando o atom
+			wget https://atom.io/download/deb -O atom-amd64.deb
+			#executando o arquivo
+			dpkg -i atom-amd64.deb
+			#removendo o arquivo
+			rm atom-amd64.deb
+		fi
+
+		#instalando o libreoffice
+		if [[ $libreoffice == "s" ]]; then
+			#adicionando ppa
+			add-apt-repository ppa:libreoffice/ppa -y
+			#instalando libreoffice
+			apt install libreoffice* -y
+		fi
+
+		if [[ $vlc == "s" ]]; then
+			#instalando o vlc
+			apt install vlc* -y
+		fi
+
+		if [[ $netbeans == "s" ]]; then
+			#instalando o netbeans
+			echo "Baixando o Netbeans(Este programa precisará de atenção)"
+			echo "----------------------------------------------------------------------"
+			wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
+			echo "Realizando a instalação..."
+			echo "----------------------------------------------------------------------"
+			chmod +x netbeans-8.2-linux.sh
+			./netbeans-8.2-linux.sh
+			rm netbeans-8.2-linux.sh
+		fi
+
+		if [[ $clementine == "s" ]]; then
+			#instalando o clementine
+			apt install clementine* -y
+		fi
+
+		if [[ $gparted == "s" ]]; then
+			#instalando o gparted
+			apt install gparted* -y
+		fi
+
+		if [[ $tlp == "s" ]]; then
+			#instalando o tlp
+			apt install tlp* -y
+		fi
+
+		if [[ $rar == "s" ]]; then
+			#instalando o tlp
+			apt install rar* -y
+		fi
+
+		if [[ $git == "s" ]]; then
+			#instalando o tlp
+			apt install git -y
+		fi
+
+		if [[ $lmsensors == "s" ]]; then
+			#instalando o tlp
+			apt install lm-sensors -y
+		fi
+
+		if [[ $stellarium == "s" ]]; then
+			#instalando o tlp
+			apt install stellarium* -y
+		fi
+
+		if [[ $texmaker == "s" ]]; then
+			#instalando o tlp
+			apt install texmaker* -y
+		fi
+
+		if [[ $gnometerminal == "s" ]]; then
+			#instalando o tlp
+			apt install gnometerminal* -y
+		fi
+
+		if [[ $reaver == "s" ]]; then
+			#instalando Reaver
+			apt-get install reaver
+		fi
+
+	######REINICIANDO
+		#reiniciando a maquina
+		if [[ $reinicia == "s" ]]; then
+			#reiniciando a maquina em dois minutos
+	#VERIFICAR	sudo reboot -t 120
+			reboot
+		fi
+	}
 
 ########################################################################
 install_no()
 {
 	#relatorio de instalacao
 	echo "As seguintes tarefas não serão realizadas..."
-	echo "----------------------------------------------"	
-	
-######CORREÇÃO SISTEMA			
-	if [[ $update == "n" ]]; then	
+	echo "----------------------------------------------"
+
+######CORREÇÃO SISTEMA
+	if [[ $update == "n" ]]; then
 	 	echo "Atualizando repositórios, "
 	fi
-	
-	if [[ $update == "n" ]]; then	
+
+	if [[ $update == "n" ]]; then
 	 	echo "Atualizando programas, "
 	fi
-	
-	if [[ $corrigeerros == "n" ]]; then	
+
+	if [[ $corrigeerros == "n" ]]; then
 	 	echo "Corrigindo Erros, "
 	fi
-	
-	if [[ $swap == "n" ]]; then	
+
+	if [[ $swap == "n" ]]; then
 	 	echo "Swap, "
-	fi	
+	fi
 ########################################################################
-######INSTALANDO PROGRAMAS		
+######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
 	fi
-	
-	if [[ $steam == "n" ]]; then	
+
+	if [[ $steam == "n" ]]; then
 	 	echo "Steam, "
 	fi
-	
-	if [[ $xampp == "n" ]]; then	
+
+	if [[ $xampp == "n" ]]; then
 	 	echo "Xampp, "
 	fi
-	
-	if [[ $spotify == "n" ]]; then	
+
+	if [[ $spotify == "n" ]]; then
 	 	echo "Spotify, "
 	fi
-	
-	if [[ $mac == "n" ]]; then	
+
+	if [[ $mac == "n" ]]; then
 	 	echo "Mac, "
 	fi
-	
-	if [[ $codecs == "n" ]]; then	
+
+	if [[ $codecs == "n" ]]; then
 		echo "Codecs,"
 	fi
-	
-	if [[ $gimp == "n" ]]; then	
+
+	if [[ $gimp == "n" ]]; then
 		echo "Gimp,"
 	fi
-	
-	if [[ $xfce == "n" ]]; then	
+
+	if [[ $xfce == "n" ]]; then
 		echo "Xfce,"
 	fi
-	
-	if [[ $wine == "n" ]]; then	
+
+	if [[ $wine == "n" ]]; then
 		echo "Wine,"
 	fi
-	
-	if [[ $playonlinux == "n" ]]; then	
+
+	if [[ $playonlinux == "n" ]]; then
 		echo "PlayonLinux,"
 	fi
-	
-	if [[ $java == "n" ]]; then	
+
+	if [[ $java == "n" ]]; then
 		echo "Java 8,"
 	fi
-	
-	if [[ $redshift == "n" ]]; then	
+
+	if [[ $redshift == "n" ]]; then
 		echo "Redshift,"
 	fi
-	
-	if [[ $flux == "n" ]]; then	
+
+	if [[ $flux == "n" ]]; then
 		echo "Flux,"
 	fi
-	
-	if [[ $nodejs == "n" ]]; then	
+
+	if [[ $nodejs == "n" ]]; then
 		echo "NodeJS,"
 	fi
-	
-	if [[ $atom == "n" ]]; then	
+
+	if [[ $atom == "n" ]]; then
 		echo "Atom,"
 	fi
-	
-	if [[ $libreoffice == "n" ]]; then	
+
+	if [[ $libreoffice == "n" ]]; then
 		echo "Libreoffice,"
 	fi
-	
-	if [[ $vlc == "n" ]]; then	
+
+	if [[ $vlc == "n" ]]; then
 		echo "Vlc,"
 	fi
-	
+
 	if [[ $netbeans == "n" ]]; then
 		echo "Netbeans,"
 	fi
-	
-	if [[ $clementine == "n" ]]; then	
+
+	if [[ $clementine == "n" ]]; then
 		echo "Clementine,"
 	fi
-	
-	if [[ $gparted == "n" ]]; then	
+
+	if [[ $gparted == "n" ]]; then
 		echo "Gparted,"
 	fi
-	
-	if [[ $tlp == "n" ]]; then	
+
+	if [[ $tlp == "n" ]]; then
 		echo "Tlp,"
 	fi
-	
-	if [[ $rar == "n" ]]; then	
+
+	if [[ $rar == "n" ]]; then
 		echo "Rar,"
 	fi
-	
-	if [[ $git == "n" ]]; then	
+
+	if [[ $git == "n" ]]; then
 		echo "Git,"
 	fi
-	
-	if [[ $lmsensors == "n" ]]; then	
+
+	if [[ $lmsensors == "n" ]]; then
 		echo "Lm-sensors,"
 	fi
-	
-	if [[ $stellarium == "n" ]]; then	
+
+	if [[ $stellarium == "n" ]]; then
 		echo "Stellarium,"
 	fi
-	
-	if [[ $texmaker == "n" ]]; then	
+
+	if [[ $texmaker == "n" ]]; then
 		echo "Texmaker,"
 	fi
-	
-	if [[ $gnometerminal == "n" ]]; then	
+
+	if [[ $gnometerminal == "n" ]]; then
 		echo "Gnome-Terminal,"
 	fi
 
 ########################################################################
 ######REINICIANDO
-	if [[ $reinicia == "n" ]]; then	
+	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
 	fi
-	
+
 	echo "----------------------------------------------"
 }
 
@@ -922,7 +934,7 @@ auto_config()
 			upgrade
 			corrigeerros
 			swap
-			
+
 			update
 			firefox
 			steam
@@ -951,12 +963,13 @@ auto_config()
 			stellarium
 			texmaker
 			gnometerminal
-		
+			reaver
+
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
 			install_no
-			
-	echo "TAREFAS FINALIZADAS, SAINDO.."		
+
+	echo "TAREFAS FINALIZADAS, SAINDO.."
 	clear
 }
 
@@ -977,7 +990,7 @@ menu()
 				exit
 				;;
 			*) echo
-				echo Alternativa incorreta!! 
+				echo Alternativa incorreta!!
 				sleep 1
 				menu
 				exit
