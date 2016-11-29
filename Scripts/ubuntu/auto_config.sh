@@ -104,6 +104,20 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
+#verificar distribuição utilizada
+#			VERIFICARINICIO			##############################################
+########################################################################
+#$distro == cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"
+#echo $distro
+#if [[ $distro == "Ubuntu" ]];then
+# echo "teste"
+#	else
+#		echo "erro"
+#fi
+########################################################################
+#			VERIFICARFIM			################################################
+
+
 ########################################################################
 ######CORREÇÃO SISTEMA
 update()
