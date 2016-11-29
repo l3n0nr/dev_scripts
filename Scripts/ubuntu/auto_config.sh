@@ -799,7 +799,9 @@ install_yes()
 			cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui &&
 
 			#executando instalacao
-			python download-xflux.py && python setup.py install && python setup.py install --user
+			sudo python download-xflux.py &&
+			sudo python setup.py install &&
+			sudo python setup.py install --user
 		fi
 
 		#instalando o nodejs
