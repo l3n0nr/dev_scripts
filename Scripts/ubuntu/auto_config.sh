@@ -31,7 +31,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.32
+#versão do script: Alpha 0.35
 #############################
 #
 ##################Alpha: 0.*#
@@ -50,8 +50,14 @@
 #	[+]CorrigindoErros
 #		[+]Swap
 #		[-]Prelink
+#				apt-get install prelink deborphan -y ;
+#				sed -i 's/unknown/yes/g' /etc/default/prelink
+#
 #		[-]Preload
 #		[-]Deborphan
+#		[-]Pacotes com problemas
+#				dpkg --configure -a
+#
 #Instalação
 #	[+]Firefox
 #	[+]Steam
@@ -79,6 +85,7 @@
 #	[+]Texmaker
 #	[+]Gnome-terminal
 #	[+]Reaver
+#	[+]Android Studio
 #
 #Limpeza
 #	[+] Lixeira
@@ -86,18 +93,30 @@
 #		[+] Cache
 #		[+] Cookies
 #	[-] Excluindo pacotes antigos
-#	[-]	Excluindo pacotes orfaõs
+#			apt-get autoremove -y
+
+#	[+]	Excluindo pacotes orfaõs
+#	[-] Excluindo pacotes duplicados
+#			apt-get autoclean -y
+
 #	[+] Removendo arquivos temporários
 # [+] Arquivos obsoletos
 #	[+] Kernel's antigos
+#	[-] Removendo arquivos (.bak, ~, tmp) pasta Home
+#			for i in *~ *.bak *.tmp; do
+#			find $HOME -iname "$i" -exec rm -f {} \;
 #
+#	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #Reinicialização
 #	[+]Reinicia
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição o usuário está utilizando, dessa forma realizar a instalação dos programas especificos para ela.
-#	-Criar um menu para selecionar qual tipo de ação que o usuário deseja realizar como, [1]- Instalar programas [2]- Corrigir erros no sistema, [3]- Limpar o sistema, [4]- Reiniciar o sistema
+#
 # -Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
+#
+#	-Criar um menu para selecionar qual tipo de ação que o usuário deseja realizar como, [1]- Instalar programas [2]- Corrigir erros no sistema, [3]- Limpar o sistema, [4]- Reiniciar o sistema.
+#
 #	-Possibilitar ao usuário o cancelamento dos programas selecionados para instalação, dentro de um tempo pré-determinado(10 seg.)
 
 ################################################################################
@@ -207,6 +226,22 @@ firefoxcookie()
 	echo ""
 	echo "Deseja realizar a limpeza nos cookies no navegador Firefox (s/n)?"
 	read -p "??" firefoxcookie
+}
+
+arquivosorfaos()
+{
+	clear
+	echo ""
+	echo "Deseja realizar a limpeza nos arquivos orfãos do sistema (s/n)?"
+	read -p "??" arquivosorfaos
+}
+
+arquivosinuteis()
+{
+	clear
+	echo ""
+	echo "Deseja realizar a limpeza nos arquivos obsoletos do sistema (s/n)?"
+	read -p "??" arquivosinuteis
 }
 
 ########################################################################
@@ -435,6 +470,14 @@ reaver()
 	read -p "??" reaver
 }
 
+android()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Android Studio (s/n)?"
+	read -p "??" android
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -498,71 +541,6 @@ programs_prelink_preload_deborphan()
 		else
 			echo "Otimização já adicionada anteriormente."
 		fi
-	fi
-}
-
-cleaning_ubuntu()
-{
-	clear
-	echo "Realizando a limpeza no sistema"
-	echo "----------------------------------------------------------------------"
-	clear
-	if which -a prelink && which -a deborphan; then
-		clear
-		echo "Esvaziando a Lixeira"
-		rm -rf /home/$SUDO_USER/.local/share/Trash/files/*
-		echo "--------------------------------------------"
-		echo "Esvaziando os Arquivos Temporários (pasta tmp)"
-		rm -rf /var/tmp/*
-		echo "--------------------------------------------"
-		echo "Excluindo Arquivos Inúteis do Cache do Gerenciador de Pacotes (apt)"
-		apt-get clean -y
-		echo "--------------------------------------------"
-		echo "Excluindo Pacotes Velhos que não tem utilidade para o Sistema"
-		apt-get autoremove -y
-		echo "--------------------------------------------"
-		echo "Excluindo Pacotes Duplicados"
-		apt-get autoclean -y
-		echo "--------------------------------------------"
-		echo "Reparando Pacotes com Problemas"
-		dpkg --configure -a
-		echo "--------------------------------------------"
-		echo "Removendo Pacotes Órfãos"
-		apt-get remove $(deborphan) -y ; apt-get autoremove -y
-		echo "--------------------------------------------"
-		echo "Removendo Arquivos (.bak, ~, .tmp) da pasta Home"
-		for i in *~ *.bak *.tmp; do
-			find $HOME -iname "$i" -exec rm -f {} \;
-	done
-
-	echo "--------------------------------------------"
-	echo "Otimizando as Bibliotecas dos Programas"
-	/etc/cron.daily/prelink
-	echo "--------------------------------------------"
-	clear
-	echo "Limpeza Concluída ... "
-	sleep 3
-	else
-		clear
-		echo -e "Você precisa instalar dois programas\n para continuar com a Limpeza."
-		read -p "Deseja instalar o Prelink e o Deborphan? s/n: " -n1 escolha
-		case $escolha in
-			s|S) echo
-				apt-get install prelink deborphan -y ;
-				sed -i 's/unknown/yes/g' /etc/default/prelink
-				;;
-			n|N) echo
-				echo Saindo, não executando a limpeza...
-				sleep 1
-				exit
-				;;
-			*) echo
-				echo Alternativas incorretas ... Saindo!!!
-				sleep 1
-				exit
-				;;
-		esac
-
 	fi
 }
 
@@ -640,6 +618,7 @@ install_yes()
 		fi
 
 ######LIMPANDO A MAQUINA
+		#removendo kernel antigo
 		if [[ $kernel == "s" ]]; then
 			clear
 			echo "Removendo os kernel's temporários do sistema"
@@ -648,6 +627,7 @@ install_yes()
 			dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^]*\).*/\1/;/[0-9]/!d' | xargs apt-get -y purge
 		fi
 
+		#removendo arquivos temporarios
 		if [[ $temporario == "s" ]]; then
 			clear
 			echo "Removendo arquivos temporários do sistema"
@@ -655,6 +635,7 @@ install_yes()
 			find ~/.thumbnails -type f -atime +2 -exec rm -Rf {} \+
 		fi
 
+		#removendo arquivos obsoletos
 		if [[ $obsoleto == "s" ]]; then
 			clear
 			echo "Removendo os arquivos obsoletos do sistema"
@@ -662,6 +643,7 @@ install_yes()
 			apt-get clean && apt-get autoclean
 		fi
 
+		#limpando a lixeira
 		if [[ $lixeira == "s" ]]; then
 			clear
 			echo "Removendo todos os arquivos da Lixeira"
@@ -669,6 +651,7 @@ install_yes()
 			rm -Rf ~/.local/share/Trash/files/*
 		fi
 
+		#limpando cache do firefox
 		if [[ $firefoxcache == "s" ]]; then
 			clear
 			echo "Realizando a limpeza no cache no navegador Firefox"
@@ -677,6 +660,7 @@ install_yes()
 			rm -Rf ~/.cache/mozilla/firefox/*.default/*
 		fi
 
+		#limpando cookies do firefox
 		if [[ $firefoxcookie == "s" ]]; then
 			clear
 			echo "Realizando a limpeza nos cookies no navegador Firefox"
@@ -684,18 +668,36 @@ install_yes()
 			rm -Rf ~/.mozilla/firefox/*.default/cookies.sqlite
 		fi
 
+		#limpando arquivos orfaos
+		if [[ $arquivosorfaos == "s" ]]; then
+			clear
+			echo "Removendo Pacotes Órfãos"
+			echo "------------------------"
+			apt-get remove $(deborphan) -y ; apt-get autoremove -y
+		fi
+
+		#limpando arquivos inuteis
+		if [[ $arquivosinuteis == "s" ]]; then
+			clear
+			echo "Removendo Pacotes inuteis"
+			echo "------------------------"
+			apt-get clean -y
+		fi
+
 	######INSTALANDO PROGRAMAS
-		#instalando o firefox
 		if [[ $firefox == "s" ]]; then
 				clear
 	  		echo "Firefox, "
+
+				#instalando o firefox
 	  		apt install firefox -y
 		fi
 
-		#instalando o steam
 		if [[ $steam == "s" ]]; then
 			clear
 		 	echo "Steam"
+
+			#instalando o steam
 	 		apt install steam -y
 		fi
 
@@ -703,94 +705,124 @@ install_yes()
 		if [[ $xampp == "s" ]]; then
 			clear
 		 	echo "Xampp, (Ele irá precisar da sua atenção)"
-			#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o 	processo
 			echo "Instalando XAMPP em sua máquina"
 			echo "----------------------------------------------------------------------"
+
+			#baixando o pacote
 			wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
 			echo "Realizando a instalação..."
 			echo "---------------------"
+
+			#dando permissão para execução
 			chmod +x xampp-installer.run
+
+			#executando o arquivo
 			./xampp-installer.run
+
+			#removendo o arquivo
 			rm xampp-installer.run
 		fi
 
-		#instalando o spotify
 		if [[ $spotify == "s" ]]; then
 			clear
 			echo "Instalando Spotify"
 			echo "----------------------------------------------------------------------"
+
+			#baixando pacote
 			sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
-		     	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+
+			#baixando chave
+			apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+
+			#atualizando lista de repositorios
 			apt update
+
+			#instalando o spotify
 			apt-get install spotify-client
 		fi
 
-		#instalando icones e temas do MAC OS X
 		if [[ $mac == "s" ]]; then
 			clear
 			"Instalando icones e temas do MacOS X"
+			#adicionando repositorio
 			add-apt-repository ppa:noobslab/macbuntu -y
+
+			#atualizando lista de repositorios
 			apt update
+
+			#instalando icones do MacOS
 			apt-get install macbuntu-os-icons-lts-v7 -y
+
+			#instalando tema do MacOS
 			apt-get install macbuntu-os-ithemes-lts-v7 -y
 		fi
 
-		#instalando pacotes multimidias
 		if [[ $codecs == "s" ]]; then
 			clear
 			echo "Instalando Pacotes Multimidias (Codecs)"
 			echo "----------------------------------------------------------------------"
+
+			#instalando pacotes multimidias
 			apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
 		fi
 
-		#instalando o gimp
 		if [[ $gimp == "s" ]]; then
 			clear
 			echo "Instalando o Gimp"
 			echo "----------------------------------------------------------------------"
+
+			#instalando o gimp
 			apt-get install gimp* -y
 		fi
 
-		#instalando os componentes do xfce
 		if [[ $xfce == "s" ]]; then
 			clear
 			echo "Instalando Adicionais do XFCE4"
 			echo "----------------------------------------------------------------------"
+			#instalando componentes do XFCE
 			apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+
+			#dando permissão de leitura, para verificar temperatura do HDD
 			chmod u+s /usr/sbin/hddtemp
 		fi
 
-		#instalando o wine
 		if [[ $wine == "s" ]]; then
 			clear
 			echo "Instalando Wine"
 			echo "----------------------------------------------------------------------"
+			#adicionado o repositorio
 			add-apt-repository ppa:ubuntu-wine/ppa -y
+
+			#instalando o wine
 			apt-get install wine* -y
 		fi
 
-		#instalando o playonlinux
 		if [[ $playonlinux == "s" ]]; then
 			clear
 			echo "Instalando o Playonlinux"
 			echo "----------------------------------------------------------------------"
+
+			#instalando o playonlinux
 			apt-get install playonlinux* -y
 		fi
 
-		#instalando o java8
 		if [[ $java == "s" ]]; then
 			clear
 			echo "Instalando o Java 8"
 			echo "----------------------------------------------------------------------"
+			#adicionando repositorio
 			add-apt-repository ppa:webupd8team/java -y
+
+			#instalando o java8
 			apt-get install oracle-java8-installer -y
 		fi
 
-		#instalando o redshift
 		if [[ $redshift == "s" ]]; then
 			clear
 			echo "Instalando o Redshift"
 			echo "----------------------------------------------------------------------"
+
+			#instalando o redshift
 			apt-get install redshift gtk-redshift -y
 		fi
 
@@ -806,7 +838,9 @@ install_yes()
 			cd /tmp && git clone "https://github.com/xflux-gui/xflux-gui.git" && cd xflux-gui &&
 
 			#executando instalacao
-			python download-xflux.py && python setup.py install && python setup.py install --user
+			sudo python download-xflux.py &&
+			sudo python setup.py install &&
+			sudo python setup.py install --user
 		fi
 
 		#instalando o nodejs
@@ -822,8 +856,10 @@ install_yes()
 		if [[ $atom == "s" ]]; then
 			#baixando o atom
 			wget https://atom.io/download/deb -O atom-amd64.deb
+
 			#executando o arquivo
 			dpkg -i atom-amd64.deb
+
 			#removendo o arquivo
 			rm atom-amd64.deb
 		fi
@@ -836,13 +872,13 @@ install_yes()
 			apt install libreoffice* -y
 		fi
 
+		#instalando o vlc
 		if [[ $vlc == "s" ]]; then
-			#instalando o vlc
 			apt install vlc* -y
 		fi
 
+		#instalando o netbeans
 		if [[ $netbeans == "s" ]]; then
-			#instalando o netbeans
 			echo "Baixando o Netbeans(Este programa precisará de atenção)"
 			echo "----------------------------------------------------------------------"
 			wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
@@ -869,40 +905,51 @@ install_yes()
 		fi
 
 		if [[ $rar == "s" ]]; then
-			#instalando o tlp
+			#instalando o rar
 			apt install rar* -y
 		fi
 
 		if [[ $git == "s" ]]; then
-			#instalando o tlp
+			#instalando o git
 			apt install git -y
 		fi
 
 		if [[ $lmsensors == "s" ]]; then
-			#instalando o tlp
+			#instalando o lmsensors
 			apt install lm-sensors -y
 		fi
 
 		if [[ $stellarium == "s" ]]; then
-			#instalando o tlp
+			#instalando o stellarium
 			apt install stellarium* -y
 		fi
 
 		if [[ $texmaker == "s" ]]; then
-			#instalando o tlp
+			#instalando o texmaker
 			apt install texmaker* -y
 		fi
 
 		if [[ $gnometerminal == "s" ]]; then
-			#instalando o tlp
+			#instalando o gnometerminal
 			apt install gnometerminal* -y
 		fi
 
 		if [[ $reaver == "s" ]]; then
-			#instalando Reaver
+			#instalando o reaver
 			apt-get install reaver
 		fi
 
+		#instalando o androidstudio
+		if [[ $android == "s" ]]; then
+			#adicionando repositorio
+			apt-add-repository ppa:paolorotolo/android-studio
+
+			#atualizando lista de repositorios
+			apt update
+
+			#instalando android studio
+			apt-get install android-studio
+		fi
 	######REINICIANDO
 		#reiniciando a maquina
 		if [[ $reinicia == "s" ]]; then
@@ -960,6 +1007,14 @@ install_no()
 
 	if [[ $firefoxcookie == "n" ]]; then
 		echo "Limpeza nos cookies do Firefox"
+	fi
+
+	if [[ $arquivosorfaos == "n" ]]; then
+		echo "Arquivos orfãos do sistema"
+	fi
+
+	if [[ $arquivosinuteis == "n" ]]; then
+		echo "Arquivos Inuteis"
 	fi
 
 ########################################################################
@@ -1072,6 +1127,14 @@ install_no()
 		echo "Gnome-Terminal,"
 	fi
 
+	if [[ $reaver == "n" ]]; then
+		echo "Reaver,"
+	fi
+
+	if [[ $android == "n" ]]; then
+		echo "Android Studio"
+	fi
+
 ########################################################################
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1097,6 +1160,8 @@ auto_config()
 			lixeira
 			firefoxcache
 			firefoxcookie
+			arquivosorfaos
+			arquivosinuteis
 
 			update
 			firefox
@@ -1127,6 +1192,7 @@ auto_config()
 			texmaker
 			gnometerminal
 			reaver
+			android
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
