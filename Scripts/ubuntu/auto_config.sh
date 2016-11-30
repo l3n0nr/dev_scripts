@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.33
+#versão do script: Alpha 0.34
 #############################
 #
 ##################Alpha: 0.*#
@@ -98,8 +98,7 @@
 #			for i in *~ *.bak *.tmp; do
 #			find $HOME -iname "$i" -exec rm -f {} \;
 #
-#	[-] Excluindo arquivos inuteis do cache do gerenciador de pacotes
-#			apt-get clean -y
+#	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #Reinicialização
 #	[+]Reinicia
 
@@ -227,6 +226,14 @@ arquivosorfaos()
 	echo ""
 	echo "Deseja realizar a limpeza nos arquivos orfãos do sistema (s/n)?"
 	read -p "??" arquivosorfaos
+}
+
+arquivosinuteis()
+{
+	clear
+	echo ""
+	echo "Deseja realizar a limpeza nos arquivos obsoletos do sistema (s/n)?"
+	read -p "??" arquivosinuteis
 }
 
 ########################################################################
@@ -653,6 +660,14 @@ install_yes()
 			apt-get remove $(deborphan) -y ; apt-get autoremove -y
 		fi
 
+		#limpando arquivos inuteis
+		if [[ $arquivosinuteis == "s" ]]; then
+			clear
+			echo "Removendo Pacotes inuteis"
+			echo "------------------------"
+			apt-get clean -y
+		fi
+
 	######INSTALANDO PROGRAMAS
 		#instalando o firefox
 		if [[ $firefox == "s" ]]; then
@@ -937,6 +952,10 @@ install_no()
 		echo "Arquivos orfãos do sistema"
 	fi
 
+	if [[ $arquivosinuteis == "n" ]]; then
+		echo "Arquivos Inuteis"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1073,7 +1092,8 @@ auto_config()
 			firefoxcache
 			firefoxcookie
 			arquivosorfaos
-
+			arquivosinuteis
+			
 			update
 			firefox
 			steam
