@@ -24,7 +24,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.32
+#versão do script: Alpha 0.33
 #############################
 #
 ##################Alpha: 0.*#
@@ -79,7 +79,7 @@
 #		[+] Cache
 #		[+] Cookies
 #	[-] Excluindo pacotes antigos
-#	[-]	Excluindo pacotes orfaõs
+#	[+]	Excluindo pacotes orfaõs
 #	[+] Removendo arquivos temporários
 # [+] Arquivos obsoletos
 #	[+] Kernel's antigos
@@ -200,6 +200,14 @@ firefoxcookie()
 	echo ""
 	echo "Deseja realizar a limpeza nos cookies no navegador Firefox (s/n)?"
 	read -p "??" firefoxcookie
+}
+
+arquivosorfaos()
+{
+	clear
+	echo ""
+	echo "Deseja realizar a limpeza nos arquivos orfãos do sistema (s/n)?"
+	read -p "??" arquivosorfaos
 }
 
 ########################################################################
@@ -633,6 +641,7 @@ install_yes()
 		fi
 
 ######LIMPANDO A MAQUINA
+		#removendo kernel antigo
 		if [[ $kernel == "s" ]]; then
 			clear
 			echo "Removendo os kernel's temporários do sistema"
@@ -641,6 +650,7 @@ install_yes()
 			dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^]*\).*/\1/;/[0-9]/!d' | xargs apt-get -y purge
 		fi
 
+		#removendo arquivos temporarios
 		if [[ $temporario == "s" ]]; then
 			clear
 			echo "Removendo arquivos temporários do sistema"
@@ -648,6 +658,7 @@ install_yes()
 			find ~/.thumbnails -type f -atime +2 -exec rm -Rf {} \+
 		fi
 
+		#removendo arquivos obsoletos
 		if [[ $obsoleto == "s" ]]; then
 			clear
 			echo "Removendo os arquivos obsoletos do sistema"
@@ -655,6 +666,7 @@ install_yes()
 			apt-get clean && apt-get autoclean
 		fi
 
+		#limpando a lixeira
 		if [[ $lixeira == "s" ]]; then
 			clear
 			echo "Removendo todos os arquivos da Lixeira"
@@ -662,6 +674,7 @@ install_yes()
 			rm -Rf ~/.local/share/Trash/files/*
 		fi
 
+		#limpando cache do firefox
 		if [[ $firefoxcache == "s" ]]; then
 			clear
 			echo "Realizando a limpeza no cache no navegador Firefox"
@@ -670,11 +683,20 @@ install_yes()
 			rm -Rf ~/.cache/mozilla/firefox/*.default/*
 		fi
 
+		#limpando cookies do firefox
 		if [[ $firefoxcookie == "s" ]]; then
 			clear
 			echo "Realizando a limpeza nos cookies no navegador Firefox"
 			echo "--------------------------------------"
 			rm -Rf ~/.mozilla/firefox/*.default/cookies.sqlite
+		fi
+
+		#limpando arquivos orfaos
+		if [[ $arquivosorfaos == "s" ]]; then
+			clear
+			echo "Removendo Pacotes Órfãos"
+			echo "------------------------"
+			apt-get remove $(deborphan) -y ; apt-get autoremove -y
 		fi
 
 	######INSTALANDO PROGRAMAS
@@ -957,6 +979,10 @@ install_no()
 		echo "Limpeza nos cookies do Firefox"
 	fi
 
+	if [[ $arquivosorfaos == "n" ]]; then
+		echo "Arquivos orfãos do sistema"
+	fi
+
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1092,6 +1118,7 @@ auto_config()
 			lixeira
 			firefoxcache
 			firefoxcookie
+			arquivosorfaos
 
 			update
 			firefox
