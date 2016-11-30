@@ -43,8 +43,14 @@
 #	[+]CorrigindoErros
 #		[+]Swap
 #		[-]Prelink
+#				apt-get install prelink deborphan -y ;
+#				sed -i 's/unknown/yes/g' /etc/default/prelink
+#
 #		[-]Preload
 #		[-]Deborphan
+#		[-]Pacotes com problemas
+#				dpkg --configure -a
+#
 #Instalação
 #	[+]Firefox
 #	[+]Steam
@@ -79,18 +85,31 @@
 #		[+] Cache
 #		[+] Cookies
 #	[-] Excluindo pacotes antigos
+#			apt-get autoremove -y
+
 #	[+]	Excluindo pacotes orfaõs
+#	[-] Excluindo pacotes duplicados
+#			apt-get autoclean -y
+
 #	[+] Removendo arquivos temporários
 # [+] Arquivos obsoletos
 #	[+] Kernel's antigos
+#	[-] Removendo arquivos (.bak, ~, tmp) pasta Home
+#			for i in *~ *.bak *.tmp; do
+#			find $HOME -iname "$i" -exec rm -f {} \;
 #
+#	[-] Excluindo arquivos inuteis do cache do gerenciador de pacotes
+#			apt-get clean -y
 #Reinicialização
 #	[+]Reinicia
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição o usuário está utilizando, dessa forma realizar a instalação dos programas especificos para ela.
-#	-Criar um menu para selecionar qual tipo de ação que o usuário deseja realizar como, [1]- Instalar programas [2]- Corrigir erros no sistema, [3]- Limpar o sistema, [4]- Reiniciar o sistema
+#
 # -Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
+#
+#	-Criar um menu para selecionar qual tipo de ação que o usuário deseja realizar como, [1]- Instalar programas [2]- Corrigir erros no sistema, [3]- Limpar o sistema, [4]- Reiniciar o sistema.
+#
 #	-Possibilitar ao usuário o cancelamento dos programas selecionados para instalação, dentro de um tempo pré-determinado(10 seg.)
 
 ################################################################################
@@ -499,71 +518,6 @@ programs_prelink_preload_deborphan()
 		else
 			echo "Otimização já adicionada anteriormente."
 		fi
-	fi
-}
-
-cleaning_ubuntu()
-{
-	clear
-	echo "Realizando a limpeza no sistema"
-	echo "----------------------------------------------------------------------"
-	clear
-	if which -a prelink && which -a deborphan; then
-		clear
-		echo "Esvaziando a Lixeira"
-		rm -rf /home/$SUDO_USER/.local/share/Trash/files/*
-		echo "--------------------------------------------"
-		echo "Esvaziando os Arquivos Temporários (pasta tmp)"
-		rm -rf /var/tmp/*
-		echo "--------------------------------------------"
-		echo "Excluindo Arquivos Inúteis do Cache do Gerenciador de Pacotes (apt)"
-		apt-get clean -y
-		echo "--------------------------------------------"
-		echo "Excluindo Pacotes Velhos que não tem utilidade para o Sistema"
-		apt-get autoremove -y
-		echo "--------------------------------------------"
-		echo "Excluindo Pacotes Duplicados"
-		apt-get autoclean -y
-		echo "--------------------------------------------"
-		echo "Reparando Pacotes com Problemas"
-		dpkg --configure -a
-		echo "--------------------------------------------"
-		echo "Removendo Pacotes Órfãos"
-		apt-get remove $(deborphan) -y ; apt-get autoremove -y
-		echo "--------------------------------------------"
-		echo "Removendo Arquivos (.bak, ~, .tmp) da pasta Home"
-		for i in *~ *.bak *.tmp; do
-			find $HOME -iname "$i" -exec rm -f {} \;
-	done
-
-	echo "--------------------------------------------"
-	echo "Otimizando as Bibliotecas dos Programas"
-	/etc/cron.daily/prelink
-	echo "--------------------------------------------"
-	clear
-	echo "Limpeza Concluída ... "
-	sleep 3
-	else
-		clear
-		echo -e "Você precisa instalar dois programas\n para continuar com a Limpeza."
-		read -p "Deseja instalar o Prelink e o Deborphan? s/n: " -n1 escolha
-		case $escolha in
-			s|S) echo
-				apt-get install prelink deborphan -y ;
-				sed -i 's/unknown/yes/g' /etc/default/prelink
-				;;
-			n|N) echo
-				echo Saindo, não executando a limpeza...
-				sleep 1
-				exit
-				;;
-			*) echo
-				echo Alternativas incorretas ... Saindo!!!
-				sleep 1
-				exit
-				;;
-		esac
-
 	fi
 }
 
