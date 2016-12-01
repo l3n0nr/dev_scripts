@@ -83,8 +83,38 @@
 #	[+]Reaver
 #	[+]Gnome System Monitor
 #	[+]Tor
+#	[-]GBA - Gameboyadvanced
+#
+################################################################################
 # [-]Dolphin
 #
+#adicionando repositorio do dolphin
+#add-apt-repository ppa:glennric/dolphin-emu
+#
+#atualizando lista de repositorios
+#apt-get update
+#
+#corrigindo problemas de dependencias
+#apt-get install -f
+#
+#instalando dolphin
+#apt-get install dolphin-emu
+#apt-get install dolphin-emu-master
+#
+################################################################################
+#
+#
+#	[-]Virtualbox
+#
+#baixando o arquivo 		http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
+
+#executando o arquivos
+#dpkg -i virtualbox.deb
+#
+#removendo o arquivo baixando
+#rm virtualbox.deb
+#
+################################################################################
 #Limpeza
 #	[+] Lixeira
 #	[+] Firefox
@@ -929,8 +959,39 @@ install_yes()
 
 			#VERIFICAR
 			sudo ln -sf /opt/tor-browser/Browser/start-tor-browser /usr/bin/torbrowser
+
+			#removendo arquivo download
+			rm tor-browser.tar.xz
 		fi
 
+		if [[ $vba == "s" ]]; then
+			#corrigindo dependencias
+			apt install -f -y
+
+			#adicionando dependencias
+			apt-get install cmake libgtkmm-2.4-dev libglademm-2.4-dev libgtkglextmm-x11-1.2-dev libsdl1.2-dev checkinstall -y
+
+			#corrigindo dependencias
+			apt install -f -y
+
+			#baixando vba
+			wget https://sourceforge.net/projects/vbam/files/Linux%20Binaries/VBA-M%202.0.0%20Beta%201%20-%20Ubuntu%20-%2064%20bits.zip/download
+
+			#extraindo pasta
+			unzip vba.zip -d vba && clear && echo "Arquivo extraido com sucesso!"
+
+			#entrando na pasta
+			cd vba/VBA-M\ 2.0.0\ Beta\ 1\ -\ Ubuntu\ -\ 64\ bits/15.04
+
+			#instalando pacotes deb
+			dpkg -i *.deb
+
+			#voltando pasta origem
+			cd .. && cd .. && cd ..
+
+			#removendo arquivos criados
+			rm -rf vba && rm vba.zip
+		fi
 	######REINICIANDO
 		#reiniciando a maquina
 		if [[ $reinicia == "s" ]]; then
