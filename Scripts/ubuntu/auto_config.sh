@@ -10,6 +10,9 @@
 #
 #por gmanson(Gabriel Manson)
 #	contato: <github.com/gmasson/welcome-debian>
+#
+#por Lucas Alves Santos
+# fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
 ################################################################################
 #
 ################################################################################
@@ -24,7 +27,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.34
+#versão do script: Alpha 0.35
 #############################
 #
 ##################Alpha: 0.*#
@@ -127,9 +130,10 @@ fi
 #verificar distribuição utilizada
 #			VERIFICARINICIO			##############################################
 ########################################################################
-#$distro == cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"
+#$distro == 'cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"´
 #echo $distro
 #if [[ $distro == "Ubuntu" ]];then
+
 # echo "teste"
 #	else
 #		echo "erro"
@@ -902,7 +906,6 @@ install_yes()
 		if [[ $gnomesystem == "s" ]]; then
 			#instalando gnomesystem monitor
 			apt-get install gnome-system-monitor-y
-
 		fi
 
 	######REINICIANDO
