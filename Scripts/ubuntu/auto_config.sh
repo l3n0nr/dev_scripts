@@ -13,6 +13,9 @@
 #
 #por Lucas Alves Santos
 # fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
+#
+#por Edivaldo Brito
+# fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
 ################################################################################
 #
 ################################################################################
@@ -27,7 +30,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.35
+#versão do script: Alpha 0.36
 #############################
 #
 ##################Alpha: 0.*#
