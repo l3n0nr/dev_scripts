@@ -82,6 +82,7 @@
 #	[+]Gnome-terminal
 #	[+]Reaver
 #	[+]Gnome System Monitor
+#	[+]Tor
 # [-]Dolphin
 #
 #Limpeza
@@ -472,8 +473,16 @@ gnomesystem()
 {
 	clear
 	echo ""
-	echo "Deseja instalar Gnome System Monitor (s/n)?"
+	echo "Deseja instalar o Gnome System Monitor (s/n)?"
 	read -p "??" gnomesystem
+}
+
+tor()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Navegador Tor (s/n)?"
+	read -p "??" tor
 }
 
 ########################################################################
@@ -908,6 +917,20 @@ install_yes()
 			apt-get install gnome-system-monitor-y
 		fi
 
+		if [[ $tor == "s" ]]; then
+			#baixando o tor
+			wget https://dist.torproject.org/torbrowser/6.0.7/tor-browser-linux32-6.0.7_en-US.tar.xz -O tor-browser.tar.xz
+
+			#extraindo o arquivo
+			sudo tar -xvJf tor-browser.tar.xz -C /opt/
+
+			#movendo arquivos
+			sudo mv /opt/tor-browser*/ /opt/tor-browser
+
+			#VERIFICAR
+			sudo ln -sf /opt/tor-browser/Browser/start-tor-browser /usr/bin/torbrowser
+		fi
+
 	######REINICIANDO
 		#reiniciando a maquina
 		if [[ $reinicia == "s" ]]; then
@@ -1093,6 +1116,10 @@ install_no()
 		echo "Gnome System Monitor,"
 	fi
 
+	if [[ $tor == "n" ]]; then
+		echo "Tor,"
+	fi
+
 ########################################################################
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1151,6 +1178,7 @@ auto_config()
 			gnometerminal
 			reaver
 			gnomesystem
+			tor
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
