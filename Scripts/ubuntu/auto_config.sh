@@ -78,6 +78,8 @@
 #	[+]Texmaker
 #	[+]Gnome-terminal
 #	[+]Reaver
+#	[+]Gnome System Monitor
+# [-]Dolphin
 #
 #Limpeza
 #	[+] Lixeira
@@ -460,6 +462,14 @@ reaver()
 	echo ""
 	echo "Deseja instalar o Reaver (s/n)?"
 	read -p "??" reaver
+}
+
+gnomesystem()
+{
+	clear
+	echo ""
+	echo "Deseja instalar Gnome System Monitor (s/n)?"
+	read -p "??" gnomesystem
 }
 
 ########################################################################
@@ -889,6 +899,12 @@ install_yes()
 			apt-get install reaver
 		fi
 
+		if [[ $gnomesystem == "s" ]]; then
+			#instalando gnomesystem monitor
+			apt-get install gnome-system-monitor-y
+
+		fi
+
 	######REINICIANDO
 		#reiniciando a maquina
 		if [[ $reinicia == "s" ]]; then
@@ -1066,6 +1082,14 @@ install_no()
 		echo "Gnome-Terminal,"
 	fi
 
+	if [[ $reaver == "n" ]]; then
+		echo "Reaver,"
+	fi
+
+	if [[ $gnomesystem == "n" ]]; then
+		echo "Gnome System Monitor,"
+	fi
+
 ########################################################################
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1093,7 +1117,7 @@ auto_config()
 			firefoxcookie
 			arquivosorfaos
 			arquivosinuteis
-			
+
 			update
 			firefox
 			steam
@@ -1123,6 +1147,7 @@ auto_config()
 			texmaker
 			gnometerminal
 			reaver
+			gnomesystem
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
