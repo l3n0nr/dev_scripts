@@ -81,6 +81,7 @@
 #	[+]Texmaker
 #	[+]Gnome-terminal
 #	[+]Reaver
+<<<<<<< HEAD
 #	[+]Gnome System Monitor
 #	[+]Tor
 #	[-]GBA - Gameboyadvanced
@@ -110,6 +111,9 @@
 
 #executando o arquivos
 #dpkg -i virtualbox.deb
+=======
+#	[+]Android Studio
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 #
 #removendo o arquivo baixando
 #rm virtualbox.deb
@@ -499,6 +503,7 @@ reaver()
 	read -p "??" reaver
 }
 
+<<<<<<< HEAD
 gnomesystem()
 {
 	clear
@@ -513,6 +518,14 @@ tor()
 	echo ""
 	echo "Deseja instalar o Navegador Tor (s/n)?"
 	read -p "??" tor
+=======
+android()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Android Studio (s/n)?"
+	read -p "??" android
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 }
 
 ########################################################################
@@ -722,17 +735,19 @@ install_yes()
 		fi
 
 	######INSTALANDO PROGRAMAS
-		#instalando o firefox
 		if [[ $firefox == "s" ]]; then
 				clear
 	  		echo "Firefox, "
+
+				#instalando o firefox
 	  		apt install firefox -y
 		fi
 
-		#instalando o steam
 		if [[ $steam == "s" ]]; then
 			clear
 		 	echo "Steam"
+
+			#instalando o steam
 	 		apt install steam -y
 		fi
 
@@ -740,94 +755,124 @@ install_yes()
 		if [[ $xampp == "s" ]]; then
 			clear
 		 	echo "Xampp, (Ele irá precisar da sua atenção)"
-			#verificar se existe o diretorio "/opt/lampp/" habilitado na maquina, senao realizar o 	processo
 			echo "Instalando XAMPP em sua máquina"
 			echo "----------------------------------------------------------------------"
+
+			#baixando o pacote
 			wget http://nbtelecom.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.6.14/xampp-linux-x64-5.6.14-0-installer.run -O xampp-installer.run
 			echo "Realizando a instalação..."
 			echo "---------------------"
+
+			#dando permissão para execução
 			chmod +x xampp-installer.run
+
+			#executando o arquivo
 			./xampp-installer.run
+
+			#removendo o arquivo
 			rm xampp-installer.run
 		fi
 
-		#instalando o spotify
 		if [[ $spotify == "s" ]]; then
 			clear
 			echo "Instalando Spotify"
 			echo "----------------------------------------------------------------------"
+
+			#baixando pacote
 			sh -c "echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list"
-		     	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+
+			#baixando chave
+			apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+
+			#atualizando lista de repositorios
 			apt update
+
+			#instalando o spotify
 			apt-get install spotify-client
 		fi
 
-		#instalando icones e temas do MAC OS X
 		if [[ $mac == "s" ]]; then
 			clear
 			"Instalando icones e temas do MacOS X"
+			#adicionando repositorio
 			add-apt-repository ppa:noobslab/macbuntu -y
+
+			#atualizando lista de repositorios
 			apt update
+
+			#instalando icones do MacOS
 			apt-get install macbuntu-os-icons-lts-v7 -y
+
+			#instalando tema do MacOS
 			apt-get install macbuntu-os-ithemes-lts-v7 -y
 		fi
 
-		#instalando pacotes multimidias
 		if [[ $codecs == "s" ]]; then
 			clear
 			echo "Instalando Pacotes Multimidias (Codecs)"
 			echo "----------------------------------------------------------------------"
+
+			#instalando pacotes multimidias
 			apt install ubuntu-restricted-extras faac faad ffmpeg gstreamer0.10-ffmpeg flac icedax id3v2 lame libflac++6 libjpeg-progs libmpeg3-1 mencoder mjpegtools mp3gain mpeg2dec mpeg3-utils mpegdemux mpg123 mpg321 regionset sox uudeview vorbis-tools x264 arj p7zip p7zip-full p7zip-rar rar unrar unace-nonfree sharutils uudeview mpack cabextract libdvdread4 libav-tools libavcodec-extra-54 libavformat-extra-54 easytag gnome-icon-theme-full gxine id3tool libmozjs185-1.0 libopusfile0 libxine1 libxine1-bin libxine1-ffmpeg libxine1-misc-plugins libxine1-plugins libxine1-x nautilus-script-audio-convert nautilus-scripts-manager tagtool spotify-client prelink deborphan oracle-java7-installer -y --force-yes
 		fi
 
-		#instalando o gimp
 		if [[ $gimp == "s" ]]; then
 			clear
 			echo "Instalando o Gimp"
 			echo "----------------------------------------------------------------------"
+
+			#instalando o gimp
 			apt-get install gimp* -y
 		fi
 
-		#instalando os componentes do xfce
 		if [[ $xfce == "s" ]]; then
 			clear
 			echo "Instalando Adicionais do XFCE4"
 			echo "----------------------------------------------------------------------"
+			#instalando componentes do XFCE
 			apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+
+			#dando permissão de leitura, para verificar temperatura do HDD
 			chmod u+s /usr/sbin/hddtemp
 		fi
 
-		#instalando o wine
 		if [[ $wine == "s" ]]; then
 			clear
 			echo "Instalando Wine"
 			echo "----------------------------------------------------------------------"
+			#adicionado o repositorio
 			add-apt-repository ppa:ubuntu-wine/ppa -y
+
+			#instalando o wine
 			apt-get install wine* -y
 		fi
 
-		#instalando o playonlinux
 		if [[ $playonlinux == "s" ]]; then
 			clear
 			echo "Instalando o Playonlinux"
 			echo "----------------------------------------------------------------------"
+
+			#instalando o playonlinux
 			apt-get install playonlinux* -y
 		fi
 
-		#instalando o java8
 		if [[ $java == "s" ]]; then
 			clear
 			echo "Instalando o Java 8"
 			echo "----------------------------------------------------------------------"
+			#adicionando repositorio
 			add-apt-repository ppa:webupd8team/java -y
+
+			#instalando o java8
 			apt-get install oracle-java8-installer -y
 		fi
 
-		#instalando o redshift
 		if [[ $redshift == "s" ]]; then
 			clear
 			echo "Instalando o Redshift"
 			echo "----------------------------------------------------------------------"
+
+			#instalando o redshift
 			apt-get install redshift gtk-redshift -y
 		fi
 
@@ -861,8 +906,10 @@ install_yes()
 		if [[ $atom == "s" ]]; then
 			#baixando o atom
 			wget https://atom.io/download/deb -O atom-amd64.deb
+
 			#executando o arquivo
 			dpkg -i atom-amd64.deb
+
 			#removendo o arquivo
 			rm atom-amd64.deb
 		fi
@@ -875,13 +922,13 @@ install_yes()
 			apt install libreoffice* -y
 		fi
 
+		#instalando o vlc
 		if [[ $vlc == "s" ]]; then
-			#instalando o vlc
 			apt install vlc* -y
 		fi
 
+		#instalando o netbeans
 		if [[ $netbeans == "s" ]]; then
-			#instalando o netbeans
 			echo "Baixando o Netbeans(Este programa precisará de atenção)"
 			echo "----------------------------------------------------------------------"
 			wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
@@ -908,40 +955,41 @@ install_yes()
 		fi
 
 		if [[ $rar == "s" ]]; then
-			#instalando o tlp
+			#instalando o rar
 			apt install rar* -y
 		fi
 
 		if [[ $git == "s" ]]; then
-			#instalando o tlp
+			#instalando o git
 			apt install git -y
 		fi
 
 		if [[ $lmsensors == "s" ]]; then
-			#instalando o tlp
+			#instalando o lmsensors
 			apt install lm-sensors -y
 		fi
 
 		if [[ $stellarium == "s" ]]; then
-			#instalando o tlp
+			#instalando o stellarium
 			apt install stellarium* -y
 		fi
 
 		if [[ $texmaker == "s" ]]; then
-			#instalando o tlp
+			#instalando o texmaker
 			apt install texmaker* -y
 		fi
 
 		if [[ $gnometerminal == "s" ]]; then
-			#instalando o tlp
+			#instalando o gnometerminal
 			apt install gnometerminal* -y
 		fi
 
 		if [[ $reaver == "s" ]]; then
-			#instalando Reaver
+			#instalando o reaver
 			apt-get install reaver
 		fi
 
+<<<<<<< HEAD
 		if [[ $gnomesystem == "s" ]]; then
 			#instalando gnomesystem monitor
 			apt-get install gnome-system-monitor-y
@@ -991,6 +1039,18 @@ install_yes()
 
 			#removendo arquivos criados
 			rm -rf vba && rm vba.zip
+=======
+		#instalando o androidstudio
+		if [[ $android == "s" ]]; then
+			#adicionando repositorio
+			apt-add-repository ppa:paolorotolo/android-studio
+
+			#atualizando lista de repositorios
+			apt update
+
+			#instalando android studio
+			apt-get install android-studio
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 		fi
 	######REINICIANDO
 		#reiniciando a maquina
@@ -1173,12 +1233,17 @@ install_no()
 		echo "Reaver,"
 	fi
 
+<<<<<<< HEAD
 	if [[ $gnomesystem == "n" ]]; then
 		echo "Gnome System Monitor,"
 	fi
 
 	if [[ $tor == "n" ]]; then
 		echo "Tor,"
+=======
+	if [[ $android == "n" ]]; then
+		echo "Android Studio"
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 	fi
 
 ########################################################################
@@ -1238,8 +1303,12 @@ auto_config()
 			texmaker
 			gnometerminal
 			reaver
+<<<<<<< HEAD
 			gnomesystem
 			tor
+=======
+			android
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
