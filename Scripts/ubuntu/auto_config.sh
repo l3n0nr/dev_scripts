@@ -929,13 +929,20 @@ install_yes()
 
 		#instalando o netbeans
 		if [[ $netbeans == "s" ]]; then
-			echo "Baixando o Netbeans(Este programa precisará de atenção)"
+			echo "Baixando o Netbeans + JDK8"
+			echo "A INSTALAÇÃO, PRECISARÁ DE SUA ATENÇÃO"
 			echo "----------------------------------------------------------------------"
-			wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
+			#baixando o arquivo
+			wget -c http://download.oracle.com/otn-pub/java/jdk-nb/8-8.0/jdk-8-nb-8-linux-x64.sh?AuthParam=1395311377_7cbe28b25486a89be5d8399b8a43c7a6 -O netbeans.sh
 			echo "Realizando a instalação..."
 			echo "----------------------------------------------------------------------"
-			chmod +x netbeans-8.2-linux.sh
-			./netbeans-8.2-linux.sh
+			#alterando permissao de execucao
+			chmod +x netbeans.sh
+
+			#execuntando arquivo
+			./netbeans.sh
+
+			#removendo arquivo
 			rm netbeans-8.2-linux.sh
 		fi
 
