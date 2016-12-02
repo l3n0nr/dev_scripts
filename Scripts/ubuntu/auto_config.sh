@@ -30,12 +30,14 @@
 #
 ################################################################################
 #
-#############################
-#versão do script: Alpha 0.36.4
-#############################
+###############################
+#versão do script: Alpha 0.36.5
+###############################
 #
-##################Alpha: 0.*#
-##################Beta: 1.* #
+#versão: x.y.z
+# x = alpha, beta;
+# y = versões funcionando;
+# z = correções necessárias;
 #
 ################################################################################
 
@@ -73,7 +75,9 @@
 #	[+]NodeJS
 #	[+]Atom
 #	[+]Libreoffice
-#	[+]Netbeans
+#	[-]Netbeans
+	#VERIFICAR, INSTALAR TAMBEM JDK
+	
 #	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
@@ -87,7 +91,11 @@
 #	[+]Reaver
 #	[+]Gnome System Monitor
 #	[+]Tor
+#
 #	[-]GBA - Gameboyadvanced
+#
+#[-]Android Studio
+	#VERIFICAR, INSTALAR TAMBEM JDK	
 ################################################################################
 #	[-]Synaptic	
 #instalando synaptic
@@ -117,7 +125,6 @@
 #
 #executando o arquivos
 #dpkg -i virtualbox.deb
-#	[+]Android Studio
 #
 #removendo o arquivo baixando
 #rm virtualbox.deb
