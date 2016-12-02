@@ -10,6 +10,12 @@
 #
 #por gmanson(Gabriel Manson)
 #	contato: <github.com/gmasson/welcome-debian>
+#
+#por Lucas Alves Santos
+# fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
+#
+#por Edivaldo Brito
+# fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
 ################################################################################
 #
 ################################################################################
@@ -31,7 +37,7 @@
 ################################################################################
 #
 #############################
-#versão do script: Alpha 0.35
+#versão do script: Alpha 0.36
 #############################
 #
 ##################Alpha: 0.*#
@@ -85,8 +91,44 @@
 #	[+]Texmaker
 #	[+]Gnome-terminal
 #	[+]Reaver
-#	[+]Android Studio
+<<<<<<< HEAD
+#	[+]Gnome System Monitor
+#	[+]Tor
+#	[-]GBA - Gameboyadvanced
 #
+################################################################################
+# [-]Dolphin
+#
+#adicionando repositorio do dolphin
+#add-apt-repository ppa:glennric/dolphin-emu
+#
+#atualizando lista de repositorios
+#apt-get update
+#
+#corrigindo problemas de dependencias
+#apt-get install -f
+#
+#instalando dolphin
+#apt-get install dolphin-emu
+#apt-get install dolphin-emu-master
+#
+################################################################################
+#
+#
+#	[-]Virtualbox
+#
+#baixando o arquivo 		http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
+
+#executando o arquivos
+#dpkg -i virtualbox.deb
+=======
+#	[+]Android Studio
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
+#
+#removendo o arquivo baixando
+#rm virtualbox.deb
+#
+################################################################################
 #Limpeza
 #	[+] Lixeira
 #	[+] Firefox
@@ -133,9 +175,10 @@ fi
 #verificar distribuição utilizada
 #			VERIFICARINICIO			##############################################
 ########################################################################
-#$distro == cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"
+#$distro == 'cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"´
 #echo $distro
 #if [[ $distro == "Ubuntu" ]];then
+
 # echo "teste"
 #	else
 #		echo "erro"
@@ -470,12 +513,29 @@ reaver()
 	read -p "??" reaver
 }
 
+<<<<<<< HEAD
+gnomesystem()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Gnome System Monitor (s/n)?"
+	read -p "??" gnomesystem
+}
+
+tor()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Navegador Tor (s/n)?"
+	read -p "??" tor
+=======
 android()
 {
 	clear
 	echo ""
 	echo "Deseja instalar o Android Studio (s/n)?"
 	read -p "??" android
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 }
 
 ########################################################################
@@ -879,13 +939,20 @@ install_yes()
 
 		#instalando o netbeans
 		if [[ $netbeans == "s" ]]; then
-			echo "Baixando o Netbeans(Este programa precisará de atenção)"
+			echo "Baixando o Netbeans + JDK8"
+			echo "A INSTALAÇÃO, PRECISARÁ DE SUA ATENÇÃO"
 			echo "----------------------------------------------------------------------"
-			wget download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-linux.sh -O netbeans-8.2-linux.sh
+			#baixando o arquivo
+			wget -c http://download.oracle.com/otn-pub/java/jdk-nb/8-8.0/jdk-8-nb-8-linux-x64.sh?AuthParam=1395311377_7cbe28b25486a89be5d8399b8a43c7a6 -O netbeans.sh
 			echo "Realizando a instalação..."
 			echo "----------------------------------------------------------------------"
-			chmod +x netbeans-8.2-linux.sh
-			./netbeans-8.2-linux.sh
+			#alterando permissao de execucao
+			chmod +x netbeans.sh
+
+			#execuntando arquivo
+			./netbeans.sh
+
+			#removendo arquivo
 			rm netbeans-8.2-linux.sh
 		fi
 
@@ -939,6 +1006,57 @@ install_yes()
 			apt-get install reaver
 		fi
 
+<<<<<<< HEAD
+		if [[ $gnomesystem == "s" ]]; then
+			#instalando gnomesystem monitor
+			apt-get install gnome-system-monitor-y
+		fi
+
+		if [[ $tor == "s" ]]; then
+			#baixando o tor
+			wget https://dist.torproject.org/torbrowser/6.0.7/tor-browser-linux32-6.0.7_en-US.tar.xz -O tor-browser.tar.xz
+
+			#extraindo o arquivo
+			sudo tar -xvJf tor-browser.tar.xz -C /opt/
+
+			#movendo arquivos
+			sudo mv /opt/tor-browser*/ /opt/tor-browser
+
+			#VERIFICAR
+			sudo ln -sf /opt/tor-browser/Browser/start-tor-browser /usr/bin/torbrowser
+
+			#removendo arquivo download
+			rm tor-browser.tar.xz
+		fi
+
+		if [[ $vba == "s" ]]; then
+			#corrigindo dependencias
+			apt install -f -y
+
+			#adicionando dependencias
+			apt-get install cmake libgtkmm-2.4-dev libglademm-2.4-dev libgtkglextmm-x11-1.2-dev libsdl1.2-dev checkinstall -y
+
+			#corrigindo dependencias
+			apt install -f -y
+
+			#baixando vba
+			wget https://sourceforge.net/projects/vbam/files/Linux%20Binaries/VBA-M%202.0.0%20Beta%201%20-%20Ubuntu%20-%2064%20bits.zip/download
+
+			#extraindo pasta
+			unzip vba.zip -d vba && clear && echo "Arquivo extraido com sucesso!"
+
+			#entrando na pasta
+			cd vba/VBA-M\ 2.0.0\ Beta\ 1\ -\ Ubuntu\ -\ 64\ bits/15.04
+
+			#instalando pacotes deb
+			dpkg -i *.deb
+
+			#voltando pasta origem
+			cd .. && cd .. && cd ..
+
+			#removendo arquivos criados
+			rm -rf vba && rm vba.zip
+=======
 		#instalando o androidstudio
 		if [[ $android == "s" ]]; then
 			#adicionando repositorio
@@ -949,6 +1067,7 @@ install_yes()
 
 			#instalando android studio
 			apt-get install android-studio
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 		fi
 	######REINICIANDO
 		#reiniciando a maquina
@@ -1131,8 +1250,17 @@ install_no()
 		echo "Reaver,"
 	fi
 
+<<<<<<< HEAD
+	if [[ $gnomesystem == "n" ]]; then
+		echo "Gnome System Monitor,"
+	fi
+
+	if [[ $tor == "n" ]]; then
+		echo "Tor,"
+=======
 	if [[ $android == "n" ]]; then
 		echo "Android Studio"
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 	fi
 
 ########################################################################
@@ -1192,7 +1320,12 @@ auto_config()
 			texmaker
 			gnometerminal
 			reaver
+<<<<<<< HEAD
+			gnomesystem
+			tor
+=======
 			android
+>>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
