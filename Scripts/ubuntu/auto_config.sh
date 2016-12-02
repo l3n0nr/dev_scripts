@@ -91,7 +91,6 @@
 #	[+]Reaver
 #	[+]Gnome System Monitor
 #	[+]Tor
-#
 #	[-]GBA - Gameboyadvanced
 #
 #[-]Android Studio
