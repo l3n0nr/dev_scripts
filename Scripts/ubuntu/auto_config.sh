@@ -85,7 +85,6 @@
 #	[+]Texmaker
 #	[+]Gnome-terminal
 #	[+]Reaver
-<<<<<<< HEAD
 #	[+]Gnome System Monitor
 #	[+]Tor
 #	[-]GBA - Gameboyadvanced	
@@ -114,23 +113,43 @@
 #
 #executando o arquivos
 #dpkg -i virtualbox.deb
-=======
 #	[+]Android Studio
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 #
 #removendo o arquivo baixando
 #rm virtualbox.deb
 #
 ################################################################################
-#	[-]Xfdashboard
-#adicionando o repositorio
-#	sudo add-apt-repository ppa:xubuntu-dev/extras
-#	
-#atualizando lista repositorios
-#	apt update
+#	[-]Citra
+#SDL2
+#apt-get install sdl2
+#apt-get install libsdl2-2.0-0
+#apt-get install libsdl2-dev
 #
-#instalando xfdashboard
-#	apt install xfdashboard -y	
+#Qt
+#apt-get install qtbase5-dev libqt5opengl5-dev
+#
+#GCC
+#apt-get install build-essential
+#
+#Cmake
+#apt-get install cmake
+#
+#Clang
+#apt-get install clang libc++-dev
+#
+#copiando repositorio
+#git clone --recursive https://github.com/citra-emu/citra
+#
+#entrando na pasta
+#cd citra
+#
+#construindo o citra
+#mkdir build && cd build
+#cmake ..
+#make
+#make install 
+#
+#################################################################################
 #
 #Limpeza
 #	[+] Lixeira
@@ -516,7 +535,6 @@ reaver()
 	read -p "??" reaver
 }
 
-<<<<<<< HEAD
 gnomesystem()
 {
 	clear
@@ -531,14 +549,14 @@ tor()
 	echo ""
 	echo "Deseja instalar o Navegador Tor (s/n)?"
 	read -p "??" tor
-=======
+}
+
 android()
 {
 	clear
 	echo ""
 	echo "Deseja instalar o Android Studio (s/n)?"
 	read -p "??" android
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 }
 
 ########################################################################
@@ -1009,7 +1027,6 @@ install_yes()
 			apt-get install reaver
 		fi
 
-<<<<<<< HEAD
 		if [[ $gnomesystem == "s" ]]; then
 			#instalando gnomesystem monitor
 			apt-get install gnome-system-monitor-y
@@ -1070,7 +1087,6 @@ install_yes()
 
 			#instalando android studio
 			apt-get install android-studio
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 		fi
 	######REINICIANDO
 		#reiniciando a maquina
@@ -1253,17 +1269,15 @@ install_no()
 		echo "Reaver,"
 	fi
 
-<<<<<<< HEAD
 	if [[ $gnomesystem == "n" ]]; then
 		echo "Gnome System Monitor,"
 	fi
 
 	if [[ $tor == "n" ]]; then
 		echo "Tor,"
-=======
+		
 	if [[ $android == "n" ]]; then
 		echo "Android Studio"
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 	fi
 
 ########################################################################
@@ -1323,12 +1337,9 @@ auto_config()
 			texmaker
 			gnometerminal
 			reaver
-<<<<<<< HEAD
 			gnomesystem
 			tor
-=======
 			android
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
