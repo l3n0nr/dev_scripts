@@ -16,6 +16,7 @@
 #
 #por Edivaldo Brito
 # fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
+#
 ################################################################################
 #
 ################################################################################
@@ -87,10 +88,10 @@
 <<<<<<< HEAD
 #	[+]Gnome System Monitor
 #	[+]Tor
-#	[-]GBA - Gameboyadvanced
+#	[-]GBA - Gameboyadvanced	
 #
 ################################################################################
-# [-]Dolphin
+# 	[-]Dolphin
 #
 #adicionando repositorio do dolphin
 #add-apt-repository ppa:glennric/dolphin-emu
@@ -106,12 +107,11 @@
 #apt-get install dolphin-emu-master
 #
 ################################################################################
-#
-#
 #	[-]Virtualbox
 #
-#baixando o arquivo 		http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
-
+#baixando o arquivo 		
+#http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
+#
 #executando o arquivos
 #dpkg -i virtualbox.deb
 =======
@@ -122,6 +122,16 @@
 #rm virtualbox.deb
 #
 ################################################################################
+#	[-]Xfdashboard
+#adicionando o repositorio
+#	sudo add-apt-repository ppa:xubuntu-dev/extras
+#	
+#atualizando lista repositorios
+#	apt update
+#
+#instalando xfdashboard
+#	apt install xfdashboard -y	
+#
 #Limpeza
 #	[+] Lixeira
 #	[+] Firefox
