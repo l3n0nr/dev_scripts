@@ -1009,7 +1009,7 @@ install_yes()
 
 		if [[ $git == "s" ]]; then
 			#instalando o git
-			apt install git -y
+			apt install git* gitg* -y
 		fi
 
 		if [[ $lmsensors == "s" ]]; then
