@@ -18,7 +18,10 @@
 # fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
 #
 #por Fabiano de Oliveira e Souza
-# fonte: https://www.vivaolinux.com.br/script/Mantendo-hora-do-servidor-atualizada-com-NTP
+# fonte: <https://www.vivaolinux.com.br/script/Mantendo-hora-do-servidor-atualizada-com-NTP>
+#
+#por Lucas Novo Silva
+# fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
 ################################################################################
 #
@@ -39,15 +42,27 @@
 #										#
 #################################################################################
 #
-###############################
-#versão do script: Alpha 0.38.6
-###############################
+###########################
+#versão do script: 0.38.3.8
+###########################
 #
-#versão: x.y.z
-# x = alpha, beta;
-# y = versões funcionando;
-# z = correções necessárias;
+#legenda: a.b.c.d
+# a = alpha[0], beta[1];
+# b = versões funcionando;
+# c = correções necessárias;
+#	netbeans
+#	android
+#	vga
 #
+# d = pendencias
+#	prelink
+#	preload
+#	deborphan
+#	pacotes com problemas
+#	GBA
+#	DeSmuME 
+#	Citra
+#	Virtualbox	
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
@@ -68,6 +83,7 @@
 #		[-]Deborphan
 #		[-]Pacotes com problemas
 #				dpkg --configure -a
+#				sudo rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial && sudo apt-get update
 #
 #Instalação
 #	[+]Firefox
@@ -180,7 +196,7 @@
 #	[-] Excluindo pacotes antigos
 #			apt-get autoremove -y
 
-#	[+]	Excluindo pacotes orfaõs
+#	[+] Excluindo pacotes orfaõs
 #	[-] Excluindo pacotes duplicados
 #			apt-get autoclean -y
 
@@ -193,7 +209,7 @@
 #
 #	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #Reinicialização
-#	[+]Reinicia
+#	[+]Reiniciar
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição o usuário está utilizando, dessa forma realizar a instalação dos programas especificos para ela.
