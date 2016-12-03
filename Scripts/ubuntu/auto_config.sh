@@ -600,7 +600,7 @@ synaptic()
 {
 	clear
 	echo ""
-	echo "Deseja instalar o synaptic? (s/n)?"
+	echo "Deseja instalar o Synaptic? (s/n)?"
 	read -p "??" synaptic
 }
 
@@ -1401,7 +1401,6 @@ auto_config()
 			arquivosorfaos
 			arquivosinuteis
 
-			update
 			firefox
 			steam
 			xampp
