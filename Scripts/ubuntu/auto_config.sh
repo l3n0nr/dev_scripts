@@ -27,14 +27,13 @@
 #por lenonr(Lenon Ricardo) -
 #	contato: <github.com/lenonr/dev_scripts>
 #
-###################
-#
-#	If I have seen further it is by standing on the shoulders of Giants.
-#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)
-#							~Isaac Newton
-#
-###################
-################################################################################
+#################################################################################
+#										#
+#	If I have seen further it is by standing on the shoulders of Giants.	#
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
+#							~Isaac Newton		#
+#										#
+#################################################################################
 #
 #############################
 #versão do script: Alpha 0.36
@@ -91,10 +90,11 @@
 #	[+]Texmaker
 #	[+]Gnome-terminal
 #	[+]Reaver
-<<<<<<< HEAD
 #	[+]Gnome System Monitor
 #	[+]Tor
 #	[-]GBA - Gameboyadvanced
+#	[+]Android Studio
+#	[-]DeSmuME
 #
 ################################################################################
 # [-]Dolphin
@@ -114,16 +114,13 @@
 #
 ################################################################################
 #
-#
 #	[-]Virtualbox
 #
-#baixando o arquivo 		http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
+#baixando o arquivo 		
+#http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
 
 #executando o arquivos
 #dpkg -i virtualbox.deb
-=======
-#	[+]Android Studio
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 #
 #removendo o arquivo baixando
 #rm virtualbox.deb
@@ -513,7 +510,6 @@ reaver()
 	read -p "??" reaver
 }
 
-<<<<<<< HEAD
 gnomesystem()
 {
 	clear
@@ -528,14 +524,14 @@ tor()
 	echo ""
 	echo "Deseja instalar o Navegador Tor (s/n)?"
 	read -p "??" tor
-=======
+}
+	
 android()
 {
 	clear
 	echo ""
 	echo "Deseja instalar o Android Studio (s/n)?"
 	read -p "??" android
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 }
 
 ########################################################################
@@ -1006,7 +1002,6 @@ install_yes()
 			apt-get install reaver
 		fi
 
-<<<<<<< HEAD
 		if [[ $gnomesystem == "s" ]]; then
 			#instalando gnomesystem monitor
 			apt-get install gnome-system-monitor-y
@@ -1030,6 +1025,7 @@ install_yes()
 		fi
 
 		if [[ $vba == "s" ]]; then
+#VERIFICAR NAO ESTA FUNCIONANDO	
 			#corrigindo dependencias
 			apt install -f -y
 
@@ -1056,7 +1052,8 @@ install_yes()
 
 			#removendo arquivos criados
 			rm -rf vba && rm vba.zip
-=======
+		fi
+		
 		#instalando o androidstudio
 		if [[ $android == "s" ]]; then
 			#adicionando repositorio
@@ -1067,8 +1064,8 @@ install_yes()
 
 			#instalando android studio
 			apt-get install android-studio
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 		fi
+		
 	######REINICIANDO
 		#reiniciando a maquina
 		if [[ $reinicia == "s" ]]; then
@@ -1076,7 +1073,7 @@ install_yes()
 	#VERIFICAR	sudo reboot -t 120
 			reboot
 		fi
-	}
+}
 
 ########################################################################
 install_no()
@@ -1250,17 +1247,15 @@ install_no()
 		echo "Reaver,"
 	fi
 
-<<<<<<< HEAD
 	if [[ $gnomesystem == "n" ]]; then
 		echo "Gnome System Monitor,"
 	fi
 
 	if [[ $tor == "n" ]]; then
 		echo "Tor,"
-=======
+
 	if [[ $android == "n" ]]; then
-		echo "Android Studio"
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
+		echo "Android Studio,"
 	fi
 
 ########################################################################
@@ -1320,12 +1315,9 @@ auto_config()
 			texmaker
 			gnometerminal
 			reaver
-<<<<<<< HEAD
 			gnomesystem
 			tor
-=======
 			android
->>>>>>> a8bc546b997ee434bc35748738aa10dd3708ba76
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
