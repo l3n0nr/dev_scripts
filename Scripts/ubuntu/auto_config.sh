@@ -100,19 +100,16 @@
 #	[+]Gnome System Monitor
 #	[+]Tor
 #	[+]Android Studio
-		#VERIFICAR, INSTALAR TAMBEM JDK	
+#		#VERIFICAR, INSTALAR TAMBEM JDK	
+
 #	[+]NTP
 #	[+]Hollywood
 #	[-]GBA - Gameboyadvanced
+#	[+]Synaptic	
 #	[-]DeSmuME - Procurar encontrar um forma de instalação automatica.
 #
 #[-]Android Studio
 	#VERIFICAR, INSTALAR TAMBEM JDK	
-################################################################################
-#	[-]Synaptic	
-#instalando synaptic
-#apt-get install synaptic
-#
 ################################################################################
 # 	[-]Dolphin
 #
@@ -597,6 +594,14 @@ hollywood()
 	echo ""
 	echo "Deseja instalar o recurso Hollywood, que irá torná-lo um super hacker? (s/n)?"
 	read -p "??" hollywood
+}
+
+synaptic()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o synaptic? (s/n)?"
+	read -p "??" synaptic
 }
 
 
@@ -1120,7 +1125,6 @@ install_yes()
 			rm -rf vba && rm vba.zip
 		fi
 		
-		#instalando o androidstudio
 		if [[ $android == "s" ]]; then
 			#adicionando repositorio
 			apt-add-repository ppa:paolorotolo/android-studio
@@ -1132,7 +1136,6 @@ install_yes()
 			apt-get install android-studio
 		fi
 		
-		#instalando o ntp
 		if [[ $ntp == "s" ]]; then
 			#instalando software necessario
 			apt-get install ntpdate* -y
@@ -1153,10 +1156,14 @@ install_yes()
 			echo "Hora do servidor atualizada!"
 		fi
 		
-		#instalando o ntp
 		if [[ $hollywood == "s" ]]; then
 			#instalando recurso para hackear a matrix
 			sudo apt install hollywood
+		fi
+		
+		if [[ $synaptic == "s" ]]; then
+			#instalando o synaptic
+			apt-get install synaptic* -y
 		fi
 		
 ########################################################################
@@ -1292,6 +1299,10 @@ install_yes()
 	if [[ $hollywood == "n" ]]; then
 		echo "Hollywood"
 	fi
+	
+	if [[ $synaptic == "n" ]]; then
+		echo "Synaptic"
+	fi
 		
 	######REINICIANDO
 		#reiniciando a maquina
@@ -1424,6 +1435,7 @@ auto_config()
 			android
 			ntp
 			hollywood
+			synaptic
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
