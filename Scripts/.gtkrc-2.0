@@ -4,7 +4,7 @@ style "xfce-tasklist-style"
 # The maximum length of a button before the label ellipsizes.
 # When this value is set to -1 the button will expand to the
 # entire available space.
-XfceTasklist::max-button-length = 80 # pixels. or whatever size you like
+XfceTasklist::max-button-length = 100 # pixels. or whatever size you like
 
 }
 class "XfceTasklist" style "xfce-tasklist-style" 

@@ -16,6 +16,7 @@
 #
 #por Edivaldo Brito
 # fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
+#
 ################################################################################
 #
 ################################################################################
@@ -35,12 +36,14 @@
 #										#
 #################################################################################
 #
-#############################
-#versão do script: Alpha 0.36
-#############################
+###############################
+#versão do script: Alpha 0.36.5
+###############################
 #
-##################Alpha: 0.*#
-##################Beta: 1.* #
+#versão: x.y.z
+# x = alpha, beta;
+# y = versões funcionando;
+# z = correções necessárias;
 #
 ################################################################################
 
@@ -78,7 +81,9 @@
 #	[+]NodeJS
 #	[+]Atom
 #	[+]Libreoffice
-#	[+]Netbeans
+#	[-]Netbeans
+	#VERIFICAR, INSTALAR TAMBEM JDK
+	
 #	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
@@ -96,8 +101,15 @@
 #	[+]Android Studio
 #	[-]DeSmuME
 #
+#[-]Android Studio
+	#VERIFICAR, INSTALAR TAMBEM JDK	
 ################################################################################
-# [-]Dolphin
+#	[-]Synaptic	
+#instalando synaptic
+#apt-get install synaptic
+#
+################################################################################
+# 	[-]Dolphin
 #
 #adicionando repositorio do dolphin
 #add-apt-repository ppa:glennric/dolphin-emu
@@ -113,12 +125,19 @@
 #apt-get install dolphin-emu-master
 #
 ################################################################################
+<<<<<<< HEAD
 #
+=======
+>>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 #	[-]Virtualbox
 #
 #baixando o arquivo 		
 #http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
+<<<<<<< HEAD
 
+=======
+#
+>>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 #executando o arquivos
 #dpkg -i virtualbox.deb
 #
@@ -126,6 +145,38 @@
 #rm virtualbox.deb
 #
 ################################################################################
+#	[-]Citra
+#SDL2
+#apt-get install sdl2
+#apt-get install libsdl2-2.0-0
+#apt-get install libsdl2-dev
+#
+#Qt
+#apt-get install qtbase5-dev libqt5opengl5-dev
+#
+#GCC
+#apt-get install build-essential
+#
+#Cmake
+#apt-get install cmake
+#
+#Clang
+#apt-get install clang libc++-dev
+#
+#copiando repositorio
+#git clone --recursive https://github.com/citra-emu/citra
+#
+#entrando na pasta
+#cd citra
+#
+#construindo o citra
+#mkdir build && cd build
+#cmake ..
+#make
+#make install 
+#
+#################################################################################
+#
 #Limpeza
 #	[+] Lixeira
 #	[+] Firefox
@@ -525,7 +576,11 @@ tor()
 	echo "Deseja instalar o Navegador Tor (s/n)?"
 	read -p "??" tor
 }
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 android()
 {
 	clear
@@ -1253,9 +1308,15 @@ install_no()
 
 	if [[ $tor == "n" ]]; then
 		echo "Tor,"
+<<<<<<< HEAD
 
 	if [[ $android == "n" ]]; then
 		echo "Android Studio,"
+=======
+		
+	if [[ $android == "n" ]]; then
+		echo "Android Studio"
+>>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 	fi
 
 ########################################################################
