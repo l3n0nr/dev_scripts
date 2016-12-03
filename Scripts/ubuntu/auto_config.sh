@@ -6,16 +6,19 @@
 ###################
 #
 #por oliveiradeflavio(Flávio Oliveira)
-#	contato: <github.com/oliveiradeflavio/scripts-linux>
+# contato: <github.com/oliveiradeflavio/scripts-linux>
 #
 #por gmanson(Gabriel Manson)
-#	contato: <github.com/gmasson/welcome-debian>
+# contato: <github.com/gmasson/welcome-debian>
 #
 #por Lucas Alves Santos
 # fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
 #
 #por Edivaldo Brito
 # fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
+#
+#por Fabiano de Oliveira e Souza
+# fonte: https://www.vivaolinux.com.br/script/Mantendo-hora-do-servidor-atualizada-com-NTP
 #
 ################################################################################
 #
@@ -579,6 +582,15 @@ android()
 	read -p "??" android
 }
 
+ntp()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o NTP e atualizar a data/hora do seu sistema (s/n)?"
+	read -p "??" ntp
+}
+
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -1111,6 +1123,27 @@ install_yes()
 			apt-get install android-studio
 		fi
 		
+		#instalando o ntp
+		if [[ $ntp == "s" ]]; then
+			#instalando software necessario
+			apt-get install ntpdate* -y
+
+			#realizando atualizacao hora/data
+			echo "Atualizando hora do servidor"
+			echo "Data e hora atual: `date +%d/%m/%Y" "%H:%M:%S`"
+
+			#servidor 1
+			echo "Servidor ntp.cais.rnp.br"
+				/usr/sbin/ntpdate ntp.cais.rnp.br
+
+			#servidor 2			
+			echo "Servidor ntp.ansp.br"
+				/usr/sbin/ntpdate ntp.ansp.br
+
+			echo "Data e hora atual: `date +%d/%m/%Y" "%H:%M:%S`"
+			echo "Hora do servidor atualizada!"
+		fi
+		
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1235,6 +1268,10 @@ install_yes()
 	
 	if [[ $android == "n" ]]; then
 		echo "Android Studio"
+	fi
+	
+	if [[ $ntp == "n" ]]; then
+		echo "NTP"
 	fi
 		
 	######REINICIANDO
@@ -1366,6 +1403,7 @@ auto_config()
 			gnomesystem
 			tor
 			android
+			ntp
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
