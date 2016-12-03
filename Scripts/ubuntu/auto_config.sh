@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.38.3.8
+#versão do script: 0.39.3.8
 ###########################
 #
 #legenda: a.b.c.d
@@ -123,24 +123,11 @@
 #	[-]GBA - Gameboyadvanced
 #	[+]Synaptic	
 #	[-]DeSmuME - Procurar encontrar um forma de instalação automatica.
-#
-#[-]Android Studio
+# 	[-]Dolphin
+#	[-]Android Studio
 	#VERIFICAR, INSTALAR TAMBEM JDK	
 ################################################################################
-# 	[-]Dolphin
-#
-#adicionando repositorio do dolphin
-#add-apt-repository ppa:glennric/dolphin-emu
-#
-#atualizando lista de repositorios
-#apt-get update
-#
-#corrigindo problemas de dependencias
-#apt-get install -f
-#
-#instalando dolphin
-#apt-get install dolphin-emu
-#apt-get install dolphin-emu-master
+
 #
 ################################################################################
 #
@@ -620,6 +607,13 @@ synaptic()
 	read -p "??" synaptic
 }
 
+dolphin()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Dolphin? (s/n)?"
+	read -p "??" dolphin
+}
 
 ########################################################################
 ######REINICIANDO
@@ -1182,6 +1176,21 @@ install_yes()
 			apt-get install synaptic* -y
 		fi
 		
+		if [[ $dolphin == "s" ]]; then
+			#adicionando repositorio do dolphin
+			add-apt-repository ppa:glennric/dolphin-emu
+			
+			#atualizando lista de repositorios
+			apt-get update
+			
+			#corrigindo problemas de dependencias
+			apt-get install -f
+
+			#instalando dolphin
+			apt-get install dolphin-emu
+			#apt-get install dolphin-emu-master
+		fi
+		
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1319,6 +1328,10 @@ install_yes()
 	if [[ $synaptic == "n" ]]; then
 		echo "Synaptic"
 	fi
+	
+	if [[ $dolphin == "n" ]]; then
+		echo "Dolphin"
+	fi
 		
 	######REINICIANDO
 		#reiniciando a maquina
@@ -1451,6 +1464,7 @@ auto_config()
 			ntp
 			hollywood
 			synaptic
+			dolphin
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
