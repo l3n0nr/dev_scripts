@@ -6,16 +6,22 @@
 ###################
 #
 #por oliveiradeflavio(Flávio Oliveira)
-#	contato: <github.com/oliveiradeflavio/scripts-linux>
+# contato: <github.com/oliveiradeflavio/scripts-linux>
 #
 #por gmanson(Gabriel Manson)
-#	contato: <github.com/gmasson/welcome-debian>
+# contato: <github.com/gmasson/welcome-debian>
 #
 #por Lucas Alves Santos
 # fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
 #
 #por Edivaldo Brito
 # fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
+#
+#por Fabiano de Oliveira e Souza
+# fonte: <https://www.vivaolinux.com.br/script/Mantendo-hora-do-servidor-atualizada-com-NTP>
+#
+#por Lucas Novo Silva
+# fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
 ################################################################################
 #
@@ -28,17 +34,35 @@
 #por lenonr(Lenon Ricardo) -
 #	contato: <github.com/lenonr/dev_scripts>
 #
-################################################################################
+#################################################################################
+#										#
+#	If I have seen further it is by standing on the shoulders of Giants.	#
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
+#							~Isaac Newton		#
+#										#
+#################################################################################
 #
-###############################
-#versão do script: Alpha 0.36.5
-###############################
+###########################
+#versão do script: 0.38.3.8
+###########################
 #
-#versão: x.y.z
-# x = alpha, beta;
-# y = versões funcionando;
-# z = correções necessárias;
+#legenda: a.b.c.d
+# a = alpha[0], beta[1];
+# b = versões funcionando;
+# c = correções necessárias;
+#	netbeans
+#	android
+#	vga
 #
+# d = pendencias
+#	prelink
+#	preload
+#	deborphan
+#	pacotes com problemas
+#	GBA
+#	DeSmuME 
+#	Citra
+#	Virtualbox	
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
@@ -59,6 +83,7 @@
 #		[-]Deborphan
 #		[-]Pacotes com problemas
 #				dpkg --configure -a
+#				sudo rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial && sudo apt-get update
 #
 #Instalação
 #	[+]Firefox
@@ -76,8 +101,7 @@
 #	[+]Atom
 #	[+]Libreoffice
 #	[-]Netbeans
-	#VERIFICAR, INSTALAR TAMBEM JDK
-	
+		#VERIFICAR, INSTALAR TAMBEM JDK	
 #	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
@@ -91,15 +115,17 @@
 #	[+]Reaver
 #	[+]Gnome System Monitor
 #	[+]Tor
+#	[+]Android Studio
+#		#VERIFICAR, INSTALAR TAMBEM JDK	
+
+#	[+]NTP
+#	[+]Hollywood
 #	[-]GBA - Gameboyadvanced
+#	[+]Synaptic	
+#	[-]DeSmuME - Procurar encontrar um forma de instalação automatica.
 #
 #[-]Android Studio
 	#VERIFICAR, INSTALAR TAMBEM JDK	
-################################################################################
-#	[-]Synaptic	
-#instalando synaptic
-#apt-get install synaptic
-#
 ################################################################################
 # 	[-]Dolphin
 #
@@ -117,6 +143,7 @@
 #apt-get install dolphin-emu-master
 #
 ################################################################################
+#
 #	[-]Virtualbox
 #
 #baixando o arquivo 		
@@ -169,7 +196,7 @@
 #	[-] Excluindo pacotes antigos
 #			apt-get autoremove -y
 
-#	[+]	Excluindo pacotes orfaõs
+#	[+] Excluindo pacotes orfaõs
 #	[-] Excluindo pacotes duplicados
 #			apt-get autoclean -y
 
@@ -182,7 +209,7 @@
 #
 #	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #Reinicialização
-#	[+]Reinicia
+#	[+]Reiniciar
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
 #	-Identificar qual a distribuição o usuário está utilizando, dessa forma realizar a instalação dos programas especificos para ela.
@@ -205,7 +232,7 @@ if [[ `id -u` -ne 0 ]]; then
 fi
 
 #verificar distribuição utilizada
-#			VERIFICARINICIO			##############################################
+#			VERIFICARINICIO			################
 ########################################################################
 #$distro == 'cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"´
 #echo $distro
@@ -216,7 +243,7 @@ fi
 #		echo "erro"
 #fi
 ########################################################################
-#			VERIFICARFIM			################################################
+#			VERIFICARFIM			################
 
 
 ########################################################################
@@ -568,6 +595,31 @@ android()
 	echo "Deseja instalar o Android Studio (s/n)?"
 	read -p "??" android
 }
+
+ntp()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o NTP e atualizar a data/hora do seu sistema (s/n)?"
+	read -p "??" ntp
+}
+
+hollywood()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o recurso Hollywood, que irá torná-lo um super hacker? (s/n)?"
+	read -p "??" hollywood
+}
+
+synaptic()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Synaptic? (s/n)?"
+	read -p "??" synaptic
+}
+
 
 ########################################################################
 ######REINICIANDO
@@ -1060,6 +1112,7 @@ install_yes()
 		fi
 
 		if [[ $vba == "s" ]]; then
+#VERIFICAR NAO ESTA FUNCIONANDO	
 			#corrigindo dependencias
 			apt install -f -y
 
@@ -1086,8 +1139,8 @@ install_yes()
 
 			#removendo arquivos criados
 			rm -rf vba && rm vba.zip
-=======
-		#instalando o androidstudio
+		fi
+		
 		if [[ $android == "s" ]]; then
 			#adicionando repositorio
 			apt-add-repository ppa:paolorotolo/android-studio
@@ -1098,73 +1151,37 @@ install_yes()
 			#instalando android studio
 			apt-get install android-studio
 		fi
-	######REINICIANDO
-		#reiniciando a maquina
-		if [[ $reinicia == "s" ]]; then
-			#reiniciando a maquina em dois minutos
-	#VERIFICAR	sudo reboot -t 120
-			reboot
+		
+		if [[ $ntp == "s" ]]; then
+			#instalando software necessario
+			apt-get install ntpdate* -y
+
+			#realizando atualizacao hora/data
+			echo "Atualizando hora do servidor"
+			echo "Data e hora atual: `date +%d/%m/%Y" "%H:%M:%S`"
+
+			#servidor 1
+			echo "Servidor ntp.cais.rnp.br"
+				/usr/sbin/ntpdate ntp.cais.rnp.br
+
+			#servidor 2			
+			echo "Servidor ntp.ansp.br"
+				/usr/sbin/ntpdate ntp.ansp.br
+
+			echo "Data e hora atual: `date +%d/%m/%Y" "%H:%M:%S`"
+			echo "Hora do servidor atualizada!"
 		fi
-	}
-
-########################################################################
-install_no()
-{
-	#relatorio de instalacao
-	echo "As seguintes tarefas não serão realizadas..."
-	echo "----------------------------------------------"
-
-######CORREÇÃO SISTEMA
-	if [[ $update == "n" ]]; then
-	 	echo "Atualizando repositórios, "
-	fi
-
-	if [[ $update == "n" ]]; then
-	 	echo "Atualizando programas, "
-	fi
-
-	if [[ $corrigeerros == "n" ]]; then
-	 	echo "Corrigindo Erros, "
-	fi
-
-	if [[ $swap == "n" ]]; then
-	 	echo "Swap, "
-	fi
-
-########################################################################
-######LIMPANDO A MAQUINA
-	if [[ $kernel == "n" ]]; then
-		echo "Removendo kernel's antigos,"
-	fi
-
-	if [[ $temporario == "n" ]]; then
-		echo "Removendo arquivos temporários,"
-	fi
-
-	if [[ $obsoleto == "n" ]]; then
-		echo "Removendo arquivos obsoletos,"
-	fi
-
-	if [[ $lixeira == "n" ]]; then
-		echo "Removeno arquivos da Lixeira,"
-	fi
-
-	if [[ $firefoxcache == "n" ]]; then
-		echo "Limpeza no cache do Firefox"
-	fi
-
-	if [[ $firefoxcookie == "n" ]]; then
-		echo "Limpeza nos cookies do Firefox"
-	fi
-
-	if [[ $arquivosorfaos == "n" ]]; then
-		echo "Arquivos orfãos do sistema"
-	fi
-
-	if [[ $arquivosinuteis == "n" ]]; then
-		echo "Arquivos Inuteis"
-	fi
-
+		
+		if [[ $hollywood == "s" ]]; then
+			#instalando recurso para hackear a matrix
+			sudo apt install hollywood
+		fi
+		
+		if [[ $synaptic == "s" ]]; then
+			#instalando o synaptic
+			apt-get install synaptic* -y
+		fi
+		
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1194,7 +1211,7 @@ install_no()
 	if [[ $gimp == "n" ]]; then
 		echo "Gimp,"
 	fi
-
+	
 	if [[ $xfce == "n" ]]; then
 		echo "Xfce,"
 	fi
@@ -1254,7 +1271,7 @@ install_no()
 	if [[ $rar == "n" ]]; then
 		echo "Rar,"
 	fi
-
+	
 	if [[ $git == "n" ]]; then
 		echo "Git,"
 	fi
@@ -1274,7 +1291,7 @@ install_no()
 	if [[ $gnometerminal == "n" ]]; then
 		echo "Gnome-Terminal,"
 	fi
-
+	
 	if [[ $reaver == "n" ]]; then
 		echo "Reaver,"
 	fi
@@ -1285,11 +1302,93 @@ install_no()
 
 	if [[ $tor == "n" ]]; then
 		echo "Tor,"
-		
+	fi
+	
 	if [[ $android == "n" ]]; then
 		echo "Android Studio"
 	fi
+	
+	if [[ $ntp == "n" ]]; then
+		echo "NTP"
+	fi
+	
+	if [[ $hollywood == "n" ]]; then
+		echo "Hollywood"
+	fi
+	
+	if [[ $synaptic == "n" ]]; then
+		echo "Synaptic"
+	fi
+		
+	######REINICIANDO
+		#reiniciando a maquina
+		if [[ $reinicia == "s" ]]; then
+			#reiniciando a maquina em dois minutos
+	#VERIFICAR	sudo reboot -t 120
+			reboot
+		fi
+}
 
+########################################################################
+install_no()
+{
+	#relatorio de instalacao
+	echo "As seguintes tarefas não serão realizadas..."
+	echo "----------------------------------------------"
+	
+	######CORREÇÃO SISTEMA
+	if [[ $update == "n" ]]; then
+	 	echo "Atualizando repositórios, "
+	fi
+
+	if [[ $update == "n" ]]; then
+	 	echo "Atualizando programas, "
+	fi
+
+	if [[ $corrigeerros == "n" ]]; then
+	 	echo "Corrigindo Erros, "
+	fi
+
+	if [[ $swap == "n" ]]; then
+	 	echo "Swap, "
+	fi
+
+########################################################################
+######LIMPANDO A MAQUINA
+	if [[ $kernel == "n" ]]; then
+		echo "Removendo kernel's antigos,"
+	fi
+
+	if [[ $temporario == "n" ]]; then
+		echo "Removendo arquivos temporários,"
+	fi
+
+	if [[ $obsoleto == "n" ]]; then
+		echo "Removendo arquivos obsoletos,"
+	fi
+
+	if [[ $lixeira == "n" ]]; then
+		echo "Removeno arquivos da Lixeira,"
+	fi
+
+	if [[ $firefoxcache == "n" ]]; then
+		echo "Limpeza no cache do Firefox"
+	fi
+
+	if [[ $firefoxcookie == "n" ]]; then
+		echo "Limpeza nos cookies do Firefox"
+	fi
+
+	if [[ $arquivosorfaos == "n" ]]; then
+		echo "Arquivos orfãos do sistema"
+	fi
+
+	if [[ $arquivosinuteis == "n" ]]; then
+		echo "Arquivos Inuteis"
+	fi
+	
+	
+	
 ########################################################################
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1318,7 +1417,6 @@ auto_config()
 			arquivosorfaos
 			arquivosinuteis
 
-			update
 			firefox
 			steam
 			xampp
@@ -1350,6 +1448,9 @@ auto_config()
 			gnomesystem
 			tor
 			android
+			ntp
+			hollywood
+			synaptic
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
