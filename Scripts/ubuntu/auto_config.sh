@@ -37,7 +37,7 @@
 #################################################################################
 #
 ###############################
-#versão do script: Alpha 0.36.5
+#versão do script: Alpha 0.37.6
 ###############################
 #
 #versão: x.y.z
@@ -97,9 +97,10 @@
 #	[+]Reaver
 #	[+]Gnome System Monitor
 #	[+]Tor
-#	[-]GBA - Gameboyadvanced
 #	[+]Android Studio
-#	[-]DeSmuME
+#	[+]NTP
+#	[-]GBA - Gameboyadvanced
+#	[-]DeSmuME - Procurar encontrar um forma de instalação automatica.
 #
 #[-]Android Studio
 	#VERIFICAR, INSTALAR TAMBEM JDK	
@@ -125,19 +126,12 @@
 #apt-get install dolphin-emu-master
 #
 ################################################################################
-<<<<<<< HEAD
 #
-=======
->>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 #	[-]Virtualbox
 #
 #baixando o arquivo 		
 #http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
-<<<<<<< HEAD
-
-=======
 #
->>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 #executando o arquivos
 #dpkg -i virtualbox.deb
 #
@@ -221,7 +215,7 @@ if [[ `id -u` -ne 0 ]]; then
 fi
 
 #verificar distribuição utilizada
-#			VERIFICARINICIO			##############################################
+#			VERIFICARINICIO			################
 ########################################################################
 #$distro == 'cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"´
 #echo $distro
@@ -232,7 +226,7 @@ fi
 #		echo "erro"
 #fi
 ########################################################################
-#			VERIFICARFIM			################################################
+#			VERIFICARFIM			################
 
 
 ########################################################################
@@ -576,11 +570,7 @@ tor()
 	echo "Deseja instalar o Navegador Tor (s/n)?"
 	read -p "??" tor
 }
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
 android()
 {
 	clear
@@ -1121,73 +1111,6 @@ install_yes()
 			apt-get install android-studio
 		fi
 		
-	######REINICIANDO
-		#reiniciando a maquina
-		if [[ $reinicia == "s" ]]; then
-			#reiniciando a maquina em dois minutos
-	#VERIFICAR	sudo reboot -t 120
-			reboot
-		fi
-}
-
-########################################################################
-install_no()
-{
-	#relatorio de instalacao
-	echo "As seguintes tarefas não serão realizadas..."
-	echo "----------------------------------------------"
-
-######CORREÇÃO SISTEMA
-	if [[ $update == "n" ]]; then
-	 	echo "Atualizando repositórios, "
-	fi
-
-	if [[ $update == "n" ]]; then
-	 	echo "Atualizando programas, "
-	fi
-
-	if [[ $corrigeerros == "n" ]]; then
-	 	echo "Corrigindo Erros, "
-	fi
-
-	if [[ $swap == "n" ]]; then
-	 	echo "Swap, "
-	fi
-
-########################################################################
-######LIMPANDO A MAQUINA
-	if [[ $kernel == "n" ]]; then
-		echo "Removendo kernel's antigos,"
-	fi
-
-	if [[ $temporario == "n" ]]; then
-		echo "Removendo arquivos temporários,"
-	fi
-
-	if [[ $obsoleto == "n" ]]; then
-		echo "Removendo arquivos obsoletos,"
-	fi
-
-	if [[ $lixeira == "n" ]]; then
-		echo "Removeno arquivos da Lixeira,"
-	fi
-
-	if [[ $firefoxcache == "n" ]]; then
-		echo "Limpeza no cache do Firefox"
-	fi
-
-	if [[ $firefoxcookie == "n" ]]; then
-		echo "Limpeza nos cookies do Firefox"
-	fi
-
-	if [[ $arquivosorfaos == "n" ]]; then
-		echo "Arquivos orfãos do sistema"
-	fi
-
-	if [[ $arquivosinuteis == "n" ]]; then
-		echo "Arquivos Inuteis"
-	fi
-
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1217,7 +1140,7 @@ install_no()
 	if [[ $gimp == "n" ]]; then
 		echo "Gimp,"
 	fi
-
+	
 	if [[ $xfce == "n" ]]; then
 		echo "Xfce,"
 	fi
@@ -1277,7 +1200,7 @@ install_no()
 	if [[ $rar == "n" ]]; then
 		echo "Rar,"
 	fi
-
+	
 	if [[ $git == "n" ]]; then
 		echo "Git,"
 	fi
@@ -1297,7 +1220,7 @@ install_no()
 	if [[ $gnometerminal == "n" ]]; then
 		echo "Gnome-Terminal,"
 	fi
-
+	
 	if [[ $reaver == "n" ]]; then
 		echo "Reaver,"
 	fi
@@ -1308,17 +1231,81 @@ install_no()
 
 	if [[ $tor == "n" ]]; then
 		echo "Tor,"
-<<<<<<< HEAD
-
-	if [[ $android == "n" ]]; then
-		echo "Android Studio,"
-=======
-		
+	fi
+	
 	if [[ $android == "n" ]]; then
 		echo "Android Studio"
->>>>>>> c89ec05aff38b6b3ec945f9bf5043d5da8162344
+	fi
+		
+	######REINICIANDO
+		#reiniciando a maquina
+		if [[ $reinicia == "s" ]]; then
+			#reiniciando a maquina em dois minutos
+	#VERIFICAR	sudo reboot -t 120
+			reboot
+		fi
+}
+
+########################################################################
+install_no()
+{
+	#relatorio de instalacao
+	echo "As seguintes tarefas não serão realizadas..."
+	echo "----------------------------------------------"
+	
+	######CORREÇÃO SISTEMA
+	if [[ $update == "n" ]]; then
+	 	echo "Atualizando repositórios, "
 	fi
 
+	if [[ $update == "n" ]]; then
+	 	echo "Atualizando programas, "
+	fi
+
+	if [[ $corrigeerros == "n" ]]; then
+	 	echo "Corrigindo Erros, "
+	fi
+
+	if [[ $swap == "n" ]]; then
+	 	echo "Swap, "
+	fi
+
+########################################################################
+######LIMPANDO A MAQUINA
+	if [[ $kernel == "n" ]]; then
+		echo "Removendo kernel's antigos,"
+	fi
+
+	if [[ $temporario == "n" ]]; then
+		echo "Removendo arquivos temporários,"
+	fi
+
+	if [[ $obsoleto == "n" ]]; then
+		echo "Removendo arquivos obsoletos,"
+	fi
+
+	if [[ $lixeira == "n" ]]; then
+		echo "Removeno arquivos da Lixeira,"
+	fi
+
+	if [[ $firefoxcache == "n" ]]; then
+		echo "Limpeza no cache do Firefox"
+	fi
+
+	if [[ $firefoxcookie == "n" ]]; then
+		echo "Limpeza nos cookies do Firefox"
+	fi
+
+	if [[ $arquivosorfaos == "n" ]]; then
+		echo "Arquivos orfãos do sistema"
+	fi
+
+	if [[ $arquivosinuteis == "n" ]]; then
+		echo "Arquivos Inuteis"
+	fi
+	
+	
+	
 ########################################################################
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
