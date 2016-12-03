@@ -40,7 +40,7 @@
 #################################################################################
 #
 ###############################
-#versão do script: Alpha 0.37.6
+#versão do script: Alpha 0.38.6
 ###############################
 #
 #versão: x.y.z
@@ -85,8 +85,7 @@
 #	[+]Atom
 #	[+]Libreoffice
 #	[-]Netbeans
-	#VERIFICAR, INSTALAR TAMBEM JDK
-	
+		#VERIFICAR, INSTALAR TAMBEM JDK	
 #	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
@@ -101,7 +100,9 @@
 #	[+]Gnome System Monitor
 #	[+]Tor
 #	[+]Android Studio
+		#VERIFICAR, INSTALAR TAMBEM JDK	
 #	[+]NTP
+#	[+]Hollywood
 #	[-]GBA - Gameboyadvanced
 #	[-]DeSmuME - Procurar encontrar um forma de instalação automatica.
 #
@@ -588,6 +589,14 @@ ntp()
 	echo ""
 	echo "Deseja instalar o NTP e atualizar a data/hora do seu sistema (s/n)?"
 	read -p "??" ntp
+}
+
+hollywood()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o recurso Hollywood, que irá torná-lo um super hacker? (s/n)?"
+	read -p "??" hollywood
 }
 
 
@@ -1144,6 +1153,12 @@ install_yes()
 			echo "Hora do servidor atualizada!"
 		fi
 		
+		#instalando o ntp
+		if [[ $hollywood == "s" ]]; then
+			#instalando recurso para hackear a matrix
+			sudo apt install hollywood
+		fi
+		
 ########################################################################
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
@@ -1272,6 +1287,10 @@ install_yes()
 	
 	if [[ $ntp == "n" ]]; then
 		echo "NTP"
+	fi
+	
+	if [[ $hollywood == "n" ]]; then
+		echo "Hollywood"
 	fi
 		
 	######REINICIANDO
@@ -1404,6 +1423,7 @@ auto_config()
 			tor
 			android
 			ntp
+			hollywood
 
 		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
