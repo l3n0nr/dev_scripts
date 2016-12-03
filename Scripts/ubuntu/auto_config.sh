@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.39.3.8
+#versão do script: 0.40.3.8
 ###########################
 #
 #legenda: a.b.c.d
@@ -122,22 +122,11 @@
 #	[+]Hollywood
 #	[-]GBA - Gameboyadvanced
 #	[+]Synaptic	
-#	[-]DeSmuME - Procurar encontrar um forma de instalação automatica.
-# 	[-]Dolphin
-#	[-]Android Studio
-	#VERIFICAR, INSTALAR TAMBEM JDK	
-################################################################################
-#	[-]Virtualbox
-#
-#baixando o arquivo 		
-#http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
-#
-#executando o arquivos
-#dpkg -i virtualbox.deb
-#
-#removendo o arquivo baixando
-#rm virtualbox.deb
-#
+#	[-]DeSmuME 
+#		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
+# 	[+]Dolphin
+#	[+]Virtualbox
+#		VERIFICAR, INSTALAR TAMBEM JDK	
 ################################################################################
 #	[-]Citra
 #SDL2
@@ -609,6 +598,14 @@ dolphin()
 	echo ""
 	echo "Deseja instalar o Dolphin? (s/n)?"
 	read -p "??" dolphin
+}
+
+virtualbox()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Virtualbox? (s/n)?"
+	read -p "??" virtualbox
 }
 
 ########################################################################
@@ -1186,6 +1183,16 @@ install_yes()
 			apt-get install dolphin-emu
 			#apt-get install dolphin-emu-master
 		fi
+
+		if [[ $visualbox == "s" ]]; then
+			#baixando o arquivo 		
+			wget http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~yakkety_amd64.deb -O virtualbox.deb
+			#executando o arquivos
+			dpkg -i virtualbox.deb
+
+			#removendo o arquivo baixando
+			rm virtualbox.deb
+		fi
 		
 ########################################################################
 ######INSTALANDO PROGRAMAS
@@ -1310,32 +1317,36 @@ install_yes()
 	fi
 	
 	if [[ $android == "n" ]]; then
-		echo "Android Studio"
+		echo "Android Studio,"
 	fi
 	
 	if [[ $ntp == "n" ]]; then
-		echo "NTP"
+		echo "NTP,"
 	fi
 	
 	if [[ $hollywood == "n" ]]; then
-		echo "Hollywood"
+		echo "Hollywood,"
 	fi
 	
 	if [[ $synaptic == "n" ]]; then
-		echo "Synaptic"
+		echo "Synaptic,"
 	fi
 	
 	if [[ $dolphin == "n" ]]; then
-		echo "Dolphin"
+		echo "Dolphin,"
+	fi
+	
+	if [[ $virtualbox== "n" ]]; then
+		echo "Virtualbox,"
 	fi
 		
-	######REINICIANDO
-		#reiniciando a maquina
-		if [[ $reinicia == "s" ]]; then
-			#reiniciando a maquina em dois minutos
-	#VERIFICAR	sudo reboot -t 120
-			reboot
-		fi
+######REINICIANDO
+	#reiniciando a maquina
+	if [[ $reinicia == "s" ]]; then
+		#reiniciando a maquina em dois minutos
+#VERIFICAR	sudo reboot -t 120
+		reboot
+	fi
 }
 
 ########################################################################
@@ -1461,8 +1472,9 @@ auto_config()
 			hollywood
 			synaptic
 			dolphin
+			virtualbox
 
-		#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
+#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
 			install_no
 
