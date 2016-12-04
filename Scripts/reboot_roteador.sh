@@ -1,5 +1,31 @@
-#
+# por carlosmorato
+# fonte: https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
+#FUNCIONANDO - FUNCAO PRINCIPAL
+#i = 0;
+while true
+do 
+	clear
+	#$i = $i+1;
+	echo $i
+	internet=$(ping -c1 google.com.br | grep From | awk -F' ' '{ print $4 $5 $6}')
+	#echo $CMD 
+	if [ "$internet" == "DestinationPortUnreachable" ]; then
+		#se o ip não responder mostra offline!
+		echo "Offline!"
+	else
+		#se o ip responder o ping mostra online
+		echo "Online!" 
+	fi
+done
+
+############################################################################################################
+############################################################################################################
+############################################################################################################
+
 #fonte:www.hardware.com.br/comunidade/tplink-via/1360884/
+
+#FUNCIONANDO - FUNCAO REINICIA ROTEADOR
+
 #capturando informaçoes do roteador - IMPLEMENTAR
 #echo "Configurações do Roteador"
 #ifconfig | grep 'inet addr:' 
