@@ -1209,6 +1209,78 @@ install_yes()
 		fi
 		
 ########################################################################
+	
+		
+######REINICIANDO
+	#reiniciando a maquina
+	if [[ $reinicia == "s" ]]; then
+		#reiniciando a maquina em dois minutos
+#VERIFICAR	sudo reboot -t 120
+		reboot
+	fi
+}
+
+########################################################################
+install_no()
+{
+	#relatorio de instalacao
+	echo "As seguintes tarefas não serão realizadas..."
+	echo "----------------------------------------------"
+	
+######CORREÇÃO SISTEMA
+	if [[ $update == "n" ]]; then
+	 	echo "Atualizando repositórios, "
+	fi
+
+	if [[ $update == "n" ]]; then
+	 	echo "Atualizando programas, "
+	fi
+
+	if [[ $corrigeerros == "n" ]]; then
+	 	echo "Corrigindo Erros, "
+	fi
+
+	if [[ $swap == "n" ]]; then
+	 	echo "Swap, "
+	fi
+	
+	if [[ $pacotesquebrados == "n" ]]; then
+		echo "Pacotes quebrados,"
+	fi
+
+######LIMPANDO A MAQUINA
+	if [[ $kernel == "n" ]]; then
+		echo "Removendo kernel's antigos,"
+	fi
+
+	if [[ $temporario == "n" ]]; then
+		echo "Removendo arquivos temporários,"
+	fi
+
+	if [[ $obsoleto == "n" ]]; then
+		echo "Removendo arquivos obsoletos,"
+	fi
+
+	if [[ $lixeira == "n" ]]; then
+		echo "Removeno arquivos da Lixeira,"
+	fi
+
+	if [[ $firefoxcache == "n" ]]; then
+		echo "Limpeza no cache do Firefox"
+	fi
+
+	if [[ $firefoxcookie == "n" ]]; then
+		echo "Limpeza nos cookies do Firefox"
+	fi
+
+	if [[ $arquivosorfaos == "n" ]]; then
+		echo "Arquivos orfãos do sistema"
+	fi
+
+	if [[ $arquivosinuteis == "n" ]]; then
+		echo "Arquivos Inuteis"
+	fi
+	
 ######INSTALANDO PROGRAMAS
 	if [[ $firefox == "n" ]]; then
   		echo "Firefox,"
@@ -1352,82 +1424,8 @@ install_yes()
 	
 	if [[ $virtualbox == "n" ]]; then
 		echo "Virtualbox,"
-	fi		
-		
-######REINICIANDO
-	#reiniciando a maquina
-	if [[ $reinicia == "s" ]]; then
-		#reiniciando a maquina em dois minutos
-#VERIFICAR	sudo reboot -t 120
-		reboot
-	fi
-}
-
-########################################################################
-install_no()
-{
-	#relatorio de instalacao
-	echo "As seguintes tarefas não serão realizadas..."
-	echo "----------------------------------------------"
+	fi	
 	
-	######CORREÇÃO SISTEMA
-	if [[ $update == "n" ]]; then
-	 	echo "Atualizando repositórios, "
-	fi
-
-	if [[ $update == "n" ]]; then
-	 	echo "Atualizando programas, "
-	fi
-
-	if [[ $corrigeerros == "n" ]]; then
-	 	echo "Corrigindo Erros, "
-	fi
-
-	if [[ $swap == "n" ]]; then
-	 	echo "Swap, "
-	fi
-	
-	if [[ $pacotesquebrados == "n" ]]; then
-		echo "Pacotes quebrados,"
-	fi
-
-########################################################################
-######LIMPANDO A MAQUINA
-	if [[ $kernel == "n" ]]; then
-		echo "Removendo kernel's antigos,"
-	fi
-
-	if [[ $temporario == "n" ]]; then
-		echo "Removendo arquivos temporários,"
-	fi
-
-	if [[ $obsoleto == "n" ]]; then
-		echo "Removendo arquivos obsoletos,"
-	fi
-
-	if [[ $lixeira == "n" ]]; then
-		echo "Removeno arquivos da Lixeira,"
-	fi
-
-	if [[ $firefoxcache == "n" ]]; then
-		echo "Limpeza no cache do Firefox"
-	fi
-
-	if [[ $firefoxcookie == "n" ]]; then
-		echo "Limpeza nos cookies do Firefox"
-	fi
-
-	if [[ $arquivosorfaos == "n" ]]; then
-		echo "Arquivos orfãos do sistema"
-	fi
-
-	if [[ $arquivosinuteis == "n" ]]; then
-		echo "Arquivos Inuteis"
-	fi
-	
-	
-	
-########################################################################
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
