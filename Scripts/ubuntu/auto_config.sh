@@ -81,9 +81,7 @@
 #
 #		[-]Preload
 #		[-]Deborphan
-#		[-]Pacotes com problemas
-#				dpkg --configure -a
-#				sudo rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial && sudo apt-get update
+#		[+]Pacotes com problemas
 #
 #Instalação
 #	[+]Firefox
@@ -240,7 +238,7 @@ corrigeerros()
 {
 	clear
 	echo ""
-	echo "Deseja corrigir possíveis erros em sua distribuição? (s/n)"
+	echo "Deseja corrigir possíveis erros em sua distribuição (s/n)?"
 	read -p "??" corrigeerros;
 }
 
@@ -248,8 +246,16 @@ swap()
 {
 	clear
 	echo ""
-	echo "Deseja otimizar a utilização da swap?"
+	echo "Deseja otimizar a utilização da swap (s/n)?"
 	read -p "??" swap;
+}
+
+pacotesquebrados()
+{
+	clear
+	echo ""
+	echo "Deseja realizar uma correção nos pacotes quebrados do sistema (s/n)?"
+	read -p "??" pacotesquebrados;
 }
 
 ########################################################################
@@ -746,6 +752,14 @@ install_yes()
 				echo "Isso porque já foi otimizado anteriormente!"
 			fi
 		fi
+		
+		#corrigindo pacotes quebrados
+		if [[ $pacotesquebrados == "s" ]]; then
+			#VERIFICAR AÇÕES
+			dpkg --configure -a
+			#VERIFICAR AÇÕES
+			rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial && sudo apt-get update
+		fi
 
 ######LIMPANDO A MAQUINA
 		#removendo kernel antigo
@@ -812,7 +826,7 @@ install_yes()
 			echo "Removendo Pacotes inuteis"
 			echo "------------------------"
 			apt-get clean -y
-		fi
+		fi		
 
 	######INSTALANDO PROGRAMAS
 		if [[ $firefox == "s" ]]; then
@@ -1336,9 +1350,9 @@ install_yes()
 		echo "Dolphin,"
 	fi
 	
-	if [[ $virtualbox== "n" ]]; then
+	if [[ $virtualbox == "n" ]]; then
 		echo "Virtualbox,"
-	fi
+	fi		
 		
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1371,6 +1385,10 @@ install_no()
 
 	if [[ $swap == "n" ]]; then
 	 	echo "Swap, "
+	fi
+	
+	if [[ $pacotesquebrados == "n" ]]; then
+		echo "Pacotes quebrados,"
 	fi
 
 ########################################################################
@@ -1427,6 +1445,7 @@ auto_config()
 			upgrade
 			corrigeerros
 			swap
+			pacotesquebrados
 
 			kernel
 			temporario
