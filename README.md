@@ -1,1 +1,1 @@
-Este repositório está destinado para o conhecimento de comandos usados no sistema operacional GNU/Linux
+Este repositório está destinado para aumentar o conhecimento em ShellScript e automizar diversas tarefas.
