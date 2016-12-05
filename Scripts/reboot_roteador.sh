@@ -1,15 +1,11 @@
+#!bin/bash
 ########################################################################
 # por carlosmorato
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
-
+#
 # por bur
 # fonte: <www.hardware.com.br/comunidade/tplink-via/1360884/>
-########################################################################
-#IMPLEMENTAR############################################################
-#Caso o seja reiniciado 'n' vezes o roteador e o problema de falta de 
-#conexão não seja solucionada, desligar a máquina
-########################################################################
-
+#
 ###################
 #DESENVOLVIDO POR
 ###################
@@ -34,6 +30,7 @@
 # b = versões funcionando;
 # c = correções necessárias;
 # d = pendencias a serem implementadas
+#	Caso o seja reiniciado 'n' vezes o roteador e o problema de falta de conexão não seja solucionada, desligar a máquina
 
 ########################################################################
 #verificando se o usuário é ROOT
