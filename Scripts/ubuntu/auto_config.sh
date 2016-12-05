@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.40.3.8
+#versão do script: 0.40.4.9
 ###########################
 #
 #legenda: a.b.c.d
@@ -53,6 +53,7 @@
 #	netbeans
 #	android
 #	vga
+#	esac - ultimas linhas
 #
 # d = pendencias
 #	prelink
@@ -63,6 +64,7 @@
 #	DeSmuME 
 #	Citra
 #	Virtualbox	
+#	Criar um menu como (1)Instalar aplicações, (2)Correções no sistema, (3)Limpar, (4)Reiniciar;
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
