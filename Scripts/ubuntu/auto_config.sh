@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.40.3.8
+#versão do script: 0.40.3.6
 ###########################
 #
 #legenda: a.b.c.d
@@ -58,11 +58,9 @@
 #	prelink
 #	preload
 #	deborphan
-#	pacotes com problemas
 #	GBA
 #	DeSmuME 
 #	Citra
-#	Virtualbox	
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
