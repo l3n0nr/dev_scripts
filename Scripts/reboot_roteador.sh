@@ -1,10 +1,16 @@
+########################################################################
 # por carlosmorato
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
 
 # por bur
 # fonte: <www.hardware.com.br/comunidade/tplink-via/1360884/>
+########################################################################
+#IMPLEMENTAR############################################################
+#Caso o seja reiniciado 'n' vezes o roteador e o problema de falta de 
+#conexão não seja solucionada, desligar a máquina
+########################################################################
 
-
+########################################################################
 #verificando se o usuário é ROOT
 if [[ `id -u` -ne 0 ]]; then
 	echo
@@ -14,10 +20,13 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
+########################################################################
 #instalando curl - dependencia necessaria
 sudo apt install curl* -y
 clear
+########################################################################
 
+########################################################################
 while true
 #i = 0;
 do 
@@ -44,3 +53,4 @@ do
 		sleep 1
 	fi
 done
+########################################################################
