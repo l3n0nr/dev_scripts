@@ -10,6 +10,31 @@
 #conexão não seja solucionada, desligar a máquina
 ########################################################################
 
+###################
+#DESENVOLVIDO POR
+###################
+#
+#por lenonr(Lenon Ricardo) -
+#	contato: <github.com/lenonr/dev_scripts>
+#
+#################################################################################
+#										#
+#	If I have seen further it is by standing on the shoulders of Giants.	#
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
+#							~Isaac Newton		#
+#										#
+#################################################################################
+#
+###########################
+#versão do script: 0.2.0.1
+###########################
+#
+#legenda: a.b.c.d
+# a = alpha[0], beta[1];
+# b = versões funcionando;
+# c = correções necessárias;
+# d = pendencias a serem implementadas
+
 ########################################################################
 #verificando se o usuário é ROOT
 if [[ `id -u` -ne 0 ]]; then
