@@ -719,7 +719,7 @@ install_yes()
 			apt-get clean -y &&
 			apt-get install auto-apt -y &&
 			auto-apt update-local -y &&
-			auto-apt update &&
+			auto-apt update -y &&
 			auto-apt updatedb -y
 		fi
 
@@ -784,7 +784,7 @@ install_yes()
 			clear
 			echo "Removendo os arquivos obsoletos do sistema"
 			echo "-----------------------------------------"
-			apt-get clean && apt-get autoclean
+			apt-get clean -y && apt-get autoclean -y
 		fi
 
 		#limpando a lixeira
@@ -879,10 +879,10 @@ install_yes()
 			apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
 
 			#atualizando lista de repositorios
-			apt update
+			apt update -y
 
 			#instalando o spotify
-			apt-get install spotify-client
+			apt-get install spotify-client -y
 		fi
 
 		if [[ $mac == "s" ]]; then
