@@ -21,15 +21,17 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.2.0.1
+#versão do script: 0.3.2.1
 ###########################
 #
 #legenda: a.b.c.d
 # a = alpha[0], beta[1];
 # b = versões funcionando;
 # c = correções necessárias;
+#	Não está funcionando, a funcao de reiniciar o roteador
+#	Verificar if, erro linha 84
 # d = pendencias a serem implementadas
-#	Caso o seja reiniciado 'n' vezes o roteador e o problema de falta de conexão não seja solucionada, desligar a máquina
+#	Gerar relatorio antes de desligar, como horário, data, log
 
 ########################################################################
 #verificando se o usuário é ROOT
@@ -49,17 +51,21 @@ clear
 
 ########################################################################
 while true
-#i = 0;
 do 
-	echo "Aguardando tempo minimo para teste - 5 minutos" 
-	sleep 300
-	sleep 1
 	clear
-	#$i = $i+1;
-	#echo $i
 	internet=$(ping -c1 google.com.br | grep From | awk -F' ' '{ print $4 $5 $6}')
-	#echo $CMD 
-	if [ "$internet" == "DestinationPortUnreachable" ]; then
+
+	#sleep 300
+	#resposta esperada
+	if [ "$internet" != "DestinationPortUnreachable" ]; then
+		echo "Online!" 
+		if ["$cont" == 3]; then
+			echo $cont
+			echo "funcionando if"
+		fi
+		sleep 1
+	else
+		echo "Aguardando tempo minimo para teste - 5 minutos" 
 		echo "Offline!"
 		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
 		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
@@ -69,9 +75,14 @@ do
 		sleep 60
 		echo "Roteador funcionando! Teste.."
 		sleep 10
-	else
-		echo "Online!" 
-		sleep 1
+	
+		#contador de erros
+		cont=$((cont+1))
+
+		#caso o valor seja igual a dez
+		if ["$cont" == "10"]; then
+			#poweroff
+		fi
 	fi
 done
 ########################################################################
