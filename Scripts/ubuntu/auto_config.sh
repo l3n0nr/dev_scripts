@@ -43,7 +43,11 @@
 #################################################################################
 #
 ###########################
+<<<<<<< HEAD
 #versão do script: 0.41.4.9
+=======
+#versão do script: 0.42.3.6
+>>>>>>> 301233fcbb1b20dc4925f869d0c61ee7054c45d8
 ###########################
 #
 #legenda: a.b.c.d
@@ -59,12 +63,14 @@
 #	prelink
 #	preload
 #	deborphan
-#	pacotes com problemas
 #	GBA
 #	DeSmuME 
 #	Citra
+<<<<<<< HEAD
 #	Virtualbox	
 #	Criar um menu como (1)Instalar aplicações, (2)Correções no sistema, (3)Limpar, (4)Reiniciar;
+=======
+>>>>>>> 301233fcbb1b20dc4925f869d0c61ee7054c45d8
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
@@ -204,26 +210,10 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
-#verificar distribuição utilizada
-#			VERIFICARINICIO			################
-########################################################################
-#$distro == 'cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;"´
-#echo $distro
-#if [[ $distro == "Ubuntu" ]];then
-
-# echo "teste"
-#	else
-#		echo "erro"
-#fi
-########################################################################
-#			VERIFICARFIM			################
-
-
 ########################################################################
 ######CORREÇÃO SISTEMA
 update()
 {
-	clear
 	echo ""
 	echo "Deseja atualizar os repositórios de sua máquina (s/n)?"
 	read -p "??" update;
@@ -1460,7 +1450,7 @@ install_no()
 }
 
 #criando função global, que inicia todas as outras
-auto_config()
+auto_config_ubuntu()
 {
 	echo "INICIANDO AS TAREFAS"
 		#chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
@@ -1534,7 +1524,17 @@ menu()
 	read -n1 -p "Para continuar escolha s(sim) ou n(não)  " escolha
 		case $escolha in
 			s|S) echo
-				auto_config
+				#verificar distribuição utilizada
+				distro=$(cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;")
+				if [ "$distro" == "Ubuntu" ]; then
+					clear
+					echo "Você utiliza a distribuição(ou derivação) Ubuntu"
+					echo "Serão executadas ações especificas para esse tipo de distribuição"
+					echo "------------------------------------------------"
+					auto_config_ubuntu
+				else
+					echo "Script incompativel(TEMPORARIAMENTE)"
+				fi
 				;;
 			n|N) echo
 				echo Finalizando o script...
