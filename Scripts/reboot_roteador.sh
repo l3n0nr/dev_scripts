@@ -21,7 +21,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.3.2.1
+#versão do script: 0.3.2.2
 ###########################
 #
 #legenda: a.b.c.d
@@ -32,6 +32,7 @@
 #	Verificar if, erro linha 84
 # d = pendencias a serem implementadas
 #	Gerar relatorio antes de desligar, como horário, data, log
+#   Possibilitar ao usuario, passar o ip do roteador
 
 ########################################################################
 #verificando se o usuário é ROOT
@@ -52,6 +53,8 @@ clear
 ########################################################################
 while true
 do 
+    #echo "Digite o endereço do seu roteador"
+    #read -p ip
 	clear
 	internet=$(ping -c1 google.com.br | grep From | awk -F' ' '{ print $4 $5 $6}')
 
