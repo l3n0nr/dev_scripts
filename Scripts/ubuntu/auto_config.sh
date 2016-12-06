@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.40.4.9
+#versão do script: 0.41.4.9
 ###########################
 #
 #legenda: a.b.c.d
@@ -127,6 +127,7 @@
 # 	[+]Dolphin
 #	[+]Virtualbox
 #		VERIFICAR, INSTALAR TAMBEM JDK	
+#	[+]Brackets
 ################################################################################
 #	[-]Citra
 #SDL2
@@ -614,6 +615,14 @@ virtualbox()
 	echo ""
 	echo "Deseja instalar o Virtualbox? (s/n)?"
 	read -p "??" virtualbox
+}
+
+brackets()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Brackets? (s/n)?"
+	read -p "??" brackets
 }
 
 ########################################################################
@@ -1210,6 +1219,16 @@ install_yes()
 			rm virtualbox.deb
 		fi
 		
+		if [[ $brackets == "s" ]]; then
+			#adicionando repositorio
+			sudo add-apt-repository ppa:webupd8team/brackets && 
+			
+			#atualizando lista repositorios
+			sudo apt-get update && 
+			
+			#instalando brackets
+			sudo apt-get install brackets
+		fi
 ########################################################################
 	
 		
@@ -1428,6 +1447,10 @@ install_no()
 		echo "Virtualbox,"
 	fi	
 	
+	if [[ $brackets == "n" ]]; then
+		echo "Brackets,"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1492,6 +1515,7 @@ auto_config()
 			synaptic
 			dolphin
 			virtualbox
+			brackets
 
 #inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 			install_yes
