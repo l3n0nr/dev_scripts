@@ -66,7 +66,8 @@
 ################################################################################
 
 #Script testado em
-#	-Xubuntu 16.
+#	-Xubuntu 16.04
+#
 #Compativel com
 #	-Ubuntu
 #	-Fedora
@@ -211,7 +212,7 @@ update()
 {
 	echo ""
 	echo "Deseja atualizar os repositórios de sua máquina (s/n)?"
-	read -p "??" update;
+	read -p "??" update
 }
 
 upgrade()
@@ -219,7 +220,7 @@ upgrade()
 	clear
 	echo ""
 	echo "Deseja atualizar os programas de sua máquina (s/n)?"
-	read -p "??" upgrade;
+	read -p "??" upgrade
 }
 
 corrigeerros()
@@ -227,7 +228,7 @@ corrigeerros()
 	clear
 	echo ""
 	echo "Deseja corrigir possíveis erros em sua distribuição (s/n)?"
-	read -p "??" corrigeerros;
+	read -p "??" corrigeerros
 }
 
 swap()
@@ -235,7 +236,7 @@ swap()
 	clear
 	echo ""
 	echo "Deseja otimizar a utilização da swap (s/n)?"
-	read -p "??" swap;
+	read -p "??" swap
 }
 
 pacotesquebrados()
@@ -243,7 +244,7 @@ pacotesquebrados()
 	clear
 	echo ""
 	echo "Deseja realizar uma correção nos pacotes quebrados do sistema (s/n)?"
-	read -p "??" pacotesquebrados;
+	read -p "??" pacotesquebrados
 }
 
 ########################################################################
@@ -319,7 +320,7 @@ firefox()
 	clear
 	echo ""
 	echo "Deseja instalar o firefox? (s/n)"
-	read -p "?? " firefox;
+	read -p "?? " firefox
 }
 
 steam()
@@ -327,7 +328,7 @@ steam()
 	clear
 	echo ""
 	echo "Deseja instalar o steam? (s/n)"
-	read -p "?? " steam;
+	read -p "?? " steam
 }
 
 xampp()
@@ -335,7 +336,7 @@ xampp()
 	clear
 	echo ""
 	echo "Deseja instalar o xampp? (s/n)"
-	read -p "?? " xampp;
+	read -p "?? " xampp
 }
 
 spotify()
@@ -343,7 +344,7 @@ spotify()
 	clear
 	echo ""
 	echo "Deseja instalar o spotify? (s/n)"
-	read -p "??" spotify;
+	read -p "??" spotify
 }
 
 mac()
@@ -351,7 +352,7 @@ mac()
 	clear
 	echo ""
 	echo "Deseja instalar o tema e ícones do MAC OS X? (s/n)"
-	read -p "??" mac;
+	read -p "??" mac
 }
 
 codecs()
@@ -359,7 +360,7 @@ codecs()
 	clear
 	echo ""
 	echo "Deseja instalar codecs multimidia em seu sistema (s/n)?"
-	read -p "??" codecs;
+	read -p "??" codecs
 }
 
 gimp()
@@ -367,7 +368,7 @@ gimp()
 	clear
 	echo ""
 	echo "Deseja instalar o Gimp em seu sistema (s/n)?"
-	read -p "??" gimp;
+	read -p "??" gimp
 }
 
 xfce()
@@ -375,7 +376,7 @@ xfce()
 	clear
 	echo ""
 	echo "Deseja instalar componentes adicionais do XFCE em sua máquina (s/n)?"
-	read -p "??" xfce;
+	read -p "??" xfce
 }
 
 wine()
@@ -383,7 +384,7 @@ wine()
 	clear
 	echo ""
 	echo "Deseja instalar o wine (s/n)?"
-	read -p "??" wine;
+	read -p "??" wine
 }
 
 playonlinux()
@@ -391,7 +392,7 @@ playonlinux()
 	clear
 	echo ""
 	echo "Deseja instalar o playonlinux (s/n)?"
-	read -p "??" playonlinux;
+	read -p "??" playonlinux
 }
 
 java()
@@ -407,7 +408,7 @@ redshift()
 	clear
 	echo ""
 	echo "Deseja instalar o Red Shift (s/n)?"
-	read -p "??" redshift;
+	read -p "??" redshift
 }
 
 flux()
@@ -415,7 +416,7 @@ flux()
 	clear
 	echo ""
 	echo "Deseja instalar o Flux (s/n)?"
-	read -p "??" flux;
+	read -p "??" flux
 }
 
 nodejs()
@@ -423,7 +424,7 @@ nodejs()
 	clear
 	echo ""
 	echo "Deseja instalar o NodeJS (s/n)?"
-	read -p "??" nodejs;
+	read -p "??" nodejs
 }
 
 atom()
@@ -431,7 +432,7 @@ atom()
 	clear
 	echo ""
 	echo "Deseja instalar o Atom (s/n)?"
-	read -p "??" atom;
+	read -p "??" ato
 }
 
 libreoffice()
@@ -439,7 +440,7 @@ libreoffice()
 	clear
 	echo ""
 	echo "Deseja instalar o LibreOffice (s/n)?"
-	read -p "??" libreoffice;
+	read -p "??" libreoffice
 }
 
 vlc()
@@ -447,7 +448,7 @@ vlc()
 	clear
 	echo ""
 	echo "Deseja instalar o VLC (s/n)?"
-	read -p "??" vlc;
+	read -p "??" vlc
 }
 
 netbeans()
@@ -455,7 +456,7 @@ netbeans()
 	clear
 	echo ""
 	echo "Deseja instalar o Netbeans (s/n)?"
-	read -p "??" netbeans;
+	read -p "??" netbeans
 }
 
 clementine()
@@ -463,7 +464,7 @@ clementine()
 	clear
 	echo ""
 	echo "Deseja instalar o Clementine (s/n)?"
-	read -p "??" clementine;
+	read -p "??" clementine
 }
 
 gparted()
@@ -471,7 +472,7 @@ gparted()
 	clear
 	echo ""
 	echo "Deseja instalar o Gparted (s/n)?"
-	read -p "??" gparted;
+	read -p "??" gparted
 }
 
 tlp()
@@ -479,7 +480,7 @@ tlp()
 	clear
 	echo ""
 	echo "Deseja instalar o Tlp (s/n)?"
-	read -p "??" tlp;
+	read -p "??" tlp
 }
 
 rar()
@@ -487,7 +488,7 @@ rar()
 	clear
 	echo ""
 	echo "Deseja instalar o Rar (s/n)?"
-	read -p "??" rar;
+	read -p "??" rar
 }
 
 git()
@@ -495,7 +496,7 @@ git()
 	clear
 	echo ""
 	echo "Deseja instalar o Git (s/n)?"
-	read -p "??" git;
+	read -p "??" git
 }
 
 lmsensors()
@@ -503,7 +504,7 @@ lmsensors()
 	clear
 	echo ""
 	echo "Deseja instalar o Lm-Sensors (s/n)?"
-	read -p "??" lmsensors;
+	read -p "??" lmsensors
 }
 
 stellarium()
@@ -511,7 +512,7 @@ stellarium()
 	clear
 	echo ""
 	echo "Deseja instalar o Stellarium (s/n)?"
-	read -p "??" stellarium;
+	read -p "??" stellarium
 }
 
 texmaker()
@@ -519,7 +520,7 @@ texmaker()
 	clear
 	echo ""
 	echo "Deseja instalar o Texmaker (s/n)?"
-	read -p "??" texmaker;
+	read -p "??" texmaker
 }
 
 gnometerminal()
@@ -527,7 +528,7 @@ gnometerminal()
 	clear
 	echo ""
 	echo "Deseja instalar o Gnome-Terminal (s/n)?"
-	read -p "??" gnometerminal;
+	read -p "??" gnometerminal
 }
 
 reaver()
