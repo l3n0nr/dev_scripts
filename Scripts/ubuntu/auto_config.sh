@@ -1482,62 +1482,85 @@ auto_config_ubuntu()
 {
 	echo "INICIANDO AS TAREFAS"
 		#chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
-			update
-			upgrade
-			corrigeerros
-			swap
-			pacotesquebrados
-
-			kernel
-			temporario
-			obsoleto
-			lixeira
-			firefoxcache
-			firefoxcookie
-			arquivosorfaos
-			arquivosinuteis
-
-			firefox
-			steam
-			xampp
-			spotify
-			mac
-			codecs
-			gimp
-			xfce
-			wine
-			playonlinux
-			java
-			redshift
-			flux
-			nodejs
-			atom
-			libreoffice
-			vlc
-			netbeans
-			clementine
-			gparted
-			tlp
-			rar
-			git
-			lmsensors
-			stellarium
-			texmaker
-			gnometerminal
-			reaver
-			gnomesystem
-			tor
-			android
-			ntp
-			hollywood
-			synaptic
-			dolphin
-			virtualbox
-			brackets
+	echo "Digite 1 para atualizar o sistema,"
+	echo "Digite 2 para corrigir possíveis erros," 
+	echo "Digite 3 para realizar uma limpeza," 
+	echo "Digite 4 para instalar alguns programas," 
+	read -n1 -p "Digite 5 para reiniciar a máquina." escolha
+	clear
+	case $escolha in
+	1) echo
+		update
+		upgrade	
+		;;
+	2) echo
+		corrigeerros
+		swap
+		pacotesquebrados
+		;;
+	3) echo
+		kernel
+		temporario
+		obsoleto
+		lixeira
+		firefoxcache
+		firefoxcookie
+		arquivosorfaos
+		arquivosinuteis
+		;;
+	4) echo
+		firefox
+		steam
+		xampp
+		spotify
+		mac
+		codecs
+		gimp
+		xfce
+		wine
+		playonlinux
+		java
+		redshift
+		flux
+		nodejs
+		atom
+		libreoffice
+		vlc
+		netbeans
+		clementine
+		gparted
+		tlp
+		rar
+		git
+		lmsensors
+		stellarium
+		texmaker
+		gnometerminal
+		reaver
+		gnomesystem
+		tor
+		android
+		ntp
+		hollywood
+		synaptic
+		dolphin
+		virtualbox	
+		brackets
+		;;
+	5) echo
+		reinicia
+		;;
+	*) echo
+		echo Alternativa incorreta!!
+		sleep 1
+		menu
+		exit
+		;;
+	esac
 
 #inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
-			install_yes
-			install_no
+	install_yes
+	install_no
 
 	echo "TAREFAS FINALIZADAS, SAINDO.."
 	clear
@@ -1572,6 +1595,7 @@ menu()
 					echo "Você utiliza a distribuição(ou derivação) Ubuntu"
 					echo "Serão executadas ações especificas para esse tipo de distribuição"
 					echo "------------------------------------------------"
+					clear
 					auto_config_ubuntu
 
 				#executando ações para a distribuição Fedora	
@@ -1580,6 +1604,7 @@ menu()
 					echo "Você utiliza a distribuição(ou derivação) Red Hat"
 					echo "Serão executadas ações especificas para esse tipo de distribuição"
 					echo "------------------------------------------------"
+					clear
 					auto_config_fedora					
 					
 				#distribuição não identificada	
