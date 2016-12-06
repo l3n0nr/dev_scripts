@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.45.3.6
+#versão do script: 0.46.3.5
 ###########################
 #
 #legenda: a.b.c.d
@@ -63,11 +63,13 @@
 #	DeSmuME 
 #	Citra
 #	Virtualbox	
-#	Criar um menu como (1)Instalar aplicações, (2)Correções no sistema, (3)Limpar, (4)Reiniciar;
 ################################################################################
 
-#Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
-#	-Xubuntu 16.04
+#Script testado em
+#	-Xubuntu 16.
+#Compativel com
+#	-Ubuntu
+#	-Fedora
 
 #FUNCOES
 #Correções
