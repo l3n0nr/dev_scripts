@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.42.3.6
+#versão do script: 0.45.3.6
 ###########################
 #
 #legenda: a.b.c.d
@@ -684,20 +684,35 @@ install_yes()
 	######CORREÇÃO SISTEMA
 		#atualizando os repositórios
 		if [[ $update == "s" ]]; then
-			clear
-			echo "Atualizando os repositórios na máquina"
-			echo "----------------------------------------------------------------------"
-			apt update
-			update-grub
+			if [ "$distro" == "Ubuntu" ]; then
+				clear
+				echo "Atualizando os repositórios na máquina"
+				echo "----------------------------------------------------------------------"
+				apt update
+				update-grub
+				
+			elif [ "$distro" == "Fedora" ]; then
+				clear
+				echo "Atualizando os repositórios na máquina"
+				echo "----------------------------------------------------------------------"
+				dnf distro-sync 
+			fi
 		fi
 
 		#atualizando os programas
 		if [[ $upgrade == "s" ]]; then
-			clear
-			echo "Atualizando os programas da máquina"
-			echo "----------------------------------------------------------------------"
-			apt upgrade -y
-			apt-get dist-upgrade
+			if [ "$distro" == "Ubuntu" ]; then
+				clear
+				echo "Atualizando os programas da máquina"
+				echo "----------------------------------------------------------------------"
+				apt upgrade -y
+				apt-get dist-upgrade
+			elif [ "$distro" == "Fedora" ]; then
+				clear
+				echo "Atualizando os programas da máquina"
+				echo "----------------------------------------------------------------------"
+				dnf update -y 
+			fi
 		fi
 
 		#corrigindo possiveis erros no sistema
@@ -816,10 +831,18 @@ install_yes()
 
 		#limpando arquivos inuteis
 		if [[ $arquivosinuteis == "s" ]]; then
-			clear
-			echo "Removendo Pacotes inuteis"
-			echo "------------------------"
-			apt-get clean -y
+			if [ "$distro" == "Ubuntu" ]; then
+				clear
+				echo "Removendo Pacotes inuteis"
+				echo "------------------------"
+				apt-get clean -y
+			elif [ "$distro" == "Fedora" ]; then
+				clear
+				echo "Removendo Pacotes inuteis"
+				echo "------------------------"				
+				dnf autoremove -y 
+				dnf clean all 
+			fi
 		fi		
 
 	######INSTALANDO PROGRAMAS
@@ -914,14 +937,26 @@ install_yes()
 		fi
 
 		if [[ $xfce == "s" ]]; then
-			clear
-			echo "Instalando Adicionais do XFCE4"
-			echo "----------------------------------------------------------------------"
-			#instalando componentes do XFCE
-			apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+			if [ "$distro" == "Ubuntu" ]; then
+				clear
+				echo "Instalando Adicionais do XFCE4"
+				echo "----------------------------------------------------------------------"
+				#instalando componentes do XFCE
+				apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
 
-			#dando permissão de leitura, para verificar temperatura do HDD
-			chmod u+s /usr/sbin/hddtemp
+				#dando permissão de leitura, para verificar temperatura do HDD
+				chmod u+s /usr/sbin/hddtemp
+				
+			elif [ "$distro" == "Fedora" ]; then
+				clear
+				echo "Instalando Adicionais do XFCE4"
+				echo "----------------------------------------------------------------------"
+				#instalando componentes do XFCE
+				dnf install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+				
+				#dando permissão de leitura, para verificar temperatura do HDD
+				chmod u+s /usr/sbin/hddtemp
+			fi
 		fi
 
 		if [[ $wine == "s" ]]; then
@@ -1508,6 +1543,17 @@ auto_config_ubuntu()
 	clear
 }
 
+auto_config_fedora()
+{
+	echo "INICIANDO AS TAREFAS"
+		#chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
+		
+	#inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
+		update
+		upgrade	
+		arquivosinuteis		
+}
+
 #mostrando mensagem inicial
 menu()
 {
@@ -1519,12 +1565,24 @@ menu()
 			s|S) echo
 				#verificar distribuição utilizada
 				distro=$(cat /etc/*-release | grep DISTRIB_ID | sed -e "s;DISTRIB_ID=;;")
+				
+				#executando ações para a distribuição Ubuntu
 				if [ "$distro" == "Ubuntu" ]; then
 					clear
 					echo "Você utiliza a distribuição(ou derivação) Ubuntu"
 					echo "Serão executadas ações especificas para esse tipo de distribuição"
 					echo "------------------------------------------------"
 					auto_config_ubuntu
+
+				#executando ações para a distribuição Fedora	
+				elif [ "$distro" == "Fedora" ]; then
+					clear
+					echo "Você utiliza a distribuição(ou derivação) Red Hat"
+					echo "Serão executadas ações especificas para esse tipo de distribuição"
+					echo "------------------------------------------------"
+					auto_config_fedora					
+					
+				#distribuição não identificada	
 				else
 					echo "Script incompativel(TEMPORARIAMENTE)"
 				fi
