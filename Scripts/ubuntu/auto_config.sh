@@ -43,11 +43,7 @@
 #################################################################################
 #
 ###########################
-<<<<<<< HEAD
-#versão do script: 0.41.4.9
-=======
 #versão do script: 0.42.3.6
->>>>>>> 301233fcbb1b20dc4925f869d0c61ee7054c45d8
 ###########################
 #
 #legenda: a.b.c.d
@@ -66,11 +62,8 @@
 #	GBA
 #	DeSmuME 
 #	Citra
-<<<<<<< HEAD
 #	Virtualbox	
 #	Criar um menu como (1)Instalar aplicações, (2)Correções no sistema, (3)Limpar, (4)Reiniciar;
-=======
->>>>>>> 301233fcbb1b20dc4925f869d0c61ee7054c45d8
 ################################################################################
 
 #Script utilizado para automatizar a instalação de programas, após a formatação do Sistema Operacional
