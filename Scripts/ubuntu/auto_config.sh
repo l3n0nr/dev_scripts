@@ -25,14 +25,12 @@
 #
 ################################################################################
 #
-################################################################################
-#
 ###################
 #DESENVOLVIDO POR
 ###################
 #
-#por lenonr(Lenon Ricardo) -
-#	contato: <github.com/lenonr/dev_scripts>
+#por lenonr(Lenon Ricardo) 
+# contato: <lenonrmsouza@gmail.com>
 #
 #################################################################################
 #										#
@@ -42,21 +40,27 @@
 #										#
 #################################################################################
 #
-###########################
-#versão do script: 0.53.3.2
-###########################
+#############################
+#versão do script: 0.1.53.4.2
+#############################
 #
-#legenda: a.b.c.d
+#legenda: a.b.c.d.e
 # a = alpha[0], beta[1];
-# b = interações com o script + versões funcionando;
-# c = correções necessárias;
+#
+# b = erros na execução;	
+#	possivel erro em algum for ou } nao fechada
+#
+# c = interações com o script + versões funcionando;
+#
+# d = correções necessárias;
 #	netbeans
 #	android
 #	vga
 #
-# d = pendencias
+# e = pendencias
 #	GBA
 #	DeSmuME 
+#
 ################################################################################
 #
 #Script testado em
@@ -82,9 +86,7 @@
 #	[+] Firefox
 #		[+] Cache
 #		[+] Cookies
-#	[-] Excluindo pacotes antigos
-#			apt-get autoremove -y
-#
+#	[+] Excluindo pacotes antigos
 #	[+] Excluindo pacotes orfaõs
 #	[-] Excluindo pacotes duplicados
 #			apt-get autoclean -y
@@ -202,8 +204,16 @@ prelink_preload_deborphan()
 {
 	clear
 	echo ""
-	echo "Deseja instalar o Prelink, Preload e Deborphan(s/n)?"
+	echo "Deseja executar o Prelink, Preload e Deborphan(s/n)?"
 	read -p "??" prelink_preload_deborphan
+}
+
+pacotes_antigos()
+{
+	clear
+	echo ""
+	echo "Deseja remover os pacotes antigos do sistema(s/n)?"
+	read -p "??" pacotes_antigos
 }
 
 ########################################################################
@@ -588,9 +598,6 @@ reinicia()
 	read -p "??" reinicia;
 }
 
-####RESCREVER - INICIO
-
-####RESCREVER - FIM
 install_yes()
 {
 	#relatorio de instalacao
@@ -614,7 +621,7 @@ install_yes()
 				dnf distro-sync 
 			fi
 		fi
-
+		
 		#atualizando os programas
 		if [[ $upgrade == "s" ]]; then
 			if [ "$distro" == "Ubuntu" ]; then
@@ -647,7 +654,7 @@ install_yes()
 			auto-apt update -y &&
 			auto-apt updatedb -y
 		fi
-
+		
 		#configurando a swap
 		if [[ $swap == "s" ]]; then
 			clear
@@ -683,10 +690,10 @@ install_yes()
 			#VERIFICAR AÇÕES
 			dpkg --configure -a
 			#VERIFICAR AÇÕES
-			rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial && sudo apt-get update
-		fi
+			rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial
+		fi	
 		
-######LIMPANDO A MAQUINA
+	######LIMPANDO A MAQUINA
 		#removendo kernel antigo
 		if [[ $kernel == "s" ]]; then
 			clear
@@ -704,10 +711,10 @@ install_yes()
 			find ~/.thumbnails -type f -atime +2 -exec rm -Rf {} \+
 			
 			#arquivo temporaritos pasta home
-			for i in *~ *.bak *.tmp; do
-				find $HOME -iname "$i" -exec rm -f {} \
+#			for i in *~ *.bak *.tmp; do
+#				find $HOME -iname "$i" -exec rm -f {} \	
 		fi
-
+	
 		#removendo arquivos obsoletos
 		if [[ $obsoleto == "s" ]]; then
 			clear
@@ -765,7 +772,7 @@ install_yes()
 			fi
 		fi	
 		
-				#otimizando sistema
+		#otimizando sistema
 		if [[ $prelink_preload_deborphan == "s" ]]; then		
 			clear
 			echo
@@ -815,6 +822,11 @@ install_yes()
 			else
 				echo "Otimização já adicionada anteriormente."
 			fi
+		fi
+		
+		#removendo pacotes antigos
+		if [[ $pacotes_antigos == "s" ]]; then		
+			apt-get autoremove -y
 		fi
 	
 	######INSTALANDO PROGRAMAS
@@ -1250,7 +1262,7 @@ install_yes()
 			make
 			make install 	
 		fi
-		
+					
 ######REINICIANDO
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then
@@ -1290,6 +1302,10 @@ install_no()
 	
 	if [[ $prelink_preload_deborphan == "n" ]]; then
 		echo "Prelink, Preload, Deborphan"
+	fi
+	
+	if [[ $pacotes_antigos == "n" ]]; then
+		echo "Pacotes antigos"
 	fi
 
 ######LIMPANDO A MAQUINA
@@ -1524,6 +1540,7 @@ auto_config_ubuntu()
 		arquivosorfaos
 		arquivosinuteis
 		prelink_preload_deborphan
+		pacotes_antigos
 		;;
 		
 	#instalando programas	
