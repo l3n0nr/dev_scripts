@@ -21,7 +21,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.3.2.2
+#versão do script: 0.4.1.2
 ###########################
 #
 #legenda: a.b.c.d
@@ -29,10 +29,9 @@
 # b = versões funcionando;
 # c = correções necessárias;
 #	Não está funcionando, a funcao de reiniciar o roteador
-#	Verificar if, erro linha 84
 # d = pendencias a serem implementadas
 #	Gerar relatorio antes de desligar, como horário, data, log
-#   Possibilitar ao usuario, passar o ip do roteador
+#  	Possibilitar ao usuario, passar o ip do roteador
 
 ########################################################################
 #verificando se o usuário é ROOT
@@ -56,19 +55,19 @@ do
     #echo "Digite o endereço do seu roteador"
     #read -p ip
 	clear
+
+	#intervalo de trinta minutos
+	sleep 1800
+	
+	echo "Realizando teste"
 	internet=$(ping -c1 google.com.br | grep From | awk -F' ' '{ print $4 $5 $6}')
 
 	#sleep 300
 	#resposta esperada
 	if [ "$internet" != "DestinationPortUnreachable" ]; then
-		echo "Online!" 
-		if ["$cont" == 3]; then
-			echo $cont
-			echo "funcionando if"
-		fi
+		echo "Online!" 	
 		sleep 1
 	else
-		echo "Aguardando tempo minimo para teste - 5 minutos" 
 		echo "Offline!"
 		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
 		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
@@ -79,12 +78,12 @@ do
 		echo "Roteador funcionando! Teste.."
 		sleep 10
 	
-		#contador de erros
-		cont=$((cont+1))
-
 		#caso o valor seja igual a dez
-		if ["$cont" == "10"]; then
-			#poweroff
+		if [ "$cont" == "10" ]; then
+			poweroff
+			
+			#contador de erros
+			cont=$((cont+1))
 		fi
 	fi
 done
