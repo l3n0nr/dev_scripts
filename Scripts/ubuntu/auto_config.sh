@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.46.3.5
+#versão do script: 0.47.3.5
 ###########################
 #
 #legenda: a.b.c.d
@@ -53,7 +53,6 @@
 #	netbeans
 #	android
 #	vga
-#	esac - ultimas linhas
 #
 # d = pendencias
 #	prelink
@@ -61,8 +60,6 @@
 #	deborphan
 #	GBA
 #	DeSmuME 
-#	Citra
-#	Virtualbox	
 ################################################################################
 
 #Script testado em
@@ -130,38 +127,7 @@
 #	[+]Virtualbox
 #		VERIFICAR, INSTALAR TAMBEM JDK	
 #	[+]Brackets
-################################################################################
-#	[-]Citra
-#SDL2
-#apt-get install sdl2
-#apt-get install libsdl2-2.0-0
-#apt-get install libsdl2-dev
-#
-#Qt
-#apt-get install qtbase5-dev libqt5opengl5-dev
-#
-#GCC
-#apt-get install build-essential
-#
-#Cmake
-#apt-get install cmake
-#
-#Clang
-#apt-get install clang libc++-dev
-#
-#copiando repositorio
-#git clone --recursive https://github.com/citra-emu/citra
-#
-#entrando na pasta
-#cd citra
-#
-#construindo o citra
-#mkdir build && cd build
-#cmake ..
-#make
-#make install 
-#
-#################################################################################
+#	[+]Citra
 #
 #Limpeza
 #	[+] Lixeira
@@ -609,6 +575,14 @@ brackets()
 	echo ""
 	echo "Deseja instalar o Brackets? (s/n)?"
 	read -p "??" brackets
+}
+
+citra()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Citra? (s/n)?"
+	read -p "??" citra
 }
 
 ########################################################################
@@ -1250,6 +1224,37 @@ install_yes()
 			#instalando brackets
 			sudo apt-get install brackets
 		fi
+		
+		if [[ $citra == "s" ]]; then
+			#SDL2
+			#apt-get install sdl2
+			#apt-get install libsdl2-2.0-0
+			apt-get install libsdl2-dev
+
+			#Qt
+			apt-get install qtbase5-dev libqt5opengl5-dev
+
+			#GCC
+			apt-get install build-essential
+	
+			#Cmake
+			apt-get install cmake
+	
+			#Clang
+			apt-get install clang libc++-dev
+	
+			#copiando repositorio
+			git clone --recursive https://github.com/citra-emu/citra
+			
+			#entrando na pasta
+			cd citra
+			
+			#construindo o citra
+			mkdir build && cd build
+			cmake ..
+			make
+			make install 	
+		fi
 ########################################################################
 	
 		
@@ -1472,6 +1477,10 @@ install_no()
 		echo "Brackets,"
 	fi
 	
+	if [[ $citra == "n" ]]; then
+		echo "Citra,"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1489,7 +1498,8 @@ auto_config_ubuntu()
 	echo "Digite 2 para corrigir possíveis erros," 
 	echo "Digite 3 para realizar uma limpeza," 
 	echo "Digite 4 para instalar alguns programas," 
-	read -n1 -p "Digite 5 para reiniciar a máquina." escolha
+	echo "Digite 5 para reiniciar a máquina."
+	read -n1 -p  "Digite 6 para sair do script" escolha
 	clear
 	case $escolha in
 	1) echo
@@ -1549,9 +1559,13 @@ auto_config_ubuntu()
 		dolphin
 		virtualbox	
 		brackets
+		citra
 		;;
 	5) echo
 		reinicia
+		;;
+	6) echo 	
+		exit
 		;;
 	*) echo
 		echo Alternativa incorreta!!
