@@ -43,7 +43,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.50.3.5
+#versão do script: 0.53.3.2
 ###########################
 #
 #legenda: a.b.c.d
@@ -55,34 +55,45 @@
 #	vga
 #
 # d = pendencias
-#	prelink
-#	preload
-#	deborphan
 #	GBA
 #	DeSmuME 
 ################################################################################
-
+#
 #Script testado em
 #	-Xubuntu 16.04
 #
 #Compativel com
 #	-Ubuntu
 #	-Fedora
-
+#
 #FUNCOES
-#Correções
+#Atualização
 #	[+]Update
 #		[+]Update-Grud
 #	[+]Upgrade
-#	[+]CorrigindoErros
-#		[+]Swap
-#		[-]Prelink
-#				apt-get install prelink deborphan -y ;
-#				sed -i 's/unknown/yes/g' /etc/default/prelink
 #
-#		[-]Preload
-#		[-]Deborphan
-#		[+]Pacotes com problemas
+#CorrigindoErros
+#	[+]Swap
+#	[+]Prelink, Preload, Deborphan
+#	[+]Pacotes com problemas
+#
+#Limpeza
+#	[+] Lixeira
+#	[+] Firefox
+#		[+] Cache
+#		[+] Cookies
+#	[-] Excluindo pacotes antigos
+#			apt-get autoremove -y
+#
+#	[+] Excluindo pacotes orfaõs
+#	[-] Excluindo pacotes duplicados
+#			apt-get autoclean -y
+#
+#	[+] Removendo arquivos temporários
+# 	[+] Arquivos obsoletos
+#	[+] Kernel's antigos
+#	[+] Removendo arquivos (.bak, ~, tmp) pasta Home
+#	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #
 #Instalação
 #	[+]Firefox
@@ -100,7 +111,7 @@
 #	[+]Atom
 #	[+]Libreoffice
 #	[-]Netbeans
-		#VERIFICAR, INSTALAR TAMBEM JDK	
+#		VERIFICAR, INSTALAR TAMBEM JDK	
 #	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
@@ -115,8 +126,8 @@
 #	[+]Gnome System Monitor
 #	[+]Tor
 #	[+]Android Studio
-#		#VERIFICAR, INSTALAR TAMBEM JDK	
-
+#		VERIFICAR, INSTALAR TAMBEM JDK	
+#
 #	[+]NTP
 #	[+]Hollywood
 #	[-]GBA - Gameboyadvanced
@@ -128,31 +139,13 @@
 #	[+]Brackets
 #	[+]Citra
 #
-#Limpeza
-#	[+] Lixeira
-#	[+] Firefox
-#		[+] Cache
-#		[+] Cookies
-#	[-] Excluindo pacotes antigos
-#			apt-get autoremove -y
-
-#	[+] Excluindo pacotes orfaõs
-#	[-] Excluindo pacotes duplicados
-#			apt-get autoclean -y
-
-#	[+] Removendo arquivos temporários
-# [+] Arquivos obsoletos
-#	[+] Kernel's antigos
-#	[+] Removendo arquivos (.bak, ~, tmp) pasta Home
-#	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #Reinicialização
 #	[+]Reiniciar
-
-#ESTRUTURAR/DESENVOLVER/APRIMORAR
-# -Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #
+#ESTRUTURAR/DESENVOLVER/APRIMORAR
+# 	-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #	-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
-
+#
 ################################################################################
 
 #verificando se o usuário é ROOT
@@ -203,6 +196,14 @@ pacotesquebrados()
 	echo ""
 	echo "Deseja realizar uma correção nos pacotes quebrados do sistema (s/n)?"
 	read -p "??" pacotesquebrados
+}
+
+prelink_preload_deborphan()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Prelink, Preload e Deborphan(s/n)?"
+	read -p "??" prelink_preload_deborphan
 }
 
 ########################################################################
@@ -588,60 +589,6 @@ reinicia()
 }
 
 ####RESCREVER - INICIO
-programs_prelink_preload_deborphan()
-{
-	clear
-	echo
-	echo "Instalando Prelink, Preload e Deborphan"
-	#prelink =
-	#preload =
-	#deborphan = remove pacotes obsoletos do sistema, principalmente após as atualizações de programas
-	echo "-------------------"
-	sudo apt install prelink preload -y 1>/dev/null 2>/dev/stdout
-	sudo apt-get install deborphan -y
-
-	echo "Configurando Deborphan..."
-	sudo deborphan | xargs sudo apt-get -y remove --purge &&
-	sudo deborphan --guess-data | xargs sudo apt-get -y remove --purge
-
-	echo ""
-	echo "Configurando Prelink e Preload..."
-	echo "-------------------"
-	memfree=$(grep "memfree = 50" /etc/preload.conf)
-	memcached=$(grep "memcached = 0" /etc/preload.conf)
-	processes=$(grep "processes = 30" /etc/preload.conf)
-	prelink=$(grep "PRELINKING=unknown" /etc/default/prelink)
-
-	if which -a prelink 1>/dev/null 2>/dev/stdout && which -a preload 1>/dev/null 2>/dev/stdout; then
-	echo
-	echo "Configurando o PRELOAD"
-	if [[ $memfree == "memfree = 90" ]];then
-		echo "configurando..."
-		sed -i 's/memfree = 50/memfree = 90/g' /etc/preload.conf
-
-		elif [[ $memcached == "memcached = 35" ]]; then
-			echo "configurando..."
-			sed -i 's/memcached = 0/memcached = 35/g' /etc/preload.conf
-
-		elif [[ $processes == "processes = 50" ]]; then
-			echo "configurando..."
-			sed -i 's/processes = 30/processes = 50/g' /etc/preload.conf
-
-	else
-		echo "Não há nada para ser configurado"
-		echo "Isso porque já foi configurado anteriomente"
-		fi
-
-		echo "Ativando o PRELINK"
-		if [[ $prelink == "PRELINKING=unknown" ]]; then
-			echo "adicionando ..."
-			sed -i 's/unknown/yes/g' /etc/default/prelink
-
-		else
-			echo "Otimização já adicionada anteriormente."
-		fi
-	fi
-}
 
 ####RESCREVER - FIM
 install_yes()
@@ -738,7 +685,7 @@ install_yes()
 			#VERIFICAR AÇÕES
 			rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial && sudo apt-get update
 		fi
-
+		
 ######LIMPANDO A MAQUINA
 		#removendo kernel antigo
 		if [[ $kernel == "s" ]]; then
@@ -758,7 +705,7 @@ install_yes()
 			
 			#arquivo temporaritos pasta home
 			for i in *~ *.bak *.tmp; do
-				find $HOME -iname "$i" -exec rm -f {} \;
+				find $HOME -iname "$i" -exec rm -f {} \
 		fi
 
 		#removendo arquivos obsoletos
@@ -816,8 +763,60 @@ install_yes()
 				dnf autoremove -y 
 				dnf clean all 
 			fi
-		fi		
-
+		fi	
+		
+				#otimizando sistema
+		if [[ $prelink_preload_deborphan == "s" ]]; then		
+			clear
+			echo
+			echo "Instalando Prelink, Preload e Deborphan"
+			#prelink =
+			#preload =
+			#deborphan = remove pacotes obsoletos do sistema, principalmente após as atualizações de programas
+			echo "-------------------"
+			sudo apt install prelink preload -y 1>/dev/null 2>/dev/stdout
+			sudo apt-get install deborphan -y
+		
+			echo "Configurando Deborphan..."
+			sudo deborphan | xargs sudo apt-get -y remove --purge &&
+			sudo deborphan --guess-data | xargs sudo apt-get -y remove --purge
+		
+			echo ""
+			echo "Configurando Prelink e Preload..."
+			echo "-------------------"
+				memfree=$(grep "memfree = 50" /etc/preload.conf)
+				memcached=$(grep "memcached = 0" /etc/preload.conf)
+				processes=$(grep "processes = 30" /etc/preload.conf)
+				prelink=$(grep "PRELINKING=unknown" /etc/default/prelink)
+	
+			if which -a prelink 1>/dev/null 2>/dev/stdout && which -a preload 1>/dev/null 2>/dev/stdout; then
+				echo
+				echo "Configurando o PRELOAD"
+				if [[ $memfree == "memfree = 90" ]];then
+					echo "configurando..."
+					sed -i 's/memfree = 50/memfree = 90/g' /etc/preload.conf
+			
+				elif [[ $memcached == "memcached = 35" ]]; then
+					echo "configurando..."
+					sed -i 's/memcached = 0/memcached = 35/g' /etc/preload.conf
+	
+				elif [[ $processes == "processes = 50" ]]; then
+					echo "configurando..."
+					sed -i 's/processes = 30/processes = 50/g' /etc/preload.conf	
+			else
+				echo "Não há nada para ser configurado"
+				echo "Isso porque já foi configurado anteriomente"
+			fi
+	
+			echo "Ativando o PRELINK"
+			if [[ $prelink == "PRELINKING=unknown" ]]; then
+				echo "adicionando ..."
+				sed -i 's/unknown/yes/g' /etc/default/prelink	
+			else
+				echo "Otimização já adicionada anteriormente."
+			fi
+		fi
+	
 	######INSTALANDO PROGRAMAS
 		if [[ $firefox == "s" ]]; then
 				clear
@@ -1251,8 +1250,6 @@ install_yes()
 			make
 			make install 	
 		fi
-########################################################################
-	
 		
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1289,6 +1286,10 @@ install_no()
 	
 	if [[ $pacotesquebrados == "n" ]]; then
 		echo "Pacotes quebrados,"
+	fi
+	
+	if [[ $prelink_preload_deborphan == "n" ]]; then
+		echo "Prelink, Preload, Deborphan"
 	fi
 
 ######LIMPANDO A MAQUINA
@@ -1498,15 +1499,21 @@ auto_config_ubuntu()
 	read -n1 -p  "Digite 6 para sair do script" escolha
 	clear
 	case $escolha in
+	
+	#atualizando o sistema
 	1) echo
 		update
 		upgrade	
 		;;
+		
+	#corrigindo erros
 	2) echo
 		corrigeerros
 		swap
 		pacotesquebrados
 		;;
+	
+	#limpando a máquina
 	3) echo
 		kernel
 		temporario
@@ -1516,7 +1523,10 @@ auto_config_ubuntu()
 		firefoxcookie
 		arquivosorfaos
 		arquivosinuteis
+		prelink_preload_deborphan
 		;;
+		
+	#instalando programas	
 	4) echo
 		firefox
 		steam
@@ -1557,12 +1567,18 @@ auto_config_ubuntu()
 		brackets
 		citra
 		;;
+		
+	#reiniciando	
 	5) echo
 		reinicia
 		;;
+	
+	#saindo
 	6) echo 	
 		exit
 		;;
+		
+	#entrada inválida	
 	*) echo
 		echo Alternativa incorreta!!
 		sleep 1
