@@ -41,7 +41,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.1.53.4.2
+#versão do script: 0.1.54.4.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -86,11 +86,9 @@
 #	[+] Firefox
 #		[+] Cache
 #		[+] Cookies
+#
 #	[+] Excluindo pacotes antigos
 #	[+] Excluindo pacotes orfaõs
-#	[-] Excluindo pacotes duplicados
-#			apt-get autoclean -y
-#
 #	[+] Removendo arquivos temporários
 # 	[+] Arquivos obsoletos
 #	[+] Kernel's antigos
@@ -113,7 +111,8 @@
 #	[+]Atom
 #	[+]Libreoffice
 #	[-]Netbeans
-#		VERIFICAR, INSTALAR TAMBEM JDK	
+#		VERIFICAR, INSTALAR TAMBEM JDK
+#	
 #	[+]Vlc
 #	[+]Clementine
 #	[+]Gparted
@@ -136,6 +135,7 @@
 #	[+]Synaptic	
 #	[-]DeSmuME 
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
+#
 # 	[+]Dolphin
 #	[+]Virtualbox
 #	[+]Brackets
