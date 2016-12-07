@@ -43,12 +43,12 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.47.3.5
+#versão do script: 0.50.3.5
 ###########################
 #
 #legenda: a.b.c.d
 # a = alpha[0], beta[1];
-# b = versões funcionando;
+# b = interações com o script + versões funcionando;
 # c = correções necessárias;
 #	netbeans
 #	android
@@ -125,7 +125,6 @@
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
 # 	[+]Dolphin
 #	[+]Virtualbox
-#		VERIFICAR, INSTALAR TAMBEM JDK	
 #	[+]Brackets
 #	[+]Citra
 #
@@ -144,22 +143,15 @@
 #	[+] Removendo arquivos temporários
 # [+] Arquivos obsoletos
 #	[+] Kernel's antigos
-#	[-] Removendo arquivos (.bak, ~, tmp) pasta Home
-#			for i in *~ *.bak *.tmp; do
-#			find $HOME -iname "$i" -exec rm -f {} \;
-#
+#	[+] Removendo arquivos (.bak, ~, tmp) pasta Home
 #	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #Reinicialização
 #	[+]Reiniciar
 
 #ESTRUTURAR/DESENVOLVER/APRIMORAR
-#	-Identificar qual a distribuição o usuário está utilizando, dessa forma realizar a instalação dos programas especificos para ela.
-#
 # -Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #
-#	-Criar um menu para selecionar qual tipo de ação que o usuário deseja realizar como, [1]- Instalar programas [2]- Corrigir erros no sistema, [3]- Limpar o sistema, [4]- Reiniciar o sistema.
-#
-#	-Possibilitar ao usuário o cancelamento dos programas selecionados para instalação, dentro de um tempo pré-determinado(10 seg.)
+#	-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
 
 ################################################################################
 
@@ -763,6 +755,10 @@ install_yes()
 			echo "Removendo arquivos temporários do sistema"
 			echo "-----------------------------------------"
 			find ~/.thumbnails -type f -atime +2 -exec rm -Rf {} \+
+			
+			#arquivo temporaritos pasta home
+			for i in *~ *.bak *.tmp; do
+				find $HOME -iname "$i" -exec rm -f {} \;
 		fi
 
 		#removendo arquivos obsoletos
