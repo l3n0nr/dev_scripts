@@ -7,7 +7,7 @@
       echo "---------------------------------------------"
 	
     #fazendo a copia dos arquivos de origem, para o destino
-    cp -r /media/lenonr/lenonr-4GB/IFF /home/lenonr/Dropbox/Backup_Pendrive/
+    cp -r /media/lenonr/lenonr_4GB/IFF /home/lenonr/Dropbox/Backup_Pendrive/
 
     #mostrando mensagem
       echo "Backup realizado com sucesso!"
