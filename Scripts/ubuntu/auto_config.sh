@@ -41,14 +41,13 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.1.54.4.2
+#versão do script: 0.0.55.4.2
 #############################
 #
 #legenda: a.b.c.d.e
 # a = alpha[0], beta[1];
 #
 # b = erros na execução;	
-#	possivel erro em algum for ou } nao fechada
 #
 # c = interações com o script + versões funcionando;
 #
