@@ -64,7 +64,7 @@ do
 
 	#sleep 300
 	#resposta esperada
-	if [ "$internet" == "DestinationPortUnreachable" ]; then
+	if [ "$internet" == "DestinationPortUnreachable" ] | [ "$internet" == "unknown host"]; then
 		echo "Offline!"
 		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
 		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
