@@ -21,7 +21,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.4.1.2
+#versão do script: 0.5.2.2
 ###########################
 #
 #legenda: a.b.c.d
@@ -29,6 +29,7 @@
 # b = versões funcionando;
 # c = correções necessárias;
 #	Não está funcionando, a funcao de reiniciar o roteador
+#	Está caindo apenas no else a funcao de verificar ping
 # d = pendencias a serem implementadas
 #	Gerar relatorio antes de desligar, como horário, data, log
 #  	Possibilitar ao usuario, passar o ip do roteador
@@ -59,13 +60,21 @@ do
 	#intervalo de trinta minutos
 	#sleep 1800
 	
+	site='github.com.br'
+	
 	echo "Realizando teste"
-	internet=$(ping -c1 google.com.br | grep From | awk -F' ' '{ print $4 $5 $6}')
-
+	echo "Teste 1"
+	internet=$(ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}')
+	echo "---------------------------------------------------------------"
+	echo "Teste 2"
+	internet1=$(ping $site )
+	echo $internet1
+	echo "---------------------------------------------------------------"
+	
 	#sleep 300
 	#resposta esperada
-	if [ "$internet" == "DestinationPortUnreachable" ] | [ "$internet" == "unknown host"]; then
-		echo "Offline!"
+	if [ "$internet" == "DestinationPortUnreachable" ]; then
+		echo "Você está Offline!"
 		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
 		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
 		#funcao alternativa
@@ -82,8 +91,11 @@ do
 			#contador de erros
 			cont=$((cont+1))
 		fi
+		
+		elif [ "$internet1" == "unknown host" ]; then
+			echo "teste"
 	else
-		echo "Online!" 	
+		echo "Você está Online!" 	
 		sleep 1		
 	fi
 done
