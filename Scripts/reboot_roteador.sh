@@ -57,17 +57,14 @@ do
 	clear
 
 	#intervalo de trinta minutos
-	sleep 1800
+	#sleep 1800
 	
 	echo "Realizando teste"
 	internet=$(ping -c1 google.com.br | grep From | awk -F' ' '{ print $4 $5 $6}')
 
 	#sleep 300
 	#resposta esperada
-	if [ "$internet" != "DestinationPortUnreachable" ]; then
-		echo "Online!" 	
-		sleep 1
-	else
+	if [ "$internet" == "DestinationPortUnreachable" ]; then
 		echo "Offline!"
 		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
 		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
@@ -80,11 +77,14 @@ do
 	
 		#caso o valor seja igual a dez
 		if [ "$cont" == "10" ]; then
-			poweroff
+			#poweroff
 			
 			#contador de erros
 			cont=$((cont+1))
 		fi
+	else
+		echo "Online!" 	
+		sleep 1		
 	fi
 done
 ########################################################################

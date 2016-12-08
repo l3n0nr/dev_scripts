@@ -600,7 +600,7 @@ reinicia()
 
 install_yes()
 {
-	#relatorio de instalacao
+#relatorio de instalacao
 	echo "As seguintes tarefas serão realizadas..."
 	echo "----------------------------------------------"
 
@@ -637,7 +637,7 @@ install_yes()
 				dnf update -y 
 			fi
 		fi
-
+	
 		#corrigindo possiveis erros no sistema
 		if [[ $corrigeerros == "s" ]]; then
 			clear
@@ -685,6 +685,61 @@ install_yes()
 			fi
 		fi
 		
+		#otimizando sistema
+		if [[ $prelink_preload_deborphan == "s" ]]; then		
+			clear
+			echo
+			echo "Instalando Prelink, Preload e Deborphan"
+			#prelink =
+			#preload =
+			#deborphan = remove pacotes obsoletos do sistema, principalmente após as atualizações de programas
+			echo "-------------------"
+			sudo apt install prelink preload -y 1>/dev/null 2>/dev/stdout
+			sudo apt-get install deborphan -y
+		
+			echo "Configurando Deborphan..."
+			sudo deborphan | xargs sudo apt-get -y remove --purge &&
+			sudo deborphan --guess-data | xargs sudo apt-get -y remove --purge
+			
+			#configurando o prelink e o preload
+			echo ""
+			echo "Configurando Prelink e Preload..."
+			echo "-------------------"
+				memfree=$(grep "memfree = 50" /etc/preload.conf)
+				memcached=$(grep "memcached = 0" /etc/preload.conf)
+				processes=$(grep "processes = 30" /etc/preload.conf)
+				prelink=$(grep "PRELINKING=unknown" /etc/default/prelink)
+				
+#########################################################################################################################
+#			if which -a prelink 1>/dev/null 2>/dev/stdout && which -a preload 1>/dev/null 2>/dev/stdout; then
+#				echo
+#				echo "Configurando o PRELOAD"
+#				if [[ $memfree == "memfree = 90" ]];then
+#					echo "configurando..."
+#					sed -i 's/memfree = 50/memfree = 90/g' /etc/preload.conf
+#			
+#				elif [[ $memcached == "memcached = 35" ]]; then
+#					echo "configurando..."
+#					sed -i 's/memcached = 0/memcached = 35/g' /etc/preload.conf
+#
+#				elif [[ $processes == "processes = 50" ]]; then
+#					echo "configurando..."
+#					sed -i 's/processes = 30/processes = 50/g' /etc/preload.conf	
+#				else
+#					echo "Não há nada para ser configurado"
+#					echo "Isso porque já foi configurado anteriomente"
+#			fi		
+#########################################################################################################################
+						
+			echo "Ativando o PRELINK"
+			if [[ $prelink == "PRELINKING=unknown" ]]; then
+				echo "adicionando ..."
+				sed -i 's/unknown/yes/g' /etc/default/prelink	
+			else
+				echo "Otimização já adicionada anteriormente."
+			fi
+		fi
+		
 		#corrigindo pacotes quebrados
 		if [[ $pacotesquebrados == "s" ]]; then
 			#VERIFICAR AÇÕES
@@ -692,7 +747,7 @@ install_yes()
 			#VERIFICAR AÇÕES
 			rm -r /var/lib/apt/lists  sudo mkdir -p /var/lib/apt/lists/partial
 		fi	
-		
+	
 	######LIMPANDO A MAQUINA
 		#removendo kernel antigo
 		if [[ $kernel == "s" ]]; then
@@ -702,7 +757,7 @@ install_yes()
 			#removendo kernel's antigos
 			dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^]*\).*/\1/;/[0-9]/!d' | xargs apt-get -y purge
 		fi
-
+		
 		#removendo arquivos temporarios
 		if [[ $temporario == "s" ]]; then
 			clear
@@ -714,7 +769,7 @@ install_yes()
 #			for i in *~ *.bak *.tmp; do
 #				find $HOME -iname "$i" -exec rm -f {} \	
 		fi
-	
+		
 		#removendo arquivos obsoletos
 		if [[ $obsoleto == "s" ]]; then
 			clear
@@ -722,7 +777,7 @@ install_yes()
 			echo "-----------------------------------------"
 			apt-get clean -y && apt-get autoclean -y
 		fi
-
+		
 		#limpando a lixeira
 		if [[ $lixeira == "s" ]]; then
 			clear
@@ -739,7 +794,7 @@ install_yes()
 			rm - Rf ~/.mozilla/firefox/*.default/*.sqlite
 			rm -Rf ~/.cache/mozilla/firefox/*.default/*
 		fi
-
+		
 		#limpando cookies do firefox
 		if [[ $firefoxcookie == "s" ]]; then
 			clear
@@ -755,7 +810,7 @@ install_yes()
 			echo "------------------------"
 			apt-get remove $(deborphan) -y ; apt-get autoremove -y
 		fi
-
+		
 		#limpando arquivos inuteis
 		if [[ $arquivosinuteis == "s" ]]; then
 			if [ "$distro" == "Ubuntu" ]; then
@@ -771,58 +826,6 @@ install_yes()
 				dnf clean all 
 			fi
 		fi	
-		
-		#otimizando sistema
-		if [[ $prelink_preload_deborphan == "s" ]]; then		
-			clear
-			echo
-			echo "Instalando Prelink, Preload e Deborphan"
-			#prelink =
-			#preload =
-			#deborphan = remove pacotes obsoletos do sistema, principalmente após as atualizações de programas
-			echo "-------------------"
-			sudo apt install prelink preload -y 1>/dev/null 2>/dev/stdout
-			sudo apt-get install deborphan -y
-		
-			echo "Configurando Deborphan..."
-			sudo deborphan | xargs sudo apt-get -y remove --purge &&
-			sudo deborphan --guess-data | xargs sudo apt-get -y remove --purge
-		
-			echo ""
-			echo "Configurando Prelink e Preload..."
-			echo "-------------------"
-				memfree=$(grep "memfree = 50" /etc/preload.conf)
-				memcached=$(grep "memcached = 0" /etc/preload.conf)
-				processes=$(grep "processes = 30" /etc/preload.conf)
-				prelink=$(grep "PRELINKING=unknown" /etc/default/prelink)
-	
-			if which -a prelink 1>/dev/null 2>/dev/stdout && which -a preload 1>/dev/null 2>/dev/stdout; then
-				echo
-				echo "Configurando o PRELOAD"
-				if [[ $memfree == "memfree = 90" ]];then
-					echo "configurando..."
-					sed -i 's/memfree = 50/memfree = 90/g' /etc/preload.conf
-			
-				elif [[ $memcached == "memcached = 35" ]]; then
-					echo "configurando..."
-					sed -i 's/memcached = 0/memcached = 35/g' /etc/preload.conf
-	
-				elif [[ $processes == "processes = 50" ]]; then
-					echo "configurando..."
-					sed -i 's/processes = 30/processes = 50/g' /etc/preload.conf	
-			else
-				echo "Não há nada para ser configurado"
-				echo "Isso porque já foi configurado anteriomente"
-			fi
-	
-			echo "Ativando o PRELINK"
-			if [[ $prelink == "PRELINKING=unknown" ]]; then
-				echo "adicionando ..."
-				sed -i 's/unknown/yes/g' /etc/default/prelink	
-			else
-				echo "Otimização já adicionada anteriormente."
-			fi
-		fi
 		
 		#removendo pacotes antigos
 		if [[ $pacotes_antigos == "s" ]]; then		
