@@ -64,17 +64,18 @@ do
 	
 	echo "Realizando teste"
 	echo "Teste 1"
-	internet=$(ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}')
+	internet=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
+	echo $internet
 	echo "---------------------------------------------------------------"
 	echo "Teste 2"
-	internet1=$(ping $site )
+	internet1=$( ping $site )
 	echo $internet1
 	echo "---------------------------------------------------------------"
 	
 	#sleep 300
 	#resposta esperada
 	if [ "$internet" == "DestinationPortUnreachable" ]; then
-		echo "Você está Offline!"
+		echo "Você está offline!"
 		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
 		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
 		#funcao alternativa
@@ -95,7 +96,7 @@ do
 		elif [ "$internet1" == "unknown host" ]; then
 			echo "teste"
 	else
-		echo "Você está Online!" 	
+		echo "Você está online!" 	
 		sleep 1		
 	fi
 done
