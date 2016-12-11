@@ -1508,13 +1508,16 @@ install_no()
 auto_config_ubuntu()
 {
 	echo "INICIANDO AS TAREFAS"
-		#chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
+	#chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
+	echo "----------------------------------------"
 	echo "Digite 1 para atualizar o sistema,"
 	echo "Digite 2 para corrigir possíveis erros," 
 	echo "Digite 3 para realizar uma limpeza," 
 	echo "Digite 4 para instalar alguns programas," 
 	echo "Digite 5 para reiniciar a máquina."
-	read -n1 -p  "Digite 6 para sair do script" escolha
+	echo "Digite 6 para sair do script;"
+	echo "----------------------------------------" 
+ 	read -n1 -p "Ação:" escolha
 	clear
 	case $escolha in
 	
