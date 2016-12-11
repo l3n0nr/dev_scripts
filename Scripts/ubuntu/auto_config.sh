@@ -814,12 +814,12 @@ install_yes()
 		if [[ $arquivosinuteis == "s" ]]; then
 			if [ "$distro" == "Ubuntu" ]; then
 				clear
-				echo "Removendo Pacotes inuteis"
+				echo "Removendo Pacotes inúteis"
 				echo "------------------------"
 				apt-get clean -y
 			elif [ "$distro" == "Fedora" ]; then
 				clear
-				echo "Removendo Pacotes inuteis"
+				echo "Removendo Pacotes inúteis"
 				echo "------------------------"				
 				dnf autoremove -y 
 				dnf clean all 
@@ -1324,7 +1324,7 @@ install_no()
 	fi
 
 	if [[ $lixeira == "n" ]]; then
-		echo "Removeno arquivos da Lixeira,"
+		echo "Removendo arquivos da Lixeira,"
 	fi
 
 	if [[ $firefoxcache == "n" ]]; then
