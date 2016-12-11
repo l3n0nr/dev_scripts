@@ -130,15 +130,14 @@
 #
 #	[+]NTP
 #	[+]Hollywood
-#	[-]GBA - Gameboyadvanced
 #	[+]Synaptic	
-#	[-]DeSmuME 
-#		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
-#
 # 	[+]Dolphin
 #	[+]Virtualbox
 #	[+]Brackets
 #	[+]Citra
+#	[-]DeSmuME 
+#		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
+#	[-]GBA - Gameboyadvanced
 #
 #Reinicialização
 #	[+]Reiniciar
