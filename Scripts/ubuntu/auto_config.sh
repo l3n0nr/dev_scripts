@@ -23,6 +23,9 @@
 #por Lucas Novo Silva
 # fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
+#por "Dionathan Simione"
+# fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
+#
 ################################################################################
 #
 ###################
@@ -41,7 +44,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.56.4.2
+#versão do script: 0.0.57.4.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -138,7 +141,8 @@
 #	[-]DeSmuME 
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
 #	[-]GBA - Gameboyadvanced
-#
+#	[+]Mesa - ppa
+#	
 #Reinicialização
 #	[+]Reiniciar
 #
@@ -584,6 +588,14 @@ citra()
 	echo ""
 	echo "Deseja instalar o Citra? (s/n)?"
 	read -p "??" citra
+}
+
+mesa()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Mesa? (s/n)?"
+	read -p "??" mesa
 }
 
 ########################################################################
@@ -1263,6 +1275,21 @@ install_yes()
 			make
 			make install 	
 		fi
+		
+		#instalando o mesa
+		if [[ $mesa == "s" ]]; then
+			#instalando ppa-purge
+			apt install ppa-purge -y
+
+			#adicionando repositorio
+			add-apt-repository ppa:paulo-miguel-dias/pkppa -y
+
+			#atualizando sistema
+			apt-get update && sudo apt-get dist-upgrade
+		
+			#removendo caso erro
+			#ppa-purge ppa:paulo-miguel-dias/pkppa
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1495,6 +1522,10 @@ install_no()
 		echo "Citra,"
 	fi
 	
+	if [[ $mesa == "n" ]]; then
+		echo "Mesa,"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1587,6 +1618,7 @@ auto_config_ubuntu()
 		virtualbox	
 		brackets
 		citra
+		mesa
 		;;
 		
 	#reiniciando	
