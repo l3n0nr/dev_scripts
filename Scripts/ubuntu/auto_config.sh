@@ -44,7 +44,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.57.4.2
+#versão do script: 0.0.58.4.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -142,6 +142,7 @@
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
 #	[-]GBA - Gameboyadvanced
 #	[+]Mesa - ppa
+#	[+]Mutate
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -596,6 +597,14 @@ mesa()
 	echo ""
 	echo "Deseja instalar o Mesa? (s/n)?"
 	read -p "??" mesa
+}
+
+mutate()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Mutate? (s/n)?"
+	read -p "??" mutate
 }
 
 ########################################################################
@@ -1290,6 +1299,18 @@ install_yes()
 			#removendo caso erro
 			#ppa-purge ppa:paulo-miguel-dias/pkppa
 		fi
+		
+		#instalando o mutate
+		if [[ $mutate == "s" ]]; then
+			#adicionando ppa
+			add-apt-repository ppa:noobslab/apps -y
+	
+			#atualizando sistema
+			apt-get update -y
+
+			#atualizando mutate
+			apt-get install mutate -y
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1526,6 +1547,10 @@ install_no()
 		echo "Mesa,"
 	fi
 	
+	if [[ $mutate == "n" ]]; then
+		echo "Mutate,"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1619,6 +1644,7 @@ auto_config_ubuntu()
 		brackets
 		citra
 		mesa
+		mutates
 		;;
 		
 	#reiniciando	
