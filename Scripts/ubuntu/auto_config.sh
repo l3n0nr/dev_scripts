@@ -44,7 +44,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.59.4.2
+#versão do script: 0.0.60.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -58,6 +58,7 @@
 #	netbeans
 #	android
 #	vga
+#	mutate
 #
 # e = pendencias
 #	GBA
@@ -1303,13 +1304,16 @@ install_yes()
 		#instalando o mutate
 		if [[ $mutate == "s" ]]; then
 			#instalando dependencias
-			apt-get install build-essential qt5-qmake qt5-default libgtk2.0-dev libqt5x11extras5-dev libboost-regex-dev
+			#apt-get install build-essential qt5-qmake qt5-default libgtk2.0-dev libqt5x11extras5-dev libboost-regex-dev
 		
 			#baixando pacote
-			wget https://github.com/qdore/Mutate/releases/download/v2.3/Mutate-2.3.deb -O Mutate-2.3.deb
+			#wget https://github.com/qdore/Mutate/releases/download/v2.3/Mutate-2.3.deb -O Mutate-2.3.deb
 			
 			#instalando			
-			sudo dpkg -i Mutate-2.3.deb
+			#sudo dpkg -i Mutate-2.3.deb
+			
+			#removendo 
+			#rm -r Mutate-2.3.deb
 			
 			#adicionando ppa
 			#add-apt-repository ppa:mutate/ppa -y
@@ -1319,6 +1323,21 @@ install_yes()
 
 			#atualizando mutate
 			#apt-get install mutate -y
+			
+			#git clone https://github.com/qdore/Mutate.git
+			#cd Mutate/src
+			#qmake
+			#make
+			#sudo make install
+			
+			#cd ..
+			#sudo cp info/mutate.png /usr/share/icons
+			#sudo cp info/Mutate.desktop /usr/share/applications
+			#mkdir -p ~/.config/Mutate
+			#cp -R config/* ~/.config/Mutate
+			#chmod -R a+x ~/.config/Mutate/scripts
+			#chmod -R a+w ~/.config/Mutate
+			#sed -i "s|{home}|$HOME|g" ~/.config/Mutate/config.ini
 		fi
 					
 ######REINICIANDO
@@ -1677,7 +1696,7 @@ auto_config_ubuntu()
 
 #inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 	install_yes
-	install_no
+	#install_no
 
 	echo "TAREFAS FINALIZADAS, SAINDO.."
 	clear
