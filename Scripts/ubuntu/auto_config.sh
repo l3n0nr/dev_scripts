@@ -44,7 +44,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.58.4.2
+#versão do script: 0.0.59.4.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -1302,14 +1302,23 @@ install_yes()
 		
 		#instalando o mutate
 		if [[ $mutate == "s" ]]; then
+			#instalando dependencias
+			apt-get install build-essential qt5-qmake qt5-default libgtk2.0-dev libqt5x11extras5-dev libboost-regex-dev
+		
+			#baixando pacote
+			wget https://github.com/qdore/Mutate/releases/download/v2.3/Mutate-2.3.deb -O Mutate-2.3.deb
+			
+			#instalando			
+			sudo dpkg -i Mutate-2.3.deb
+			
 			#adicionando ppa
-			add-apt-repository ppa:noobslab/apps -y
+			#add-apt-repository ppa:mutate/ppa -y
 	
 			#atualizando sistema
-			apt-get update -y
+			#apt-get update -y
 
 			#atualizando mutate
-			apt-get install mutate -y
+			#apt-get install mutate -y
 		fi
 					
 ######REINICIANDO
@@ -1644,7 +1653,7 @@ auto_config_ubuntu()
 		brackets
 		citra
 		mesa
-		mutates
+		mutate
 		;;
 		
 	#reiniciando	
