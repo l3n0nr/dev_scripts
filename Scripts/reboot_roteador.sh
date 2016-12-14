@@ -75,7 +75,51 @@ while true
 	if [ "$ip" == "Network is unreachable" ]; then
 		echo "Conecte ao roteador"
 	else
-		echo "Ok!"
+		echo "Realizando testes de conexão"
+		echo "Teste 1"
+		teste1=$( ping $site )
+		teste1=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
+		echo $teste1
+		echo "---------------------------------------------------------------"
+		
+		echo "Teste 2"
+		teste2=$( ping $site )
+		echo $teste2
+		echo "---------------------------------------------------------------"
+		
+		#resposta esperada
+		if [ "$internet" == "DestinationPortUnreachable" ]; then
+			echo "Você está offline!"
+			echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
+			curl --user admin:admin http://$ip/userRpm/SysRebootRpm.htm?Reboot=Reboot
+			
+			#funcao alternativa
+			#/usr/bin/curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot > /dev/null
+			
+			echo "Reiniciando o roteador, espere..."
+			sleep 60
+			
+			echo "Roteador reiniciado! Teste em um site.."
+			sleep 10
+
+			#caso o valor seja igual a dez
+			if [ "$cont" == "10" ]; then
+				#desligando a maquina
+				#poweroff
+				
+				#contador de erros
+				cont=$((cont+1))
+				
+				#mostrando contador
+				echo $cont
+			fi
+			
+			elif [ "$internet1" == "unknown host" ]; then
+				echo "teste"
+			else
+				echo "Você está online!"
+				#sleep 1				
+		fi	
 	fi
 do
 ########################################################################
