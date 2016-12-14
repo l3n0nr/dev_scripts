@@ -44,7 +44,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.60.5.2
+#versão do script: 0.0.61.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -144,6 +144,7 @@
 #	[-]GBA - Gameboyadvanced
 #	[+]Mesa - ppa
 #	[+]Mutate
+#	[+]Screenfetch
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -606,6 +607,14 @@ mutate()
 	echo ""
 	echo "Deseja instalar o Mutate? (s/n)?"
 	read -p "??" mutate
+}
+
+screenfetch()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Screenfetch? (s/n)?"
+	read -p "??" screenfetch
 }
 
 ########################################################################
@@ -1286,7 +1295,6 @@ install_yes()
 			make install 	
 		fi
 		
-		#instalando o mesa
 		if [[ $mesa == "s" ]]; then
 			#instalando ppa-purge
 			apt install ppa-purge -y
@@ -1301,7 +1309,6 @@ install_yes()
 			#ppa-purge ppa:paulo-miguel-dias/pkppa
 		fi
 		
-		#instalando o mutate
 		if [[ $mutate == "s" ]]; then
 			#instalando dependencias
 			#apt-get install build-essential qt5-qmake qt5-default libgtk2.0-dev libqt5x11extras5-dev libboost-regex-dev
@@ -1339,6 +1346,11 @@ install_yes()
 			#chmod -R a+w ~/.config/Mutate
 			#sed -i "s|{home}|$HOME|g" ~/.config/Mutate/config.ini
 		fi
+		
+		if [[ $screenfetch == "s" ]]; then
+			#instalando o screenfetch
+			apt install screenfetch* -y
+		if
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1579,6 +1591,10 @@ install_no()
 		echo "Mutate,"
 	fi
 	
+	if [[ $screenfetch == "n" ]]; then
+		echo "Screenfetch"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1673,6 +1689,7 @@ auto_config_ubuntu()
 		citra
 		mesa
 		mutate
+		screenfetch
 		;;
 		
 	#reiniciando	
