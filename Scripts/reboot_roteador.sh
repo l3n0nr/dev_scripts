@@ -3,7 +3,7 @@
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
 #
 # por bur
-# fonte: <www.hardware.com.br/comunidade/tplink-via/1360884/>
+# fonte: <https://www.hardware.com.br/comunidade/tplink-via/1360884/>
 #
 ###################
 #DESENVOLVIDO POR
@@ -21,7 +21,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.7.2.2
+#versão do script: 0.8.2.1
 ###########################
 #
 #legenda: a.b.c.d
@@ -32,8 +32,7 @@
 #	Está caindo apenas no else a funcao de verificar ping
 # d = pendencias a serem implementadas
 #	Gerar relatorio antes de desligar, como horário, data, log
-#  	Possibilitar ao usuario, passar o ip do roteador
-
+#
 ########################################################################
 #verificando se o usuário é ROOT
 if [[ `id -u` -ne 0 ]]; then
@@ -62,21 +61,21 @@ clear
 
 #mostrando informacoes
 echo "---------------------------------"
-echo "Endereço do roteador: "$ip
+echo "Ip do roteador: " $ip
 echo "---------------------------------"
-echo "Endereço do site: " $site
+echo "Site para o teste: " $site
 echo "---------------------------------"
 
 #verificação infinita
 while true
 	#intervalo de trinta minutos
 	#sleep 1800
-	
-	echo "Realizando teste"
-	echo "Teste 1"
-	internet=$( ping $site )
-	#internet=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
-	echo $internet
-	echo "---------------------------------------------------------------"
-do 
+		
+	#verificando se maquina esta conectada ao roteador
+	if [ "$ip" == "Network is unreachable" ]; then
+		echo "Conecte ao roteador"
+	else
+		echo "Ok!"
+	fi
+do
 ########################################################################
