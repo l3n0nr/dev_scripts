@@ -21,7 +21,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.5.2.2
+#versão do script: 0.7.2.2
 ###########################
 #
 #legenda: a.b.c.d
@@ -51,53 +51,32 @@ clear
 ########################################################################
 
 ########################################################################
-while true
-do 
-    #echo "Digite o endereço do seu roteador"
-    #read -p ip
-	clear
+#usuario digita o ip do roteador
+echo "Digite o endereço do roteador"
+read -p "?? " ip
 
+#usuario digita o site que deseja testar
+echo "Digite o site que deseja testar"
+read -p "?? " site
+clear
+
+#mostrando informacoes
+echo "---------------------------------"
+echo "Endereço do roteador: "$ip
+echo "---------------------------------"
+echo "Endereço do site: " $site
+echo "---------------------------------"
+
+#verificação infinita
+while true
 	#intervalo de trinta minutos
 	#sleep 1800
 	
-	site='github.com.br'
-	
 	echo "Realizando teste"
 	echo "Teste 1"
-	internet=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
+	internet=$( ping $site )
+	#internet=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
 	echo $internet
 	echo "---------------------------------------------------------------"
-	echo "Teste 2"
-	internet1=$( ping $site )
-	echo $internet1
-	echo "---------------------------------------------------------------"
-	
-	#sleep 300
-	#resposta esperada
-	if [ "$internet" == "DestinationPortUnreachable" ]; then
-		echo "Você está offline!"
-		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
-		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
-		#funcao alternativa
-		#/usr/bin/curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot > /dev/null
-		echo "Reiniciando o roteador, espere..."
-		sleep 60
-		echo "Roteador funcionando! Teste.."
-		sleep 10
-	
-		#caso o valor seja igual a dez
-		if [ "$cont" == "10" ]; then
-			#poweroff
-			
-			#contador de erros
-			cont=$((cont+1))
-		fi
-		
-		elif [ "$internet1" == "unknown host" ]; then
-			echo "teste"
-	else
-		echo "Você está online!" 	
-		sleep 1		
-	fi
-done
+do 
 ########################################################################
