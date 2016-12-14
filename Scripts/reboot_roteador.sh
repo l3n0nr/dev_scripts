@@ -9,8 +9,8 @@
 #DESENVOLVIDO POR
 ###################
 #
-#por lenonr(Lenon Ricardo) -
-#	contato: <github.com/lenonr/dev_scripts>
+# por lenonr(Lenon Ricardo) -
+# contato: <lenonrmsouza@gmail.com>
 #
 #################################################################################
 #										#

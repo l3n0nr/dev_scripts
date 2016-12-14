@@ -1,10 +1,10 @@
+#!/bin/bash
+############################################################################################################
+
 #autor: ???
 #fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
 
-#!/bin/bash
-
 ############################################################################################################
-
 
 if [[ $EUID -ne 0 ]]; then
    echo "Você deve executar este script como root" 1>&2
