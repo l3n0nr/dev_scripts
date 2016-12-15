@@ -44,11 +44,7 @@
 #################################################################################
 #
 #############################
-<<<<<<< HEAD
-#versão do script: 0.0.59.4.2
-=======
-#versão do script: 0.0.62.5.3
->>>>>>> 1e4b1cf4c43c18567dc9a8eb6e44513f6688f7df
+#versão do script: 0.0.63.5.3
 #############################
 #
 #legenda: a.b.c.d.e
@@ -80,14 +76,14 @@
 #
 #FUNCOES
 #Atualização
-#	[+]Update
-#		[+]Update-Grud
-#	[+]Upgrade
+#	[+] Update
+#		[+] Update-Grud
+#	[+] Upgrade
 #
 #CorrigindoErros
-#	[+]Swap
-#	[+]Prelink, Preload, Deborphan
-#	[+]Pacotes com problemas
+#	[+] Swap
+#	[+] Prelink, Preload, Deborphan
+#	[+] Pacotes com problemas
 #
 #Limpeza
 #	[+] Lixeira
@@ -104,52 +100,53 @@
 #	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #
 #Instalação
-#	[+]Firefox
-#	[+]Steam
-#	[+]Xampp
-#	[+]Spofity
-#	[+]Icones/Temas Mac
-#	[+]Codec's
-#	[+]Gimp
-#	[+]XFCE
-#	[+]Java 8
-#	[+]Redshift
-#	[+]Flux
-#	[+]NodeJS
-#	[+]Atom
-#	[+]Libreoffice
-#	[-]Netbeans
+#	[+] Firefox
+#	[+] Steam
+#	[+] Xampp
+#	[+] Spofity
+#	[+] Icones/Temas Mac
+#	[+] Codec's
+#	[+] Gimp
+#	[+] XFCE
+#	[+] Java 8
+#	[+] Redshift
+#	[+] Flux
+#	[+] NodeJS
+#	[+] Atom
+#	[+] Libreoffice
+#	[-] Netbeans
 #		VERIFICAR, INSTALAR TAMBEM JDK
 #	
-#	[+]Vlc
-#	[+]Clementine
-#	[+]Gparted
-#	[+]Tlp
-#	[+]Rar
-#	[+]Git
-#	[+]Lm-sensors
-#	[+]Stellarium
-#	[+]Texmaker
-#	[+]Gnome-terminal
-#	[+]Reaver
-#	[+]Gnome System Monitor
-#	[+]Tor
-#	[+]Android Studio
+#	[+] Vlc
+#	[+] Clementine
+#	[+] Gparted
+#	[+] Tlp
+#	[+] Rar
+#	[+] Git
+#	[+] Lm-sensors
+#	[+] Stellarium
+#	[+] Texmaker
+#	[+] Gnome-terminal
+#	[+] Reaver
+#	[+] Gnome System Monitor
+#	[+] Tor
+#	[+] Android Studio
 #		VERIFICAR, INSTALAR TAMBEM JDK	
 #
-#	[+]NTP
-#	[+]Hollywood
-#	[+]Synaptic	
-# 	[+]Dolphin
-#	[+]Virtualbox
-#	[+]Brackets
-#	[+]Citra
-#	[-]DeSmuME 
+#	[+] NTP
+#	[+] Hollywood
+#	[+] Synaptic	
+# 	[+] Dolphin
+#	[+] Virtualbox
+#	[+] Brackets
+#	[+] Citra
+#	[-] DeSmuME 
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
-#	[-]GBA - Gameboyadvanced
-#	[+]Mesa - ppa
-#	[-]Mutate
-#	[+]Screenfetch
+#	[-] GBA - Gameboyadvanced
+#	[+] Mesa - ppa
+#	[-] Mutate
+#	[+] Screenfetch
+#	[+] Midori
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -620,6 +617,14 @@ screenfetch()
 	echo ""
 	echo "Deseja instalar o Screenfetch? (s/n)?"
 	read -p "??" screenfetch
+}
+
+midori()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Midori? (s/n)?"
+	read -p "??" midori
 }
 
 ########################################################################
@@ -1357,6 +1362,11 @@ install_yes()
 			#instalando o screenfetch
 			apt install screenfetch* -y
 		fi
+		
+		if [[ $midori == "s" ]]; then
+			#instalando o midori
+			apt install midori* -y
+		fi	
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1601,6 +1611,10 @@ install_no()
 		echo "Screenfetch"
 	fi
 	
+	if [[ $midori == "n" ]]; then
+		echo "Midori"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1696,6 +1710,7 @@ auto_config_ubuntu()
 		mesa
 		mutate
 		screenfetch
+		midori
 		;;
 		
 	#reiniciando	
