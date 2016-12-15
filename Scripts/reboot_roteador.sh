@@ -3,14 +3,14 @@
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
 #
 # por bur
-# fonte: <www.hardware.com.br/comunidade/tplink-via/1360884/>
+# fonte: <https://www.hardware.com.br/comunidade/tplink-via/1360884/>
 #
 ###################
 #DESENVOLVIDO POR
 ###################
 #
-#por lenonr(Lenon Ricardo) -
-#	contato: <github.com/lenonr/dev_scripts>
+# por lenonr(Lenon Ricardo) -
+# contato: <lenonrmsouza@gmail.com>
 #
 #################################################################################
 #										#
@@ -21,7 +21,7 @@
 #################################################################################
 #
 ###########################
-#versão do script: 0.5.2.2
+#versão do script: 0.8.2.1
 ###########################
 #
 #legenda: a.b.c.d
@@ -32,8 +32,7 @@
 #	Está caindo apenas no else a funcao de verificar ping
 # d = pendencias a serem implementadas
 #	Gerar relatorio antes de desligar, como horário, data, log
-#  	Possibilitar ao usuario, passar o ip do roteador
-
+#
 ########################################################################
 #verificando se o usuário é ROOT
 if [[ `id -u` -ne 0 ]]; then
@@ -51,53 +50,76 @@ clear
 ########################################################################
 
 ########################################################################
-while true
-do 
-    #echo "Digite o endereço do seu roteador"
-    #read -p ip
-	clear
+#usuario digita o ip do roteador
+echo "Digite o endereço do roteador"
+read -p "?? " ip
 
+#usuario digita o site que deseja testar
+echo "Digite o site que deseja testar"
+read -p "?? " site
+clear
+
+#mostrando informacoes
+echo "---------------------------------"
+echo "Ip do roteador: " $ip
+echo "---------------------------------"
+echo "Site para o teste: " $site
+echo "---------------------------------"
+
+#verificação infinita
+while true
 	#intervalo de trinta minutos
 	#sleep 1800
-	
-	site='github.com.br'
-	
-	echo "Realizando teste"
-	echo "Teste 1"
-	internet=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
-	echo $internet
-	echo "---------------------------------------------------------------"
-	echo "Teste 2"
-	internet1=$( ping $site )
-	echo $internet1
-	echo "---------------------------------------------------------------"
-	
-	#sleep 300
-	#resposta esperada
-	if [ "$internet" == "DestinationPortUnreachable" ]; then
-		echo "Você está offline!"
-		echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
-		curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot
-		#funcao alternativa
-		#/usr/bin/curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot > /dev/null
-		echo "Reiniciando o roteador, espere..."
-		sleep 60
-		echo "Roteador funcionando! Teste.."
-		sleep 10
-	
-		#caso o valor seja igual a dez
-		if [ "$cont" == "10" ]; then
-			#poweroff
-			
-			#contador de erros
-			cont=$((cont+1))
-		fi
 		
-		elif [ "$internet1" == "unknown host" ]; then
-			echo "teste"
+	#verificando se maquina esta conectada ao roteador
+	if [ "$ip" == "Network is unreachable" ]; then
+		echo "Conecte ao roteador"
 	else
-		echo "Você está online!" 	
-		sleep 1		
+		echo "Realizando testes de conexão"
+		echo "Teste 1"
+		teste1=$( ping $site )
+		teste1=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
+		echo $teste1
+		echo "---------------------------------------------------------------"
+		
+		echo "Teste 2"
+		teste2=$( ping $site )
+		echo $teste2
+		echo "---------------------------------------------------------------"
+		
+		#resposta esperada
+		if [ "$internet" == "DestinationPortUnreachable" ]; then
+			echo "Você está offline!"
+			echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
+			curl --user admin:admin http://$ip/userRpm/SysRebootRpm.htm?Reboot=Reboot
+			
+			#funcao alternativa
+			#/usr/bin/curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot > /dev/null
+			
+			echo "Reiniciando o roteador, espere..."
+			sleep 60
+			
+			echo "Roteador reiniciado! Teste em um site.."
+			sleep 10
+
+			#caso o valor seja igual a dez
+			if [ "$cont" == "10" ]; then
+				#desligando a maquina
+				#poweroff
+				
+				#contador de erros
+				cont=$((cont+1))
+				
+				#mostrando contador
+				echo $cont
+			fi
+			
+			elif [ "$internet1" == "unknown host" ]; then
+				echo "teste"
+			else
+				echo "Você está online!"
+				#sleep 1				
+		fi	
 	fi
-done
+do
 ########################################################################

@@ -44,7 +44,11 @@
 #################################################################################
 #
 #############################
+<<<<<<< HEAD
 #versão do script: 0.0.59.4.2
+=======
+#versão do script: 0.0.62.5.3
+>>>>>>> 1e4b1cf4c43c18567dc9a8eb6e44513f6688f7df
 #############################
 #
 #legenda: a.b.c.d.e
@@ -58,10 +62,12 @@
 #	netbeans
 #	android
 #	vga
+#	mutate
 #
 # e = pendencias
 #	GBA
 #	DeSmuME 
+#	Mutate
 #
 ################################################################################
 #
@@ -142,7 +148,8 @@
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
 #	[-]GBA - Gameboyadvanced
 #	[+]Mesa - ppa
-#	[+]Mutate
+#	[-]Mutate
+#	[+]Screenfetch
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -605,6 +612,14 @@ mutate()
 	echo ""
 	echo "Deseja instalar o Mutate? (s/n)?"
 	read -p "??" mutate
+}
+
+screenfetch()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Screenfetch? (s/n)?"
+	read -p "??" screenfetch
 }
 
 ########################################################################
@@ -1285,7 +1300,6 @@ install_yes()
 			make install 	
 		fi
 		
-		#instalando o mesa
 		if [[ $mesa == "s" ]]; then
 			#instalando ppa-purge
 			apt install ppa-purge -y
@@ -1300,16 +1314,48 @@ install_yes()
 			#ppa-purge ppa:paulo-miguel-dias/pkppa
 		fi
 		
-		#instalando o mutate
 		if [[ $mutate == "s" ]]; then
+			#instalando dependencias
+			#apt-get install build-essential qt5-qmake qt5-default libgtk2.0-dev libqt5x11extras5-dev libboost-regex-dev
+		
+			#baixando pacote
+			#wget https://github.com/qdore/Mutate/releases/download/v2.3/Mutate-2.3.deb -O Mutate-2.3.deb
+			
+			#instalando			
+			#sudo dpkg -i Mutate-2.3.deb
+			
+			#removendo 
+			#rm -r Mutate-2.3.deb
+			
 			#adicionando ppa
-			add-apt-repository ppa:noobslab/apps -y
+			#add-apt-repository ppa:mutate/ppa -y
 	
 			#atualizando sistema
-			apt-get update -y
+			#apt-get update -y
 
 			#atualizando mutate
-			apt-get install mutate -y
+			#apt-get install mutate -y
+			
+			#git clone https://github.com/qdore/Mutate.git
+			#cd Mutate/src
+			#qmake
+			#make
+			#sudo make install
+			
+			#cd ..
+			#sudo cp info/mutate.png /usr/share/icons
+			#sudo cp info/Mutate.desktop /usr/share/applications
+			#mkdir -p ~/.config/Mutate
+			#cp -R config/* ~/.config/Mutate
+			#chmod -R a+x ~/.config/Mutate/scripts
+			#chmod -R a+w ~/.config/Mutate
+			#sed -i "s|{home}|$HOME|g" ~/.config/Mutate/config.ini
+			echo
+		fi
+		
+		if [[ $screenfetch == "s" ]]; then
+			#instalando o screenfetch
+			apt install screenfetch* -y
 		fi
 					
 ######REINICIANDO
@@ -1551,6 +1597,10 @@ install_no()
 		echo "Mutate,"
 	fi
 	
+	if [[ $screenfetch == "n" ]]; then
+		echo "Screenfetch"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1644,7 +1694,8 @@ auto_config_ubuntu()
 		brackets
 		citra
 		mesa
-		mutates
+		mutate
+		screenfetch
 		;;
 		
 	#reiniciando	
@@ -1668,7 +1719,7 @@ auto_config_ubuntu()
 
 #inicia as funções que o usuário escolheu, executando primeiro as que ele deseja, posteriormente mostrando as que ele não quis realizar.
 	install_yes
-	install_no
+	#install_no
 
 	echo "TAREFAS FINALIZADAS, SAINDO.."
 	clear
