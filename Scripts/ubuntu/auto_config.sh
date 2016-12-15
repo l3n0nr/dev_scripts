@@ -44,7 +44,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.61.5.2
+#versão do script: 0.0.62.5.3
 #############################
 #
 #legenda: a.b.c.d.e
@@ -63,6 +63,7 @@
 # e = pendencias
 #	GBA
 #	DeSmuME 
+#	Mutate
 #
 ################################################################################
 #
@@ -143,7 +144,7 @@
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
 #	[-]GBA - Gameboyadvanced
 #	[+]Mesa - ppa
-#	[+]Mutate
+#	[-]Mutate
 #	[+]Screenfetch
 #	
 #Reinicialização
@@ -1345,12 +1346,13 @@ install_yes()
 			#chmod -R a+x ~/.config/Mutate/scripts
 			#chmod -R a+w ~/.config/Mutate
 			#sed -i "s|{home}|$HOME|g" ~/.config/Mutate/config.ini
+			echo
 		fi
 		
 		if [[ $screenfetch == "s" ]]; then
 			#instalando o screenfetch
 			apt install screenfetch* -y
-		if
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
