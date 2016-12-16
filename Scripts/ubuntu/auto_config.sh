@@ -23,8 +23,9 @@
 #por Lucas Novo Silva
 # fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
-#por "Dionathan Simione"
+#por "Dionatan Simioni"
 # fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
+# fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
 #
 ################################################################################
 #
@@ -44,7 +45,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.63.5.2
+#versão do script: 0.0.64.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -146,6 +147,7 @@
 #	[-] Mutate
 #	[+] Screenfetch
 #	[+] Midori
+#	[+] Diolinux_paper(Diolinux Paper Orange Modern)
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -624,6 +626,14 @@ midori()
 	echo ""
 	echo "Deseja instalar o Midori? (s/n)?"
 	read -p "??" midori
+}
+
+diolinux_paper()
+{
+	clear
+	echo ""
+	echo "Deseja instalado o Diolinux Paper Orange Modern? (s/n)"
+	read -p "??" diolinux_paper
 }
 
 ########################################################################
@@ -1366,6 +1376,17 @@ install_yes()
 			#instalando o midori
 			apt install midori* -y
 		fi	
+
+		if [[ $diolinux_paper == "s" ]]; then
+			#adicionando ppa			
+			add-apt-repository ppa:tiagosh/diolinux-paper-orange -y
+
+			#atualizando sistema
+			apt-get update
+
+			#instalando tema
+			apt install diolinux-paper-orange -y
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1613,7 +1634,10 @@ install_no()
 	if [[ $midori == "n" ]]; then
 		echo "Midori"
 	fi
-	
+
+	if [[ $diolinux_paper == "n" ]]; then
+		echo "Diolinux Paper"
+	fi
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1710,6 +1734,7 @@ auto_config_ubuntu()
 		mutate
 		screenfetch
 		midori
+		diolinux_paper
 		;;
 		
 	#reiniciando	
