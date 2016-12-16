@@ -1369,7 +1369,7 @@ install_yes()
 		
 		if [[ $screenfetch == "s" ]]; then
 			#instalando o screenfetch
-			apt install screenfetch* -y
+			apt install screenfetch -y
 		fi
 		
 		if [[ $midori == "s" ]]; then
