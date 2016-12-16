@@ -8,6 +8,11 @@
 	tree -f /media/lenonr/lenonr-500GB/Arquivos/Seriados/ > /home/lenonr/MEGA/Outros/Lista/Seriados.txt
 	clear
 	
+#documentarios
+	echo "Verificando Documentários"	
+	tree -f /media/lenonr/lenonr-500GB/Arquivos/Documentarios/ > /home/lenonr/MEGA/Outros/Lista/Documentarios.txt
+	clear
+	
 #musicas
 	echo "Verificando Musicas"
 	tree -f /home/lenonr/Music/Musicas/ > /home/lenonr/MEGA/Outros/Lista/Musicas.txt	

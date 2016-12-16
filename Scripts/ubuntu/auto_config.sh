@@ -23,8 +23,9 @@
 #por Lucas Novo Silva
 # fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
-#por "Dionathan Simione"
+#por "Dionatan Simioni"
 # fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
+# fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
 #
 ################################################################################
 #
@@ -44,7 +45,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.62.5.3
+#versão do script: 0.0.64.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -63,7 +64,6 @@
 # e = pendencias
 #	GBA
 #	DeSmuME 
-#	Mutate
 #
 ################################################################################
 #
@@ -76,14 +76,14 @@
 #
 #FUNCOES
 #Atualização
-#	[+]Update
-#		[+]Update-Grud
-#	[+]Upgrade
+#	[+] Update
+#		[+] Update-Grud
+#	[+] Upgrade
 #
 #CorrigindoErros
-#	[+]Swap
-#	[+]Prelink, Preload, Deborphan
-#	[+]Pacotes com problemas
+#	[+] Swap
+#	[+] Prelink, Preload, Deborphan
+#	[+] Pacotes com problemas
 #
 #Limpeza
 #	[+] Lixeira
@@ -100,52 +100,54 @@
 #	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #
 #Instalação
-#	[+]Firefox
-#	[+]Steam
-#	[+]Xampp
-#	[+]Spofity
-#	[+]Icones/Temas Mac
-#	[+]Codec's
-#	[+]Gimp
-#	[+]XFCE
-#	[+]Java 8
-#	[+]Redshift
-#	[+]Flux
-#	[+]NodeJS
-#	[+]Atom
-#	[+]Libreoffice
-#	[-]Netbeans
+#	[+] Firefox
+#	[+] Steam
+#	[+] Xampp
+#	[+] Spofity
+#	[+] Icones/Temas Mac
+#	[+] Codec's
+#	[+] Gimp
+#	[+] XFCE
+#	[+] Java 8
+#	[+] Redshift
+#	[+] Flux
+#	[+] NodeJS
+#	[+] Atom
+#	[+] Libreoffice
+#	[-] Netbeans
 #		VERIFICAR, INSTALAR TAMBEM JDK
 #	
-#	[+]Vlc
-#	[+]Clementine
-#	[+]Gparted
-#	[+]Tlp
-#	[+]Rar
-#	[+]Git
-#	[+]Lm-sensors
-#	[+]Stellarium
-#	[+]Texmaker
-#	[+]Gnome-terminal
-#	[+]Reaver
-#	[+]Gnome System Monitor
-#	[+]Tor
-#	[+]Android Studio
+#	[+] Vlc
+#	[+] Clementine
+#	[+] Gparted
+#	[+] Tlp
+#	[+] Rar
+#	[+] Git
+#	[+] Lm-sensors
+#	[+] Stellarium
+#	[+] Texmaker
+#	[+] Gnome-terminal
+#	[+] Reaver
+#	[+] Gnome System Monitor
+#	[+] Tor
+#	[+] Android Studio
 #		VERIFICAR, INSTALAR TAMBEM JDK	
 #
-#	[+]NTP
-#	[+]Hollywood
-#	[+]Synaptic	
-# 	[+]Dolphin
-#	[+]Virtualbox
-#	[+]Brackets
-#	[+]Citra
-#	[-]DeSmuME 
+#	[+] NTP
+#	[+] Hollywood
+#	[+] Synaptic	
+# 	[+] Dolphin
+#	[+] Virtualbox
+#	[+] Brackets
+#	[+] Citra
+#	[-] DeSmuME 
 #		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
-#	[-]GBA - Gameboyadvanced
-#	[+]Mesa - ppa
-#	[-]Mutate
-#	[+]Screenfetch
+#	[-] GBA - Gameboyadvanced
+#	[+] Mesa - ppa
+#	[-] Mutate
+#	[+] Screenfetch
+#	[+] Midori
+#	[+] Diolinux_paper(Diolinux Paper Orange Modern)
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -618,6 +620,22 @@ screenfetch()
 	read -p "??" screenfetch
 }
 
+midori()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Midori? (s/n)?"
+	read -p "??" midori
+}
+
+diolinux_paper()
+{
+	clear
+	echo ""
+	echo "Deseja instalado o Diolinux Paper Orange Modern? (s/n)"
+	read -p "??" diolinux_paper
+}
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -959,7 +977,7 @@ install_yes()
 				echo "Instalando Adicionais do XFCE4"
 				echo "----------------------------------------------------------------------"
 				#instalando componentes do XFCE
-				apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin -y -f -q
+				apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin smartmontools -y -f -q
 
 				#dando permissão de leitura, para verificar temperatura do HDD
 				chmod u+s /usr/sbin/hddtemp
@@ -1353,6 +1371,22 @@ install_yes()
 			#instalando o screenfetch
 			apt install screenfetch* -y
 		fi
+		
+		if [[ $midori == "s" ]]; then
+			#instalando o midori
+			apt install midori* -y
+		fi	
+
+		if [[ $diolinux_paper == "s" ]]; then
+			#adicionando ppa			
+			add-apt-repository ppa:tiagosh/diolinux-paper-orange -y
+
+			#atualizando sistema
+			apt-get update
+
+			#instalando tema
+			apt install diolinux-paper-orange -y
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1597,6 +1631,13 @@ install_no()
 		echo "Screenfetch"
 	fi
 	
+	if [[ $midori == "n" ]]; then
+		echo "Midori"
+	fi
+
+	if [[ $diolinux_paper == "n" ]]; then
+		echo "Diolinux Paper"
+	fi
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1692,6 +1733,8 @@ auto_config_ubuntu()
 		mesa
 		mutate
 		screenfetch
+		midori
+		diolinux_paper
 		;;
 		
 	#reiniciando	
