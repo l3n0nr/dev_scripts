@@ -50,7 +50,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.67.5.2
+#versão do script: 0.0.68.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -158,6 +158,7 @@
 #	[+] Diolinux_paper(Diolinux Paper Orange Modern)
 #	[+] Kdenlive
 #	[+] Openssh(Client-Servidor)
+#	[+] Bleachbit
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -660,6 +661,14 @@ openssh()
 	echo ""
 	echo "Deseja instalar o Openssh(Client-Servidor)? (s/n)"
 	read -p "??" openssh
+}
+
+bleachbit()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Bleachbit? (s/n)"
+	read -p "??" bleachbit
 }
 ########################################################################
 ######REINICIANDO
@@ -1492,7 +1501,11 @@ install_yes()
 			echo "ssh nomeusuario@iproteador"
 			echo "----------------------------------------------"
 		fi
-					
+		
+		if [[ $bleachbit == "s" ]]; then
+			#instalando bleachbit		
+			apt-get install bleachbit
+		fi			
 ######REINICIANDO
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then
@@ -1751,6 +1764,11 @@ install_no()
 	if [[ $openssh == "n" ]]; then
 		echo "Openssh"
 	fi
+	
+	if [[ $bleachbit == "n" ]]; then
+		echo "Bleachbit"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1850,6 +1868,7 @@ auto_config_ubuntu()
 		diolinux_paper
 		kdenlive
 		openssh
+		bleachbit
 		;;
 		
 	#reiniciando	
