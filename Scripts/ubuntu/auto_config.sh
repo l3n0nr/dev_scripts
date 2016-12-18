@@ -50,7 +50,7 @@
 #################################################################################
 #
 ###############################
-#versão do script: 0.0.69.5.2.3
+#versão do script: 0.0.70.5.2.3
 ###############################
 #
 #legenda: a.b.c.d.e.f
@@ -166,6 +166,7 @@
 #	[+] Bleachbit
 #	[+] Supertuxkart
 #	[+] Figlet
+#	[+] Cowsay
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -690,6 +691,13 @@ figlet()
 	read -p "??" figler
 }
 
+cowsay()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Cowsay? (s/n)"
+	read -p "??" cowsay
+}
 
 ########################################################################
 ######REINICIANDO
@@ -1538,6 +1546,11 @@ install_yes()
 			apt install figler -y		
 		fi
 		
+		if [[ $cowsay == "s" ]]; then
+			#instalando cowsay
+			apt install cowsay* -y
+		fi
+		
 ######REINICIANDO
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then
@@ -1809,6 +1822,10 @@ install_no()
 		echo "Figler"
 	fi
 	
+	if [[ $cowsay == "n" ]]; then
+		echo "Cowsay"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1911,6 +1928,7 @@ auto_config_ubuntu()
 		bleachbit
 		supertuxkart
 		figler
+		cowsay
 		;;
 		
 	#reiniciando	
