@@ -26,6 +26,7 @@
 #por "Dionatan Simioni"
 # fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
 # fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
+# fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
 #
 ################################################################################
 #
@@ -45,7 +46,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.64.5.2
+#versão do script: 0.0.65.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -148,6 +149,7 @@
 #	[+] Screenfetch
 #	[+] Midori
 #	[+] Diolinux_paper(Diolinux Paper Orange Modern)
+#	[+] Kdenlive
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -632,8 +634,16 @@ diolinux_paper()
 {
 	clear
 	echo ""
-	echo "Deseja instalado o Diolinux Paper Orange Modern? (s/n)"
+	echo "Deseja instalar o Diolinux Paper Orange Modern? (s/n)"
 	read -p "??" diolinux_paper
+}
+
+kdenlive()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Kdenlive? (s/n)"
+	read -p "??" kdenlive
 }
 
 ########################################################################
@@ -1387,6 +1397,17 @@ install_yes()
 			#instalando tema
 			apt install diolinux-paper-orange -y
 		fi
+		
+		if [[ $kdenlive == "s" ]]; then
+			#adicionando ppa
+		     	add-apt-repository ppa:sunab/kdenlive-release
+	
+			#atualizando sistema
+			apt-get update
+
+			#instalando kdenlive	
+			apt-get install kdenlive
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1638,6 +1659,10 @@ install_no()
 	if [[ $diolinux_paper == "n" ]]; then
 		echo "Diolinux Paper"
 	fi
+	
+	if [[ $kdenlive == "n" ]]; then
+		echo "Kdenlive"
+	fi
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1735,6 +1760,7 @@ auto_config_ubuntu()
 		screenfetch
 		midori
 		diolinux_paper
+		kdenlive
 		;;
 		
 	#reiniciando	
