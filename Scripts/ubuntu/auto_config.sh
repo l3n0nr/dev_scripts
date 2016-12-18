@@ -1984,7 +1984,7 @@ menu()
 				#distribuição não identificada	
 				else
 					echo "Disponivel para Fedora e Ubuntu!!!"
-					echo "Script incompativel(TEMPORARIAMENTE)"
+					echo "Script incompativel temporariamente"
 				fi
 				;;
 			n|N) echo
