@@ -49,11 +49,11 @@
 #										#
 #################################################################################
 #
-#############################
-#versão do script: 0.0.69.5.2
-#############################
+###############################
+#versão do script: 0.0.69.5.2.3
+###############################
 #
-#legenda: a.b.c.d.e
+#legenda: a.b.c.d.e.f
 # a = alpha[0], beta[1];
 #
 # b = erros na execução;	
@@ -69,6 +69,11 @@
 # e = pendencias
 #	GBA
 #	DeSmuME 
+#
+# f = desenvolver
+# 	-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
+#	-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
+#	-Verificar a arquitetura do sistema, para a instalação de determinados programas
 #
 ################################################################################
 #
@@ -163,10 +168,6 @@
 #	
 #Reinicialização
 #	[+]Reiniciar
-#
-#ESTRUTURAR/DESENVOLVER/APRIMORAR
-# 	-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
-#	-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
 #
 ################################################################################
 
