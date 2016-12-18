@@ -27,6 +27,7 @@
 # fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
 # fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
 # fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
+# fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
 #
 ################################################################################
 #
@@ -46,7 +47,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.65.5.2
+#versão do script: 0.0.66.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -80,6 +81,9 @@
 #	[+] Update
 #		[+] Update-Grud
 #	[+] Upgrade
+#	[+] Kernel 
+#		[+] Remove antigos
+#		[+] Atualiza novo
 #
 #CorrigindoErros
 #	[+] Swap
@@ -178,6 +182,14 @@ update()
 	read -p "??" update
 }
 
+kernel()
+{
+	clear
+	echo ""
+	echo "Deseja realizar atualizar o kernel do sistema (s/n)?"
+	read -p "??" kernel
+}
+
 upgrade()
 {
 	clear
@@ -228,14 +240,6 @@ pacotes_antigos()
 
 ########################################################################
 ######LIMPANDO A MÁQUINA
-kernel()
-{
-	clear
-	echo ""
-	echo "Deseja realizar uma limpeza nos seus antigos kernel's (s/n)?"
-	read -p "??" kernel
-}
-
 temporario()
 {
 	clear
@@ -812,8 +816,63 @@ install_yes()
 			clear
 			echo "Removendo os kernel's temporários do sistema"
 			echo "--------------------------------------------"
+
 			#removendo kernel's antigos
 			dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^]*\).*/\1/;/[0-9]/!d' | xargs apt-get -y purge
+			
+			#removendo arquivos
+			apt autoremove -y
+			
+			echo "Instalando kernel's novos"
+			echo "--------------------------------------------"
+			
+			#instalando lynx
+			apt install lynx -y
+			
+			#Baixa a lista de kernel e atributos
+			list=$(lynx --dump http://kernel.ubuntu.com/~kernel-ppa/mainline/ | awk '/http/{print $2}')
+			AddressLastVersion=$( echo "${list}"  | grep -v rc | tail -n 1)
+			LastKernelAvaliable=$(echo $AddressLastVersion | cut -d "/" -f 6 | cut -d "-" -f1 | tr -d v )
+		
+			if [ -z $(echo $LastKernelAvaliable | cut -d "." -f3) ]  ; then LastKernelAvaliable=${LastKernelAvaliable}.0; fi  
+
+				#kernel instalado
+				LastKernelInstalled=$(ls /boot/ | grep img | cut -d "-" -f2 | sort -V | cut -d "." -f1,2,3 | tail -n 1)
+
+				#tipo do processador
+				arch=`uname -m`
+				if  [ $arch = i686 ] || [ $arch = i386 ]; then 
+					myarch="i386" 
+				elif [ $arch = "x86_64" ]; then
+					myarch="amd64"
+				else 
+					echo "Não foram encontrados pacotes para o seu processador :("
+				exit 0
+			fi
+
+			#comparação
+			if [ $LastKernelInstalled = $LastKernelAvaliable ]; then
+				echo
+				echo
+				echo "Seu Kernel" $LastKernelInstalled  "e' a versão mais recente disponível."
+				echo "Até mais! :)"
+				echo
+				echo
+				exit 0		
+			else
+				echo
+				echo "Seu Kernel e' o" $LastKernelInstalled "está disponível" $LastKernelAvaliable
+				echo
+				echo "Baixando o novo Kernel"
+			        DownloadFolder=/tmp/kernel_$LastKernelAvaliable; mkdir -p $DownloadFolder; cd $DownloadFolder
+			        wget $(lynx -dump -listonly $AddressLastVersion | awk '/http/{print $2}' | egrep 'all.deb|generic(.){1,}'$myarch'.deb')
+			        echo
+	        		echo "...e vamos instalar"
+			        echo
+			        sudo dpkg -i *.deb
+			        echo
+			        echo "Para usar o novo Kernel vocẽ deve reiniciar o computador"
+			fi
 		fi
 		
 		#removendo arquivos temporarios
@@ -1692,6 +1751,7 @@ auto_config_ubuntu()
 	1) echo
 		update
 		upgrade	
+		kernel
 		;;
 		
 	#corrigindo erros
@@ -1703,7 +1763,6 @@ auto_config_ubuntu()
 	
 	#limpando a máquina
 	3) echo
-		kernel
 		temporario
 		obsoleto
 		lixeira
