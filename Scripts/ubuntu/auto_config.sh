@@ -1485,6 +1485,12 @@ install_yes()
 
 			#instalando modo cliente	
 			apt-get install openssh-client
+			
+			#mostrando ao usuario como acessar
+			echo "----------------------------------------------"
+			echo "Você pode utilizar o acesso remoto através de:"
+			echo "ssh nomeusuario@iproteador"
+			echo "----------------------------------------------"
 		fi
 					
 ######REINICIANDO
@@ -1916,6 +1922,7 @@ menu()
 					
 				#distribuição não identificada	
 				else
+					echo "Disponivel para Fedora e Ubuntu!!!"
 					echo "Script incompativel(TEMPORARIAMENTE)"
 				fi
 				;;
