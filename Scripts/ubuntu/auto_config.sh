@@ -50,7 +50,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.68.5.2
+#versão do script: 0.0.69.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -159,6 +159,7 @@
 #	[+] Kdenlive
 #	[+] Openssh(Client-Servidor)
 #	[+] Bleachbit
+#	[+] Supertuxkart
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -670,6 +671,16 @@ bleachbit()
 	echo "Deseja instalar o Bleachbit? (s/n)"
 	read -p "??" bleachbit
 }
+
+supertuxkart()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Supertuxkart? (s/n)"
+	read -p "??" supertuxkart
+}
+
+
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -1505,7 +1516,12 @@ install_yes()
 		if [[ $bleachbit == "s" ]]; then
 			#instalando bleachbit		
 			apt-get install bleachbit
-		fi			
+		fi	
+		
+		if [[ $supertuxkart == "s" ]]; then
+			#instalando supertuxkart				
+			apt-get install supertuxkart		
+		fi	
 ######REINICIANDO
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then
@@ -1769,6 +1785,10 @@ install_no()
 		echo "Bleachbit"
 	fi
 	
+	if [[ $supertuxkart == "s" ]]; then
+		echo "Supertuxkart"
+	fi
+	
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1869,6 +1889,7 @@ auto_config_ubuntu()
 		kdenlive
 		openssh
 		bleachbit
+		supertuxkart
 		;;
 		
 	#reiniciando	
