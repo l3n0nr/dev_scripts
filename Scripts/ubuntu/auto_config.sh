@@ -29,6 +29,9 @@
 # fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
 # fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
 #
+#por "Ricardo Ferreira"
+# fonte: <http://www.linuxdescomplicado.com.br/2014/11/saiba-como-acessar-uma-maquina-ubuntu.html>
+#
 ################################################################################
 #
 ###################
@@ -47,7 +50,7 @@
 #################################################################################
 #
 #############################
-#versão do script: 0.0.66.5.2
+#versão do script: 0.0.67.5.2
 #############################
 #
 #legenda: a.b.c.d.e
@@ -154,6 +157,7 @@
 #	[+] Midori
 #	[+] Diolinux_paper(Diolinux Paper Orange Modern)
 #	[+] Kdenlive
+#	[+] Openssh(Client-Servidor)
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -650,6 +654,13 @@ kdenlive()
 	read -p "??" kdenlive
 }
 
+openssh()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Openssh(Client-Servidor)? (s/n)"
+	read -p "??" openssh
+}
 ########################################################################
 ######REINICIANDO
 reinicia()
@@ -1467,6 +1478,14 @@ install_yes()
 			#instalando kdenlive	
 			apt-get install kdenlive -y
 		fi
+		
+		if [[ $openssh == "s" ]]; then
+			#instalando modo servidor
+			apt-get install openssh-server
+
+			#instalando modo cliente	
+			apt-get install openssh-client
+		fi
 					
 ######REINICIANDO
 	#reiniciando a maquina
@@ -1722,6 +1741,10 @@ install_no()
 	if [[ $kdenlive == "n" ]]; then
 		echo "Kdenlive"
 	fi
+	
+	if [[ $openssh == "n" ]]; then
+		echo "Openssh"
+	fi
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
 		echo "Máquina não será reiniciada agora!"
@@ -1820,6 +1843,7 @@ auto_config_ubuntu()
 		midori
 		diolinux_paper
 		kdenlive
+		openssh
 		;;
 		
 	#reiniciando	
