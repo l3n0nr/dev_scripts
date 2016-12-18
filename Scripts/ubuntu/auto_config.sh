@@ -165,6 +165,7 @@
 #	[+] Openssh(Client-Servidor)
 #	[+] Bleachbit
 #	[+] Supertuxkart
+#	[+] Figlet
 #	
 #Reinicialização
 #	[+]Reiniciar
@@ -679,6 +680,14 @@ supertuxkart()
 	echo ""
 	echo "Deseja instalar o Supertuxkart? (s/n)"
 	read -p "??" supertuxkart
+}
+
+figlet()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Figler? (s/n)"
+	read -p "??" figler
 }
 
 
@@ -1502,10 +1511,10 @@ install_yes()
 		
 		if [[ $openssh == "s" ]]; then
 			#instalando modo servidor
-			apt-get install openssh-server
+			apt-get install openssh-server -y
 
 			#instalando modo cliente	
-			apt-get install openssh-client
+			apt-get install openssh-client -y
 			
 			#mostrando ao usuario como acessar
 			echo "----------------------------------------------"
@@ -1516,13 +1525,19 @@ install_yes()
 		
 		if [[ $bleachbit == "s" ]]; then
 			#instalando bleachbit		
-			apt-get install bleachbit
+			apt-get install bleachbit -y
 		fi	
 		
 		if [[ $supertuxkart == "s" ]]; then
 			#instalando supertuxkart				
-			apt-get install supertuxkart		
+			apt-get install supertuxkart -y	
 		fi	
+		
+		if [[ $figler == "s" ]]; then
+			#instalando o figler
+			apt install figler -y		
+		fi
+		
 ######REINICIANDO
 	#reiniciando a maquina
 	if [[ $reinicia == "s" ]]; then
@@ -1786,8 +1801,12 @@ install_no()
 		echo "Bleachbit"
 	fi
 	
-	if [[ $supertuxkart == "s" ]]; then
+	if [[ $supertuxkart == "n" ]]; then
 		echo "Supertuxkart"
+	fi
+	
+	if [[ $figler == "n" ]]; then
+		echo "Figler"
 	fi
 	
 ######REINICIANDO
@@ -1891,6 +1910,7 @@ auto_config_ubuntu()
 		openssh
 		bleachbit
 		supertuxkart
+		figler
 		;;
 		
 	#reiniciando	
