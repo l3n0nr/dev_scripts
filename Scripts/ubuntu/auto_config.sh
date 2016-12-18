@@ -1400,13 +1400,13 @@ install_yes()
 		
 		if [[ $kdenlive == "s" ]]; then
 			#adicionando ppa
-		     	add-apt-repository ppa:sunab/kdenlive-release
+		     	add-apt-repository ppa:sunab/kdenlive-release -y
 	
 			#atualizando sistema
 			apt-get update
 
 			#instalando kdenlive	
-			apt-get install kdenlive
+			apt-get install kdenlive -y
 		fi
 					
 ######REINICIANDO
