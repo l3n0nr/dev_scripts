@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.72.5.2.3 #
+# versão do script: 0.0.73.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -166,6 +166,7 @@
 #	[+] Supertuxkart
 #	[+] Figlet
 #	[+] Cowsay
+#	[+] Chromium
 #
 ################################################################################	
 # Reinicialização
@@ -697,6 +698,14 @@ cowsay()
 	echo ""
 	echo "Deseja instalar o Cowsay? (s/n)"
 	read -p "??" cowsay
+}
+
+chromium()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Chromium? (s/n)"
+	read -p "??" chromium
 }
 
 ################################################################################
@@ -1551,6 +1560,11 @@ install_yes()
 			#instalando cowsay
 			apt install cowsay* -y
 		fi
+		
+		if [[ $chromium == "s" ]]; then
+			#instalando chromium		
+			apt-get install chromium-browser* -y
+		fi
 
 ################################################################################		
 ######REINICIANDO
@@ -1830,6 +1844,10 @@ install_no()
 		echo "Cowsay"
 	fi
 	
+	if [[ $chromium == "n" ]]; then
+		echo "Chromium"
+	fi
+	
 ################################################################################		
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1935,6 +1953,7 @@ auto_config_ubuntu()
 		supertuxkart
 		figler
 		cowsay
+		chromium
 		;;
 		
 	#reiniciando	
