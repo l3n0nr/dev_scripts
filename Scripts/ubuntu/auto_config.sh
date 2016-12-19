@@ -1,45 +1,45 @@
 #!/bin/bash
 ################################################################################
 #
-###################
-#FONTES DE PESQUISA
-###################
+######################
+# FONTES DE PESQUISA #
+######################
 #
-#por oliveiradeflavio(Flávio Oliveira)
-# contato: <github.com/oliveiradeflavio/scripts-linux>
+# por oliveiradeflavio(Flávio Oliveira)
+# 	contato: <github.com/oliveiradeflavio/scripts-linux>
 #
-#por gmanson(Gabriel Manson)
-# contato: <github.com/gmasson/welcome-debian>
+# por gmanson(Gabriel Manson)
+# 	contato: <github.com/gmasson/welcome-debian>
 #
-#por Lucas Alves Santos
-# fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
+# por Lucas Alves Santos
+# 	fonte: <https://www.vivaolinux.com.br/script/Instalar-Tor-Browser/>
 #
-#por Edivaldo Brito
-# fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
+# por Edivaldo Brito
+# 	fonte: <http://www.edivaldobrito.com.br/instalando-ide-java-netbeans-8-0-ubuntu-e-derivados>
 #
-#por Fabiano de Oliveira e Souza
-# fonte: <https://www.vivaolinux.com.br/script/Mantendo-hora-do-servidor-atualizada-com-NTP>
+# por Fabiano de Oliveira e Souza
+# 	fonte: <https://www.vivaolinux.com.br/script/Mantendo-hora-do-servidor-atualizada-com-NTP>
 #
-#por Lucas Novo Silva
-# fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
+# por Lucas Novo Silva
+# 	fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
-#por "Dionatan Simioni"
-# fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
-# fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
-# fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
-# fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
+# por "Dionatan Simioni"
+# 	fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
+# 	fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
+# 	fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
+# 	fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
 #
-#por "Ricardo Ferreira"
-# fonte: <http://www.linuxdescomplicado.com.br/2014/11/saiba-como-acessar-uma-maquina-ubuntu.html>
+# por "Ricardo Ferreira"
+# 	fonte: <http://www.linuxdescomplicado.com.br/2014/11/saiba-como-acessar-uma-maquina-ubuntu.html>
 #
 ################################################################################
 #
-###################
-#DESENVOLVIDO POR
-###################
+####################
+# DESENVOLVIDO POR #
+####################
 #
-#por lenonr(Lenon Ricardo) 
-# contato: <lenonrmsouza@gmail.com>
+# por lenonr(Lenon Ricardo) 
+# 	contato: <lenonrmsouza@gmail.com>
 #
 #################################################################################
 #										#
@@ -49,43 +49,38 @@
 #										#
 #################################################################################
 #
-###############################
-#versão do script: 0.0.70.5.2.3
-###############################
+##################################
+# versão do script: 0.0.70.5.2.3 #
+##################################
 #
-#legenda: a.b.c.d.e.f
-# a = alpha[0], beta[1];
-#
-# b = erros na execução;	
-#
-# c = interações com o script + versões funcionando;
-#
-# d = correções necessárias;
-#	netbeans
-#	android
-#	vga
-#	mutate
-#
-# e = pendencias
-#	GBA
-#	DeSmuME 
-#
-# f = desenvolver
-# 	-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
-#	-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
-#	-Verificar a arquitetura do sistema, para a instalação de determinados programas
+# legenda: a.b.c.d.e.f
+# 	a = alpha[0], beta[1];
+# 	b = erros na execução;	
+# 	c = interações com o script + versões funcionando;
+# 	d = correções necessárias;
+#		netbeans
+#		android
+#		vga
+#		mutate
+# 	e = pendencias
+#		GBA
+#		DeSmuME 
+# 	f = desenvolver
+# 		-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
+#		-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
+#		-Verificar a arquitetura do sistema, para a instalação de determinados programas
 #
 ################################################################################
 #
-#Script testado em
+# Script testado em
 #	-Xubuntu 16.04
 #
-#Compativel com
+# Compativel com
 #	-Ubuntu
 #	-Fedora
 #
-#FUNCOES
-#Atualização
+# FUNCOES
+# Atualização
 #	[+] Update
 #		[+] Update-Grud
 #	[+] Upgrade
@@ -93,12 +88,12 @@
 #		[+] Remove antigos
 #		[+] Atualiza novo
 #
-#CorrigindoErros
+# CorrigindoErros
 #	[+] Swap
 #	[+] Prelink, Preload, Deborphan
 #	[+] Pacotes com problemas
 #
-#Limpeza
+# Limpeza
 #	[+] Lixeira
 #	[+] Firefox
 #		[+] Cache
@@ -112,7 +107,7 @@
 #	[+] Removendo arquivos (.bak, ~, tmp) pasta Home
 #	[+] Excluindo arquivos inuteis do cache do gerenciador de pacotes
 #
-#Instalação
+# Instalação
 #	[+] Firefox
 #	[+] Steam
 #	[+] Xampp
@@ -168,7 +163,7 @@
 #	[+] Figlet
 #	[+] Cowsay
 #	
-#Reinicialização
+# Reinicialização
 #	[+]Reiniciar
 #
 ################################################################################
