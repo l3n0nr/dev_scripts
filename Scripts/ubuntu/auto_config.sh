@@ -726,163 +726,140 @@ install_yes()
 	echo "----------------------------------------------"
 
 	######CORREÇÃO SISTEMA
-            #atualizando os repositórios
-            if [[ $update == "s" ]]; then
-                    if [ "$distro" == "Ubuntu" ]; then
-                            clear
-                            echo "Atualizando os repositórios na máquina"
-                            echo 
-"----------------------------------------------------------------------"
-                            apt update
-                            update-grub
-                            
-                    elif [ "$distro" == "Fedora" ]; then
-                            clear
-                            echo "Atualizando os repositórios na máquina"
-                            echo 
-"----------------------------------------------------------------------"
-                            dnf distro-sync 
-                    fi
-            fi
-            
-            #atualizando os programas
-            if [[ $upgrade == "s" ]]; then
-                    if [ "$distro" == "Ubuntu" ]; then
-                            clear
-                            echo "Atualizando os programas da máquina"
-                            echo 
-"----------------------------------------------------------------------"
-                            apt upgrade -y
-                            apt-get dist-upgrade
-                    elif [ "$distro" == "Fedora" ]; then
-                            clear
-                            echo "Atualizando os programas da máquina"
-                            echo 
-"----------------------------------------------------------------------"
-                            dnf update -y 
-                    fi
-            fi
-    
-            #corrigindo possiveis erros no sistema
-            if [[ $corrigeerros == "s" ]]; then
-                    clear
-                    echo "Corrigindo possiveis erros no Sistema"
-                    echo 
-"----------------------------------------------------------------------"
-                    apt-get check -y &&
-                    dpkg --configure -a -y &&
-                    apt-get -f install &&
-                    apt-get -f remove -y &&
-                    apt-get autoremove -y &&
-                    apt-get clean -y &&
-                    apt-get install auto-apt -y &&
-                    auto-apt update-local -y &&
-                    auto-apt update -y &&
-                    auto-apt updatedb -y
-            fi
-            
-            #configurando a swap
-            if [[ $swap == "s" ]]; then
-                    clear
-                    echo "Configurando a Swap"
-                    echo "-------------------"
-                    memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
-                    memocache=$(grep "vm.vfs_cache_pressure=60" 
-/etc/sysctl.conf)
-                    background=$(grep "vm.dirty_background_ratio=15" 
-/etc/sysctl.conf)
-                    ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
-                    clear
-                    echo "Diminuindo a Prioridade de uso da memória SWAP"
-                    echo
-                    if [[ $memoswap == "vm.swappiness=10" ]]; then
-                            echo "Otimizando..."
-                            /bin/su -c "echo 'vm.swappiness=10' >> 
-/etc/sysctl.conf"
-                    elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
-                            echo "Otimizando..."
-                            /bin/su -c "echo 'vm.vfs_cache_pressure=60' >> 
-/etc/sysctl.conf"
-                    elif [[ $background == "vm.dirty_background_ratio=15" ]]; 
-then
-                            echo "Otimizando..."
-                            /bin/su -c "echo 'vm.dirty_background_ratio=15' >> 
-/etc/sysctl.conf"
-                    elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
-                            echo "Otimizando..."
-                            /bin/su -c "echo 'vm.dirty_ratio=25' >> 
-/etc/sysctl.conf"
-                    else
-                            echo "Não há nada para ser otimizado"
-                            echo "Isso porque já foi otimizado anteriormente!"
-                    fi
-            fi
-            
-            #otimizando sistema
-            if [[ $prelink_preload_deborphan == "s" ]]; then		
-                    clear
-                    echo
-                    echo "Instalando Prelink, Preload e Deborphan"
-                    #prelink =
-                    #preload =
-                    #deborphan = remove pacotes obsoletos do sistema, 
-principalmente após as atualizações de programas
-                    echo "-------------------"
-                    sudo apt install prelink preload -y 1>/dev/null 
-2>/dev/stdout
-                    sudo apt-get install deborphan -y
-            
-                    echo "Configurando Deborphan..."
-                    sudo deborphan | xargs sudo apt-get -y remove --purge &&
-                    sudo deborphan --guess-data | xargs sudo apt-get -y remove 
---purge
-                    
-                    #configurando o prelink e o preload
-                    echo ""
-                    echo "Configurando Prelink e Preload..."
-                    echo "-------------------"
-                            memfree=$(grep "memfree = 50" /etc/preload.conf)
-                            memcached=$(grep "memcached = 0" /etc/preload.conf)
-                            processes=$(grep "processes = 30" /etc/preload.conf)
-                            prelink=$(grep "PRELINKING=unknown" 
-/etc/default/prelink)
-                            
-################################################################################
-#########################################
-#			if which -a prelink 1>/dev/null 2>/dev/stdout && which 
--a preload 1>/dev/null 2>/dev/stdout; then
+		#atualizando os repositórios
+		if [[ $update == "s" ]]; then
+			if [ "$distro" == "Ubuntu" ]; then
+				clear
+				echo "Atualizando os repositórios na máquina"
+				echo "----------------------------------------------------------------------"
+				apt update
+				update-grub
+				
+			elif [ "$distro" == "Fedora" ]; then
+				clear
+				echo "Atualizando os repositórios na máquina"
+				echo "----------------------------------------------------------------------"
+				dnf distro-sync 
+			fi
+		fi
+		
+		#atualizando os programas
+		if [[ $upgrade == "s" ]]; then
+			if [ "$distro" == "Ubuntu" ]; then
+				clear
+				echo "Atualizando os programas da máquina"
+				echo "----------------------------------------------------------------------"
+				apt upgrade -y
+				apt-get dist-upgrade
+			elif [ "$distro" == "Fedora" ]; then
+				clear
+				echo "Atualizando os programas da máquina"
+				echo "----------------------------------------------------------------------"
+				dnf update -y 
+			fi
+		fi
+	
+		#corrigindo possiveis erros no sistema
+		if [[ $corrigeerros == "s" ]]; then
+			clear
+			echo "Corrigindo possiveis erros no Sistema"
+			echo "----------------------------------------------------------------------"
+			apt-get check -y &&
+			dpkg --configure -a -y &&
+			apt-get -f install &&
+			apt-get -f remove -y &&
+			apt-get autoremove -y &&
+			apt-get clean -y &&
+			apt-get install auto-apt -y &&
+			auto-apt update-local -y &&
+			auto-apt update -y &&
+			auto-apt updatedb -y
+		fi
+		
+		#configurando a swap
+		if [[ $swap == "s" ]]; then
+			clear
+			echo "Configurando a Swap"
+			echo "-------------------"
+			memoswap=$(grep "vm.swappiness=10" /etc/sysctl.conf)
+			memocache=$(grep "vm.vfs_cache_pressure=60" /etc/sysctl.conf)
+			background=$(grep "vm.dirty_background_ratio=15" /etc/sysctl.conf)
+			ratio=$(grep "vm.dirty_ratio=25" /etc/sysctl.conf)
+			clear
+			echo "Diminuindo a Prioridade de uso da memória SWAP"
+			echo
+			if [[ $memoswap == "vm.swappiness=10" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.swappiness=10' >> /etc/sysctl.conf"
+			elif [[ $memocache == "vm.vfs_cache_pressure=60" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.vfs_cache_pressure=60' >> /etc/sysctl.conf"
+			elif [[ $background == "vm.dirty_background_ratio=15" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.dirty_background_ratio=15' >> /etc/sysctl.conf"
+			elif [[ $ratio == "vm.dirty_ratio=25" ]]; then
+				echo "Otimizando..."
+				/bin/su -c "echo 'vm.dirty_ratio=25' >> /etc/sysctl.conf"
+			else
+				echo "Não há nada para ser otimizado"
+				echo "Isso porque já foi otimizado anteriormente!"
+			fi
+		fi
+		
+		#otimizando sistema
+		if [[ $prelink_preload_deborphan == "s" ]]; then		
+			clear
+			echo
+			echo "Instalando Prelink, Preload e Deborphan"
+			#prelink =
+			#preload =
+			#deborphan = remove pacotes obsoletos do sistema, principalmente após as atualizações de programas
+			echo "-------------------"
+			sudo apt install prelink preload -y 1>/dev/null 2>/dev/stdout
+			sudo apt-get install deborphan -y
+		
+			echo "Configurando Deborphan..."
+			sudo deborphan | xargs sudo apt-get -y remove --purge &&
+			sudo deborphan --guess-data | xargs sudo apt-get -y remove --purge
+			
+			#configurando o prelink e o preload
+			echo ""
+			echo "Configurando Prelink e Preload..."
+			echo "-------------------"
+				memfree=$(grep "memfree = 50" /etc/preload.conf)
+				memcached=$(grep "memcached = 0" /etc/preload.conf)
+				processes=$(grep "processes = 30" /etc/preload.conf)
+				prelink=$(grep "PRELINKING=unknown" /etc/default/prelink)
+				
+#########################################################################################################################
+#			if which -a prelink 1>/dev/null 2>/dev/stdout && which -a preload 1>/dev/null 2>/dev/stdout; then
 #				echo
 #				echo "Configurando o PRELOAD"
 #				if [[ $memfree == "memfree = 90" ]];then
 #					echo "configurando..."
-#					sed -i 's/memfree = 50/memfree = 90/g' 
-/etc/preload.conf
+#					sed -i 's/memfree = 50/memfree = 90/g' /etc/preload.conf
 #			
 #				elif [[ $memcached == "memcached = 35" ]]; then
 #					echo "configurando..."
-#					sed -i 's/memcached = 0/memcached = 
-35/g' /etc/preload.conf
+#					sed -i 's/memcached = 0/memcached = 35/g' /etc/preload.conf
 #
 #				elif [[ $processes == "processes = 50" ]]; then
 #					echo "configurando..."
-#					sed -i 's/processes = 30/processes = 
-50/g' /etc/preload.conf	
+#					sed -i 's/processes = 30/processes = 50/g' /etc/preload.conf	
 #				else
 #					echo "Não há nada para ser configurado"
-#					echo "Isso porque já foi configurado 
-anteriomente"
+#					echo "Isso porque já foi configurado anteriomente"
 #			fi		
-################################################################################
-#########################################
-                                            
-                    echo "Ativando o PRELINK"
-                    if [[ $prelink == "PRELINKING=unknown" ]]; then
-                            echo "adicionando ..."
-                            sed -i 's/unknown/yes/g' /etc/default/prelink	
-                    else
-                            echo "Otimização já adicionada anteriormente."
-                    fi
-            fi
+#########################################################################################################################
+						
+			echo "Ativando o PRELINK"
+			if [[ $prelink == "PRELINKING=unknown" ]]; then
+				echo "adicionando ..."
+				sed -i 's/unknown/yes/g' /etc/default/prelink	
+			else
+				echo "Otimização já adicionada anteriormente."
+			fi
+		fi
 		
 		#corrigindo pacotes quebrados
 		if [[ $pacotesquebrados == "s" ]]; then
@@ -2070,5 +2047,6 @@ menu()
 }
 
 ################################################################################
+#INICIAND SCRIPT
 menu
 ################################################################################
