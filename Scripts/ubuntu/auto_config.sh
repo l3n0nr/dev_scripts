@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.73.5.2.3 #
+# versão do script: 0.0.74.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -167,6 +167,7 @@
 #	[+] Figlet
 #	[+] Cowsay
 #	[+] Chromium
+#       [+] Synapse
 #
 ################################################################################	
 # Reinicialização
@@ -706,6 +707,14 @@ chromium()
 	echo ""
 	echo "Deseja instalar o Chromium? (s/n)"
 	read -p "??" chromium
+}
+
+synapse()
+{
+        clear
+        echo ""
+        echo "Deseja instalar o Synapse? (s/n)"
+        read -p "??" synapse
 }
 
 ################################################################################
@@ -1565,6 +1574,11 @@ install_yes()
 			#instalando chromium		
 			apt-get install chromium-browser* -y
 		fi
+		
+		if [[ $synapse == "s" ]]; then
+			#instalando o synapse
+			apt-get install synapse* -y
+		fi
 
 ################################################################################		
 ######REINICIANDO
@@ -1848,6 +1862,11 @@ install_no()
 		echo "Chromium"
 	fi
 	
+	if [[ $synapse == "n" ]]; then
+                echo "Synapse"
+	fi
+	
+	
 ################################################################################		
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1954,6 +1973,7 @@ auto_config_ubuntu()
 		figler
 		cowsay
 		chromium
+		synapse
 		;;
 		
 	#reiniciando	
