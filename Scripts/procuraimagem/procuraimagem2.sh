@@ -3,15 +3,18 @@
 	#clear
 
 	#capturando caminho da imagem
-	#xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
+xfconf-query -c xfce4-desktop -p 
+/backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
 
 	#extraindo caminho base
-	#cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Papeis de Parede/Belezas Naturais/wallhaven-;;g" > .base.txt 
+	cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Papeis de 
+Parede/Belezas Naturais/wallhaven-;;g" > .base.txt 
 
 	#extraindo imagem
-	#cat .base.txt | sed -e "s;.jpg;;g" > .numero.txt 
-	#url=`cat .numero.txt` 
+	cat .base.txt | sed -e "s;.jpg;;g" > .numero.txt 
+	url=`cat .numero.txt` 
 
+	echo $url
 	#echo "ABRINDO IMAGEM NO WALLHAVEN"
 	#firefox https://alpha.wallhaven.cc/wallpaper/$url
 
@@ -33,11 +36,12 @@ clear
 #descobrindo imagem original
 #url=`cat .numero.txt` 
 
-caminho=`xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image | sed -e "s;/home/lenonr/MEGA/Imagens/;;g"`
-echo $caminho
-
-removejpg=`cat $caminho | sed -e "s;/*.jpg;;g"``
-echo $removejpg
+# caminho=`xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image | sed -e "s;/home/lenonr/MEGA/Pictures/;;g"`
+# echo $caminho
+# 
+# removejpg=`$caminho`
+# # | sed -e "s;/*.jpg;;g"
+# echo $removejpg
 
 
 #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .original.txt
