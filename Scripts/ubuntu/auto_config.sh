@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.79.5.2.3 #
+# versão do script: 0.0.79.5.2.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -68,6 +68,7 @@
 # 		-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #		-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
 #		-Verificar a arquitetura do sistema, para a instalação de determinados programas
+#               -Criar um menu de categorias para facilitar a instalação dos programas
 #
 ################################################################################
 #
@@ -760,6 +761,13 @@ audacity()
     echo ""
     echo "Deseja instalar o Audacity? (s/n)"
     read -p "??" audacity
+}
+
+cheese()
+{
+    clear
+    echo ""
+    echo "Deseja instalar o Cheese"
 }
 
 ################################################################################
@@ -1652,6 +1660,11 @@ install_yes()
                     #instalando o audacity
                     apt-get install audacity* -y
             fi
+            
+            if [[ $cheese == "s" ]]; then
+                    #instalando o audacity
+                    apt-get install cheese* -y
+            fi
                     
 ################################################################################		
 ######REINICIANDO
@@ -1959,6 +1972,10 @@ install_no()
         echo "Audacity"
     fi
     
+    if [[ $cheese == "n" ]]; then
+        echo "Cheese"
+    fi
+    
 ################################################################################		
 ######REINICIANDO
     if [[ $reinicia == "n" ]]; then
@@ -2071,6 +2088,7 @@ auto_config_ubuntu()
             inkscape
             blender
             audacity
+            cheese
             ;;
             
     #reiniciando	
