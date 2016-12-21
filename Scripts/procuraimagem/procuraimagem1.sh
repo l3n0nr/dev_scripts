@@ -1,6 +1,7 @@
 	#limpando a tela
 	clear
 	
+	#criandos arquivos para manipulação
 	touch .caminho.txt .base.txt .numero.txt
 
 	#capturando caminho da imagem
@@ -15,3 +16,6 @@
 
 	#echo "ABRINDO IMAGEM NO WALLHAVEN"
  	firefox https://alpha.wallhaven.cc/wallpaper/$url
+ 	
+ 	#removendo arquivos criados
+ 	rm .caminho.txt .base.txt .numero.txt

@@ -1,25 +1,25 @@
 #FUNCIONANDO
-	#limpando a tela
-	#clear
+################################################################################
+    #limpando a tela
+    #clear
 
-	#capturando caminho da imagem
-xfconf-query -c xfce4-desktop -p 
-/backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
+    #capturando caminho da imagem
+#   xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
 
-	#extraindo caminho base
-	cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Papeis de 
-Parede/Belezas Naturais/wallhaven-;;g" > .base.txt 
+    #extraindo caminho base
+#   cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .base.txt 
 
-	#extraindo imagem
-	cat .base.txt | sed -e "s;.jpg;;g" > .numero.txt 
-	url=`cat .numero.txt` 
+    #extraindo imagem
+    #cat .base.txt | sed -e "s;.jpg;;g" > .numero.txt 
+    #url=`cat .numero.txt` 
 
-	echo $url
-	#echo "ABRINDO IMAGEM NO WALLHAVEN"
-	#firefox https://alpha.wallhaven.cc/wallpaper/$url
+    #echo $url
+    #echo "ABRINDO IMAGEM NO WALLHAVEN"
+    #firefox https://alpha.wallhaven.cc/wallpaper/$url
+################################################################################
 
-#FIMFUNCIONANDO
-
+#LIXO
+################################################################################
 #limpando a tela
 clear
 
@@ -36,8 +36,6 @@ clear
 #descobrindo imagem original
 #url=`cat .numero.txt` 
 
-# caminho=`xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image | sed -e "s;/home/lenonr/MEGA/Pictures/;;g"`
-# echo $caminho
 # 
 # removejpg=`$caminho`
 # # | sed -e "s;/*.jpg;;g"
@@ -65,3 +63,16 @@ clear
 
 #removendo arquivos
 #rm -r .original.txt .removecaminho.txt .removewallhaven.txt .removeimagem.txt
+
+################################################################################
+
+#REALIZANDO LEITURA ATRAVES DE VARIAVEIS
+################################################################################
+#limpando a tela
+clear
+
+#capturando caminho completo imagem
+caminho=`xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image`
+
+#removendo raiz
+echo $caminho | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures;;g"
