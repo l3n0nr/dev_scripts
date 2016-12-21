@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.78.5.2.3 #
+# versão do script: 0.0.79.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -172,6 +172,7 @@
 #	[+] Kate
 #       [+] Inkscape
 #       [+] Blender
+#       [+] Audacity
 #
 ################################################################################	
 # Reinicialização
@@ -751,6 +752,14 @@ blender()
     echo ""
     echo "Deseja instalar o Blender? (s/n)"
     read -p "??" blender
+}
+
+audacity()
+{
+    clear
+    echo ""
+    echo "Deseja instalar o Audacity? (s/n)"
+    read -p "??" audacity
 }
 
 ################################################################################
@@ -1634,11 +1643,16 @@ install_yes()
                     apt-get install inkscape* -y                
             fi
             
-            if [[ $blender == "s" ]] then
+            if [[ $blender == "s" ]]; then
                     #instalando o blender
                     apt-get install blender* -y
             fi
-
+            
+            if [[ $audacity == "s" ]]; then
+                    #instalando o audacity
+                    apt-get install audacity* -y
+            fi
+                    
 ################################################################################		
 ######REINICIANDO
     #reiniciando a maquina
@@ -1933,12 +1947,16 @@ install_no()
             echo "Kate"
     fi
     
-    if [[ $inkscape == "n" ]] then
+    if [[ $inkscape == "n" ]]; then
         echo "Inkscape"
     fi
     
-    if [[ $blender == "n" ]] then
+    if [[ $blender == "n" ]]; then
         echo "Blender"
+    fi
+    
+    if [[ $audacity == "n" ]]; then
+        echo "Audacity"
     fi
     
 ################################################################################		
@@ -2052,6 +2070,7 @@ auto_config_ubuntu()
             kate
             inkscape
             blender
+            audacity
             ;;
             
     #reiniciando	
