@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.76.5.2.3 #
+# versão do script: 0.0.77.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -1089,7 +1089,7 @@ install_yes()
 			apt update -y
 
 			#instalando o spotify
-			apt-get install spotify-client -y
+			apt install spotify-client -y
 		fi
 
 		if [[ $mac == "s" ]]; then
@@ -1123,7 +1123,7 @@ install_yes()
 			echo "----------------------------------------------------------------------"
 
 			#instalando o gimp
-			apt-get install gimp* -y
+			apt install gimp* -y
 		fi
 
 		if [[ $xfce == "s" ]]; then
@@ -1132,7 +1132,7 @@ install_yes()
 				echo "Instalando Adicionais do XFCE4"
 				echo "----------------------------------------------------------------------"
 				#instalando componentes do XFCE
-				apt-get install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin smartmontools -y -f -q
+				apt install xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-eyes-plugin xfce4-fsguard-plugin xfce4-genmon-plugin xfce4-indicator-plugin xfce4-linelight-plugin xfce4-mailwatch-plugin xfce4-mpc-plugin xfce4-notes-plugin xfce4-places-plugin xfce4-netload-plugin xfce4-quicklauncher-plugin xfce4-radio-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-wmdock-plugin xfce4-xkb-plugin xfce4-mount-plugin smartmontools -y -f -q
 
 				#dando permissão de leitura, para verificar temperatura do HDD
 				chmod u+s /usr/sbin/hddtemp
@@ -1157,7 +1157,7 @@ install_yes()
 			add-apt-repository ppa:ubuntu-wine/ppa -y
 
 			#instalando o wine
-			apt-get install wine* -y
+			apt install wine* -y
 		fi
 
 		if [[ $playonlinux == "s" ]]; then
@@ -1166,7 +1166,7 @@ install_yes()
 			echo "----------------------------------------------------------------------"
 
 			#instalando o playonlinux
-			apt-get install playonlinux* -y
+			apt install playonlinux* -y
 		fi
 
 		if [[ $java == "s" ]]; then
@@ -1186,7 +1186,7 @@ install_yes()
 			echo "----------------------------------------------------------------------"
 
 			#instalando o redshift
-			apt-get install redshift gtk-redshift -y
+			apt install redshift gtk-redshift -y
 		fi
 
 		#instalando o flux
@@ -1306,12 +1306,12 @@ install_yes()
 
 		if [[ $reaver == "s" ]]; then
 			#instalando o reaver
-			apt-get install reaver
+			apt install reaver
 		fi
 
 		if [[ $gnomesystem == "s" ]]; then
 			#instalando gnomesystem monitor
-			apt-get install gnome-system-monitor-y
+			apt install gnome-system-monitor-y
 		fi
 
 		if [[ $tor == "s" ]]; then
@@ -1337,7 +1337,7 @@ install_yes()
 			apt install -f -y
 
 			#adicionando dependencias
-			apt-get install cmake libgtkmm-2.4-dev libglademm-2.4-dev libgtkglextmm-x11-1.2-dev libsdl1.2-dev checkinstall -y
+			apt install cmake libgtkmm-2.4-dev libglademm-2.4-dev libgtkglextmm-x11-1.2-dev libsdl1.2-dev checkinstall -y
 
 			#corrigindo dependencias
 			apt install -f -y
@@ -1369,12 +1369,12 @@ install_yes()
 			apt update
 
 			#instalando android studio
-			apt-get install android-studio
+			apt install android-studio
 		fi
 		
 		if [[ $ntp == "s" ]]; then
 			#instalando software necessario
-			apt-get install ntpdate* -y
+			apt install ntpdate* -y
 
 			#realizando atualizacao hora/data
 			echo "Atualizando hora do servidor"
@@ -1399,7 +1399,7 @@ install_yes()
 		
 		if [[ $synaptic == "s" ]]; then
 			#instalando o synaptic
-			apt-get install synaptic* -y
+			apt install synaptic* -y
 		fi
 		
 		if [[ $dolphin == "s" ]]; then
@@ -1407,13 +1407,13 @@ install_yes()
 			add-apt-repository ppa:glennric/dolphin-emu
 			
 			#atualizando lista de repositorios
-			apt-get update
+			apt update
 			
 			#corrigindo problemas de dependencias
 			apt-get install -f
 
 			#instalando dolphin
-			apt-get install dolphin-emu
+			apt install dolphin-emu
 			#apt-get install dolphin-emu-master
 		fi
 
@@ -1429,13 +1429,13 @@ install_yes()
 		
 		if [[ $brackets == "s" ]]; then
 			#adicionando repositorio
-			sudo add-apt-repository ppa:webupd8team/brackets && 
+			add-apt-repository ppa:webupd8team/brackets && 
 			
 			#atualizando lista repositorios
-			sudo apt-get update && 
+			apt update && 
 			
 			#instalando brackets
-			sudo apt-get install brackets
+			apt install brackets
 		fi
 		
 		if [[ $citra == "s" ]]; then
@@ -1477,7 +1477,7 @@ install_yes()
 			add-apt-repository ppa:paulo-miguel-dias/pkppa -y
 
 			#atualizando sistema
-			apt-get update && sudo apt-get dist-upgrade
+			apt update && sudo apt-get dist-upgrade
 		
 			#removendo caso erro
 			#ppa-purge ppa:paulo-miguel-dias/pkppa
@@ -1556,10 +1556,10 @@ install_yes()
 		
 		if [[ $openssh == "s" ]]; then
 			#instalando modo servidor
-			apt-get install openssh-server -y
+			apt install openssh-server -y
 
 			#instalando modo cliente	
-			apt-get install openssh-client -y
+			apt install openssh-client -y
 			
 			#mostrando ao usuario como acessar
 			echo "----------------------------------------------"
