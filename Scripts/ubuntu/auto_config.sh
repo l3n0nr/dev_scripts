@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.79.5.2.4 #
+# versão do script: 0.0.80.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -68,7 +68,6 @@
 # 		-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #		-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
 #		-Verificar a arquitetura do sistema, para a instalação de determinados programas
-#               -Criar um menu de categorias para facilitar a instalação dos programas
 #
 ################################################################################
 #
@@ -2032,65 +2031,130 @@ auto_config_ubuntu()
             
     #instalando programas	
     4) echo
-            firefox
-            steam
-            xampp
-            spotify
-            mac
-            codecs
-            gimp
-            xfce
-            wine
-            playonlinux
-            java
-            redshift
-            flux
-            nodejs
-            atom
-            libreoffice
-            vlc
-            netbeans
-            clementine
-            gparted
-            tlp
-            rar
-            git
-            lmsensors
-            stellarium
-            texmaker
-            gnometerminal
-            reaver
-            gnomesystem
-            tor
-            android
-            ntp
-            hollywood
-            synaptic
-            dolphin
-            virtualbox	
-            brackets
-            citra
-            mesa
-            mutate
-            screenfetch
-            midori
-            diolinux_paper
-            kdenlive
-            openssh
-            bleachbit
-            supertuxkart
-            figler
-            cowsay
-            chromium
-            synapse
-            sweethome3d
-            kate
-            inkscape
-            blender
-            audacity
-            cheese
+            echo "Categorias"
+            #chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
+            echo "----------------------------------------"
+            echo "Digite 0 para entrar na área de Outros programas,"
+            echo "Digite 1 para entrar na área de Jogos,"
+            echo "Digite 2 para entrar na área de Multimidia, "
+            echo "Digite 3 para entrar na área de Escritório," 
+            echo "Digite 4 para entrar na área de Internet," 
+            echo "Digite 5 para entrar na área de Desenvolvimento,"
+            echo "Digite 6 para entrar na área de Gráficos,"
+            echo "Digite 7 para entrar na área de Personalização do sistema,"
+            echo "Digite V para voltar ao menu anterior"
+            echo "Digite X para sair do script;"
+            echo "----------------------------------------" 
+            read -n1 -p "Ação:" categoria
+            clear
+            case $categoria in
+                #outros programas
+                0) echo 
+                    ntp
+                    openssh
+                    bleachbit            
+                    figler                
+                    synapse
+                    tlp
+                    rar
+                    git
+                    lmsensors
+                    gnometerminal
+                    reaver
+                    gnomesystem                                
+                    hollywood
+                    synaptic            
+                    mesa
+                    mutate
+                    gparted            
+                    stellarium            
+                    virtualbox
+                    ;;
+                    
+                #jogos
+                1) echo 
+                    steam
+                    supertuxkart
+                    wine
+                    playonlinux
+                    citra
+                    dolphin
+                    ;;
+                
+                #multimidia
+                2) echo 
+                    audacity
+                    cheese    
+                    spotify
+                    vlc
+                    clementine
+                    kdenlive
+                    ;;
+                
+                #escritorio
+                3) echo 
+                    libreoffice            
+                    texmaker 
+                    ;;
+                        
+                #internet
+                4) echo 
+                    firefox    
+                    chromium
+                    midori 
+                    tor                         	                                                                                              
+                    ;;
+                        
+                #desenvolvimento        
+                5) echo 
+                    kate
+                    xampp
+                    java
+                    nodejs
+                    atom
+                    android
+                    netbeans
+                    brackets
+                    ;;
+                
+                #graficos
+                6) echo 
+                    sweethome3d            
+                    inkscape
+                    blender
+                    gimp
+                    ;;
+                    
+                #personalizacao    
+                7) echo    
+                    cowsay
+                    mac
+                    codecs
+                    screenfetch
+                    diolinux_paper
+                    xfce
+                    redshift
+                    flux
+                    ;;
+                    
+                #voltando ao menu anterior        
+                v|V) echo 
+                    menu
+                    ;;
+                        
+                #fechando        
+                x|X)echo Finalizando o script...
+                    sleep 1
+                    exit
+                    ;;
+
+                *)  echo Alternativa incorreta!!
+                    sleep 1
+                    menu
+                    exit
+                    ;;
+            esac
             ;;
-            
     #reiniciando	
     5) echo
             reinicia
