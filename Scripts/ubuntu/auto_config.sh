@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.80.5.2.3 #
+# versão do script: 0.0.80.5.2.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -68,6 +68,7 @@
 # 		-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #		-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
 #		-Verificar a arquitetura do sistema, para a instalação de determinados programas
+#               -Facilitar a instalação dos programas, com a opção de instalar todos disponiveis no script
 #
 ################################################################################
 #
@@ -112,67 +113,68 @@
 #
 ################################################################################
 # Instalação
-#	[+] Firefox
-#	[+] Steam
-#	[+] Xampp
-#	[+] Spofity
-#	[+] Icones/Temas Mac
-#	[+] Codec's
-#	[+] Gimp
-#	[+] XFCE
-#	[+] Java 8
-#	[+] Redshift
-#	[+] Flux
-#	[+] NodeJS
-#	[+] Atom
-#	[+] Libreoffice
-#	[-] Netbeans
-#		VERIFICAR, INSTALAR TAMBEM JDK
+#   [+] Todos
+#   [+] Firefox
+#   [+] Steam
+#   [+] Xampp
+#   [+] Spofity
+#   [+] Icones/Temas Mac
+#   [+] Codec's
+#   [+] Gimp
+#   [+] XFCE
+#   [+] Java 8
+#   [+] Redshift
+#   [+] Flux
+#   [+] NodeJS
+#   [+] Atom
+#   [+] Libreoffice
+#   [-] Netbeans
+#   	VERIFICAR, INSTALAR TAMBEM JDK
 #	
-#	[+] Vlc
-#	[+] Clementine
-#	[+] Gparted
-#	[+] Tlp
-#	[+] Rar
-#	[+] Git
-#	[+] Lm-sensors
-#	[+] Stellarium
-#	[+] Texmaker
-#	[+] Gnome-terminal
-#	[+] Reaver
-#	[+] Gnome System Monitor
-#	[+] Tor
-#	[+] Android Studio
-#		VERIFICAR, INSTALAR TAMBEM JDK	
+#   [+] Vlc
+#   [+] Clementine
+#   [+] Gparted
+#   [+] Tlp
+#   [+] Rar
+#   [+] Git
+#   [+] Lm-sensors
+#   [+] Stellarium
+#   [+] Texmaker
+#   [+] Gnome-terminal
+#   [+] Reaver
+#   [+] Gnome System Monitor
+#   [+] Tor
+#   [+] Android Studio
+#	VERIFICAR, INSTALAR TAMBEM JDK	
 #
-#	[+] NTP
-#	[+] Hollywood
-#	[+] Synaptic	
-# 	[+] Dolphin
-#	[+] Virtualbox
-#	[+] Brackets
-#	[+] Citra
-#	[-] DeSmuME 
-#		ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
-#	[-] GBA - Gameboyadvanced
-#	[+] Mesa - ppa
-#	[-] Mutate
-#	[+] Screenfetch
-#	[+] Midori
-#	[+] Diolinux_paper(Diolinux Paper Orange Modern)
-#	[+] Kdenlive
-#	[+] Openssh(Client-Servidor)
-#	[+] Bleachbit
-#	[+] Supertuxkart
-#	[+] Figlet
-#	[+] Cowsay
-#	[+] Chromium
-#       [+] Synapse
-#	[+] Sweet Home 3d
-#	[+] Kate
-#       [+] Inkscape
-#       [+] Blender
-#       [+] Audacity
+#   [+] NTP
+#   [+] Hollywood
+#   [+] Synaptic	
+#   [+] Dolphin
+#   [+] Virtualbox
+#   [+] Brackets
+#   [+] Citra
+#   [-] DeSmuME 
+#   	ENCONTRAR FORMA DE INSTALAÇÃO AUTOMÁTICA
+#   [-] GBA - Gameboyadvanced
+#   [+] Mesa - ppa
+#   [-] Mutate
+#   [+] Screenfetch
+#   [+] Midori
+#   [+] Diolinux_paper(Diolinux Paper Orange Modern)
+#   [+] Kdenlive
+#   [+] Openssh(Client-Servidor)
+#   [+] Bleachbit
+#   [+] Supertuxkart
+#   [+] Figlet
+#   [+] Cowsay
+#   [+] Chromium
+#   [+] Synapse
+#   [+] Sweet Home 3d
+#   [+] Kate
+#   [+] Inkscape
+#   [+] Blender
+#   [+] Audacity
 #
 ################################################################################	
 # Reinicialização
@@ -314,6 +316,14 @@ arquivosinuteis()
 
 ################################################################################
 ######INSTALANDO PROGRAMAS
+todos()
+{
+    clear
+    echo ""
+    echo "Deseja instalar todos os programas? (s/n)"
+    read -p "??" todos
+}
+
 firefox()
 {
     clear
@@ -1070,7 +1080,7 @@ install_yes()
             fi
     
     ######INSTALANDO PROGRAMAS
-            if [[ $firefox == "s" ]]; then
+            if [[ $firefox == "s" ]] || if[[ $todos == "s" ]]; then
                             clear
                     echo "Firefox, "
 
@@ -2034,7 +2044,8 @@ auto_config_ubuntu()
             echo "Categorias"
             #chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
             echo "----------------------------------------"
-            echo "Digite 0 para entrar na área de Outros programas,"
+            echo "Digite 0 para instalar todos os programas das categorias,"
+            echo "Ou digite 1, para entrar nas categorias"
             echo "Digite 1 para entrar na área de Jogos,"
             echo "Digite 2 para entrar na área de Multimidia, "
             echo "Digite 3 para entrar na área de Escritório," 
@@ -2048,27 +2059,9 @@ auto_config_ubuntu()
             read -n1 -p "Ação:" categoria
             clear
             case $categoria in
-                #outros programas
-                0) echo 
-                    ntp
-                    openssh
-                    bleachbit            
-                    figler                
-                    synapse
-                    tlp
-                    rar
-                    git
-                    lmsensors
-                    gnometerminal
-                    reaver
-                    gnomesystem                                
-                    hollywood
-                    synaptic            
-                    mesa
-                    mutate
-                    gparted            
-                    stellarium            
-                    virtualbox
+                #instalando todos os programas
+                0) echo
+                    tudo
                     ;;
                     
                 #jogos
@@ -2135,6 +2128,29 @@ auto_config_ubuntu()
                     xfce
                     redshift
                     flux
+                    ;;
+                    
+                #outros programas
+                8) echo 
+                    ntp
+                    openssh
+                    bleachbit            
+                    figler                
+                    synapse
+                    tlp
+                    rar
+                    git
+                    lmsensors
+                    gnometerminal
+                    reaver
+                    gnomesystem                                
+                    hollywood
+                    synaptic            
+                    mesa
+                    mutate
+                    gparted            
+                    stellarium            
+                    virtualbox
                     ;;
                     
                 #voltando ao menu anterior        
