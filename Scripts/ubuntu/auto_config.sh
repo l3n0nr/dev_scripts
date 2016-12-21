@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.74.5.2.3 #
+# versão do script: 0.0.75.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -168,6 +168,7 @@
 #	[+] Cowsay
 #	[+] Chromium
 #       [+] Synapse
+#	[+] Sweet Home 3d
 #
 ################################################################################	
 # Reinicialização
@@ -715,6 +716,14 @@ synapse()
         echo ""
         echo "Deseja instalar o Synapse? (s/n)"
         read -p "??" synapse
+}
+
+sweethome3d()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Sweet Home 3D? (s/n)"
+	read -p "??" sweethome3d
 }
 
 ################################################################################
@@ -1579,6 +1588,11 @@ install_yes()
 			#instalando o synapse
 			apt-get install synapse* -y
 		fi
+		
+		if [[ $sweethome3d == "s" ]]; then
+			#instalando o sweethome3d
+			apt-get install sweethome3d* -y
+		fi		
 
 ################################################################################		
 ######REINICIANDO
@@ -1866,6 +1880,9 @@ install_no()
                 echo "Synapse"
 	fi
 	
+	if [[ $sweethome3d == "n" ]]; then
+		echo "Sweet Home 3D"
+	fi
 	
 ################################################################################		
 ######REINICIANDO
@@ -1974,6 +1991,7 @@ auto_config_ubuntu()
 		cowsay
 		chromium
 		synapse
+		sweethome3d
 		;;
 		
 	#reiniciando	
