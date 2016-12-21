@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.75.5.2.3 #
+# versão do script: 0.0.76.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -169,6 +169,7 @@
 #	[+] Chromium
 #       [+] Synapse
 #	[+] Sweet Home 3d
+#	[+] Kate
 #
 ################################################################################	
 # Reinicialização
@@ -724,6 +725,14 @@ sweethome3d()
 	echo ""
 	echo "Deseja instalar o Sweet Home 3D? (s/n)"
 	read -p "??" sweethome3d
+}
+
+kate()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Kate? (s/n)"
+	read -p "??" kate
 }
 
 ################################################################################
@@ -1528,7 +1537,7 @@ install_yes()
 			add-apt-repository ppa:tiagosh/diolinux-paper-orange -y
 
 			#atualizando sistema
-			apt-get update
+			apt update
 
 			#instalando tema
 			apt install diolinux-paper-orange -y
@@ -1539,10 +1548,10 @@ install_yes()
 		     	add-apt-repository ppa:sunab/kdenlive-release -y
 	
 			#atualizando sistema
-			apt-get update
+			apt update
 
 			#instalando kdenlive	
-			apt-get install kdenlive -y
+			apt install kdenlive -y
 		fi
 		
 		if [[ $openssh == "s" ]]; then
@@ -1561,12 +1570,12 @@ install_yes()
 		
 		if [[ $bleachbit == "s" ]]; then
 			#instalando bleachbit		
-			apt-get install bleachbit -y
+			apt install bleachbit -y
 		fi	
 		
 		if [[ $supertuxkart == "s" ]]; then
 			#instalando supertuxkart				
-			apt-get install supertuxkart -y	
+			apt install supertuxkart -y	
 		fi	
 		
 		if [[ $figler == "s" ]]; then
@@ -1581,18 +1590,23 @@ install_yes()
 		
 		if [[ $chromium == "s" ]]; then
 			#instalando chromium		
-			apt-get install chromium-browser* -y
+			apt install chromium-browser* -y
 		fi
 		
 		if [[ $synapse == "s" ]]; then
 			#instalando o synapse
-			apt-get install synapse* -y
+			apt install synapse* -y
 		fi
 		
 		if [[ $sweethome3d == "s" ]]; then
 			#instalando o sweethome3d
-			apt-get install sweethome3d* -y
-		fi		
+			apt install sweethome3d* -y
+		fi	
+		
+		if [[ $kate == "s" ]]; then
+			#instalando o kate
+			apt install kate* -y
+		fi
 
 ################################################################################		
 ######REINICIANDO
@@ -1884,6 +1898,10 @@ install_no()
 		echo "Sweet Home 3D"
 	fi
 	
+	if [[ $kate == "n" ]]; then
+		echo "Kate"
+	fi
+	
 ################################################################################		
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -1992,6 +2010,7 @@ auto_config_ubuntu()
 		chromium
 		synapse
 		sweethome3d
+		kate
 		;;
 		
 	#reiniciando	
