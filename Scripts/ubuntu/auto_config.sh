@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.77.5.2.3 #
+# versão do script: 0.0.78.5.2.3 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -170,6 +170,7 @@
 #       [+] Synapse
 #	[+] Sweet Home 3d
 #	[+] Kate
+#       [+] Inkscape
 #
 ################################################################################	
 # Reinicialização
@@ -735,6 +736,14 @@ kate()
 	read -p "??" kate
 }
 
+inkscape()
+{
+	clear
+	echo ""
+	echo "Deseja instalar o Inkscape? (s/n)"
+	read -p "??" inkscape
+}
+
 ################################################################################
 ######REINICIANDO
 reinicia()
@@ -1178,6 +1187,9 @@ install_yes()
 
 			#instalando o java8
 			apt-get install oracle-java8-installer -y
+			
+			#instalando java jre
+                        apt-get install default-jre
 		fi
 
 		if [[ $redshift == "s" ]]; then
@@ -1607,6 +1619,11 @@ install_yes()
 			#instalando o kate
 			apt install kate* -y
 		fi
+		
+		if [[ $inkscape == "s" ]]; then
+                        #instalando inkscape
+                        apt-get install inkscape* -y                
+                fi
 
 ################################################################################		
 ######REINICIANDO
@@ -1902,6 +1919,10 @@ install_no()
 		echo "Kate"
 	fi
 	
+	if [[ $inkscape == "n" ]] then
+                echo "Inkscape"
+	fi
+	
 ################################################################################		
 ######REINICIANDO
 	if [[ $reinicia == "n" ]]; then
@@ -2011,6 +2032,7 @@ auto_config_ubuntu()
 		synapse
 		sweethome3d
 		kate
+		inkscape
 		;;
 		
 	#reiniciando	
