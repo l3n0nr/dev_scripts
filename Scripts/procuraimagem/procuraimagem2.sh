@@ -11,8 +11,9 @@ echo "Caminho do Wallpaper: "
 #extraindo caminho base
 cat .caminhocompleto.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .caminho.txt 
 
+#mostrando localização da pasta para o usuário
 cat .caminho.txt
-# 
+
 # #removendo raiz
 echo "Por favor, digite o caminho da imagem"
 read -p "" local
