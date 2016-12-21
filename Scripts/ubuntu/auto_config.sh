@@ -22,13 +22,13 @@
 # por Lucas Novo Silva
 # 	fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
-# por "Dionatan Simioni"
+# por Dionatan Simioni
 # 	fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
 # 	fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
 # 	fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
 # 	fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
 #
-# por "Ricardo Ferreira"
+# por Ricardo Ferreira
 # 	fonte: <http://www.linuxdescomplicado.com.br/2014/11/saiba-como-acessar-uma-maquina-ubuntu.html>
 #
 ################################################################################
