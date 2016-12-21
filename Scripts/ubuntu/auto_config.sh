@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.80.5.2.4 #
+# versão do script: 0.0.80.5.11.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -63,7 +63,16 @@
 #		mutate
 # 	e = pendencias
 #		GBA
-#		DeSmuME 
+#		DeSmuME
+#               Openshot
+#               Audacious
+#               K3b
+#               Scribus
+#               Umbrello
+#               Opera
+#               Skype
+#               Tuxpaint
+#               Calibre
 # 	f = desenvolver
 # 		-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #		-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
@@ -175,6 +184,15 @@
 #   [+] Inkscape
 #   [+] Blender
 #   [+] Audacity
+#   [-] Openshot
+#   [-] Audacious
+#   [-] K3B
+#   [-] Scribus
+#   [-] Umbrello
+#   [-] Opera 
+#   [-] Skype
+#   [-] Tuxpaint
+#   [-] Calibre
 #
 ################################################################################	
 # Reinicialização
@@ -2044,6 +2062,7 @@ auto_config_ubuntu()
             echo "Categorias"
             #chama as funções para serem realizadas[pergunta ao usuário quais ações ele deseja realizar]
             echo "----------------------------------------"
+            #######VERIFICAR
             echo "Digite 0 para instalar todos os programas das categorias,"
             echo "Ou digite 1, para entrar nas categorias"
             echo "Digite 1 para entrar na área de Jogos,"
