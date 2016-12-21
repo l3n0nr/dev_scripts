@@ -1,69 +1,41 @@
-#FUNCIONANDO
-################################################################################
-    #limpando a tela
-    #clear
-
-    #capturando caminho da imagem
-#   xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
-
-    #extraindo caminho base
-#   cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .base.txt 
-
-    #extraindo imagem
-    #cat .base.txt | sed -e "s;.jpg;;g" > .numero.txt 
-    #url=`cat .numero.txt` 
-
-    #echo $url
-    #echo "ABRINDO IMAGEM NO WALLHAVEN"
-    #firefox https://alpha.wallhaven.cc/wallpaper/$url
-################################################################################
-
-#LIXO
-################################################################################
-#REALIZANDO LEITURA ATRAVES DE VARIAVEIS
-################################################################################
-#limpando a tela
-# clear
-# 
-# #criando arquivos temporarios
-# touch .caminho.txt
-# 
-# #capturando caminho completo imagem
-# caminho=`xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image`
-# 
-# #removendo raiz
-# echo $caminho | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures;;g" > .caminho.txt
-# 
-# raiz=`cat .caminho.txt`
-################################################################################
 #limpando a tela
 clear
-
-#criandos arquivos para manipulação
-touch .caminho.txt .base.txt .numero.txt .genero.txt .imagem.txt
-
-#capturando caminho da imagem
-xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
+# 
+# #criando arquivos temporarios
+touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
+# 
+# #capturando caminho completo imagem
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminhocompleto.txt
+echo "Caminho do Wallpaper: " 
 
 #extraindo caminho base
-cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures;;g" >  .base.txt 
+cat .caminhocompleto.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .caminho.txt 
 
-#removendo wallhaven
-cat .base.txt | sed -e "s;wallhaven-;;g" > .wallhaven.txt
+cat .caminho.txt
+# 
+# #removendo raiz
+echo "Por favor, digite o caminho da imagem"
+read -p "" local
 
-#extraindo extensao imagem
-cat .wallhaven.txt | sed -e "s;.jpg;;g" > .genero.txt 
-#url=`cat .genero.txt` 
+#extraindo caminho base
+cat .caminho.txt | sed -e "s;$local;;g" > .base.txt 
 
-#removendo pasta
-cat .genero.txt | sed -e "s;/?/;;g" > .imagem.txt
+#extraindo wallhaven
+cat .base.txt | sed -e "s;wallhaven-;;g" > .imagem.txt
 
-url=`cat .imagem.txt` 
+#extraindo extensao
+cat .imagem.txt | sed -e "s;.jpg;;g" > .numero.txt 
+#cat .imagem.txt | sed -e "s;.png;;g" > .numero.txt
 
-echo $url
+#salvando numero da imagem em uma variavel
+url=`cat .numero.txt` 
 
-#removendo arquivos criados
-rm .caminho.txt .base.txt .numero.txt .genero.txt .imagem.txt
+#iniciando o firefox
+echo "Imagem identificada! Abrindo o Firefox..."
+firefox https://alpha.wallhaven.cc/wallpaper/$url
 
-#echo "ABRINDO IMAGEM NO WALLHAVEN"
-#firefox https://alpha.wallhaven.cc/wallpaper/$url
+# removendo arquivos temporarios
+rm -r .caminho.txt .base.txt .imagem.txt .numero.txt
+
+#limpando a tela
+clear
