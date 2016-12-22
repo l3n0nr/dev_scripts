@@ -5,6 +5,9 @@
 # por bur
 # fonte: <https://www.hardware.com.br/comunidade/tplink-via/1360884/>
 #
+# por Vivek Gite
+# fonte: <https://www.cyberciti.biz/tips/simple-linux-and-unix-system-monitoring-with-ping-command-and-scripts.html>
+#
 ###################
 #DESENVOLVIDO POR
 ###################
@@ -21,7 +24,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.10.2.1.0 #
+# versão do script: 0.0.12.2.1.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -34,7 +37,16 @@
 # 	f = desenvolver
 # 		Gerar relatorio antes de desligar, como horário, data, log
 #
-########################################################################
+################################################################################
+#
+# Script testado em
+#	-Xubuntu 16.04
+#
+# Compativel com roteadores
+#	- TPLINK
+#	-
+#
+################################################################################
 #verificando se o usuário é ROOT
 if [[ `id -u` -ne 0 ]]; then
 	echo
@@ -44,13 +56,12 @@ if [[ `id -u` -ne 0 ]]; then
 		exit
 fi
 
-########################################################################
+################################################################################
 #instalando curl - dependencia necessaria
 sudo apt install curl* -y
 clear
-########################################################################
+################################################################################
 
-########################################################################
 #usuario digita o ip do roteador
 echo "Digite o endereço do roteador:(x.x.x.x)"
 read -p "?? " ip
@@ -69,62 +80,52 @@ echo "---------------------------------"
 
 #verificação infinita
 while true 
-do
-	#intervalo de trinta minutos
-	#sleep 1800
-		
+do			
 	#verificando se maquina esta conectada ao roteador
 	if [ "$ip" == "Network is unreachable" ]; then
 		echo "Conecte ao roteador"
-	else
-		echo "Realizando testes de conexão"
-		echo "Teste 1"
-		#teste1=$
-		echo $site
-		ping google.com
-		teste=`ping $site`
-		#teste1=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
-		echo $teste1
-		echo "---------------------------------------------------------------"
-		
-		echo "Teste 2"
-		teste2=$( ping $site )
-		echo $teste2
-		echo "---------------------------------------------------------------"
-		
-		#resposta esperada
-		if [ "$internet" == "DestinationPortUnreachable" ]; then
-			echo "Você está offline!"
-			echo "Reiniciando o roteador, aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
-			curl --user admin:admin http://$ip/userRpm/SysRebootRpm.htm?Reboot=Reboot
-			
-			#funcao alternativa
-			#/usr/bin/curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot > /dev/null
-			
-			echo "Reiniciando o roteador, espere..."
-			sleep 60
-			
-			echo "Roteador reiniciado! Teste em um site.."
-			sleep 10
+	else                
+            echo "Realizando testes de conexão"            
+            teste=`ping -c4 google.com | grep 'received' | awk -F',' '{ print $2}' | awk '{ print $1}'`
+            echo $teste
+            echo "---------------------------------------------------------------"		
+            #verificando
+            if [ "$teste" == "0" ]; then
+                    echo "Você está offline!"
+                    echo "Reiniciando o roteador com ip $ip aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
+                    curl --user admin:admin http://$ip/userRpm/SysRebootRpm.htm?Reboot=Reboot
+                    
+                    #funcao alternativa
+                    #/usr/bin/curl --user admin:admin http://192.168.11.1/userRpm/SysRebootRpm.htm?Reboot=Reboot > /dev/null
+                    
+                    echo "Reiniciando o roteador, espere..."
+                    sleep 60
+                    
+                    echo "Roteador reiniciado! Teste em um site.."
+                    sleep 10
 
-			#caso o valor seja igual a dez
-			if [ "$cont" == "10" ]; then
-				#desligando a maquina
-				#poweroff
-				
-				#contador de erros
-				cont=$((cont+1))
-				
-				#mostrando contador
-				echo $cont
-			fi
-			
-			elif [ "$internet1" == "unknown host" ]; then
-				echo "teste"
-			else
-				echo "Você está online!"
-				#sleep 1				
+                    #caso o valor seja igual a dez
+                    if [ "$cont" == "10" ]; then
+                        #desligando a maquina
+                        #poweroff
+                        
+                        #contador de erros
+                        cont=$((cont+1))
+                        
+                        #mostrando contador
+                        echo $cont
+                    fi
+                    
+            else
+                #mostra mensagem
+                echo "Você está online!"
+                
+                #aguarda 1 minuto para realizar o teste novamente
+                sleep 60	
+                
+                #intervalo de quinze minutos
+                #sleep 900
 		fi	
 	fi
 done
-########################################################################
+################################################################################
