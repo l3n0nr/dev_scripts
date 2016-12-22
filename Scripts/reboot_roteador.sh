@@ -20,18 +20,19 @@
 #										#
 #################################################################################
 #
-###########################
-#versão do script: 0.8.2.1
-###########################
+##################################
+# versão do script: 0.0.10.2.1.0 #
+##################################
 #
-#legenda: a.b.c.d
-# a = alpha[0], beta[1];
-# b = versões funcionando;
-# c = correções necessárias;
-#	Não está funcionando, a funcao de reiniciar o roteador
-#	Está caindo apenas no else a funcao de verificar ping
-# d = pendencias a serem implementadas
-#	Gerar relatorio antes de desligar, como horário, data, log
+# legenda: a.b.c.d.e.f
+# 	a = alpha[0], beta[1];
+# 	b = erros na execução;	
+# 	c = interações com o script + versões funcionando;
+# 	d = correções necessárias;
+#       	Está caindo apenas no else a funcao de verificar ping
+# 	e = pendencias
+# 	f = desenvolver
+# 		Gerar relatorio antes de desligar, como horário, data, log
 #
 ########################################################################
 #verificando se o usuário é ROOT
@@ -67,7 +68,8 @@ echo "Site para o teste: " $site
 echo "---------------------------------"
 
 #verificação infinita
-while true
+while true 
+do
 	#intervalo de trinta minutos
 	#sleep 1800
 		
@@ -121,5 +123,5 @@ while true
 				#sleep 1				
 		fi	
 	fi
-do
+done
 ########################################################################
