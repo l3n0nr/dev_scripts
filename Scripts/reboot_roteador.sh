@@ -52,11 +52,11 @@ clear
 
 ########################################################################
 #usuario digita o ip do roteador
-echo "Digite o endereço do roteador"
+echo "Digite o endereço do roteador:(x.x.x.x)"
 read -p "?? " ip
 
 #usuario digita o site que deseja testar
-echo "Digite o site que deseja testar"
+echo "Digite o site que deseja testar:(www.x.com)"
 read -p "?? " site
 clear
 
@@ -79,8 +79,11 @@ do
 	else
 		echo "Realizando testes de conexão"
 		echo "Teste 1"
-		teste1=$( ping $site )
-		teste1=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
+		#teste1=$
+		echo $site
+		ping google.com
+		teste=`ping $site`
+		#teste1=$( ping -c1 $site | grep From | awk -F' ' '{ print $4 $5 $6}' )
 		echo $teste1
 		echo "---------------------------------------------------------------"
 		

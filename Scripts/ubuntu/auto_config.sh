@@ -31,6 +31,9 @@
 # por Ricardo Ferreira
 # 	fonte: <http://www.linuxdescomplicado.com.br/2014/11/saiba-como-acessar-uma-maquina-ubuntu.html>
 #
+# por Vinícius Vieira
+#        fonte: <http://sejalivre.org/instalando-o-tor-browser-no-ubuntu-e-linux-mint/>
+#
 ################################################################################
 #
 ####################
@@ -49,7 +52,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.81.5.11.4 #
+# versão do script: 0.0.82.6.11.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -61,6 +64,7 @@
 #		android
 #		vga
 #		mutate
+#               tor
 # 	e = pendencias
 #		GBA
 #		DeSmuME
@@ -153,6 +157,7 @@
 #   [+] Reaver
 #   [+] Gnome System Monitor
 #   [+] Tor
+#        VERIFICAR ARQUITETURA PARA INSTALAR
 #   [+] Android Studio
 #	VERIFICAR, INSTALAR TAMBEM JDK	
 #
@@ -1391,19 +1396,34 @@ install_yes()
 
             if [[ $tor == "s" ]]; then
                     #baixando o tor
-                    wget https://dist.torproject.org/torbrowser/6.0.7/tor-browser-linux32-6.0.7_en-US.tar.xz -O tor-browser.tar.xz
+                    #wget https://dist.torproject.org/torbrowser/6.0.7/tor-browser-linux32-6.0.7_en-US.tar.xz -O tor-browser.tar.xz
 
                     #extraindo o arquivo
-                    sudo tar -xvJf tor-browser.tar.xz -C /opt/
+                    #sudo tar -xvJf tor-browser.tar.xz -C /opt/
 
                     #movendo arquivos
-                    sudo mv /opt/tor-browser*/ /opt/tor-browser
+                    #sudo mv /opt/tor-browser*/ /opt/tor-browser
 
                     #VERIFICAR
-                    sudo ln -sf /opt/tor-browser/Browser/start-tor-browser /usr/bin/torbrowser
+                    #sudo ln -sf /opt/tor-browser/Browser/start-tor-browser /usr/bin/torbrowser
 
                     #removendo arquivo download
-                    rm tor-browser.tar.xz
+                    #rm tor-browser.tar.xz
+                    
+                    #32bits
+                    #add-apt-repository ppa:upubuntu-com/tor64 -y
+                    #apt update
+                    #apt-get install tor-browser* -y
+
+                    #64bits
+                    #adicinando repositorio
+                    add-apt-repository ppa:upubuntu-com/tor64 -y
+                    
+                    #atualizando lista de pacotes
+                    apt-get update
+                    
+                    #instalando tor
+                    apt-get install tor-browser* -y
             fi
 
             if [[ $vba == "s" ]]; then
