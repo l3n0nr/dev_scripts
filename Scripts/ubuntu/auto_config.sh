@@ -49,7 +49,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.80.5.11.4 #
+# versão do script: 0.0.81.5.11.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -193,6 +193,7 @@
 #   [-] Skype
 #   [-] Tuxpaint
 #   [-] Calibre
+#   [+] Numix Icon
 #
 ################################################################################	
 # Reinicialização
@@ -794,7 +795,16 @@ cheese()
 {
     clear
     echo ""
-    echo "Deseja instalar o Cheese"
+    echo "Deseja instalar o Cheese? (s/n)"
+    read -p "??" cheese
+}
+
+numixicon()
+{
+    clear
+    echo ""
+    echo "Deseja instalar o Numix Icon? (s/n)"
+    read -p "??" numixicon
 }
 
 ################################################################################
@@ -1692,6 +1702,16 @@ install_yes()
                     #instalando o audacity
                     apt-get install cheese* -y
             fi
+            
+            if [[ $numixicon == "s" ]]; then
+                #adicionando PPA
+                    add-apt-repository ppa:numix/ppa -y
+                    
+                #atualizando lista repositorios
+                    apt-get update
+                
+                #instalando numixicon
+                    
                     
 ################################################################################		
 ######REINICIANDO
