@@ -44,7 +44,6 @@
 #
 # Compativel com roteadores
 #	- TPLINK
-#	-
 #
 ################################################################################
 #verificando se o usuário é ROOT
