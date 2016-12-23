@@ -1,3 +1,4 @@
+#!bin/bash
 ########################################################################
 # por carlosmorato
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
