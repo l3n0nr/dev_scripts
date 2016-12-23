@@ -1,2 +1,1 @@
-Este repositório está destinado para aumentar o conhecimento em ShellScript e 
-automizar diversas tarefas em Linux.
+Este repositório está destinado para aumentar o conhecimento em ShellScript e outras linguagens de programação, buscando automizar diversas tarefas do cotidiano.
