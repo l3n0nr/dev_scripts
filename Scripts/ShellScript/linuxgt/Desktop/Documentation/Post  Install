@@ -1,0 +1,31 @@
+- Update the system database (for locate command)
+open a terminal, type: sudo updatedb
+*** Please note there is no output after running the above command ***
+
+- Configure & Update Mirrors:
+in a terminal:
+
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+sudo reflector --country 'Your Country' -f 6 -l 6 -n 24 --save /etc/pacman.d/mirrorlist
+
+*** Where 'Your Country' can be replaced; i.e. 'United States' --make sure to include the single quotes! ***
+
+after editing the mirrors, open a terminal, type: mirrors, then type: psync to update the pacman database
+
+- Bash Aliases
+
+open a terminal and type: led & observe the aliases
+most common: sync, pacu, pac and pacs
+- psync = sudo pacman -Syy (update mirrors)
+- pacu = sudo pacman -Su (check and/or install updates)
+- pac = sudo pacman -S (install package(s))
+- pacs = pacman -Ss (search for a package)
+
+- Post Install Cleanup
+Open a terminal a type: post-clean
+This removes leftover files from the installation as well as updating the icon and font caches
+
+You can also run localepurge with the command lcp and lcc:
+to configure type in a terminal: sudo leafpad /etc/locale.nopurge
+comment out NEEDSCONFIGFIRST with a # i.e. #NEEDSCONFIGFIRST, scroll down the botton and select your locale(s), delete any you do not need - save & exit, now run lcp ; if you see an additional message, type: lcc and run lcp again
+
