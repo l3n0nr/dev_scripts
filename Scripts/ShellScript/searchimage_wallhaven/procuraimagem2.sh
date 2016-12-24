@@ -1,3 +1,44 @@
+#!/bin/bash
+#
+####################
+# DESENVOLVIDO POR #
+####################
+#
+# por lenonr(Lenon Ricardo) 
+# 	contato: <lenonrmsouza@gmail.com>
+#
+#################################################################################
+#										#
+#	If I have seen further it is by standing on the shoulders of Giants.	#
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
+#							~Isaac Newton		#
+#										#
+#################################################################################
+#
+##################################
+# versão do script: 0.0.5.0.0.0 #
+##################################
+#
+# legenda: a.b.c.d.e.f
+# 	a = alpha[0], beta[1];
+# 	b = erros na execução;	
+# 	c = interações com o script + versões funcionando;
+# 	d = correções necessárias;
+# 	e = pendencias
+# 	f = desenvolver
+#
+################################################################################
+#
+# Script testado em
+#	-Xubuntu 16.04
+#
+################################################################################
+#
+################################################################################
+# FUNCOES
+#   -Captura imagem do wallhaven de plano de fundo e abre diretamente no site
+#
+################################################################################
 #limpando a tela
 clear
 # 
