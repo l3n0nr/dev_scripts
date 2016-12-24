@@ -51,7 +51,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.84.6.11.4 #
+# versão do script: 0.0.85.7.11.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -64,6 +64,7 @@
 #		vga
 #		mutate
 #               tor
+#               Numixicon
 # 	e = pendencias
 #		GBA
 #		DeSmuME
@@ -198,6 +199,7 @@
 #   [-] Tuxpaint
 #   [-] Calibre
 #   [+] Numix Icon
+#   [+] Plank
 #
 ################################################################################	
 # Reinicialização
@@ -809,6 +811,14 @@ numixicon()
     echo ""
     echo "Deseja instalar o Numix Icon? (s/n)"
     read -p "??" numixicon
+}
+
+plank()
+{
+    clear
+    echo ""
+    echo "Deseja instalar o Plank Dock? (s/n)"
+    read -p "??"plank
 }
 
 ################################################################################
@@ -1723,14 +1733,25 @@ install_yes()
             fi
             
             if [[ $numixicon == "s" ]]; then
-                #adicionando PPA
+                    #adicionando PPA
                     add-apt-repository ppa:numix/ppa -y
                     
-                #atualizando lista repositorios
+                    #atualizando lista repositorios
                     apt-get update
                 
-                #instalando numixicon
-            fi        
+                    #instalando numixicon
+            fi    
+            
+            if [[ $plank == "s" ]]; then
+                    #adicionando ppa
+                    add-apt-repository ppa:noobslab/apps -y
+                    
+                    #atualizando lista repositorios
+                    apt-get update
+                    
+                    #instalando plank
+                    apt-get install plank* plank-themer -y
+            fi
                     
 ################################################################################		
 ######REINICIANDO
@@ -2042,6 +2063,14 @@ install_no()
         echo "Cheese"
     fi
     
+    if [[ $numixicon == "n" ]]; then
+        echo "Numix Icon"
+    fi
+    
+    if [[ $plank == "n" ]]; then
+        echo "Plank"
+    fi
+    
 ################################################################################		
 ######REINICIANDO
     if [[ $reinicia == "n" ]]; then
@@ -2186,6 +2215,8 @@ auto_config_ubuntu()
                     xfce
                     redshift
                     flux
+                    numixicon
+                    plank
                     ;;
                     
                 #outros programas
