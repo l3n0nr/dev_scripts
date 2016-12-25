@@ -1,0 +1,7 @@
+*.pyc
+*.old
+__pycache__
+leiame.txt
+.idea
+sources/teste.db
+sources/testes.py
