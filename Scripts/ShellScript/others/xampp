@@ -1,0 +1,79 @@
+#!/bin/bash
+####################
+# DESENVOLVIDO POR #
+####################
+#
+# por DuZeru GNU/Linux
+# 	fonte: <https://www.youtube.com/watch?v=qmbz-vxZBWk>
+
+#Script teste para remoção de kernels para o DuZeru
+#Abaixo apenas algumas variáveis para colorir as opções de kernel atual e encotrados
+
+cd $HOME/Downloads
+clear
+#INICIO DO DOWNLOAD DO XAMPP
+ echo -e "\e[32;1m XAMPP 64Bits \e[m \e[31;1m pressione 1\e[m"
+ echo -e "\e[32;1m XAMPP 32Bits \e[m \e[31;1m pressione 2\e[m"
+ read -n1 escolha
+
+ #opções de escolha para cancelamento ou remoção de antigos kernels
+case $escolha in
+	1) echo
+		echo "baixando XAMPP 64Bits"
+		sleep 3
+		wget https://www.apachefriends.org/xampp-files/7.0.6/xampp-linux-x64-7.0.6-0-installer.run;; #URL DO XAMPP64BITS
+
+	2) echo
+		echo "Baixando XAMPP 32Bits"
+		sleep 3
+		wget https://www.apachefriends.org/xampp-files/7.0.6/xampp-linux-7.0.6-0-installer.run;; #URL DO XAMPP32BITS
+
+	*) echo
+		echo você deve digitar apenas 1 ou 2 execute novamente o script;;
+esac
+
+#INICIO DA INSTALAÇÃO
+chmod 755 xampp*
+sudo ./xampp*.run
+
+
+#CONFIGURAÇÃO, ATALHO E PERMISSÕES PARA O DIRETÓRIO HTDOCS
+sleep 3
+sudo chmod -R 777 /opt/lampp/htdocs/
+ln -s /opt/lampp/htdocs/ $HOME/Desktop/
+
+#CRIANDO SCRIPT E LINK DO PAINEL DE CONFIGURAÇÃO NA AREA DE TRABALHO
+echo "#!/bin/bash
+ sudo /bin/sh -c "/opt/lampp/manager-linux-x64.run" " | cat >/tmp/XAMPP-config.sh
+
+sudo cp /tmp/XAMPP-config.sh /usr/bin/
+sudo chmod 755 /usr/bin/XAMPP-config.sh
+
+
+echo "
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=xampp-config
+Comment=
+Exec=sudo /usr/bin/XAMPP-config.sh
+Icon=
+Path=
+Terminal=true
+StartupNotify=false
+" | cat >/tmp/XAMPP-config.desktop
+
+cp /tmp/XAMPP-config.desktop $HOME/Desktop
+
+
+
+#echo "#!/bin/bash
+# sudo /bin/sh -c "/opt/lampp/manager-linux-x64.run" " | cat >/usr/bin/XAMPP-config.sh
+
+#ln -s /usr/bin/XAMPP-config.sh $HOME/Desktop/XAMPP-config
+
+#chmod 755 $HOME/Desktop/XAMPP-config
+
+
+#/bin/sh -c "/opt/lampp/manager-linux-x64.run" $HOME/Desktop/xampp-config
+#END
