@@ -51,7 +51,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.86.7.11.4 #
+# versão do script: 0.0.86.7.19.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -77,6 +77,14 @@
 #               Skype
 #               Tuxpaint
 #               Calibre
+#               UNetbootin
+#               Code::blocks IDE
+#               PgAdminIII
+#               Gnome systema monitor
+#               Gnome system tools
+#               Samba
+#               Gnome-disk-utility
+#               Wireshark
 # 	f = desenvolver
 # 		-Criar uma interface gráfica, possibilitando ao usuário selecionar as ações que o usuário deseja realizar, selecionando apenas com o espaço.
 #		-Possibilitar ao usuário o cancelamento das ações selecionadas, dentro de um tempo pré-determinado(10 seg.)
