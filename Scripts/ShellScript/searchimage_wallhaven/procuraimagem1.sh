@@ -5,7 +5,7 @@
 ####################
 #
 # por lenonr(Lenon Ricardo) 
-# 	contato: <lenonrmsouza@gmail.com>
+# 	contato: <lenonrmsouza@gmail.com> 
 #
 #################################################################################
 #										#
@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.15.0.0.0 #
+# versão do script: 1.0.22.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -36,21 +36,28 @@
 #
 ################################################################################
 # FUNCOES
-#   -Realizar correções em partições com erro, indicado para partições Linux;
+#   -Captura imagem do wallhaven de plano de fundo e abre diretamente no site
 #
 ################################################################################
-#
+
 #limpando a tela
 clear
 
-#verificando a particao alvo
-sudo fdisk -l
+#criandos arquivos para manipulação
+touch .caminho.txt .base.txt .numero.txt
 
-particao=`/dev/sdc1`
+#capturando caminho da imagem
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminho.txt
 
-#tentando corrigir
-sudo fsck $particao -y -C -f 
+#extraindo caminho base
+cat .caminho.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/People/wallhaven-;;g" > .base.txt 
 
-#reiniciando a maquina
-#reboot
-################################################################################
+#extraindo imagem
+cat .base.txt | sed -e "s;.jpg;;g" > .numero.txt 
+url=`cat .numero.txt` 
+
+#echo "ABRINDO IMAGEM NO WALLHAVEN"
+firefox https://alpha.wallhaven.cc/wallpaper/$url
+
+#removendo arquivos criados
+rm .caminho.txt .base.txt .numero.txt

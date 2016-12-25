@@ -22,18 +22,17 @@
 # por Lucas Novo Silva
 # 	fonte: <https://www.vivaolinux.com.br/dica/Erro-de-apt-get-update-no-Ubuntu-1604-Xenial-problemas-nos-repositorios-RESOLVIDO>
 #
-# por Dionatan Simioni
-# 	fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
-# 	fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
-# 	fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
-# 	fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
-#
 # por Ricardo Ferreira
 # 	fonte: <http://www.linuxdescomplicado.com.br/2014/11/saiba-como-acessar-uma-maquina-ubuntu.html>
 #
 # por Vinícius Vieira
 #        fonte: <http://sejalivre.org/instalando-o-tor-browser-no-ubuntu-e-linux-mint/>
 #
+# por Dionatan Simioni
+# 	fonte: <http://www.diolinux.com.br/2016/12/drivers-mesa-ubuntu-ppa-update.html>
+# 	fonte: <http://www.diolinux.com.br/2016/12/diolinux-paper-orange-modern-theme-for-unity.html>
+# 	fonte: <http://www.diolinux.com.br/2014/08/versao-nova-kdenlive-ppa.html>
+# 	fonte: <http://www.diolinux.com.br/2015/04/como-atualizar-kernel-para-a-ultima-versao-no-ubuntu.html>
 ################################################################################
 #
 ####################
@@ -52,7 +51,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.83.6.11.4 #
+# versão do script: 0.0.86.7.11.4 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -65,6 +64,7 @@
 #		vga
 #		mutate
 #               tor
+#               Numixicon
 # 	e = pendencias
 #		GBA
 #		DeSmuME
@@ -199,6 +199,7 @@
 #   [-] Tuxpaint
 #   [-] Calibre
 #   [+] Numix Icon
+#   [+] Plank
 #
 ################################################################################	
 # Reinicialização
@@ -812,6 +813,14 @@ numixicon()
     read -p "??" numixicon
 }
 
+plank()
+{
+    clear
+    echo ""
+    echo "Deseja instalar o Plank Dock? (s/n)"
+    read -p "??"plank
+}
+
 ################################################################################
 ######REINICIANDO
 reinicia()
@@ -1361,7 +1370,7 @@ install_yes()
 
             if [[ $git == "s" ]]; then
                     #instalando o git
-                    apt install git* gitg* -y
+                    apt install git-core git* gitg* -y
             fi
 
             if [[ $lmsensors == "s" ]]; then
@@ -1724,14 +1733,25 @@ install_yes()
             fi
             
             if [[ $numixicon == "s" ]]; then
-                #adicionando PPA
+                    #adicionando PPA
                     add-apt-repository ppa:numix/ppa -y
                     
-                #atualizando lista repositorios
+                    #atualizando lista repositorios
                     apt-get update
                 
-                #instalando numixicon
-            fi        
+                    #instalando numixicon
+            fi    
+            
+            if [[ $plank == "s" ]]; then
+                    #adicionando ppa
+                    add-apt-repository ppa:noobslab/apps -y
+                    
+                    #atualizando lista repositorios
+                    apt-get update
+                    
+                    #instalando plank
+                    apt-get install plank* plank-themer -y
+            fi
                     
 ################################################################################		
 ######REINICIANDO
@@ -2043,6 +2063,14 @@ install_no()
         echo "Cheese"
     fi
     
+    if [[ $numixicon == "n" ]]; then
+        echo "Numix Icon"
+    fi
+    
+    if [[ $plank == "n" ]]; then
+        echo "Plank"
+    fi
+    
 ################################################################################		
 ######REINICIANDO
     if [[ $reinicia == "n" ]]; then
@@ -2187,6 +2215,8 @@ auto_config_ubuntu()
                     xfce
                     redshift
                     flux
+                    numixicon
+                    plank
                     ;;
                     
                 #outros programas

@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Scripts/ShellScript/search_wallhaven/procuraimagem2.sh
 #!bin/bash
 #################################################################################
 #
@@ -9,6 +10,16 @@
 #
 # por lenonr(Lenon Ricardo) -
 # contato: <lenonrmsouza@gmail.com>
+=======
+#!/bin/bash
+#
+####################
+# DESENVOLVIDO POR #
+####################
+#
+# por lenonr(Lenon Ricardo) 
+# 	contato: <lenonrmsouza@gmail.com>
+>>>>>>> aece84ce6028cedd9046ff0bcdf92c5afb2f3b43:Scripts/ShellScript/searchimage_wallhaven/procuraimagem2.sh
 #
 #################################################################################
 #										#
@@ -19,7 +30,11 @@
 #################################################################################
 #
 ##################################
+<<<<<<< HEAD:Scripts/ShellScript/search_wallhaven/procuraimagem2.sh
 # versão do script: 0.0.13.0.0.0 #
+=======
+# versão do script: 0.0.5.0.0.0 #
+>>>>>>> aece84ce6028cedd9046ff0bcdf92c5afb2f3b43:Scripts/ShellScript/searchimage_wallhaven/procuraimagem2.sh
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -29,8 +44,24 @@
 # 	d = correções necessárias;
 # 	e = pendencias
 # 	f = desenvolver
+<<<<<<< HEAD:Scripts/ShellScript/search_wallhaven/procuraimagem2.sh
 ################################################################################
 
+=======
+#
+################################################################################
+#
+# Script testado em
+#	-Xubuntu 16.04
+#
+################################################################################
+#
+################################################################################
+# FUNCOES
+#   -Captura imagem do wallhaven de plano de fundo e abre diretamente no site
+#
+################################################################################
+>>>>>>> aece84ce6028cedd9046ff0bcdf92c5afb2f3b43:Scripts/ShellScript/searchimage_wallhaven/procuraimagem2.sh
 #limpando a tela
 clear
 # 
