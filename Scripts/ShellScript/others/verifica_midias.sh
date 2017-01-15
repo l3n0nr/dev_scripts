@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.23.0.0.0 #
+# versão do script: 0.0.24.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -118,6 +118,23 @@ podcast()
     #gerando arquivo
     tree -f $caminhopodcastorigem > $caminhopodcastdestino
 }
+
+podcast_pendentes()
+{
+    #limpando a tela
+    clear
+    
+    #criando variaveis
+    caminhopodcastorigem="/home/lenonr/Downloads/Arquivos/Podcast"
+    caminhopodcastdestino="/home/lenonr/MEGA/Outros/Lista/Podcast_Pendentes.txt"
+    
+    echo "Verificando Podcast's pendentes, aguarde..."
+    sleep 2
+    
+    #gerando arquivo
+    tree -f $caminhopodcastorigem > $caminhopodcastdestino
+    
+}
 	
 shows()
 {
@@ -142,6 +159,7 @@ documentarios
 filmes
 musicas
 podcast
+podcast_pendentes
 seriados
 shows
 #
