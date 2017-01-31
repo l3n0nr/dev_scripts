@@ -1,5 +1,4 @@
-#autor: João Otávio
-#email: joao.ot10@hotmail.com 
+#autor: github.com/JoaoOMC
 
 # -*- coding: utf-8 -*-
 
