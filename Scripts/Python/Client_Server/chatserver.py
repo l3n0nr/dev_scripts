@@ -1,3 +1,4 @@
+#autor: github.com/JoaoOMC
 # Tcp Chat server
  
 import socket, select

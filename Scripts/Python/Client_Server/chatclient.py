@@ -1,3 +1,5 @@
+#autor: github.com/JoaoOMC
+
 # telnet program example
 import socket, select, string, sys
  

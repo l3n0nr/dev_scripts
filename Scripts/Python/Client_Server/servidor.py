@@ -1,3 +1,4 @@
+#autor: github.com/JoaoOMC
 #importando biblioteca para abrir as portas
 import socket 
 
