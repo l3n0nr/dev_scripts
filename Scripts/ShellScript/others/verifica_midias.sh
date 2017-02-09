@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.25.1.0.0 #
+# versão do script: 0.0.26.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -27,6 +27,9 @@
 #           não está salvando os dados dos diretórios nos arquivos de texto(testado dia 08/02 - 22:40)
 # 	e = pendencias
 # 	f = desenvolver
+#
+#       OBS: Verificar se o "tree" está instalado na máquina, senão algumas funções não irão funcionar.
+#            (apt install tree -y)
 #
 ################################################################################
 #
@@ -40,6 +43,7 @@
 #   -Realiza backup no formato de arquivo de texto, diversos diretórios para o MEGA
 #
 ################################################################################
+
 filmes()
 {
     #limpando tela
@@ -69,7 +73,7 @@ seriados()
     sleep 2
     
     #gerando arquivo
-    tree -f $caminhoseriadosorigem > $caminhoseriadosdestino    
+    tree -f $caminhoseriadosorigem > $caminhoseriadosdestino
 }
 
 documentarios()
