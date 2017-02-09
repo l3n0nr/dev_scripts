@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.24.0.0.0 #
+# versão do script: 0.0.25.1.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -24,6 +24,7 @@
 # 	b = erros na execução;	
 # 	c = interações com o script + versões funcionando;
 # 	d = correções necessárias;
+#           não está salvando os dados dos diretórios nos arquivos de texto(testado dia 08/02 - 22:40)
 # 	e = pendencias
 # 	f = desenvolver
 #
@@ -36,7 +37,7 @@
 #
 ################################################################################
 # FUNCOES
-#   -Realiza backup no formato de arquivo, diversos diretórios para o MEGA
+#   -Realiza backup no formato de arquivo de texto, diversos diretórios para o MEGA
 #
 ################################################################################
 filmes()
