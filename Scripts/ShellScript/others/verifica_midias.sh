@@ -158,10 +158,48 @@ shows()
     ls $caminhoshowsorigem | grep - > $caminhoshowsdestino
 }
 
+games()
+{
+    #limpando a tela
+    clear
+    
+    #mostrando mensagem    
+    echo "Verificando save The Legend of Korra, aguarde..."
+    
+    sleep 3
+    
+    #SAVE 1
+    caminhogamessorigem1="/home/lenonr/Korra/Gamedata.dat"
+    caminhogamesdestino1="/media/lenonr/lenonr-500GB/Arquivos/Jogos/Avatar/TLOK/Backup"
+                    
+        #copiando arquivo
+        cp $caminhogamessorigem1 $caminhogamesdestino1
+    
+    #SAVE 2
+    caminhogamessorigem2="/home/lenonr/Korra/SystemData.dat"
+    caminhogamesdestino2="/media/lenonr/lenonr-500GB/Arquivos/Jogos/Avatar/TLOK/Backup"    
+    
+        #coṕiando arquivo
+        cp $caminhogamessorigem2 $caminhogamesdestino2
+    
+    #SAVE 3 - MEGA - ARQUIVO 1
+    caminhogamesdestino3="/home/lenonr/MEGA/Jogos/Avatar/Save/TLOK"
+    
+        #coṕiando arquivo
+        cp $caminhogamessorigem1 $caminhogamesdestino3
+    
+    #SAVE 3 - MEGA - ARQUIVO 2
+    caminhogamesdestino4="/home/lenonr/MEGA/Jogos/Avatar/Save/TLOK"
+    
+        #coṕiando arquivo
+        cp $caminhogamessorigem2 $caminhogamesdestino4
+}
+
 ################################################################################
 #
 documentarios
 filmes
+games
 musicas
 podcast
 podcast_pendentes

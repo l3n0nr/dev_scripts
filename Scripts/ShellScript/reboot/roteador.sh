@@ -1,4 +1,4 @@
-#!bin/bash
+
 #################################################################################
 # por carlosmorato
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
@@ -105,16 +105,16 @@ do
                     sleep 10
 
                     #caso o valor seja igual a dez
-                    if [ "$cont" == "10" ]; then
+#                   if [ "$cont" == "10" ]; then
                         #desligando a maquina
                         #poweroff
                         
                         #contador de erros
-                        cont=$((cont+1))
+#                       cont=$((cont+1))
                         
                         #mostrando contador
-                        echo $cont
-                    fi
+#                       echo $cont
+#                    fi
                     
             else
                 #mostra mensagem
