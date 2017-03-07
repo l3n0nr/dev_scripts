@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.23.0.0.0 #
+# versão do script: 0.0.26.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -24,8 +24,12 @@
 # 	b = erros na execução;	
 # 	c = interações com o script + versões funcionando;
 # 	d = correções necessárias;
+#           não está salvando os dados dos diretórios nos arquivos de texto(testado dia 08/02 - 22:40)
 # 	e = pendencias
 # 	f = desenvolver
+#
+#       OBS: Verificar se o "tree" está instalado na máquina, senão algumas funções não irão funcionar.
+#            (apt install tree -y)
 #
 ################################################################################
 #
@@ -36,9 +40,10 @@
 #
 ################################################################################
 # FUNCOES
-#   -Realiza backup no formato de arquivo, diversos diretórios para o MEGA
+#   -Realiza backup no formato de arquivo de texto, diversos diretórios para o MEGA
 #
 ################################################################################
+
 filmes()
 {
     #limpando tela
@@ -68,7 +73,7 @@ seriados()
     sleep 2
     
     #gerando arquivo
-    tree -f $caminhoseriadosorigem > $caminhoseriadosdestino    
+    tree -f $caminhoseriadosorigem > $caminhoseriadosdestino
 }
 
 documentarios()
@@ -118,6 +123,23 @@ podcast()
     #gerando arquivo
     tree -f $caminhopodcastorigem > $caminhopodcastdestino
 }
+
+podcast_pendentes()
+{
+    #limpando a tela
+    clear
+    
+    #criando variaveis
+    caminhopodcastorigem="/home/lenonr/Downloads/Arquivos/Podcast"
+    caminhopodcastdestino="/home/lenonr/MEGA/Outros/Lista/Podcast_Pendentes.txt"
+    
+    echo "Verificando Podcast's pendentes, aguarde..."
+    sleep 2
+    
+    #gerando arquivo
+    tree -f $caminhopodcastorigem > $caminhopodcastdestino
+    
+}
 	
 shows()
 {
@@ -136,12 +158,51 @@ shows()
     ls $caminhoshowsorigem | grep - > $caminhoshowsdestino
 }
 
+games()
+{
+    #limpando a tela
+    clear
+    
+    #mostrando mensagem    
+    echo "Verificando save The Legend of Korra, aguarde..."
+    
+    sleep 3
+    
+    #SAVE 1
+    caminhogamessorigem1="/home/lenonr/Korra/Gamedata.dat"
+    caminhogamesdestino1="/media/lenonr/lenonr-500GB/Arquivos/Jogos/Avatar/TLOK/Backup"
+                    
+        #copiando arquivo
+        cp $caminhogamessorigem1 $caminhogamesdestino1
+    
+    #SAVE 2
+    caminhogamessorigem2="/home/lenonr/Korra/SystemData.dat"
+    caminhogamesdestino2="/media/lenonr/lenonr-500GB/Arquivos/Jogos/Avatar/TLOK/Backup"    
+    
+        #coṕiando arquivo
+        cp $caminhogamessorigem2 $caminhogamesdestino2
+    
+    #SAVE 3 - MEGA - ARQUIVO 1
+    caminhogamesdestino3="/home/lenonr/MEGA/Jogos/Avatar/Save/TLOK"
+    
+        #coṕiando arquivo
+        cp $caminhogamessorigem1 $caminhogamesdestino3
+    
+    #SAVE 3 - MEGA - ARQUIVO 2
+    caminhogamesdestino4="/home/lenonr/MEGA/Jogos/Avatar/Save/TLOK"
+    
+        #coṕiando arquivo
+        cp $caminhogamessorigem2 $caminhogamesdestino4
+}
+
 ################################################################################
 #
 documentarios
 filmes
+games
 musicas
 podcast
+podcast_pendentes
 seriados
 shows
 #

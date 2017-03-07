@@ -1,4 +1,4 @@
-#!bin/bash
+
 #################################################################################
 # por carlosmorato
 # fonte: <https://www.vivaolinux.com.br/topico/Shell-Script/Script-para-reiniciar-Roteador-Apos-pingar
@@ -62,13 +62,15 @@ sudo apt install curl* -y
 clear
 ################################################################################
 
+site="www.duckduckgo.com"
+
 #usuario digita o ip do roteador
 echo "Digite o endereço do roteador:(x.x.x.x)"
 read -p "?? " ip
 
 #usuario digita o site que deseja testar
-echo "Digite o site que deseja testar:(www.x.com)"
-read -p "?? " site
+# echo "Digite o site que deseja testar:(www.x.com)"
+# read -p "?? " site
 clear
 
 #mostrando informacoes
@@ -84,14 +86,15 @@ do
 	#verificando se maquina esta conectada ao roteador
 	if [ "$ip" == "Network is unreachable" ]; then
 		echo "Conecte ao roteador"
-	else                
-            echo "Realizando testes de conexão"            
-            teste=`ping -c4 google.com | grep 'received' | awk -F',' '{ print $2}' | awk '{ print $1}'`
-            echo $teste
+	else     
+            echo "Realizando testes de conexão, espere...."            
             echo "---------------------------------------------------------------"		
+            teste=`ping -c4 $site | grep 'received' | awk -F',' '{ print $2}' | awk '{ print $1}'`
+            echo $teste		
+            
             #verificando
-            if [ "$teste" == "0" ]; then
-                    echo "Você está offline!"
+            if [[ $teste == "0" ]]; then
+                    echo "OFFLINE!"
                     echo "Reiniciando o roteador com ip $ip aguarde aproximadamente 1 minuto e meio para voltar a utilizar a Internet"
                     curl --user admin:admin http://$ip/userRpm/SysRebootRpm.htm?Reboot=Reboot
                     
@@ -105,27 +108,30 @@ do
                     sleep 10
 
                     #caso o valor seja igual a dez
-                    if [ "$cont" == "10" ]; then
+#                    if [ "$cont" == "10" ]; then
                         #desligando a maquina
                         #poweroff
                         
                         #contador de erros
-                        cont=$((cont+1))
+#                       cont=$((cont+1))
                         
                         #mostrando contador
-                        echo $cont
-                    fi
-                    
+#                       echo $cont
+#                    fi                    
             else
+                clear
                 #mostra mensagem
-                echo "Você está online!"
+                echo "ONLINE!" 
+                date
+                echo "---------------------------------------------------------------"
+                sleep 10                
                 
                 #aguarda 1 minuto para realizar o teste novamente
-                sleep 60	
+#               sleep 60	
                 
                 #intervalo de quinze minutos
                 #sleep 900
-		fi	
+            fi	
 	fi
 done
 ################################################################################
