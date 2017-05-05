@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.26.0.0.0 #
+# versão do script: 0.0.28.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -201,7 +201,7 @@ documentarios
 filmes
 games
 musicas
-podcast
+#podcast
 podcast_pendentes
 seriados
 shows
