@@ -1,0 +1,90 @@
+//passos iniciais
+import this
+
+
+ord('@'): Mostra o valor correspondente na tabela ASC II
+chr(12): Mostra o numero equivalente o item na tabela;
+
+//trabalhando com listas
+a = [1,2,3,4]
+
+//copiando mesmo numero de ponteiros
+b = a 
+
+//copiando itens da lista
+b = append(6)
+
+//importando biblioteca de matematica
+import math
+
+//chamando biblioteca
+math.sqrt();		//testando raiz quadrada
+
+//multiplicando itens de uma lista
+a = [elem*3 for elem in a]
+
+//indexando apelidos para um determinada biblioteca
+import math as m
+
+//importando metodos especificos de uma determinada biblioteca
+from math import pi, sin, cos
+	//importando todos os metodos de um classe
+		from math import *
+
+//imprimindo informacoes
+print("hello world")
+
+	//nova linha
+		\n
+
+//criando input's
+nome = input("Digite o seu nome: ")
+
+
+//criando menus
+'valor' = 'tipodeentrada(input('Mensagem'))'
+	//comparacoes
+		if / elseif / else
+
+#laços de condicionais
+i = 1
+
+while i <= 100:
+	print(i, end='')
+	i += 1
+
+#laço iterativo
+lista = [1, "dois", 4, "quatro"]
+
+#Jeito pythonico
+for elem in lista:
+	print(elem, end= '')
+
+#Estilo C
+for i in range(len(lista)):
+	print(lista[i], end='')
+
+#remove espaços do final
+strip
+
+	#remove espaços entre as palavras
+	split
+
+#retornando chaves de uma variavel
+d.keys
+
+	#retornando valores de uma variavel
+	d.values
+
+#criando funcoes 
+def soma(x,y):
+	'documentacao'
+
+	return x+y
+
+#chamando funcao
+print(soma(10,30)
+
+#github
+	giulianoramos
+	thiagoescarrone
