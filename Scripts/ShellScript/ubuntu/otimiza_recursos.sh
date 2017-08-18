@@ -11,17 +11,16 @@ clear
 echo "Olá, este script foi criado para otimização de recursos em notebook's"
 echo "---------------------------------------------------------------------"
 echo "Seu uso é recomendado para utilização, quando deseja-se uma maior duração na bateria na leitura ou produção de textos"
-echo "Não é recomendado o uso, caso vá realizar tarefas complexas pois dessa forma ele irá prejudicar a sua bateria"
+echo "Não é recomendado o uso, caso vá realizar tarefas complexas pois dessa forma ele irá prejudicar a duração da sua bateria"
 echo "---------------------------------------------------------------------"
 echo
-echo "Você realmente dessa testá-lo? (s ou n)"
 echo "|---------------------------------------------------|"
-echo "| Digite s para habilitar a otimização de recursos  |"
-echo "| Digite n para desabilitar a otimização de recursos|"
+echo "| Digite 1 para habilitar a otimização de recursos  |"
+echo "| Digite 0 para desabilitar a otimização de recursos|"
 echo "|---------------------------------------------------|"
 read valor
 clear
-if [ "$valor" == "s" ]; then
+if [ "$valor" == "1" ]; then
 	echo "Você acabou de ativar a otimização de recursos, realizando alterações..."
 	sleep 3
 	echo
@@ -30,9 +29,9 @@ if [ "$valor" == "s" ]; then
 		echo 0 >> /sys/devices/system/cpu/cpu1/online
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
 		echo 0 >> /sys/devices/system/cpu/cpu3/online
-	echo "| Desativando Wi-fi	                                  |"
-	echo "| ======================================================= |"
-		echo 0 >  /sys/class/rfkill/rfkill0/state
+# 	echo "| Desativando Wi-fi	                                  |"
+# 	echo "| ======================================================= |"
+# 		echo 0 >  /sys/class/rfkill/rfkill0/state
 	echo
 	echo "A partir de agora, o seu computador irá consumir menos recursos e talvez a sua bateria irá durar mais.."
 	echo "Caso mantenha o uso do notebook constante e com poucas tarefas rodando em paralelo."
@@ -45,8 +44,8 @@ else
 		echo 1 >>  /sys/devices/system/cpu/cpu1/online
 	  	echo 1 >>  /sys/devices/system/cpu/cpu2/online
 	 	echo 1 >>  /sys/devices/system/cpu/cpu3/online
-	echo "| Ligando Wi-fi                                           |"
-	echo "| ======================================================= |"
-		echo 1 > /sys/class/rfkill/rfkill0/state
+# 	echo "| Ligando Wi-fi                                           |"
+# 	echo "| ======================================================= |"
+# 		echo 1 > /sys/class/rfkill/rfkill0/state
 	echo
 fi
