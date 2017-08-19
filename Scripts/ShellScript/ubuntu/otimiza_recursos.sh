@@ -26,9 +26,12 @@ if [ "$valor" == "1" ]; then
 	echo
 	echo "| ======================================================= |"
 	echo "| Desativando nucleo do processador 1,2,3 respectivamente |"
+	
+                ##ATENÇÃO: NUNCA DESATIVAR O NUCLEO 0 DO PROCESSADOR, TAL OPÇÃO NUNCA FOI TESTADA.##	
 		echo 0 >> /sys/devices/system/cpu/cpu1/online
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
 		echo 0 >> /sys/devices/system/cpu/cpu3/online
+        
 # 	echo "| Desativando Wi-fi	                                  |"
 # 	echo "| ======================================================= |"
 # 		echo 0 >  /sys/class/rfkill/rfkill0/state
