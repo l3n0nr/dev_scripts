@@ -1,3 +1,6 @@
+#apache	
+		apt-get install apache2 -y
+
 #servidor web
                 apt-get install php5 php5-mysql mysql-server -y
 
