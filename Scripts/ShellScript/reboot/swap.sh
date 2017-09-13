@@ -8,3 +8,4 @@ echo "Ligando a memoria Swap.."
 echo "--------------------------"
 clear
 echo "Limpeza da memoria Swap realizada com sucesso!"
+clear
