@@ -35,7 +35,7 @@ iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -m state --state RELATED,ESTABLISHED,NEW -j ACCEPT
 iptables -A OUTPUT -m state --state RELATED,ESTABLISHED,NEW -j ACCEPT
 
-iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -A lo -j ACCEPT
 
 ###################
 # COMPARTILHAMENTO#

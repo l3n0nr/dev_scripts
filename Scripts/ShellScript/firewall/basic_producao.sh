@@ -1,4 +1,4 @@
-# Referência: <https://www.vivaolinux.com.br/topico/Squid-Iptables/Firewall-Bloqueando-parcialmente-saida-de-Email>
+# Referência: <https://www.vivaolinux.com.br/topico/Squid-Aptables/Firewall-Bloqueando-parcialmente-saida-de-Email>
 #!/bin/
 # Script de Regras do Iptables
 # Acionado por /etc/init.d/firewall start
@@ -7,7 +7,7 @@
 #*filter
 
 iptables -t filter -A INPUT -p icmp -j ACCEPT
-iptables -t filter -A INPUT -i tun0 -j ACCEPT
+iptables -t filter -A INPUT -A tun0 -j ACCEPT
 
 iptables -t filter -A INPUT -p udp -m udp --sport 53 -j ACCEPT #DNS
 iptables -t filter -A INPUT -p udp -m udp --dport 53 -j ACCEPT
@@ -27,7 +27,7 @@ iptables -t filter -A INPUT -p tcp -m tcp --sport 21 -j ACCEPT #ftp
 iptables -t filter -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT
 iptables -t filter -A INPUT -p tcp -m tcp --sport 5900 -j ACCEPT #VNC
 iptables -t filter -A INPUT -p tcp -m tcp --dport 5900 -j ACCEPT
-iptables -t filter -A INPUT -p tcp -m tcp --sport 8245 -j ACCEPT #NO-IP
+iptables -t filter -A INPUT -p tcp -m tcp --sport 8245 -j ACCEPT #NO-AP
 iptables -t filter -A INPUT -p tcp -m tcp --dport 8245 -j ACCEPT
 iptables -t filter -A INPUT -p tcp -m tcp --sport 10050 -j ACCEPT #Zabbix
 iptables -t filter -A INPUT -p tcp -m tcp --dport 10050 -j ACCEPT
@@ -48,35 +48,35 @@ iptables -t filter -A INPUT -p tcp -m tcp --dport 809 -j ACCEPT
 iptables -t filter -A INPUT -p udp -m udp --sport 1194 -j ACCEPT #openvpn - OpenVPN
 iptables -t filter -A INPUT -p udp -m udp --dport 1194 -j ACCEPT
 
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --sport 137 -j ACCEPT #netbios-ns - NETBIOS Name Service
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --dport 137 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --sport 139 -j ACCEPT #netbios-ns - NETBIOS Name Service
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 139 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --sport 139 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --dport 139 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --sport 22000 -j ACCEPT #snapenetio - SNAPenetIO - #alterado para eth1 "verificar se houver erros"
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --sport 138 -j ACCEPT #netbios-dgm - NETBIOS Datagram Service
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 138 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --sport 138 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --dport 138 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --sport 135 -j ACCEPT #epmap - DCE endpoint resolution
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 135 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --sport 135 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --dport 135 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --sport 445 -j ACCEPT #microsoft-ds - Microsoft-DS
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 445 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --sport 445 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p udp -m udp --dport 445 -j ACCEPT
-iptables -t filter -A INPUT -i lo -p udp -m udp --sport 137 -j ACCEPT #netbios-ns - NETBIOS Name Service
-iptables -t filter -A INPUT -i lo -p udp -m udp --dport 137 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --sport 137 -j ACCEPT #netbios-ns - NETBIOS Name Service
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --dport 137 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 139 -j ACCEPT #netbios-ns - NETBIOS Name Service
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 139 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --sport 139 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --dport 139 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 22000 -j ACCEPT #snapenetio - SNAPenetIO - #alterado para eth1 "verificar se houver erros"
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 138 -j ACCEPT #netbios-dgm - NETBIOS Datagram Service
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 138 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --sport 138 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --dport 138 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 135 -j ACCEPT #epmap - DCE endpoint resolution
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 135 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --sport 135 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --dport 135 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 445 -j ACCEPT #microsoft-ds - Microsoft-DS
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 445 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --sport 445 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p udp -m udp --dport 445 -j ACCEPT
+iptables -t filter -A INPUT -A lo -p udp -m udp --sport 137 -j ACCEPT #netbios-ns - NETBIOS Name Service
+iptables -t filter -A INPUT -A lo -p udp -m udp --dport 137 -j ACCEPT
 iptables -t filter -A INPUT -s 127.0.0.1 -d 127.0.0.1 -p udp -j ACCEPT
 iptables -t filter -A INPUT -s 127.0.0.1 -d 127.0.0.1 -p tcp -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 3128 -j ACCEPT #Redirecionaento squid
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 80 -j ACCEPT #http
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --sport 81 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p tcp -m tcp --dport 81 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 3128 -j ACCEPT #Redirecionaento squid
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 80 -j ACCEPT #http
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 81 -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --dport 81 -j ACCEPT
 iptables -t filter -A INPUT -p tcp -m tcp --dport 7531 -j ACCEPT
-iptables -t filter -A INPUT -i eth1 -p icmp -j ACCEPT
+iptables -t filter -A INPUT -A eth1 -p icmp -j ACCEPT
 iptables -t filter -A INPUT -p tcp -m tcp --sport 37 -j ACCEPT #RelÃ³gio (time)
 iptables -t filter -A INPUT -p tcp -m multiport -s 0/0 -d 192.168.11.254 --dport 3050,3051 -j ACCEPT #Firebird
 iptables -t filter -A OUTPUT -p tcp -m multiport -s 0/0 -d 192.168.11.254 --sport 3050,3051 -j ACCEPT
@@ -145,8 +145,8 @@ iptables -t filter -A FORWARD -p udp -m udp --dport 123 -j ACCEPT
 # Apenas para a lista da linha abaixo serÃ¡ permitido o acesso!
 for t in `cat /brasfaiber/Administrativo/Internet/access.dat` ; do
 # Bloqueia o acesso a todos exceto os da lista (!)
-iptables -I FORWARD -i eth1 -m string --algo bm --string "facebook.com" -j DROP ! -s $t
-iptables -I FORWARD -i eth1 -m string --algo bm --string "twitter.com" -j DROP ! -s $t
+iptables -A FORWARD -A eth1 -m string --algo bm --string "facebook.com" -j DROP ! -s $t
+iptables -A FORWARD -A eth1 -m string --algo bm --string "twitter.com" -j DROP ! -s $t
 done
 ## Fim do Bloqueio Redes Sociais
 
@@ -166,12 +166,12 @@ iptables -t filter -A FORWARD -j DROP
 
 #*nat
 
-iptables -t nat -A PREROUTING -i eth1 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 3128
+iptables -t nat -A PREROUTING -A eth1 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 3128
 iptables -t nat -A POSTROUTING -s 192.168.11.0/255.255.255.0 -o eth0 -j MASQUERADE
 
 ### Encaminhamento portas DVR ###
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 7070 -j DNAT --to-destination 192.168.11.33:7070
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 37777 -j DNAT --to-destination 192.168.11.33:37777
+iptables -t nat -A PREROUTING -A eth0 -p tcp --dport 7070 -j DNAT --to-destination 192.168.11.33:7070
+iptables -t nat -A PREROUTING -A eth0 -p tcp --dport 37777 -j DNAT --to-destination 192.168.11.33:37777
 ### Fim do Encaminhamento portas DVR ###
 
 #iptables -A INPUT -j LOG --log-level info --log-prefix "DROP:"

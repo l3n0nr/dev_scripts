@@ -93,7 +93,7 @@ iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -m state --state RELATED,ESTABLISHED,NEW -j ACCEPT
 iptables -A OUTPUT -m state --state RELATED,ESTABLISHED,NEW -j ACCEPT
 
-iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -A lo -j ACCEPT
 
 echo "Liberando conexoes..."
 echo "ON.......................................................[#ON]"
@@ -119,10 +119,10 @@ echo "ON ......................................................[#OK]"
 #Bloqueio Anti-Spoofings#
 #########################
 
-iptables -A INPUT -s 127.0.0.0/8 -i eth0 -j DROP
-iptables -A INPUT -s 127.0.0.0/8 -i eth0 -j DROP
-iptables -A INPUT -s 192.168.1.0/24 -i eth0 -j DROP
-iptables -A INPUT -s 192.168.1.0/24 -i eth0 -j DROP
+iptables -A INPUT -s 127.0.0.0/8 -A eth0 -j DROP
+iptables -A INPUT -s 127.0.0.0/8 -A eth0 -j DROP
+iptables -A INPUT -s 192.168.1.0/24 -A eth0 -j DROP
+iptables -A INPUT -s 192.168.1.0/24 -A eth0 -j DROP
 
 echo "ativado o bloqueio de tentativa de ataque do tipo Anti-spoofings"
 echo "ON .....................................................[#OK]"
@@ -132,7 +132,7 @@ echo "ON .....................................................[#OK]"
 #######################################
 
 iptables -N SSH-BRUT-FORCE
-iptables -A INPUT -i $LAN -p tcp --dport 22 -j SSH-BRUT-FORCE
+iptables -A INPUT -A $LAN -p tcp --dport 22 -j SSH-BRUT-FORCE
 iptables -A SSH-BRUT-FORCE -m limit --limit 1/s --limit-burst 4 -j RETURN
 iptables -A SSH-BRUT-FORCE -j DROP
 
@@ -145,7 +145,7 @@ echo "ON .....................................................[#OK]"
 
 echo "0" > /proc/sys/net/ipv4/tcp_syncookies
 iptables -N syn-flood
-iptables -A INPUT -i $LAN -p tcp --syn -j syn-flood
+iptables -A INPUT -A $LAN -p tcp --syn -j syn-flood
 iptables -A syn-flood -m limit --limit 1/s --limit-burst 4 -j RETURN
 iptables -A syn-flood -j DROP
 
@@ -153,12 +153,12 @@ echo "ativado o bloqueio de ataque do tipo SYN-FLOOD"
 echo "ON .....................................................[#OK]"
 
 ################################################# 
-#Descarte de pacotes nao-identificado ICMP (ping)
+#Descarte de pacotes nao-Adentificado ICMP (ping)
 #################################################
 
 iptables -A OUTPUT -m state -p icmp --state INVALID -j DROP
 
-echo "ativado o bloqueio a tentativa de ataque do tipo PING-ICMP"
+echo "ativado o bloqueio a tentativa de ataque do tipo PING-ACMP"
 echo "ON .....................................................[#OK]"
 
 ######################
@@ -167,7 +167,7 @@ echo "ON .....................................................[#OK]"
 
 echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
 iptables -N PING-MORTE
-iptables -A INPUT -p icmp --icmp-type echo-request -j PING-MORTE
+iptables -A INPUT -p icmp --Acmp-type echo-request -j PING-MORTE
 iptables -A PING-MORTE -m limit --limit 1/s --limit-burst 4 -j RETURN
 iptables -A PING-MORTE -j DROP
 
@@ -178,7 +178,7 @@ echo "ON .....................................................[#OK]"
 ##Impede ataques DoS a maquina limitando a quantidade de respostas do ping##
 ############################################################################
 
-iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s -j DROP
+iptables -A INPUT -p icmp --Acmp-type echo-request -m limit --limit 1/s -j DROP
 
 echo "Previne ataques DoS"
 echo "ON .....................................................[#OK]"
@@ -187,7 +187,7 @@ echo "ON .....................................................[#OK]"
 ##Bloqueia completamente o ping##
 #################################
 
-iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+iptables -A INPUT -p icmp --Acmp-type echo-request -j DROP
 
 echo "Previne ataques PING"
 echo "ON .....................................................[#OK]"
@@ -210,7 +210,7 @@ echo "ON .....................................................[#OK]"
 ##Libera o acesso via SSH e Limita o numero de tentativas de acesso a 4 a cada minuto##
 #######################################################################################
 
-#iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
+#iptables -A INPUT -p tcp --dport 22 -A eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
 #iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 #iptables -A INPUT -p udp --dport 22 -j ACCEPT
 
@@ -238,7 +238,7 @@ iptables -A INPUT -p udp --dport 137:139 -j ACCEPT
 iptables -A INPUT -p tcp --dport 445 -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -A lo -j ACCEPT
 iptables -A INPUT -p udp --dport 137 -j ACCEPT
 iptables -A INPUT -p udp --dport 138 -j ACCEPT
 iptables -A INPUT -p tcp --dport 139 -j ACCEPT
