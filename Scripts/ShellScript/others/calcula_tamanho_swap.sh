@@ -29,7 +29,7 @@ echo "Tamanho da memória é $tam_mem MB"
 # se valor menor que 2GB
 if [ "$tam_mem" -lt "2048" ]; then
     # calculando tamanho swap
-    var=$((($tam_mem * 7)/10))
+    var=$((($tam_mem * 5)/10))
     # var_teste=$(($tam_mem - $var))
 
     # mostrando valor
@@ -37,14 +37,14 @@ if [ "$tam_mem" -lt "2048" ]; then
 
 elif [ "$tam_mem" -lt "4092" ]; then
     # calculando tamanho swap
-    var=$((($tam_mem * 5)/10))
+    var=$((($tam_mem * 3)/10))
     # var_teste=$(($tam_mem - $var))
 
     # mostrando valor
     echo "Tamanho da memória SWAP recomendada: $var MB"
 else
     # calculando tamanho swap
-    var=$((($tam_mem * 3)/10))
+    var=$((($tam_mem * 1)/10))
     # var_teste=$(($tam_mem - $var))
 
     # mostrando valor
