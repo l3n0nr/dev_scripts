@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.30.0.0.0 #
+# versão do script: 0.0.35.0.0.1 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -27,9 +27,13 @@
 #           não está salvando os dados dos diretórios nos arquivos de texto(testado dia 08/02 - 22:40)
 # 	e = pendencias
 # 	f = desenvolver
+#           - Definir variaveis globais como padrao, modificar apenas o caminho final nas variaveis locais dentro de cada função.
 #
-#       OBS: Verificar se o "tree" está instalado na máquina, senão algumas funções não irão funcionar.
-#            (apt install tree -y)
+#       OBS: 
+#           - Verificar se o "tree" está instalado na máquina, senão algumas funções não irão funcionar.
+#             (apt install tree -y)
+#           - Criar os arquivos necessarios, antes de realizar o backup na primeira vez que o script for executado.
+#            
 #
 ################################################################################
 #
@@ -44,22 +48,30 @@
 #
 ################################################################################
 
+#criando variaveis globais
+# caminhoorigem="/media/lenonr/BACKUP/Arquivos/"
+# caminhodestino="/home/lenonr/MEGA/Outros/Lista/"
+
+# criando arquivo dentro de cada funcao, para evitar possiveis erros
+#     touch $caminhodestino/Filmes.txt
+
 filmes()
-{
+{    
     #limpando tela
     clear
     
     #criando variaveis
-    caminhofilmesorigem="/media/lenonr/BACKUP/Arquivos/Filmes"
+#     caminhofilmesorigem= $caminhoorigem/Filmes
     caminhofilmesdestino="/home/lenonr/MEGA/Outros/Lista/Filmes.txt"
-    caminhofilmesdestinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"
+    caminhofilmesdestino="/home/lenonr/MEGA/Outros/Lista/"
+    caminhofilmesdestinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"    
     
     echo "Verificando Filmes, aguarde..."
     sleep 2
     
     #gerando arquivo
-    trre $caminhofilmesorigem | grep -> $caminhofilmesdestino 
-    tree $caminhofilmesorigem | grep -> $caminhofilmesdestinohd 
+    tree $caminhofilmesorigem > $caminhofilmesdestino 
+    tree $caminhofilmesorigem > $caminhofilmesdestinohd 
 }
 
 seriados()
@@ -68,7 +80,7 @@ seriados()
     clear
     
     #criando variaveis
-    caminhoseriadosorigem="/media/lenonr/BACKUP/Arquivos/Seriados"
+    caminhoseriadosorigem="/media/lenonr/BACKUP/Arquivos/Seriados/"
     caminhoseriadosdestino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"
     caminhoseriadosdestino="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
     
@@ -76,8 +88,8 @@ seriados()
     sleep 2
     
     #gerando arquivo
-    tree -f $caminhoseriadosorigem > $caminhoseriadosdestino
-    tree -f $caminhoseriadosorigem > $caminhoseriadosdestinohd
+    tree $caminhoseriadosorigem > $caminhoseriadosdestino
+    tree $caminhoseriadosorigem > $caminhoseriadosdestinohd
 }
 
 documentarios()
