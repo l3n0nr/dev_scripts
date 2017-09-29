@@ -37,6 +37,14 @@ if [ "$tam_mem" -lt "2048" ]; then
 
     # mostrando valor
     echo "Tamanho da memória SWAP recomendada: $swap MB"	        
+    
+    echo     
+    # realizando soma das memorias
+    total=$(($tam_mem+$swap))
+    
+    # mostrand memoria total do computador
+    echo "O seu computador ira conter $total MB de memória total."
+    echo 
 
 elif [ "$tam_mem" -lt "4092" ]; then
     # calculando tamanho swap
@@ -61,6 +69,14 @@ else
 
     # mostrando valor
     echo "Tamanho da memória SWAP recomendada: $swap MB"
+    
+    echo     
+    # realizando soma das memorias
+    total=$(($tam_mem+$swap))
+    
+    # mostrand memoria total do computador
+    echo "O seu computador ira conter $total MB de memória total."
+    echo 
 fi
 
 # echo "Teste: $var_teste MB"
