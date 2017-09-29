@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.28.0.0.0 #
+# versão do script: 0.0.30.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -40,7 +40,7 @@
 #
 ################################################################################
 # FUNCOES
-#   -Realiza backup no formato de arquivo de texto, diversos diretórios para o MEGA
+#   -Realiza backup no formato de arquivos de texto de diversos diretórios para o MEGA.
 #
 ################################################################################
 
@@ -50,14 +50,16 @@ filmes()
     clear
     
     #criando variaveis
-    caminhofilmesorigem="/media/lenonr/lenonr-500GB/Arquivos/Filmes/"
+    caminhofilmesorigem="/media/lenonr/BACKUP/Arquivos/Filmes"
     caminhofilmesdestino="/home/lenonr/MEGA/Outros/Lista/Filmes.txt"
+    caminhofilmesdestinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"
     
     echo "Verificando Filmes, aguarde..."
     sleep 2
     
     #gerando arquivo
-    ls $caminhofilmesorigem | grep -> $caminhofilmesdestino        
+    trre $caminhofilmesorigem | grep -> $caminhofilmesdestino 
+    tree $caminhofilmesorigem | grep -> $caminhofilmesdestinohd 
 }
 
 seriados()
@@ -66,14 +68,16 @@ seriados()
     clear
     
     #criando variaveis
-    caminhoseriadosorigem="/media/lenonr/lenonr-500GB/Arquivos/Seriados/"
+    caminhoseriadosorigem="/media/lenonr/BACKUP/Arquivos/Seriados"
     caminhoseriadosdestino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"
+    caminhoseriadosdestino="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
     
     echo "Verificando Seriados, aguarde..."
     sleep 2
     
     #gerando arquivo
     tree -f $caminhoseriadosorigem > $caminhoseriadosdestino
+    tree -f $caminhoseriadosorigem > $caminhoseriadosdestinohd
 }
 
 documentarios()
@@ -197,14 +201,14 @@ games()
 
 ################################################################################
 #
-documentarios
+# documentarios
 filmes
-games
-musicas
+# games
+# musicas
 #podcast
-podcast_pendentes
+# podcast_pendentes
 seriados
-shows
+# shows
 #
 ################################################################################
 clear
