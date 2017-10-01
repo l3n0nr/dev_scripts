@@ -15,9 +15,10 @@
 #										#
 #################################################################################
 #
-##################################
-# versão do script: 0.0.35.0.0.1 #
-##################################
+###################################################
+# versão do script:              0.0.40.0.0.1     #
+# # ultima ediçao realizada:      [01/10/17]      #
+###################################################
 #
 # legenda: a.b.c.d.e.f
 # 	a = alpha[0], beta[1];
@@ -57,48 +58,55 @@
 
 filmes()
 {    
-    #limpando tela
-    clear
-    
     #criando variaveis
-#     caminhofilmesorigem= $caminhoorigem/Filmes
+    caminhofilmesorigem="/media/lenonr/BACKUP/Arquivos/Filmes"
+        
     caminhofilmesdestino="/home/lenonr/MEGA/Outros/Lista/Filmes.txt"
-    caminhofilmesdestino="/home/lenonr/MEGA/Outros/Lista/"
     caminhofilmesdestinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"    
     
-    echo "Verificando Filmes, aguarde..."
+    # deletando arquivos por garantia
+#     printf "[*] Deletando arquivos já existentes...\n"
+#     rm $caminhofilmesdestino $caminhofilmesdestinohd
+    
+    # mostrando mensagem de execução 
+    printf "[*] Verificando Filmes, aguarde...\n"
     sleep 2
     
-    #gerando arquivo
-    tree $caminhofilmesorigem > $caminhofilmesdestino 
-    tree $caminhofilmesorigem > $caminhofilmesdestinohd 
+    # gerando arquivo
+    tree $caminhofilmesorigem > $caminhofilmesdestino
+    
+    # copiando arquivo
+    cat $caminhofilmesdestino > $caminhofilmesdestinohd
 }
 
 seriados()
-{
-    #limpando tela
-    clear
-    
+{   
     #criando variaveis
-    caminhoseriadosorigem="/media/lenonr/BACKUP/Arquivos/Seriados/"
-    caminhoseriadosdestino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"
-    caminhoseriadosdestino="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
+    caminhoseriadosorigem="/media/lenonr/BACKUP/Arquivos/Seriados"
     
-    echo "Verificando Seriados, aguarde..."
+    caminhoseriadosdestino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"    
+    caminhoseriadosdestinohd="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
+    
+    # deletando arquivos por garantia
+#     printf "[*] Deletando arquivos já existentes.. \n"
+#     rm $caminhoseriadosdestino $caminhoseriadosdestinohd
+    
+    # mostrando mensagem de execução
+    printf "[*] Verificando Seriados, aguarde...\n"
     sleep 2
     
-    #gerando arquivo
+    # gerando arquivo
     tree $caminhoseriadosorigem > $caminhoseriadosdestino
-    tree $caminhoseriadosorigem > $caminhoseriadosdestinohd
+    
+    # copiando arquivo
+    cat $caminhoseriadosdestino > $caminhoseriadosdestinohd
 }
 
 documentarios()
 {
-    #limpando tela
-    clear
-    
     #criando variaveis
     caminhodocumentariosorigem="/media/lenonr/lenonr-500GB/Arquivos/Documentarios/"
+    
     caminhodocumentariosdestino="/home/lenonr/MEGA/Outros/Lista/Documentarios.txt"
         
     echo "Verificando Documentários, aguarde..."	
@@ -110,11 +118,9 @@ documentarios()
 
 musicas()
 {
-    #limpando tela
-    clear
-    
     #criando variaveis
     caminhomusicasorigem="/home/lenonr/Music/Musicas/"
+    
     caminhomusicasdestino="/home/lenonr/MEGA/Outros/Lista/Musicas.txt	"
     
     echo "Verificando Musicas, aguarde..."
@@ -125,12 +131,10 @@ musicas()
 }
 
 podcast()
-{
-    #limpando a tela
-    clear
-    
+{  
     #criando variaveis
     caminhopodcastorigem="/home/lenonr/Music/Podcast/"
+    
     caminhopodcastdestino="/home/lenonr/MEGA/Outros/Lista/Podcast.txt"
     
     echo "Verificando Podcast's, aguarde..."
@@ -142,11 +146,9 @@ podcast()
 
 podcast_pendentes()
 {
-    #limpando a tela
-    clear
-    
     #criando variaveis
     caminhopodcastorigem="/home/lenonr/Downloads/Arquivos/Podcast"
+    
     caminhopodcastdestino="/home/lenonr/MEGA/Outros/Lista/Podcast_Pendentes.txt"
     
     echo "Verificando Podcast's pendentes, aguarde..."
@@ -159,12 +161,9 @@ podcast_pendentes()
 	
 shows()
 {
-
-    #limpando a tela
-    clear
-    
     #criando variaveis
     caminhoshowsorigem="/home/lenonr/Videos/Shows/"
+    
     caminhoshowsdestino="/home/lenonr/MEGA/Outros/Lista/Shows.txt"
     
     echo "Verificando Shows, aguarde..."
@@ -176,9 +175,6 @@ shows()
 
 games()
 {
-    #limpando a tela
-    clear
-    
     #mostrando mensagem    
     echo "Verificando save The Legend of Korra, aguarde..."
     
@@ -213,6 +209,9 @@ games()
 
 ################################################################################
 #
+clear
+printf "[+] Executando leitura das pastas \n"
+printf "################################################### \n"
 # documentarios
 filmes
 # games
@@ -222,7 +221,7 @@ filmes
 seriados
 # shows
 #
+printf "################################################### \n"
+printf "[+] Script finalizado! \n"
 ################################################################################
-clear
-echo "Backup realizado!"
 #sleep 5
