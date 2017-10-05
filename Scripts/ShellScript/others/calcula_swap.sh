@@ -1,6 +1,5 @@
 # Referência: <http://sejalivre.org/entendendo-as-variaveis-em-shell-script/>
 
-
 clear
 echo "CALCULADO DE MEMÓRIA SWAP"
 echo 

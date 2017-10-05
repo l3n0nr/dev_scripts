@@ -1,95 +1,108 @@
 #!/bin/bash
-  #Autor: Jhoni Vieceli
-  #Programa de criação de backup full
-  #DATA: 04/02/2008
-  #fonte: <https://www.vivaolinux.com.br/artigo/Script-de-backup-full-+-diferencial-+-compactador-+-restauracao?pagina=2>
-  clear
-  echo "Programa de backup de arquivos"
-  echo " "
+#
+# ARQUIVO ORIGINAL
+#
+#######################################################################################################################
+# Autor: Jhoni Vieceli
+# Programa de criação de backup full
+# DATA: 04/02/2008
+# fonte: <https://www.vivaolinux.com.br/artigo/Script-de-backup-full-+-diferencial-+-compactador-+-restauracao?pagina=2>
+#######################################################################################################################
+#
+# ARQUIVO MODIFICADO
+#
+#######################################################################################################################
+# Autor: Lenon Ricardo
+# Script para criação de backup's .tar.gz
+#######################################################################################################################
 
-  dadosfull()
-  {
-    #diretório que será feito o backup
-      cd "/run/media/lenonr/lenonr/"
-      SRCDIR="IFF"
+clear
+echo "Programa de backup de arquivos"
+echo " "
 
-    #diretório de destino do backup
-      DSTDIR="/home/lenonr/Dropbox/Backup_Pendrive"
+dadosfull()
+{
+#diretório que será feito o backup
+    cd "/run/media/lenonr/lenonr/"
+    SRCDIR="IFF"
 
-    #data atual
-      DATA=`date +%x-%k%M%S`
+#diretório de destino do backup
+    DSTDIR="/home/lenonr/Dropbox/Backup_Pendrive"
 
-    #numeros de dias em que sera deletado o antigo arquivo, já salvo
-      TIME_BKCP=+1
+#data atual
+    DATA=`date +%x-%k%M%S`
 
-    #mostrando mensagem
-      echo "Criando arquivos.."
-      echo "---------------------------------------------"
+#numeros de dias em que sera deletado o antigo arquivo, já salvo
+    TIME_BKCP=+1
 
-    #esperando alguns segundos
-      sleep 5
+#mostrando mensagem
+    echo "Criando arquivos.."
+    echo "---------------------------------------------"
 
-    #criar o arquivo full-data.tar no diretório de destino
-      ARQ=$DSTDIR/backup-$DATA.tar.gz
+#esperando alguns segundos
+    sleep 5
 
-    #data de inicio backup
-      DATAIN=`date +%c`
-      clear
+#criar o arquivo full-data.tar no diretório de destino
+    ARQ=$DSTDIR/backup-$DATA.tar.gz
 
-    #mostrando da criação do arquivo
-      echo "Data de inicio: $DATAIN"
-      echo " "
-      echo " "
-      clear
-  }
+#data de inicio backup
+    DATAIN=`date +%c`
+    clear
 
-  backupfull()
-  {
-    #sync
+#mostrando da criação do arquivo
+    echo "Data de inicio: $DATAIN"
+    echo " "
+    echo " "
+    clear
+}
 
-    #criando arquivo tar com caminho de origem e destino
-    tar -czvf $ARQ $SRCDIR
+backupfull()
+{
+#sync
+
+#criando arquivo tar com caminho de origem e destino
+tar -czvf $ARQ $SRCDIR
 
 
-    if [ $? -eq 0 ] ; then
-       echo "----------------------------------------"
-       clear
-            echo "Backup Full concluído com Sucesso"
-            echo "---------------------------------------------"
-            echo " "
-       #DATAFIN=`date +%c`
-       #echo "Data de termino: $DATAFIN"
-       #echo "Backup realizado com sucesso" >> /var/log/backup_full.log
-       #echo "Criado pelo usuário: $USER" >> /var/log/backup_full.log
-       #echo "INICIO: $DATAIN" >> /var/log/backup_full.log
-       #echo "FIM: $DATAFIN" >> /var/log/backup_full.log
-       #echo "-----------------------------------------" >> /var/log/backup_full.log
-       #echo " "
-       #echo "Log gerado em /var/log/backup_full.log"
+if [ $? -eq 0 ] ; then
+    echo "----------------------------------------"
+    clear
+        echo "Backup Full concluído com Sucesso"
+        echo "---------------------------------------------"
+        echo " "
+    #DATAFIN=`date +%c`
+    #echo "Data de termino: $DATAFIN"
+    #echo "Backup realizado com sucesso" >> /var/log/backup_full.log
+    #echo "Criado pelo usuário: $USER" >> /var/log/backup_full.log
+    #echo "INICIO: $DATAIN" >> /var/log/backup_full.log
+    #echo "FIM: $DATAFIN" >> /var/log/backup_full.log
+    #echo "-----------------------------------------" >> /var/log/backup_full.log
+    #echo " "
+    #echo "Log gerado em /var/log/backup_full.log"
 
-    else
-       echo "ERRO! "
-       #Backup do dia $DATAIN" >> /var/log/backup_full.log
-    fi
-  }
+else
+    echo "ERRO! "
+    #Backup do dia $DATAIN" >> /var/log/backup_full.log
+fi
+}
 
-  procuraedestroifull()
-  {
-    #apagando arquivos mais antigos (a mais de 20 dias que existe)
-      find $DSTDIR -name "f*" -ctime $TIME_BKCP -exec rm -f {} ";"
-         if [ $? -eq 0 ] ; then
-            echo "OBS: Arquivo de backup mais antigo eliminado!"
-            echo ""
-         else
-            echo "Erro durante a busca e destruição do backup antigo!"
-         fi
-  }
+procuraedestroifull()
+{
+#apagando arquivos mais antigos (a mais de 20 dias que existe)
+    find $DSTDIR -name "f*" -ctime $TIME_BKCP -exec rm -f {} ";"
+        if [ $? -eq 0 ] ; then
+        echo "OBS: Arquivo de backup mais antigo eliminado!"
+        echo ""
+        else
+        echo "Erro durante a busca e destruição do backup antigo!"
+        fi
+}
 
-  #chamando funcao para buscar os caminhos dos arquivos
-    dadosfull
+#chamando funcao para buscar os caminhos dos arquivos
+dadosfull
 
-  #chamando funcao para realizar o backup dos dados
-    backupfull
+#chamando funcao para realizar o backup dos dados
+backupfull
 
-  #chamando funcao que realiza limpeza dos arquivos existentes
-    procuraedestroifull
+#chamando funcao que realiza limpeza dos arquivos existentes
+procuraedestroifull
