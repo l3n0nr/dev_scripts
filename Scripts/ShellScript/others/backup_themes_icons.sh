@@ -42,6 +42,11 @@
 #       [-] - Não executado
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # FUNCOES
+# # # O objetivo desse script é realizar um backup dos temas e icones, para a pasta de destino.
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #                                                                               #
 #                               CORPO DO SCRIPT                                 #
 #                                                                               #
