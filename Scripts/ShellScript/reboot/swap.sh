@@ -1,11 +1,21 @@
-#desligando e ligado a swap no modo administrador
+# limpando a tela
 clear
-echo "Desligando a memoria Swap.."
-echo "Limpando a memoria Swap.."
-echo "--------------------------"
+
+echo "-------------------------------------------------------"
+# mostrando mensagem
+printf "[+] Memória SWAP desligada! \n"
+printf "[*] Limpando a memória Swap, aguarde.. \n"
+
+# desligando SWAP
 sudo swapoff -a && sudo swapon -a
-echo "Ligando a memoria Swap.."
-echo "--------------------------"
+
+# mostrando mensagem
+printf "[*] Memória SWAP ligada novamente! \n"
+echo "-------------------------------------------------------"
+
 clear
-echo "Limpeza da memoria Swap realizada com sucesso!"
-clear
+
+# limpando a tela
+echo "-------------------------------------------------------"
+printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
+echo "-------------------------------------------------------"
