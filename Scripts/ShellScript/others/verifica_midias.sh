@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.40.0.0.1     #
-# # ultima ediçao realizada:      [01/10/17]      #
+# versão do script:              0.0.43.0.0.1     #
+# # ultima ediçao realizada:      [21/10/17]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -77,6 +77,25 @@ filmes()
     
     # copiando arquivo
     cat $caminhofilmesdestino > $caminhofilmesdestinohd
+}
+
+filmes_assistidos()
+{
+    #criando variaveis
+    caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
+    
+    caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Assistidos.txt"
+    caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Assistidos.txt"    
+ 
+    # mostrando mensagem de execução 
+    printf "[*] Verificando Filmes Assistidos, aguarde...\n"
+    sleep 2
+    
+    # gerando arquivo
+    tree $caminhofilmes_a_origem | grep "[*]" > $caminhofilmes_a_destino
+    
+    # copiando arquivo
+    cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
 }
 
 seriados()
@@ -214,6 +233,7 @@ printf "[+] Executando leitura das pastas \n"
 printf "################################################### \n"
 # documentarios
 filmes
+filmes_assistidos
 # games
 # musicas
 #podcast
