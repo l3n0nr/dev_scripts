@@ -5,7 +5,7 @@ import smtplib
  
 # Credenciais
 remetente    = 'recebendoatualizacoes@gmail.com'
-senha        = 'emailalternativo1'
+senha        = '*'
  
 # Informações da mensagem
 destinatario = 'lenonrmsouza@gmail.com'
