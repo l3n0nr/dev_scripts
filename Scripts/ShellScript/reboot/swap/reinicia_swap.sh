@@ -36,7 +36,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.15.0.0.0]   #
+# # versão do script:           [0.0.20.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [03/11/17]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -102,17 +102,18 @@ SWAP_USADA_MB=$(( $SWAP_USADA / 1024 ))
 # -ne : (not equal) diferente. Equivale ao != que usamos a pouco.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
+# limpando tela
+clear
+
 # echo "Memoria total do computador:" $MEM_TOTAL "Kb"
 # echo "Memoria livre do computador:" $MEM_LIVRE "Kb"
 
 # echo "Swap total do computador:" $SWAP_TOTAL "Kb"
 # echo "Swap livre do computador:" $SWAP_LIVRE "Kb"
+
 # echo "Swap usada:" $SWAP_USADA "Kb"
 # echo "Memoria livre " $MEM_LIVRE_MB "MB"
 # echo "Swap usada " $SWAP_USADA_MB "MB"
-
-# limpando tela
-clear
 
 # realizando verificação de sudo
 if [[ `id -u` -ne 0 ]]; then
@@ -126,7 +127,7 @@ fi
 
 verifica()
 {
-    if [[ $MEM_LIVRE_MB -ge $SWAP_USADA_MB  ]]; then
+    if [[ $MEM_LIVRE_MB -lt $SWAP_USADA_MB  ]]; then
         printf "[-] Não foi possivel reiniciar, memoria a ser restaurada é maior do que a disponivel! \n"
     else
         printf "[+] Memória SWAP desligada! \n"
