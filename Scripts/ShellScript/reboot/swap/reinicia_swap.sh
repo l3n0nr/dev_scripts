@@ -36,7 +36,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.30.0.0.0]   #
+# # versão do script:           [0.0.31.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [04/11/17]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -139,9 +139,10 @@ fi
 verifica()
 {
     if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
-        printf "[-] Não foi possivel reiniciar, memoria a ser restaurada $SWAP_USADA_MB MB, maior do que a disponivel $MEM_LIVRE_MB MB! \n"
+        printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
         
     else
+        printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
         printf "[+] Memória SWAP desligada! \n"
         printf "[*] Limpando a memória Swap, aguarde.. \n"
         sudo swapoff -a && sudo swapon -a
