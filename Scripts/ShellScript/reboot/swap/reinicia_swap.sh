@@ -36,7 +36,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.21.0.0.0]   #
+# # versão do script:           [0.0.30.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [04/11/17]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -81,13 +81,24 @@
 # # # MEMORIA
 # MEM_TOTAL=$(awk '/^MemTotal/ { print $2; }' /proc/meminfo)
 MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
+# MEM_LIVRE=$(awk '/^MemAvailable/ { print $2; }' /proc/meminfo)
 
-# # # SWAP
+# # # SWAP 
+## Kb
 SWAP_TOTAL=$(awk '/^SwapTotal/ { print $2; }' /proc/meminfo)
+## MB
+SWAP_TOTAL_MB=$(( $SWAP_TOTAL / 1024 ))
+
+## Kb
 SWAP_LIVRE=$(awk '/^SwapFree/ { print $2; }' /proc/meminfo)
+## MB
+SWAP_LIVRE_MB=$(( $SWAP_LIVRE / 1024 ))
 
 # calculo de espaço disponivel
-SWAP_USADA=($SWAP_TOTAL - $SWAP_LIVRE)
+SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
+
+# aplicando margem de segurança - evitando travamentos - 10% extra
+SWAP_USADA=$(((($SWAP_USADA * 10)/100)+ $SWAP_USADA))
 
 # realizando calculo para MB
 MEM_LIVRE_MB=$(( $MEM_LIVRE / 1024 ))
@@ -127,8 +138,9 @@ fi
 
 verifica()
 {
-    if [[ $SWAP_USADA_MB -lt $MEM_LIVRE_MB ]]; then
-        printf "[-] Não foi possivel reiniciar, memoria a ser restaurada é maior do que a disponivel! \n"
+    if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
+        printf "[-] Não foi possivel reiniciar, memoria a ser restaurada $SWAP_USADA_MB MB, maior do que a disponivel $MEM_LIVRE_MB MB! \n"
+        
     else
         printf "[+] Memória SWAP desligada! \n"
         printf "[*] Limpando a memória Swap, aguarde.. \n"
