@@ -10,12 +10,7 @@
 # dialog yes no
 dialog --yesno "Voce deseja logar?" 0 0 
 
-if [[ $? -eq 0 ]]; then
-	#echo "Agora voce ja esta logado!"
-	dialog --infobox "Agora voce esta logado!" 0 0
-	sleep 5
-else
-	#echo "Voce escolheu sair"
-	dialog --infobox "Voce escolheu sair" 0 0
-	sleep 5
-fi
+# forma simplificada do if
+[[ $? -eq 0 ]] && \
+	dialog --sleep 5 --infobox "Agora voce esta logado!" 0 0 || \
+	dialog --sleep 5 --infobox "Voce escolheu sair" 0 0
