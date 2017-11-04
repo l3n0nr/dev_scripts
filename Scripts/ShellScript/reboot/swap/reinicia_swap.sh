@@ -36,9 +36,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.20.0.0.0]   #
+# # versão do script:           [0.0.21.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [03/11/17]      #
+# # ultima ediçao realizada:      [04/11/17]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -127,7 +127,7 @@ fi
 
 verifica()
 {
-    if [[ $MEM_LIVRE_MB -lt $SWAP_USADA_MB  ]]; then
+    if [[ $SWAP_USADA_MB -lt $MEM_LIVRE_MB ]]; then
         printf "[-] Não foi possivel reiniciar, memoria a ser restaurada é maior do que a disponivel! \n"
     else
         printf "[+] Memória SWAP desligada! \n"
