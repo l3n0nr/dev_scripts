@@ -4,6 +4,10 @@
 import os, sys
 
 ####	CABEÇALHO DO SCRIPT
+# versão do script: 0.10
+# data de criação: 01/10/17
+# ultima modificação: 05/10/17
+#
 ## SCRIPT PARA CALCULAR O TEMPO MEDIO(IDEAL) PARA O PREPARO DE UMA REFEIÇÃO PARA UM COZINHEIRO PREGUIÇO, BUSCANDO ASSIM, OTIMIZAR SEU TEMPO.
 #
 ### CRIANDO LOGICA
