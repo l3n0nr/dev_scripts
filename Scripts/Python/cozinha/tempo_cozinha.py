@@ -43,4 +43,4 @@ else:
 	print
 
 ####	RODAPE DO SCRIPT
-# Sim eu sim, é um script de noob! porem foi criado para aprendizagem na linguagem python, tenha paciencia!
+# Sim eu sei, é um script de noob! porem foi criado para aprendizagem na linguagem python, tenha paciencia!
