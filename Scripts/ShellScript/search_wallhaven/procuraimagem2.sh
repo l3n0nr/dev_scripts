@@ -8,15 +8,15 @@
 # 	contato: <lenonrmsouza@gmail.com>
 #
 #################################################################################
-#										#
-#	If I have seen further it is by standing on the shoulders of Giants.	#
-#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
-#							~Isaac Newton		#
-#										#
+#																				#
+#	If I have seen further it is by standing on the shoulders of Giants.		#
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)				#
+#							~Isaac Newton										#
+#																				#
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.14.0.0.0 #
+# versão do script: 0.0.15.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -76,7 +76,7 @@ echo "Imagem identificada! Abrindo o Firefox..."
 firefox https://alpha.wallhaven.cc/wallpaper/$url
 
 # removendo arquivos temporarios
-rm -r .caminho.txt .base.txt .imagem.txt .numero.txt
+rm -r .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
 
 #limpando a tela
 clear
