@@ -98,6 +98,25 @@ filmes_assistidos()
     cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
 }
 
+filmes_pendentes()
+{
+    #criando variaveis
+    caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
+    
+    caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
+    caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
+ 
+    # mostrando mensagem de execução 
+    printf "[*] Verificando Filmes Pendentes, aguarde...\n"
+    sleep 2
+    
+    # gerando arquivo
+    tree $caminhofilmes_a_origem | grep "-" > $caminhofilmes_a_destino
+    
+    # copiando arquivo
+    cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
+}
+
 seriados()
 {   
     #criando variaveis
@@ -234,6 +253,7 @@ printf "################################################### \n"
 # documentarios
 filmes
 filmes_assistidos
+# filmes_pendentes
 # games
 # musicas
 #podcast
