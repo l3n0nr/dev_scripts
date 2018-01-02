@@ -16,7 +16,7 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.44.0.0.1     #
+# versão do script:              0.0.50.0.0.0     #
 # # ultima ediçao realizada:      [02/01/18]      #
 ###################################################
 #
@@ -25,14 +25,11 @@
 # 	b = erros na execução;	
 # 	c = interações com o script + versões funcionando;
 # 	d = correções necessárias;
-#           não está salvando os dados dos diretórios nos arquivos de texto(testado dia 08/02 - 22:40)
 # 	e = pendencias
 # 	f = desenvolver
 #           - Definir variaveis globais como padrao, modificar apenas o caminho final nas variaveis locais dentro de cada função.
 #
 #       OBS: 
-#           - Verificar se o "tree" está instalado na máquina, senão algumas funções não irão funcionar.
-#             (apt install tree -y)
 #           - Criar os arquivos necessarios, antes de realizar o backup na primeira vez que o script for executado.
 #            
 #
@@ -55,6 +52,16 @@
 
 # criando arquivo dentro de cada funcao, para evitar possiveis erros
 #     touch $caminhodestino/Filmes.txt
+
+install_tree()
+{
+	# variavel de verificação
+    var_tree=$(which tree)
+
+    if [[ ! -e $var_tree ]]; then
+    	sudo apt install tree -y        
+    fi
+}
 
 filmes()
 {    
@@ -252,16 +259,23 @@ games()
 clear
 printf "[+] Executando leitura das pastas \n"
 printf "################################################### \n"
-# documentarios
-filmes
-filmes_assistidos
-# filmes_pendentes
-# games
-# musicas
-#podcast
-# podcast_pendentes
-seriados
-# shows
+install_tree
+
+# executa somente se tree esta instalado
+if [[ ! -e $var_tree ]]; then
+	echo "[-] Tree não está instalado"
+else
+	# documentarios
+	filmes
+	filmes_assistidos
+	# filmes_pendentes
+	# games
+	# musicas
+	#podcast
+	# podcast_pendentes
+	seriados
+	# shows
+fi
 #
 printf "################################################### \n"
 printf "[+] Script finalizado! \n"
