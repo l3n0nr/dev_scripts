@@ -16,7 +16,7 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.50.0.0.0     #
+# versão do script:              0.0.51.0.0.0     #
 # # ultima ediçao realizada:      [02/01/18]      #
 ###################################################
 #
@@ -81,6 +81,9 @@ filmes()
     
     # gerando arquivo
     tree $caminhofilmesorigem > $caminhofilmesdestino
+
+ #    f=`cat $caminhofilmes_destino | wc -l`
+	# printf "\n Este arquivo contem $f filmes listados!" >> $caminhofilmes_destino
     
     # copiando arquivo
     cat $caminhofilmesdestino > $caminhofilmesdestinohd
@@ -101,7 +104,8 @@ filmes_assistidos()
     # gerando arquivo
     tree $caminhofilmes_a_origem | grep "[*]" | sort > $caminhofilmes_a_destino
 
-    # sort $caminhofilmes_a_destino > $caminhofilmes_a_destino
+    fa=`cat $caminhofilmes_a_destino | wc -l`
+	printf "\n Este arquivo contem $fa filmes listados!" >> $caminhofilmes_a_destino
     
     # copiando arquivo
     cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
