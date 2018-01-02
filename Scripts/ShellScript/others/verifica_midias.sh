@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.43.0.0.1     #
-# # ultima ediçao realizada:      [21/10/17]      #
+# versão do script:              0.0.44.0.0.1     #
+# # ultima ediçao realizada:      [02/01/18]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -92,7 +92,9 @@ filmes_assistidos()
     sleep 2
     
     # gerando arquivo
-    tree $caminhofilmes_a_origem | grep "[*]" > $caminhofilmes_a_destino
+    tree $caminhofilmes_a_origem | grep "[*]" | sort > $caminhofilmes_a_destino
+
+    # sort $caminhofilmes_a_destino > $caminhofilmes_a_destino
     
     # copiando arquivo
     cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
@@ -111,7 +113,7 @@ filmes_pendentes()
     sleep 2
     
     # gerando arquivo
-    tree $caminhofilmes_a_origem | grep "-" > $caminhofilmes_a_destino
+    tree $caminhofilmes_a_origem | grep "-" | sort > $caminhofilmes_a_destino
     
     # copiando arquivo
     cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
