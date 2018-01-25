@@ -43,63 +43,71 @@
 
 menu()
 {
-    #limpando a tela
-    clear
-    
-    echo "Com este script, você pode iniciar ou desativar os aplicativos de transmissão de arquivos[Dropbox, MegaUpload e o Transmission], o que você deseja fazer?  Digite 0, para Desativar ou 1 para Iniciar" 
-    read -n1 -p "??" escolha
-    case $escolha in
-        0) echo            
-            #fechando dropbox
-            clear
-            echo "Fechando o Dropbox, aguarde.."
-            echo "-----------------------------"
-            #sleep 5
-            dropbox stop -i 
-            
-            #fechando megasync
-            clear
-            echo "Fechando o Megasync, aguarde.."
-            echo "------------------------------"
-            #sleep 5
-            killall -INT megasync -i -y
-            
-            #fechando transmission
-            clear
-            echo "Fechando o Transmission, aguarde.."
-            echo "----------------------------------"
-            #sleep 5
-            killall -INT transmission-gtk -i
-            ;;
-        1) echo            
-            #iniciando o dropbox
-            clear
-            echo "Iniciado o Dropbox, aguarde.."
-            echo "-----------------------------"
-            #sleep 5
-            dropbox start 
-            
-            #iniciando o megasync
-            clear
-            echo "Iniciado o Megasync, aguarde.."
-            echo "------------------------------"
-            #sleep 5
-            megasync 
-            
-            #iniciando o transmission
-            clear
-            echo "Iniciado o Transmission, aguarde.."
-            echo "----------------------------------"
-            #sleep 5
-            #transmission-gtk --minimized 
-            ;;
-        *) echo
-            echo Alternativa incorreta!!
-            sleep 1
-            menu
-            exit
-            ;;
-    esac
+	comando=$(dropbox status)
+
+	# if [ $# -eq 0 ]; then
+	if [ $comando == "0" ]; then
+	    #limpando a tela
+	    clear
+	    
+	    # echo "Com este script, você pode iniciar ou desativar os aplicativos de transmissão de arquivos[Dropbox, MegaUpload e o Transmission], o que você deseja fazer?  Digite 0, para Desativar ou 1 para Iniciar" 	 
+	    echo "Digite 0, para Desativar ou 1 para Iniciar"
+	    read -n1 -p "" escolha
+	    case $escolha in
+	        0) echo            
+	            #fechando dropbox
+	            clear
+	            echo "Fechando o Dropbox, aguarde.."
+	            echo "-----------------------------"
+	            #sleep 5
+	            dropbox stop -i 
+	            
+	            #fechando megasync
+	            clear
+	            echo "Fechando o Megasync, aguarde.."
+	            echo "------------------------------"
+	            #sleep 5
+	            killall -INT megasync -i -y
+	            
+	            #fechando transmission
+	            clear
+	            echo "Fechando o Transmission, aguarde.."
+	            echo "----------------------------------"
+	            #sleep 5
+	            killall -INT transmission-gtk -i
+	            ;;
+	        1) echo            
+	            #iniciando o dropbox
+	            clear
+	            echo "Iniciado o Dropbox, aguarde.."
+	            echo "-----------------------------"
+	            #sleep 5
+	            dropbox start 
+	            
+	            #iniciando o megasync
+	            clear
+	            echo "Iniciado o Megasync, aguarde.."
+	            echo "------------------------------"
+	            #sleep 5
+	            megasync 
+	            
+	            #iniciando o transmission
+	            clear
+	            echo "Iniciado o Transmission, aguarde.."
+	            echo "----------------------------------"
+	            #sleep 5
+	            #transmission-gtk --minimized 
+	            ;;
+	        *) echo
+	            echo Alternativa incorreta!!
+	            sleep 1
+	            menu
+	            exit
+	            ;;	        
+	    esac
+	else
+		echo "Dropbox ativado"
+	fi
 }
 
 ################################################################################
