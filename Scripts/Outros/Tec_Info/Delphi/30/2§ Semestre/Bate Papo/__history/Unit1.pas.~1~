@@ -1,0 +1,26 @@
+unit Unit1;
+
+interface
+
+uses
+  SysUtils, Classes, IBDatabase, DB, IBCustomDataSet, IBQuery;
+
+type
+  TDM = class(TDataModule)
+    IBQ: TIBQuery;
+    IBDB: TIBDatabase;
+    IBT: TIBTransaction;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{$R *.dfm}
+
+end.

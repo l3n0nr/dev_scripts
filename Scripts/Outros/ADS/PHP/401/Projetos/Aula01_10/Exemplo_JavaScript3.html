@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+  <!--CRIANDO CABEÇALHO-->
+  <head>
+        <meta charset="utf-8"/>
+
+        <!--CRIANDO javascript-->
+        <script type="text/javascript">
+          function alteraEstado()
+          {
+            var elemento = document.getElementById("demo");
+            elemento.style.fontSize = "25px";
+            elemento.style.color = "red";
+          }
+        </script>
+  </head>
+
+  <!--CRIANDO CORPO PAGINA-->
+  <body>
+    <h1> O que JavaScript faz? </h1>
+    <p id="demo"> JavaScript pode alterar o estilo de um elemento html </p>
+    <!--CRIANDO BOTAO-->
+    <button type="botao" onclick="alteraEstado()"> Clique aqui </button>
+  </body>
+</html>

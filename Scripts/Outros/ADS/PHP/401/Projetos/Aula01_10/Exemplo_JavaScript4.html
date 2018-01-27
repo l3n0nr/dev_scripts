@@ -1,0 +1,39 @@
+<!DOCTYPE>
+<html>
+  <!--CRIANDO CABEÇALHO-->
+  <head>
+        <meta charset="utf-8"/>
+
+        <!--CRIANDO javascript-->
+        <script type="text/javascript">
+          function funcaovalida()
+          {
+            /*CRIANDO VARIAVEIS*/
+            var elemento, texto;
+
+            elemento = document.getElementById("null") .value;
+
+            /*REALIZANDO COMPARAÇÃO*/
+            if (isNaN(elemento) || elemento < 1 || elemento > 10)
+            {
+              texto = "Entrada inválida";
+            }
+            else
+            {
+              texto = "Entrada OK!"
+            }
+            /*PARAGRAFO COM ID "DEMO" RECEBE O VALOR DO TEXTO*/
+            document.getElementById("demo").innerHTML = texto;
+          }
+        </script>
+  </head>
+
+  <!--CRIANDO CORPO PAGINA-->
+  <body>
+    <h1> JavaScript pode validar entradas! </h1>
+    <p> Insira um valor de 1 a 10: </p>
+    <input type="text" id="num"/>
+    <button type="button" onclick="funcaovalida()"> Enviar </button>
+    <p id="demo"> </p>
+  </body>
+</html>

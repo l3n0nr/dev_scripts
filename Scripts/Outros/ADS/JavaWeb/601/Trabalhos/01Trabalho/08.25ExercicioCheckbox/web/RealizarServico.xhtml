@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Realizando servico no posto de combustivel</title>
+    </h:head>
+    <h:body>    
+        <h:form>
+            <p:selectCheckboxMenu                 
+                value="#{servicos.servicosSelecionados}" 
+                label="Servicos">                   
+                <f:selectItems value="#{servicos.servicos}"/>                
+            </p:selectCheckboxMenu>            
+                        
+            <p:outputPanel style="width:250px;">   
+                <p:dataList 
+                    id="selecionados"
+                    value="#{servicos.servicosSelecionados}"
+                    var = "serv"
+                    emptyMessage="Nenhum servico selecionado"                    
+                    type="unordered"
+                    itemType="I">                    
+                    <!--mostrando a disciplina-->
+                        #{serv} 
+                </p:dataList> 
+            </p:outputPanel>            
+            
+            <p:selectCheckboxMenu                 
+                value="#{servicos.diasSelecionados}" 
+                label="Dias da Semana">                                                
+                <f:selectItem itemLabel="Domingo" itemValue="1"/>                    
+                <f:selectItem itemLabel="Segunda" itemValue="2"/>                    
+                <f:selectItem itemLabel="Terça" itemValue="3"/>                    
+                <f:selectItem itemLabel="Quarta" itemValue="4"/>                    
+                <f:selectItem itemLabel="Quinta" itemValue="5"/>                                
+                <f:selectItem itemLabel="Sexta" itemValue="6"/>                                            
+                <f:selectItem itemLabel="Sabado" itemValue="7"/>                    
+            </p:selectCheckboxMenu>                                                         
+                                        
+            <p:dataList          
+                id="selecionados1"
+                value="#{servicos.diasSelecionados}"
+                var = "dia"
+                emptyMessage="Nenhum dia selecionado"                    
+                type="unordered"
+                itemType="I">                    
+                <!--mostrando a disciplina-->
+                    #{dia} 
+            </p:dataList>      
+            
+            <h:panelGrid columns="2">                                
+                <p:outputLabel value="Servico"/>                    
+                <h:outputText id="resultArea" value="#{servicos.resultado}"/>
+                <p:growl id="ga" showDetail="true" sticky="true"/>                
+            </h:panelGrid>                                   
+            <p:commandLink value="Realizar Calculo" update="resultArea"
+                           actionListener="#{servicos.calcularServicos()}"/>                                                   
+        </h:form>
+    </h:body>    
+</html>
+

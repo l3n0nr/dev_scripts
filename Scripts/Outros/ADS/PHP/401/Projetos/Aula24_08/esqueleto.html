@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Esqueleto HTML 5</title>
+        <meta charset="utf-8">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+        </script>
+        <![endif]-->
+
+        <style>
+            body {
+                font-family: Verdana, sans-serif; 
+                font-size:0.8em;
+                width: 800px; 
+                margin: 0 auto;
+            }
+            
+            header,nav, section,article,footer{
+                border: 1px solid grey; 
+                margin:5px; 
+                padding:8px;
+            }
+            
+            section, nav{
+                width: 600px;
+            }
+            aside{
+                border: 1px solid grey; 
+                margin-right:5px; 
+                padding:8px;
+                width: 150px;
+                height: 100%;
+                float:right;
+            }
+            nav ul {margin:0; padding:0;}
+            nav ul li {display:inline; margin:5px;}
+        </style>
+    </head>
+    <body>
+        <!--CRIANDO CABEÇALHO-->
+        <header>
+            <h1>ESQUELETO HTML5</h1>            
+        </header>
+        <!--CRIANDO PAINEL LATERAL-->
+        <aside>
+            <h1>Elemento Aside</h1>
+            Aside, em inglês, quer dizer no lado. <br/>
+            Usamos esta tag para definir elementos, ou agrupá-los, de modo que formem um bloco que não está diretamente ligado ao conteúdo principal da página.<br/>
+            É comum o uso do elemento <b>&lt;aside&gt;</b> em HTML5, para definir regiões para publicidade, links laterais, banners e tudo mais que não for conteúdo principal.
+        </aside>
+        <!--CRIANDO PAINEL DE NAVEGAÇÃO-->        
+        <nav> 
+            <ul>
+                <!--CRIANDO PRIMEIRO LINK-->
+                <li> <a href="http://www.htmlprogressivo.net/2014/02/Tutorial-de-HTML5-Novas-Tags-Elementos-Semanticos.html" target = "true">Site HTML Progressivo </a> </li>
+                <!--CRIANDO SEGUNDO LINK-->
+                <li><a href="http://diveintohtml5.com.br/semantics.html" target="true"> Site sobre HTML </a> </li>
+                <!--CRIANDO TERCEIRO LINK-->
+                <li><a href="http://www.w3schools.com/html/default.asp"> Site HTML5 W3C SCHOOLS </a> </li>
+            </ul>
+        </nav>
+        <!--CRIANDO SESSÃO-->
+        <section>
+            <h1> ELEMENTOS SEMANTICOS </h1>
+            <!--CRIANDO ARTIGO-->
+            <article>
+                <!--CRIANDO CABEÇALHO DO ARTIGO-->
+                <h2>HEADER</h2>
+                <p>
+                  Antes de mais nada, cuidado para não confundir <b>&lt;header&gt;</b> com <b>&lt;head&gt;</b>.<br/>
+                    Como o nome sugere, ele é usado para estruturar um cabeçalho, geralmente de informações, de uma página, como o nome do site, slogan, marca, títulos etc.
+                </p>
+            </article>
+            <!--CRIANDO SEGUNDO ARTIGO-->
+            <article>
+                <h2>NAV</h2>
+                <p>
+                   A tag <b>&lt;nav&gt;</b> se refere à navegação de um site, que geralmente é composta por links com as principais páginas ou seções.<br/>
+                    É um elemento genérico, pois no geral, os sites realmente possuem um local para o usuário navegar, se localizar e achar facilmente conteúdo em uma página.<br/>
+                    Ou seja, o <b>&lt;nav&gt;</b> é um elemento para estruturar um site.                     
+                </p>
+            </article>
+            <!--CRIANDO TERCEIRO ARTIGO-->
+            <article>
+                <h2>ARTICLE</h2>
+                <p>
+                  Como o nome pode sugerir, a tag &lt;article&gt; define e estrutura uma região do seu site, de modo a deixar ela mais independente.<br/>
+                    Por exemplo, o conteúdo textual do artigo ou um jogo online.<br/>
+                    Ele fica independendo do menu de navegação, barra lateral ou rodapé.  
+                </p>
+            </article>
+            <!--CRIANDO QUARTO ARTIGO-->
+            <article>
+                <h2>FOOTER</h2>
+                <p>
+                    Os tags <b>&lt;footer&gt;</b> - rodapés são, geralmente, trechos de um site que aparecem ao fim de cada página.<br/>
+                    Sua ideia é a de dar informações sobre a página, sobre o site, listar outros links interessantes ou informações de direitos autorais.
+                </p>
+            </article>
+            <!--CRIANDO QUINTO ARTIGO-->
+            <article>
+                <h2>SECTION</h2>
+                <p>
+                    Agora que já mostramos as tags <b>&lt;article&gt;</b>, <b>&lt;header&gt;</b> e <b>&lt;footer&gt;</b>, ficará fácil entender a <b>&lt;section&gt;</b>.
+                    A section é, simplesmente, uma seção.<br/>
+                    Ele define e estrutura diversas partes de uma página, é bem genérica e seu uso ajuda a organizar os elementos de uma página.<br/>
+                    Com este elemento do HTML5, você poderá agrupar elementos que tem algo em comum, como uma seção na página de um artigo, com informações do autor e uma foto. É uma section do autor.<br/>
+                    As <b>&lt;section&gt;</b> são bem gerais e tem a função de agrupar elementos que fazem parte de um mesmo bloco lógico e estrutural, com relações entre si.
+                </p>
+            </article>
+        </section>
+        <!--CRIANDO RODAPE-->
+        <footer>
+            <p>
+                &copy; 2014 W3Schools. All rights reserved.                  
+            </p>
+        </footer>
+    </body>
+</html>

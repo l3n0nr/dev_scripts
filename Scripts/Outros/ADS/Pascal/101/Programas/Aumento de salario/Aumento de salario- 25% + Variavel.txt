@@ -1,0 +1,3 @@
+1-Faça um programa que receba  o salario de um funcionario, calcule e mostre o novo salario , sabendo-se que esse sofreu um aumento de 25 porcento.
+
+2-Faça um programa que receba o salario de um funciario e o percentual de aumento,calcule o novo salario e mostre o valor do aumento e o novo salario.

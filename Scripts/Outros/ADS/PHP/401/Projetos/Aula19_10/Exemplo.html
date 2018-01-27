@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>
+            $(document).ready(function()
+            {
+                $("button").click(function()
+                {
+                  $(this).hide();
+                }
+                );
+            }
+          );
+
+          $("button").dbclick(function()
+          {
+            $(this).hide();
+          }
+          );
+        </script>
+    </head>
+    <body>
+        <h2>Isso é um título</h2>
+        <p id="p1">Isso é um parágrafo</p>
+        <p>Isso é outro parágrafo</p>
+        <button>Clique aqui</button>
+    </body>
+</html>

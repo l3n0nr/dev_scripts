@@ -1,0 +1,9 @@
+CREATE TABLE `crudjava`.`crudjava` (
+`id` INT NOT NULL AUTO_INCREMENT ,
+`cpf` INT( 14 ) NOT NULL ,
+`nome` INT( 40 ) NOT NULL ,
+`email` INT( 40 ) NOT NULL ,
+`data_nasc` INT NOT NULL ,
+`momento_registro` INT NOT NULL ,
+PRIMARY KEY ( `id` )
+) ENGINE = MYISAM ;

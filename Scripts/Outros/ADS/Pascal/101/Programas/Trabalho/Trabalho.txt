@@ -1,0 +1,1 @@
+Desenvolva um algoritmo que tenha como entrada 3 notas, junto com o nome do aluno e forneça a media junto o respectivo nome informado anteriormente.

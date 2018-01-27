@@ -1,0 +1,49 @@
+unit Unidade3;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, XPMan, StdCtrls;
+
+type
+  TCadastrar = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    XPManifest1: TXPManifest;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Label5: TLabel;
+    Edit5: TEdit;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Cadastrar: TCadastrar;
+
+implementation
+
+{$R *.dfm}
+
+procedure TCadastrar.Button1Click(Sender: TObject);
+begin
+if (edit1.Text='') or (edit2.Text='')
+or (edit3.Text='') or (edit4.Text='')
+or (edit5.Text='')  then
+Showmessage ('Nao deixe campos vazios') ;
+
+if edit4.Text <> edit5.Text  then
+Showmessage ('Senha ou confirmação. estao erradas ') ;
+
+end;
+
+end.

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:dialog id="dialogNovo"  header="Novo-Contato" 
+                  modal="true" draggable="false" 
+                  resizable="false" widgetVar="dlgNovo"
+                  showEffect="drop" hideEffect="slide"
+                  closable="false" visible="true">
+            <h:form id="formNovo">
+                <p:outputLabel value="Nome: " />
+                <p:inputText id="nome" value="#{cadastro.pessoaCadastrada.nome}"/>
+                    
+                <p:outputLabel value="Cpf: " />
+                <p:inputMask mask="999.999.999-99" id="cpf" value="#{cadastro.pessoaCadastrada.cpf}"/>
+                    
+                <p:outputLabel value="Email: " />
+                <p:inputText id="email" value="#{cadastro.pessoaCadastrada.email}"/> 
+
+                <p:outputLabel value="Data Nascimento: " />
+                <p:calendar id="data_nasc" value="#{cadastro.pessoaCadastrada.datanascimento}"></p:calendar>                
+            
+                <p:commandButton value="Cadastrar" 
+                                 oncomplete="PF('dlgNovo').hide();" 
+                                 actionListener="#{cadastro.cadastrar()}"/>
+                
+                <!--PF = primefaces -->
+                <p:commandButton value="Cancelar" oncomplete="PF('dlgNovo').hide()"/>                                
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

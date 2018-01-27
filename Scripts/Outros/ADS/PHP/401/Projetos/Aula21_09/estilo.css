@@ -1,0 +1,51 @@
+body
+{
+  background-color: gray;
+  background-image: url("fundo.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+body
+{
+  font-size: 25px;
+}
+
+.cor
+{
+    color:limegreen;
+}
+
+.aln
+{
+  text-align: center;
+}
+
+.dec
+{
+  text-align: right;
+  text-decoration: overline;
+}
+
+.trans
+{
+  text-transform: uppercase;
+}
+
+.indent
+{
+  text-indent: 50px;
+}
+
+.fontf
+{
+    font-family: "Times New Roman", Times, serif;
+}
+
+.header
+{
+  background: white;
+  text-align: center;
+  padding: 20px;
+}

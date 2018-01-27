@@ -1,0 +1,126 @@
+<!--CRIANDO PADRAO DA PAGINA-->
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <title> Formulario de Teste </title>
+
+    <!--DEFININDO CODIFICAÇÃO DA PAGINA-->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="estilo.css">    
+  <head>
+
+  <body>
+      <form action= "pagina2.html" method="post">
+
+        <!--CRIANDO TITULO DO CORPO DA PAGINA-->
+        <h1 id="paragrafo" align= "center"> FORMULARIO DE PESQUISA </h1>
+
+        <p id="p1">
+          *O formulário não demora mais do que 1 minuto para ser respondido.
+        </p>
+
+        <p class="pp1">
+          *Teste
+        </p>
+
+
+        <fieldset>
+          <!--CRIANDO NOME-->
+          <label> Digite o seu nome: </label>
+          <input type="text" name="nome" required>
+          <br>
+          <br>
+
+          <!--CRIANDO ENDERECO-->
+          <label> Digite o seu endereco: </label>
+          <input type="text" name="endereco" required>
+          <br>
+          <br>
+
+          <!--CRIANDO NUMERO TELEFONE-->
+          <label> Digite o seu numero de telefone: </label>
+          <input type="text" name="telefone" required>
+          <br>
+          <br>
+
+          <!--CRIANDO DATA NASCIMENTO-->
+          <label> Digite a sua data de nascimento: </label>
+          <input type="date" name="data" required>
+          <br>
+          <br>
+
+          <!--CRIANDO GENERO-->
+          <label> Sexo: </label>
+            <input type="radio" name="sexo" value="masculino" required> Masculino
+            <input type="radio" name="sexo" value="feminino" required> Feminino
+            <input type="radio" name="sexo" value="indefinido" required checked> Indefinido
+          <br>
+          <br>
+
+          <!--CRIANDO CIDADE-->
+          <label> Digite a sua cidade:</label>
+          <input type="text" name="cidade" required>
+          <br>
+          <br>
+
+          <!--CRIANDO ESTADO-->
+          <label> Digite o seu estado: </label>
+          <select> name="estados" >
+            <option value= "AC">  Acre </option>
+            <option value="AL">  Alagoas </option>
+            <option value="AP">  Amapa </option>
+            <option value="AM">  Amazonas </option>
+            <option value="BA">  Bahia </option>
+            <option value="CE">  Ceará </option>
+            <option value="DF" >  Distrito Federal </option>
+            <option value="ES">  Espirito Santo </option>
+            <option value="GO">  Goias </option>
+            <option value="MA">  Maranhao </option>
+            <option value="MT">  Mato Grosso</option>
+            <option value="MS">  Mato Grosso do Sul </option>
+            <option value="MG">  Minas Gerais </option>
+            <option value="PA">  Para </option>
+            <option value="PB">  Paraiba </option>
+            <option value="PR">  Parana </option>
+            <option value="PE">  Pernambuco </option>
+            <option value="PI">  Piaui </option>
+            <option value="RJ">  Rio de Janeiro</option>
+            <option value="RN">  Rio Grande do Norte </option>
+            <option value="RS">  Rio Grande do Sul </option>
+            <option value="RO">  Rondonia </option>
+            <option value="RR">  Roraima </option>
+            <option value="SC">  Santa Catarina </option>
+            <option value="SP">  São Paulo </option>
+            <option value="SE">  Sergipe </option>
+            <option value="TO">  Tocantis </option>
+          </select>
+          <br>
+          <br>
+
+          <!--CRIANDO CEP-->
+          <label> Digite o seu CEP: </label>
+          <input type="text" name="cep" required="">
+          <br>
+          <br>
+
+          <!--CRIANDO EMAIL-->
+          <label> Digite o seu e-mail: </label>
+          <input type="email" name="email" required>
+          <br>
+          <br>
+
+          <!--SUGESTOES-->
+          <label>Caso tenha alguma sugestão: </label>
+          <br>
+          <textarea name="texto" cols="50" lang="50"> </textarea>
+          <br>
+          <br>
+        </fieldset>
+        <!--CRIANDO BOTAO-->
+        <h1 align="center">
+          <input type="submit" name="botao" value="Salvar" >
+        </h1>
+      </form>
+    </body>
+</html>

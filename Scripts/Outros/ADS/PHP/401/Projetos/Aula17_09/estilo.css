@@ -1,0 +1,19 @@
+  #p1
+  {
+    color: red;
+    background-color: gold;
+    text-align: left;
+    font-size: 20px;
+  }
+  .pp1
+  {
+    color: blue;
+    background-color: yellow;
+    text-align: right;
+    font-size: 20px;
+  }
+
+  #paragrafo
+  {
+    font-size: 40px;
+  }

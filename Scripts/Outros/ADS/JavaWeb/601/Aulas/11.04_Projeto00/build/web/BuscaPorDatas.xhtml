@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="opcoes">
+            <p:selectOneMenu value="#{buscas.optionBusca}">
+                
+                <f:selectItem itemLabel="Data Nascimento" itemValue="dtnasc"/>
+                
+                
+                <f:selectItem itemLabel="Momento registro" itemValue="monreg"/>
+            
+               <p:ajax event="valueChange" update=":opnasc :opmon"/>              
+                              
+            </p:selectOneMenu>
+            
+            
+        </h:form>
+        
+        <h:form id="opnasc">
+            <p:panel rendered="#{buscas.optionBusca eq 'dtnasc'}">
+                
+                     <p:outputLabel value="intervalo nascimento"/>
+                                                   
+                      <br/>
+                     <p:calendar value="#{buscas.dataInicial}"
+                                 pattern="dd/MM/yyyy"
+                                 required="true"
+                                 requiredMessage="Data inicial obrigatoria"
+                      />
+                     
+                      <p:calendar value="#{buscas.dataFinal}"
+                                 pattern="dd/MM/yyyy"
+                                 required="true"
+                                 requiredMessage="Data final obrigatoria"
+                      />
+                      
+                      <p:commandButton value="Buscar" update=""
+                                       actionListener="#{buscas.buscarPorDataNasc()}">
+                          
+                      </p:commandButton>
+              
+                     
+            </p:panel>
+ 
+        </h:form>
+        
+        
+         <h:form id="opmon">
+             
+            <p:panel rendered="#{buscas.optionBusca eq 'monreg'}">
+                
+                     <p:outputLabel value="intervalo registro"/>
+                     <br/>
+                     <p:calendar value="#{buscas.dataInicial}"
+                                 pattern="dd/MM/yyyy HH:mm:ss"
+                                 required="true"
+                                 requiredMessage="Data inicial obrigatoria"
+                      />
+                     
+                      <p:calendar value="#{buscas.dataFinal}"
+                                 pattern="dd/MM/yyyy HH:mm:ss"
+                                 required="true"
+                                 requiredMessage="Data final obrigatoria"
+                      />
+                      
+                      <p:commandButton value="Buscar" update=""
+                                       actionListener="#{buscas.buscarPorIntervaloRegistro()}">
+                          
+                      </p:commandButton>
+              
+                     
+            </p:panel>
+ 
+        </h:form>
+        
+            
+    </h:body>
+</html>
+

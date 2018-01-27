@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dataTable id="tblContatos" var="c" value="#{agenda.contatos}">
+                <!--criando um cabeçalho para mostrar as informações das colunas-->
+                <f:facet name="header">                    
+                    <h:commandLink>
+                        <p:graphicImage name="/img/relatorio.jpg"/>
+                        <p:dataExporter type="pdf" target="tblContatos"
+                                        fileName="contatos" encoding="ISO-8859-1"
+                                        preProcessor="#{agenda.preparaPDF}"
+                                        />
+                        <!--https://mvnrepository.com/artifact/com.lowagie/itext/2.1.7 -->
+                    </h:commandLink>
+                    
+                    <h:commandLink>
+                        <p:graphicImage name="/img/relatorio.jpg"/>
+                        <p:dataExporter type="xls" target="tblContatos"
+                                        fileName="contatos-excel" encoding="ISO-8859-1"
+                                        />
+                    </h:commandLink>
+                </f:facet>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{c.nome}"/>
+                </p:column>
+                <p:column headerText="Idade">
+                    <h:outputText value="#{c.idade}"/>
+                </p:column>
+                <p:column headerText="Renda">
+                    <h:outputText value="#{c.renda}"/>
+                </p:column>                                
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

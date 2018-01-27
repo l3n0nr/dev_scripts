@@ -1,0 +1,150 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 180
+  Width = 205
+  object IBQ: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 8
+    Top = 8
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'Login'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftString
+        Name = 'Senha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end>
+  end
+  object IBDB: TIBDatabase
+    Connected = True
+    DatabaseName = '200.132.44.222:c:\PAPO.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = IBT
+    ServerType = 'IBServer'
+    Left = 88
+    Top = 8
+  end
+  object IBT: TIBTransaction
+    DefaultDatabase = IBDB
+    Left = 48
+    Top = 8
+  end
+  object IBQ1: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 8
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'login'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'senha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end>
+  end
+  object IBQM: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 48
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cod_men'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'data'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'hora'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'texto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'usu_ori'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'usu_des'
+        ParamType = ptUnknown
+      end>
+  end
+  object IBQPROX: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 8
+    Top = 120
+  end
+  object IBQMMSG: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT * FROM MENSAGEM'
+      'WHERE COD_USU_ORI = :p_usu_log'
+      'OR COD_USU_DEST =:p_usu_log')
+    Left = 88
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'p_usu_log'
+        ParamType = ptUnknown
+      end>
+  end
+end

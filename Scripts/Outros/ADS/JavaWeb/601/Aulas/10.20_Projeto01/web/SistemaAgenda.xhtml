@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="arquivo.css"/>
+
+    </h:head>
+    <h:body>
+ 
+        <p:clock pattern="dd/MM/yyyy HH:mm:ss"/>
+        <p:dialog id="dialogNovo" header="Editar" modal="true" draggable="false" resizable="false" widgetVar="dlgNovo"
+                  showEffect="drop" hideEffect="slide" closable="false">
+            <h:form id="formA">    
+                <p:messages autoUpdate="true"/>  
+                <p:outputLabel for="nome" value="Nome:"/>
+                <p:inputText id="nome" value="#{cadastro.pessoaCadastrada.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
+                <p:outputLabel value="Email: "/>
+                <p:inputText value="#{cadastro.pessoaCadastrada.email}"/>
+
+                <p:outputLabel value="CPF: "/>
+                <p:inputMask id="cpf" value="#{cadastro.pessoaCadastrada.cpf}" mask="999.999.999-99" required="true" requiredMessage="O cpf é obrigatório!"/>
+
+
+                <p:outputLabel value="Data de nascimento: "/>
+                <p:calendar id="date" value="#{cadastro.pessoaCadastrada.dataNascimento}" pattern="dd/MM/yyyy" required="true" requiredMessage="A data é obrigatória!"/>
+
+                <p:commandButton value="Cadastrar" update=":formB"
+                                 oncomplete="if (!args.validationFailed){ PF('dlgNovo').hide();}"
+                                 >
+                                    
+                    <f:actionListener binding="#{cadastro.cadastrar()}"/>
+                    <f:actionListener binding="#{cadastro.listar()}"/>
+
+                </p:commandButton> 
+                <p:commandButton value="Cancelar" 
+                                 process="@this"
+                                 update=":formB"
+                                 oncomplete="PF('dlgNovo').hide()">
+                    <p:resetInput target=":formA"/>
+                </p:commandButton>
+
+            </h:form>
+        </p:dialog>   
+
+        <h:form id="formB">
+
+            <!-- adicionar filtro, ver o exemploDataTable e criar ArrayList separado para guardar os filtrados, para não dar erro -->
+            <p:dataTable id="tabela" var="p" value="#{cadastro.contatos}" paginator="true" rows="5" widgetVar="tbl"
+                         filteredValue="#{cadastro.contatosFiltrados}" >
+
+                <p:column headerText="Nome" filterBy="#{p.nome}">
+                    <h:outputText value="#{p.nome}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{p.email}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{p.cpf}" />
+                </p:column>
+
+                <p:column  headerText="Data de Nascimento" filterBy="#{p.dataNascimento}" sortBy="#{p.dataNascimento}">
+                      <f:facet name="filter">
+                          <p:calendar id="cal1" >
+                               <p:ajax event="dateSelect" oncomplete="PF('tbl').filter()" update="tabela" />
+                          </p:calendar>
+                        </f:facet>
+                    <h:outputText value="#{p.dataNascimento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Momento registro" sortBy="#{p.momento_registro}">
+                    <h:outputText value="#{p.momento_registro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT-2"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Opções">
+                    <p:commandButton update=":formD" oncomplete="PF('dlgExcluir').show()" icon="icone-excluir">
+                        <f:setPropertyActionListener 
+                            target="#{cadastro.pessoaCadastrada}" value="#{p}"/>
+                    </p:commandButton>
+
+                    <p:commandButton update=":formC" oncomplete="PF('dlgEditar').show()" icon="icone-editar">
+                        <f:setPropertyActionListener target="#{cadastro.pessoaCadastrada}" value="#{p}"/>
+                    </p:commandButton>
+                </p:column>     
+                <f:facet name="footer">
+                    <p:commandButton value="Novo" oncomplete="PF('dlgNovo').show()" update=":formA">
+                        <f:actionListener binding="#{cadastro.preparaNovo()}"/>
+                    </p:commandButton> 
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+
+
+        <p:dialog id="dialogEditar" header="Editar" modal="true" draggable="false" resizable="false" widgetVar="dlgEditar"
+                  showEffect="drop" hideEffect="slide" closable="false">
+            <h:form id="formC">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="cpf" value="Cpf:" style="font-weight:bold"/>
+                    <p:inputMask id="cpf" value="#{cadastro.pessoaCadastrada.cpf}" mask="999.999.999-99"
+                                 required="true"
+                                 requiredMessage="O cpf é obrigatório!"/>
+
+
+                    <h:outputLabel for="name" value="Nome:" style="font-weight:bold"/>
+                    <p:inputText id="nome" value="#{cadastro.pessoaCadastrada.nome}"
+                                 required="true"
+                                 requiredMessage="O nome é obrigatório!"/> 
+
+
+                    <h:outputLabel for="email" value="E-mail:" style="font-weight:bold"/>
+                    <p:inputText id="email" value="#{cadastro.pessoaCadastrada.email}"/>
+
+
+                    <h:outputLabel for="dt_nasc" value="Data Nascimento:" style="font-weight:bold"/>
+                    <p:calendar id="dt_nasc" value="#{cadastro.pessoaCadastrada.dataNascimento}" pattern="dd/MM/yyyy"
+                                required="true"
+                                requiredMessage="A data obrigatória!"/>
+
+
+                    <!-- caso queira um fechar diferente do x 
+                    dai coloca closable="false" no dialog-->
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Salvar" actionListener="#{cadastro.alterar()}" 
+                                     oncomplete="if (!args.validationFailed)
+                                     { PF('dlgEditar').hide();}"
+                                     update=":formB:tabela"/>
+                    <p:commandButton value="Cancelar" 
+                                     process="@this"
+                                     update=":formB"
+                                     oncomplete="PF('dlgEditar').hide()">
+                        <p:resetInput target=":formC"/>
+                    </p:commandButton>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="dialogExcluir" header="Excluir" modal="true" draggable="false" resizable="false" widgetVar="dlgExcluir"
+                  showEffect="drop" hideEffect="slide" height="200" closable="false">
+            <h:form id="formD">
+                <h:panelGrid columns="1">
+                    <h:outputText value="#{cadastro.pessoaCadastrada.cpf}"/>
+                    <h:outputText value="#{cadastro.pessoaCadastrada.nome}" />
+                    <h:outputText value="#{cadastro.pessoaCadastrada.email}" />
+                    <h:outputText  value="#{cadastro.pessoaCadastrada.dataNascimento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <!-- caso queira um fechar diferente do x 
+                    dai coloca closable="false" no dialog-->
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <p:commandButton value="Excluir" actionListener="#{cadastro.excluir()}" 
+                                     update=":formB"
+                                     oncomplete="PF('dlgExcluir').hide() PF('tbl').clearFilters().hide" />
+                    <p:commandButton value="Cancelar" oncomplete="PF('dlgExcluir').hide()"/> 
+                </h:panelGrid>    
+
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

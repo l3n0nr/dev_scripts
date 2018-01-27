@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:carousel id="carouselID" 
+                        widgetVar="carouselWid"
+                        value="#{gerenciaProdutos.produtos}"
+                        headerText="Produtos indisponiveis na loja"
+                        var="p"
+                        numVisible="2"
+                        autoPlayInterval="2000"
+                        effectDuration="4000"
+                        circular="true"
+                        itemStyle="width:200px; height:200px;">
+                <h:panelGrid columns="1">
+                    <!--<h:outputText value="#{p.nome}"/>-->
+                    <h:link outcome="produtoDetalhes"
+                            onmouseover="PF('carouselWid').stopAutoplay();"
+                            onmouseout="PF('carouselWid').startAutoplay();">
+                                                        
+                        <h:graphicImage name="img/#{p.img}" 
+                                        width="200" 
+                                        height="200" />
+                        
+                        <f:param name="selecionado" value="#{p.id}"/>
+                    </h:link>
+                </h:panelGrid>
+            </p:carousel>                        
+        </h:form>
+    </h:body>
+</html>
+

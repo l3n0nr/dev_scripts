@@ -1,0 +1,158 @@
+<!--CRIANDO PADRAO DA PAGINA-->
+<!DOCTYPE html>
+<html>
+  <!--CRIANDO CABEÇALHO DA PAGINA-->
+  <head>
+    <title>Exemplo Formulário</title>
+
+    <!--DEFININDO CODIFICAÇÃO DA PAGINA-->
+    <meta charset="utf-8">
+
+  </head>
+  <!--CRIANDO CORPO DA PAGINA-->
+  <body>
+    <hr>
+    <!--CRIANDO FORMULARIO-->
+    <form action="Teste.html" method="post" autocomplete="off" target="_blank" oninput="out.value=parsetInt(inter.value)">
+
+      <!--CRIANDO NOME-->
+        <label>Informe o seu nome: </label>
+        <input type="text" name="nome" size="40" maxlength="40"/>
+        <br>
+        <br>
+
+      <!--CRIANDO SENHA-->
+        <label>Informe a sua senha: </label>
+        <input type="password" name="senha" size="40" maxlength="40">
+        <br>
+        <br>
+
+      <!--CRIANDO RADIOBUTTON-->
+        <label> Defina o seu estado civil: </label>
+        <input type="radio" name="est_civ" checked value="solteiro">Solteiro
+        <input type="radio" name="est_civ" value="divorciado">Divorciado
+        <input type="radio" name="est_civ" value="casado">Casado
+        <input type="radio" name="est_civ" value="viuvo">Viudo
+        <br><br>
+      <!--CRIANDO CHECKBOX-->
+        <label> Selecione os bens que você possui: </label> <br>
+        <input type="checkbox" name="bens" value="Carro"/> Carro <br/>
+        <input type="checkbox" name="bens" value="Casa"/>  Casa <br/>
+        <input type="checkbox" name="bens" value="Bicicleta"/> Bicicleta <br/>
+        <input type="checkbox" name="bens" value="Moto"/> Moto <br/>
+        <br>
+      <!--CRIANDO BOTAO-->
+        <input type="button" name="teste" value="Teste">
+        <br>
+        <br>
+        <br>
+      <!--CRIANDO NUMERO-->
+        <label> Insira um número: </label>
+        <input type="number" name="num">
+        <br>
+        <br>
+        <br>
+      <!--CRIANDO DATA-->
+        <label> Selecione uma data: </label>
+        <input type="date" name="data"/>
+        <br>
+        <br>
+        <br>
+      <!--CRIANDO COR-->
+        <label> Selecione uma cor: </label>
+        <input type="color" name="cor">
+        <br>
+        <br>
+        <br>
+      <!--CRIANDO RANGE-->
+        <label> Selecione um valor </label>
+        <input type="range" name="volume" min="0" max="30">
+        <output name="out" for="inter"> </output>
+        <br>
+        <br>
+        <br>
+      <!--CRIANDO MONTH-->
+        <label> Selecione o mês: </label>
+        <input type="month" name="mes"/>
+        <br>
+        <br>
+
+      <!--CRIANDO A SEMANA-->
+        <label> Selecione a semana: </label>
+        <input type="week" name="semana">
+        <br>
+        <br>
+
+      <!--CRIANDO TIME-->
+        <input type="time" name="time">
+        <br>
+        <br>
+
+      <!--CRIANDO DATATIME_LOCAL-->
+        <input type="datetime-local" name="time">
+        <br>
+        <br>
+
+      <!--CRIANDO EMAIL-->
+        <label> Digite o seu email: </label>
+        <input type="email" name="email">
+        <br>
+        <br>
+
+      <!--CRIANDO SELEÇÃOs-->
+        <label> Selecione a estacao do ano: </label>
+        <select name= "estAno" >
+          <option value="v"> Verão </option>
+          <option value="o" selected > Outono </option>
+          <option value="i"> Inverno </option>
+          <option value="p"> Primavera </option>
+        </select>
+        <br>
+        <br>
+
+      <!--CRIANDO AREA DE TEXTO-->
+        <label> Digite alguma coisa aqui: </label>
+        <br>
+        <textarea name="texto" cols="50" lang="50"> </textarea>
+        <br>
+        <br>
+
+      <!--CRIANDO FIELD SET-->
+        <fieldset>
+          <legend> Autentificação de usuário </legend>
+          <label> Informe o login: </label>
+          <input type="name" name="nome">
+          <br>
+          <br>
+          <label> Informe a senha: </label>
+          <input type="password" name="senha">
+        </fieldset>
+        <br>
+        <br>
+
+      <!--CRIANDO URL
+      <input type="url" name="url">
+        <br>
+        <br>
+      -->
+
+      <!--CRIANDO TEL-->
+        <label> Digite o seu telefone: </label>
+        <input type="tel" name="tel">
+        <br>
+        <br>
+
+      <!--CRIANDO SEARCH-->
+        <label> Campo de Pesquisa </label>
+        <input type="search" name="search">
+        <br>
+        <br>
+
+      <!--CRIANDO BOTAO-->
+        <input type="submit" name="enviar" value="Enviar"/>
+        <br>
+        <br>
+    <hr>
+    </form>
+  </body>
+</html>

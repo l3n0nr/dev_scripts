@@ -1,0 +1,16 @@
+Criar dois checkbox:
+Servicos
+-troca de oleo,
+-troca velas,
+-troca de filtro,
+-calibragem dos pneus,
+
+Dias das Promoções
+-Segunda,
+-Terca,
+-Quarta,
+-Quinta,
+-Sexta,
+-Sabado
+
+Valor dos servicos, calculados de acordo com o dia da semana, SEXTA será o dia com valor mais caro.

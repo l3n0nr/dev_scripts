@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<html>
+  <!--CRIANDO CABEÇALHO-->
+  <head>
+        <meta charset="utf-8"/>
+
+        <!--CRIANDO javascript-->
+        <script type="text/javascript">
+          function funcaosoma()
+          {
+            /*CRIANDO VARIAVEIS*/
+            var numero1, numero2, resultado
+
+            numero1 = document.getElementById("num1").value;
+            numero2 = document.getElementById("num2").value;
+
+            //criando vetor de elementos
+            elementoradio = document.getElementsByName('oper');
+
+            //criando comparação
+            for (var i=0; i< elementoradio.length; i++)
+            {
+                //verificando se valor está marcado
+                if (elementoradio[i].checked == true)
+                {
+                  //soma
+                  if(elementoradio[i].value=="mais")
+                  {
+                    result = parseInt(n1) + parseInt(n2);
+                  }
+                  //subtracao
+                  if(elementoradio[i].value=="subtracao")
+                  {
+                    result = parseInt(n1) - parseInt(n2);
+                  }
+                  //multiplicacao
+                  if(elementoradio[i].value=="multiplicacao")
+                  {
+                    result = parseInt(n1) * parseInt(n2);
+                  }
+                  //divisao
+                  else
+                  {
+                    result = parseInt(n1) + parseInt(n2);
+                  }
+                }
+            }
+
+            resultado = parseInt(numero1) + parseInt(numero2);
+
+            document.getElementById("demo").innerHTML = resultado;
+          }
+
+          function trocarcor()
+          {
+            var cor, corpo;
+            cor = document.getElementById("cor").value;
+            corpo = document.getElementById("corpo");
+            corpo.style.background = cor;
+          }
+        </script>
+  </head>
+
+  <!--CRIANDO CORPO PAGINA-->
+  <body>
+    <br>
+    <br>
+    <fieldset>
+      <legend> Soma de numeros</legend>
+      Numero 1: <input id="num1" type="text" name="numero1"> <br>
+      Numero 2: <input id="num2" type="text" name="numero2"> <br>
+      Escolha uma operação:
+      <br>
+      <input type="radio" name="oper" value="soma"> Soma
+      <input type="radio" name="oper" value="subtracao"> Subtracao
+      <input type="radio" name="oper" value="multiplicao"> Multiplicacao
+      <input type="radio" name="oper" value="divisao"> Divisao
+      <br>
+      <button type="button" onclick="funcaosoma()"> Soma </button>
+      <br>
+      <br>
+      <b> O resultado da soma é:  </b>
+      <p id="demo">  </p>
+      <br>
+      <br>
+      <input type="color" name="cor">
+      <input type="button" onClick="trocarcor();" value="Mudar a cor">
+    </fieldset>
+  </body>
+</html>

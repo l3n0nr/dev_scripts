@@ -1,0 +1,1 @@
+Desenvolver um programa que efetue a leitura de 10 elementos de um vetor A. Construir um vetor B de mesmo tipo observando a lei de formação: Se o valor do indice for par, valor deverá ser multiplicado por 5; Sendo impar deverá ser somado com 5. Ao final mostrar os conteudos das duas matrizes.

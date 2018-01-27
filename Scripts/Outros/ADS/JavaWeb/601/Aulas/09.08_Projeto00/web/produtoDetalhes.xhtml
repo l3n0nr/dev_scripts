@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:panelGrid columns="1"
+                     rendered="#{not empty gerenciaProdutos.produtos}">
+            <h:outputText value="#{gerenciaProdutos.escolhido.nome}"/>
+            <h:outputText value="#{gerenciaProdutos.escolhido.descricao}"/>
+            <h:outputText value="#{gerenciaProdutos.escolhido.preco}"/>
+            <h:outputText value="#{gerenciaProdutos.escolhido.quantidade}"/>
+            
+            <h:graphicImage name="img/#{gerenciaProdutos.escolhido.img}"
+                            width="200"
+                            height="200"/>
+        
+            <!--<p:dialog header="" visible="true" 
+                      rendered="#{not empty gerenciaProdutos.escolhido}">            
+                <h:outputText value="Não achou o produto!"/>                
+            </p:dialog>-->
+        
+        </h:panelGrid>
+    </h:body>
+</html>
+

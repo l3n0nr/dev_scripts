@@ -1,0 +1,144 @@
+object Datamodule2: TDatamodule2
+  OldCreateOrder = False
+  Left = 739
+  Top = 536
+  Height = 191
+  Width = 272
+  object IBDatabase1: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:E:\IFF\Programa'#231#227'o Comercial\Trabalho 4\CADASTRO.GDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = IBTransaction1
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 24
+    Top = 16
+  end
+  object IBTransaction1: TIBTransaction
+    Active = True
+    DefaultDatabase = IBDatabase1
+    AutoStopAction = saNone
+    Left = 104
+    Top = 56
+  end
+  object IBTCliente: TIBTable
+    Database = IBDatabase1
+    Transaction = IBTransaction1
+    OnNewRecord = IBTClienteNewRecord
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'CODIGO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'DT_NASC'
+        DataType = ftDate
+      end
+      item
+        Name = 'COD_MUNICIPIO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'SEXO'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end>
+    IndexDefs = <
+      item
+        Name = 'RDB$PRIMARY1'
+        Fields = 'CODIGO'
+        Options = [ixPrimary, ixUnique]
+      end
+      item
+        Name = 'FK_CLIENTE_1'
+        Fields = 'COD_MUNICIPIO'
+      end>
+    StoreDefs = True
+    TableName = 'CLIENTE'
+    Left = 168
+    Top = 16
+    object IBTClienteCODIGO: TIntegerField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'CODIGO'
+    end
+    object IBTClienteNOME: TIBStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object IBTClienteDT_NASC: TDateField
+      FieldName = 'DT_NASC'
+    end
+    object IBTClienteCOD_MUNICIPIO: TIntegerField
+      FieldName = 'COD_MUNICIPIO'
+    end
+    object IBTClienteSEXO: TIBStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object IBTClienteNome_Municipio: TIBStringField
+      FieldKind = fkLookup
+      FieldName = 'Nome_Municipio'
+      LookupDataSet = IBTable1
+      LookupKeyFields = 'COD_MUNICIPIO'
+      LookupResultField = 'DESCRICAO'
+      KeyFields = 'COD_MUNICIPIO'
+      Lookup = True
+    end
+  end
+  object IBQuery1: TIBQuery
+    Database = IBDatabase1
+    Transaction = IBTransaction1
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    SQL.Strings = (
+      'SELECT MAX(CODIGO) AS PROX FROM CLIENTE')
+    Left = 32
+    Top = 96
+    object IBQuery1PROX: TIntegerField
+      FieldName = 'PROX'
+    end
+  end
+  object IBTable1: TIBTable
+    Database = IBDatabase1
+    Transaction = IBTransaction1
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'COD_MUNICIPIO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 40
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_MUNICIPIO'
+        Fields = 'COD_MUNICIPIO'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'MUNICIPIO'
+    Left = 168
+    Top = 88
+  end
+end

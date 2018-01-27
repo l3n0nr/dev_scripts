@@ -1,0 +1,34 @@
+<!DOCTYPE>
+<html>
+  <!--CRIANDO CABEÇALHO-->
+  <head>
+        <meta charset="utf-8"/>
+
+        <!--CRIANDO javascript-->
+        <script type="text/javascript">
+          /*CRIANDO FUNCAO*/
+          function alterarImagem()
+          {
+            var imagem = document.getElementById("i1");
+            /*COMPARANDO VALORES*/
+            if (imagem.src.match("ligada.png"))
+            {
+              imagem.src = "deslig.png"
+            }
+            else
+            {
+              imagem.src = "ligada.png"
+            }
+          }
+        </script>
+  </head>
+
+  <!--CRIANDO CORPO PAGINA-->
+  <body>
+    <h1> JavaScript pode alterar imagens! </h1>
+    <!--ADICIONAOD IMAGEM NA PAGINA-->
+    <img id="i1" src="deslig.png" onclick="alterarImagem()" width="100" height="180"/>
+    <p> Clique na lampada para ligá-la ou desligá-la!<p>
+
+  </body>
+</html>

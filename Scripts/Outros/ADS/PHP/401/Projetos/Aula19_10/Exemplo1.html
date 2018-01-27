@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>
+            $(document).ready(function()
+            {
+                $("#a").click(function()
+                {
+                  $(p1).hide();
+                }
+                );
+
+                $("#m").click(function()
+                {
+                  $(p1).show();
+                }
+                );
+            }
+          );
+
+        </script>
+    </head>
+    <body>
+        <h2>Isso é um título</h2>
+        <p id="p1">Isso é um parágrafo</p>
+        <button id="a">Apagar paragrafo</button>
+        <button id="m">Mostrar paragrafo</button>
+    </body>
+</html>
