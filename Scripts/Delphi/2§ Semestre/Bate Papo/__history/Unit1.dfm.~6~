@@ -1,0 +1,81 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 180
+  Width = 205
+  object IBQ: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 72
+    Top = 8
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'Login'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftString
+        Name = 'Senha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end>
+  end
+  object IBDB: TIBDatabase
+    DatabaseName = '200.132.44.222:c:\PAPO.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = IBT
+    ServerType = 'IBServer'
+    Left = 8
+    Top = 8
+  end
+  object IBT: TIBTransaction
+    DefaultDatabase = IBDB
+    Left = 40
+    Top = 8
+  end
+  object IBQ1: TIBQuery
+    Database = IBDB
+    Transaction = IBT
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 8
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'login'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'senha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end>
+  end
+end

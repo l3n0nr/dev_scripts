@@ -1,0 +1,34 @@
+unit Unidade2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Vcl.Menus, Vcl.ComCtrls;
+
+type
+  TFormulario = class(TForm)
+    MainMenu1: TMainMenu;
+    Sair1: TMenuItem;
+    procedure Sair1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Formulario: TFormulario;
+
+implementation
+
+{$R *.dfm}
+
+uses Unidade1;
+
+procedure TFormulario.Sair1Click(Sender: TObject);
+begin
+login.close;
+end;
+
+end.

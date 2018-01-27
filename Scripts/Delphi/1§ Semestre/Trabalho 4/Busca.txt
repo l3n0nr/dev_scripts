@@ -1,0 +1,6 @@
+while not(dm.IBTCliente.Eof) do 
+	begin
+		n := dm.IBTCliente.Fieldbyname('nome') . Asstring ;
+		s:=  dm.IBTCliente.Fieldbyname('nome') . Asstring ; 
+		showmessage(n+'é do sexo') ;
+			Dm.IBTCliente.Next ;   

@@ -1,0 +1,101 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    RadioGroup2: TRadioGroup;
+    RadioGroup3: TRadioGroup;
+    Button1: TButton;
+    RadioGroup1: TRadioGroup;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Edit1: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    procedure Button1Click(Sender: TObject);
+  
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var a,c,d : integer ;
+begin
+
+
+Case RadioGroup1.ItemIndex Of
+0: Label1.Caption := '0' ;
+1: Label1.Caption := '1' ;
+2: Label1.Caption := '2' ;
+3: Label1.Caption := '3' ;
+4: Label1.Caption := '4' ;
+5: Label1.Caption := '5' ;
+6: Label1.Caption := '6' ;
+7: Label1.Caption := '7' ;
+8: Label1.Caption := '8' ;
+9: Label1.Caption := '9' ;
+End ;
+Case RadioGroup2.ItemIndex Of
+0: Label2.Caption := '+' ;
+1: Label2.Caption := '-' ;
+2: Label2.Caption := 'X' ;
+3: Label2.Caption := '/' ;
+End ;
+Case RadioGroup3.ItemIndex Of
+0: Label3.Caption := '0' ;
+1: Label3.Caption := '1' ;
+2: Label3.Caption := '2' ;
+3: Label3.Caption := '3' ;
+4: Label3.Caption := '4' ;
+5: Label3.Caption := '5' ;
+6: Label3.Caption := '6' ;
+7: Label3.Caption := '7' ;
+8: Label3.Caption := '8' ;
+9: Label3.Caption := '9' ;
+End;
+
+Edit1.text := Label1.Caption ;
+Edit3.Text := Label3.caption ;
+{Edit1.text:= inttostr (a) ;
+Edit3.text:= inttostr (c) ;
+Edit4.text:= inttostr (d) ; }
+a := strtoint(Edit1.text)  ;
+c := strtoint(Edit3.text)  ;
+//d := strtoint(Edit4.text)  ;
+if label2.caption = '+' then
+d := a+c ;
+Label5.Caption := inttostr(d) ;
+if label2.caption = '-' then
+d := a-c ;
+Label5.Caption := inttostr(d) ;
+if label2.caption = 'X' then
+d := a*c ;
+Label5.Caption := inttostr(d) ;
+
+
+
+
+
+
+end;
+
+
+
+end.

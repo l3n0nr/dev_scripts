@@ -1,0 +1,62 @@
+unit Unidade3;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, XPMan, StdCtrls;
+
+type
+  TCadastrar = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    XPManifest1: TXPManifest;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Label5: TLabel;
+    Edit5: TEdit;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Cadastrar: TCadastrar;
+
+implementation
+
+{$R *.dfm}
+
+procedure TCadastrar.Button1Click(Sender: TObject);
+var erro:string;
+begin
+  erro :='';
+  if (edit1.Text = '') then
+  begin
+    erro := erro + 'Código'+#13;
+    edit5.color := clyellow;
+  end;
+  if (edit2.Text = '') then
+    erro := erro + 'Nome'+#13;
+
+  if (edit3.Text = '') then
+    erro := erro + 'Login'+#13;
+
+  if (edit4.Text = '') then
+    erro := erro + 'Senha'+#13;
+
+  if (edit5.Text = '') then
+    erro := erro + 'Confirmação de senha'+#13;
+
+    showmessage('Por favor, preencha os campos:' + #13 + erro);
+
+end;
+
+end.

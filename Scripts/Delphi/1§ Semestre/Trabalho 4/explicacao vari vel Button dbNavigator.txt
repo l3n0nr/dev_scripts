@@ -1,0 +1,18 @@
+{
+Quando o usuário pressiona um dos botões do
+dbNavigator a variável local Button que está 
+declarada no cabeçalho do Evento OnClick deste
+componente recebe valores, veja quais:
+
+Primeiro = nbfirst
+Anterior = nbprior
+Próximo = nbnext
+Último = nblast
+Inserir = nbinsert
+Deletar = nbdelete
+Editar = nbedit
+Salvar = nbpost
+Cancelar = nbcancel
+Atualizar = nbrefresh
+
+}

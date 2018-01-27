@@ -1,0 +1,9 @@
+unit global;
+
+interface
+  var
+      g_login : string ;
+
+implementation
+
+end.
