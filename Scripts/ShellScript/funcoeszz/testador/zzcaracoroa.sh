@@ -1,1 +1,0 @@
-$ zzcaracoroa  #→ --regex ^(Cara|Coroa)$

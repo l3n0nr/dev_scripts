@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Screensaver Settings
-Comment=Configure locking your session
-Exec=/usr/bin/xscreensaver-demo
-Terminal=false
-Type=Application
-StartupNotify=true
-Icon=preferences-desktop-screensaver
