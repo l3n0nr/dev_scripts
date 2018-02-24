@@ -10,7 +10,7 @@ f_python()
 
 f_shell()
 {
-	printf "\nSeja rápido, seu computador irá ser reinicializado!  (°ʖ͡°)"
+	printf "\nSeja rápido, seu computador irá ser desligado!  (°ʖ͡°)"
 	# shutdown -h 1 "Desligando o computador" #
 	printf "\n\n"
 }
