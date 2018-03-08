@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.51.0.0.0     #
-# # ultima ediçao realizada:      [02/01/18]      #
+# versão do script:              0.0.60.0.0.0     #
+# # ultima ediçao realizada:      [08/03/18]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -30,8 +30,7 @@
 #           - Definir variaveis globais como padrao, modificar apenas o caminho final nas variaveis locais dentro de cada função.
 #
 #       OBS: 
-#           - Criar os arquivos necessarios, antes de realizar o backup na primeira vez que o script for executado.
-#            
+#           - Criar os arquivos necessarios, antes de realizar o backup na primeira vez que o script for executado.           
 #
 ################################################################################
 #
@@ -53,12 +52,15 @@
 # criando arquivo dentro de cada funcao, para evitar possiveis erros
 #     touch $caminhodestino/Filmes.txt
 
+LOCAL_DESTINO="/home/lenonr/MEGA/"
+
 install_tree()
 {
 	# variavel de verificação
     var_tree=$(which tree)
 
     if [[ ! -e $var_tree ]]; then
+        printf "O Tree nao foi encontrado, instalar por favor!"
     	sudo apt install tree -y        
     fi
 }
@@ -153,135 +155,25 @@ seriados()
     cat $caminhoseriadosdestino > $caminhoseriadosdestinohd
 }
 
-documentarios()
-{
-    #criando variaveis
-    caminhodocumentariosorigem="/media/lenonr/lenonr-500GB/Arquivos/Documentarios/"
-    
-    caminhodocumentariosdestino="/home/lenonr/MEGA/Outros/Lista/Documentarios.txt"
-        
-    echo "Verificando Documentários, aguarde..."	
-    sleep 2
-    
-    #gerando arquivo    
-    tree -f $caminhodocumentariosorigem > $caminhodocumentariosdestino
-}
-
-musicas()
-{
-    #criando variaveis
-    caminhomusicasorigem="/home/lenonr/Music/Musicas/"
-    
-    caminhomusicasdestino="/home/lenonr/MEGA/Outros/Lista/Musicas.txt	"
-    
-    echo "Verificando Musicas, aguarde..."
-    sleep 2
-    
-    #gerando arquivo    
-    tree -f $caminhomusicasorigem > $caminhomusicasdestino
-}
-
-podcast()
-{  
-    #criando variaveis
-    caminhopodcastorigem="/home/lenonr/Music/Podcast/"
-    
-    caminhopodcastdestino="/home/lenonr/MEGA/Outros/Lista/Podcast.txt"
-    
-    echo "Verificando Podcast's, aguarde..."
-    sleep 2
-    
-    #gerando arquivo
-    tree -f $caminhopodcastorigem > $caminhopodcastdestino
-}
-
-podcast_pendentes()
-{
-    #criando variaveis
-    caminhopodcastorigem="/home/lenonr/Downloads/Arquivos/Podcast"
-    
-    caminhopodcastdestino="/home/lenonr/MEGA/Outros/Lista/Podcast_Pendentes.txt"
-    
-    echo "Verificando Podcast's pendentes, aguarde..."
-    sleep 2
-    
-    #gerando arquivo
-    tree -f $caminhopodcastorigem > $caminhopodcastdestino
-    
-}
-	
-shows()
-{
-    #criando variaveis
-    caminhoshowsorigem="/home/lenonr/Videos/Shows/"
-    
-    caminhoshowsdestino="/home/lenonr/MEGA/Outros/Lista/Shows.txt"
-    
-    echo "Verificando Shows, aguarde..."
-    sleep 2
-    
-    #gerando arquivo    
-    ls $caminhoshowsorigem | grep - > $caminhoshowsdestino
-}
-
-games()
-{
-    #mostrando mensagem    
-    echo "Verificando save The Legend of Korra, aguarde..."
-    
-    sleep 3
-    
-    #SAVE 1
-    caminhogamessorigem1="/home/lenonr/Korra/Gamedata.dat"
-    caminhogamesdestino1="/media/lenonr/lenonr-500GB/Arquivos/Jogos/Avatar/TLOK/Backup"
-                    
-        #copiando arquivo
-        cp $caminhogamessorigem1 $caminhogamesdestino1
-    
-    #SAVE 2
-    caminhogamessorigem2="/home/lenonr/Korra/SystemData.dat"
-    caminhogamesdestino2="/media/lenonr/lenonr-500GB/Arquivos/Jogos/Avatar/TLOK/Backup"    
-    
-        #coṕiando arquivo
-        cp $caminhogamessorigem2 $caminhogamesdestino2
-    
-    #SAVE 3 - MEGA - ARQUIVO 1
-    caminhogamesdestino3="/home/lenonr/MEGA/Jogos/Avatar/Save/TLOK"
-    
-        #coṕiando arquivo
-        cp $caminhogamessorigem1 $caminhogamesdestino3
-    
-    #SAVE 3 - MEGA - ARQUIVO 2
-    caminhogamesdestino4="/home/lenonr/MEGA/Jogos/Avatar/Save/TLOK"
-    
-        #coṕiando arquivo
-        cp $caminhogamessorigem2 $caminhogamesdestino4
-}
-
 ################################################################################
 #
 clear
-printf "[+] Executando leitura das pastas \n"
-printf "################################################### \n"
-install_tree
+if [ -e "$LOCAL_DESTINO" ]; then 
+    printf "[+] Executando leitura das pastas \n"
+    printf "################################################### \n"
+    install_tree
 
-# executa somente se tree esta instalado
-if [[ ! -e $var_tree ]]; then
-	echo "[-] Tree não está instalado"
-else
-	# documentarios
-	filmes
-	filmes_assistidos
-	# filmes_pendentes
-	# games
-	# musicas
-	#podcast
-	# podcast_pendentes
-	seriados
-	# shows
+    # executa somente se tree esta instalado
+    if [[ ! -e $var_tree ]]; then
+        echo "[-] Tree não está instalado"
+    else
+        filmes
+        filmes_assistidos
+        seriados
+    fi
+    printf "################################################### \n"
+else 
+    printf "[-] Pasta '$LOCAL_DESTINO' nao encontrada! \n"
+    printf "[-] Backup nao realizado!!\n"
 fi
-#
-printf "################################################### \n"
-printf "[+] Script finalizado! \n"
-################################################################################
-#sleep 5
+
