@@ -36,7 +36,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.35.0.0.0]   #
+# # versão do script:           [0.0.36.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [08/03/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -87,27 +87,27 @@ MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
 ## Kb
 SWAP_TOTAL=$(awk '/^SwapTotal/ { print $2; }' /proc/meminfo)
 ## MB
-SWAP_TOTAL_MB=$(( $SWAP_TOTAL / 1024 ))
+SWAP_TOTAL_MB=$(($SWAP_TOTAL / 1024))
 
 ## Kb
 SWAP_LIVRE=$(awk '/^SwapFree/ { print $2; }' /proc/meminfo)
 ## MB
-SWAP_LIVRE_MB=$(( $SWAP_LIVRE / 1024 ))
+SWAP_LIVRE_MB=$(($SWAP_LIVRE / 1024))
 
 # calculo de espaço disponivel
 SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
 
 # aplicando margem de segurança - evitando travamentos - 10% extra
-SWAP_USADA=$(((($SWAP_USADA * 30)/100)+ $SWAP_USADA))
+SWAP_USADA=$(((($SWAP_USADA * 30)/100) + $SWAP_USADA))
 
 # realizando calculo para MB
-MEM_LIVRE_MB=$(( $MEM_LIVRE / 1024 ))
+MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
 
 # # adicionando taxa de segurança(menor) 
 # MEM_LIVRE_MB_C=$(( $MEM_LIVRE_MB * 0,20 ))
 # MEM_LIVRE_MB_Cal=$(( $MEM_LIVRE_MB - MEM_LIVRE_MB_C))
 
-SWAP_USADA_MB=$(( $SWAP_USADA / 1024 ))
+SWAP_USADA_MB=$(($SWAP_USADA / 1024))
 
 # echo $MEM_LIVRE_MB
 # echo $MEM_LIVRE_MB_C
