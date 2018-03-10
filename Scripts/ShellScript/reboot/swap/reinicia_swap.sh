@@ -36,9 +36,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.36.0.0.0]   #
+# # versão do script:           [0.0.37.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [08/03/18]      #
+# # ultima ediçao realizada:      [09/03/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -97,8 +97,8 @@ SWAP_LIVRE_MB=$(($SWAP_LIVRE / 1024))
 # calculo de espaço disponivel
 SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
 
-# aplicando margem de segurança - evitando travamentos - 10% extra
-SWAP_USADA=$(((($SWAP_USADA * 30)/100) + $SWAP_USADA))
+# aplicando margem de segurança - evitando travamentos - 40% extra
+SWAP_USADA=$(((($SWAP_USADA * 40)/100) + $SWAP_USADA))
 
 # realizando calculo para MB
 MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
