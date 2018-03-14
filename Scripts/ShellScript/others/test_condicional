@@ -1,0 +1,24 @@
+# Referencias
+# <https://www.youtube.com/watch?v=h6ppfK1OxC0>
+#
+# <http://www.slackjeff.com.br/2018/03/comando-test-e-opcoes.html>
+#
+
+# realizando teste de status
+test "Lenon" = "Lenon"
+
+# verificando variavel
+echo $?
+
+# verifica se variavel é nula
+test -z "$var"
+
+test "1" -eq "1"	# saida 0
+test "1" -ne "2"	# saida 0
+
+-eq     É Igual
+-ne     Não é igual
+-ge     É maior ou Igual
+-gt     É Maior que
+-lt      É Meno que
+-le     É menor ou Igual
