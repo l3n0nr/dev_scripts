@@ -12,30 +12,45 @@
 # # ultima ediçao realizada:      [29/03/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
+# Instruções
+# ##########
+# 
+# O script pode ser utilizado via crontab através de:
+# */15 * * * * sh /location_folder/internet.sh 
+#				# executando script a cada 15 minutos
+#
+#
 # variaveis de ambiente
 SERVIDOR="google.com"						# servidor para teste
 # TEMPO=60s									# tempo de intervalo do teste(segundos)
 
 # realiza teste enquanto valor de internet for "0"(falso)	
-while true; do	
+func_internet()
+{
 	# intervalo de tempo 
 	# sleep $TEMPO
+
+	# date >> /tmp/internet_log.txt
 
 	# ====================================== #
 	# testando conexao internet
 	# ====================================== #	
-	ping -c 10 $SERVIDOR >>/dev/null;
+	ping -c1 $SERVIDOR >> /dev/null;
 
 	# verificando valor
-	if [[ $? = "0" ]]; then				
-		echo "Internet funcionando!" >> /tmp/internet_log.txt
-		# notify-send -u normal "Internet funcionando" -t 2500
-		break;
+	if [[ $? = "0" ]]; then	
+		MENSAGEM="Internet funcionando!"
+		notify-send -u normal "$MENSAGEM" -t 2500
 	else				
-		# mostrando mensagem na tela
-		notify-send -u normal "Sem Conexao no link $SERVIDOR!" -t 5000
-		echo "Sem Internet!" >> /tmp/internet_log.txt		
-		break;
+		MENSAGEM="Sem conexao ao link $SERVIDOR!"
+		notify-send -u normal "$MENSAGEM" -t 5000		
+		# firefox $SERVIDOR
 	fi	
+
+	# mostrando mensagem
+	# echo $MENSAGEM >> /tmp/internet_log.txt
 	# ====================================== #
-done
+}
+
+# chamando funcao
+func_internet
