@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 #
 # # # # # # # # # # # # #
 #   DESENVOLVIDO POR    #
@@ -14,26 +14,26 @@
 #
 # variaveis de ambiente
 SERVIDOR="duckduckgo.com"				# servidor para teste
-TEMPO=360								# tempo de intervalo do teste(segundos)
+TEMPO=1m								# tempo de intervalo do teste(segundos)
 TESTE=$(ping $SERVIDOR -c4; echo $?)	# pingando no servidor, capturando saida
 
 # realiza teste enquanto valor de internet for "0"(falso)	
 while true; do	
+	# intervalo de tempo 
+	sleep $TEMPO;
+
 	# gerando arquivo de log
 	date >> /tmp/internet_log.txt
 
 	# verificando valor
 	if [[ $TESTE -eq "2" ]]; then
 		# mostrando mensagem na tela
-		notify-send -u normal "Sem Internet?!" -t 2500
+		notify-send -u normal "Sem Internet?!" -t 10000
 
 		# escrevendo log no arquivo
 		# echo $TESTE >> /tmp/internet_log.txt
 	else
 		echo "Internet funcionando!" >> /tmp/internet_log.txt
 		# notify-send -u normal "Internet funcionando" -t 2500
-	fi
-
-	# intervalo de tempo 
-	sleep $TEMPO;
+	fi	
 done
