@@ -14,7 +14,7 @@
 #
 # variaveis de ambiente
 SERVIDOR="duckduckgo.com"				# servidor para teste
-TEMPO=60								# tempo de intervalo do teste(segundos)
+TEMPO=360								# tempo de intervalo do teste(segundos)
 TESTE=$(ping $SERVIDOR -c4; echo $?)	# pingando no servidor, capturando saida
 
 # realiza teste enquanto valor de internet for "0"(falso)	
