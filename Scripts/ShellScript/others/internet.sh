@@ -36,6 +36,7 @@ while true; do
 		# mostrando mensagem na tela
 		notify-send -u normal "Sem Conexao no link $SERVIDOR!" -t 5000
 		# echo "Sem Internet!" >> /tmp/internet_log.txt		
+		break;
 	fi	
 	# ====================================== #
 done
