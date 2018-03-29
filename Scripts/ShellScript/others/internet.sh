@@ -28,14 +28,13 @@ while true; do
 
 	# verificando valor
 	if [[ $? = "0" ]]; then				
-		# echo "Internet funcionando!" >> /tmp/internet_log.txt
+		echo "Internet funcionando!" >> /tmp/internet_log.txt
 		# notify-send -u normal "Internet funcionando" -t 2500
-		printf "OK\n"
 		break;
 	else				
 		# mostrando mensagem na tela
 		notify-send -u normal "Sem Conexao no link $SERVIDOR!" -t 5000
-		# echo "Sem Internet!" >> /tmp/internet_log.txt		
+		echo "Sem Internet!" >> /tmp/internet_log.txt		
 		break;
 	fi	
 	# ====================================== #
