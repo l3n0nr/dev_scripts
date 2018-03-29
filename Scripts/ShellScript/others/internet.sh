@@ -9,31 +9,32 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [28/03/18]      #
+# # ultima ediçao realizada:      [29/03/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # variaveis de ambiente
-SERVIDOR="duckduckgo.com"				# servidor para teste
-TEMPO=1m								# tempo de intervalo do teste(segundos)
-TESTE=$(ping $SERVIDOR -c4; echo $?)	# pingando no servidor, capturando saida
+SERVIDOR="google.com"						# servidor para teste
+TEMPO=60s									# tempo de intervalo do teste(segundos)
 
 # realiza teste enquanto valor de internet for "0"(falso)	
 while true; do	
 	# intervalo de tempo 
-	sleep $TEMPO;
+	sleep $TEMPO
 
-	# gerando arquivo de log
-	date >> /tmp/internet_log.txt
+	# ====================================== #
+	# testando conexao internet
+	# ====================================== #	
+	ping -c 5 $SERVIDOR >>/dev/null;
 
 	# verificando valor
-	if [[ $TESTE -eq "2" ]]; then
-		# mostrando mensagem na tela
-		notify-send -u normal "Sem Internet?!" -t 10000
-
-		# escrevendo log no arquivo
-		# echo $TESTE >> /tmp/internet_log.txt
-	else
-		echo "Internet funcionando!" >> /tmp/internet_log.txt
+	if [[ $? = "0" ]]; then				
+		# echo "Internet funcionando!" >> /tmp/internet_log.txt
 		# notify-send -u normal "Internet funcionando" -t 2500
+		printf ""
+	else				
+		# mostrando mensagem na tela
+		notify-send -u normal "Sem Conexao?!" -t 5000
+		# echo "Sem Internet!" >> /tmp/internet_log.txt		
 	fi	
+	# ====================================== #
 done
