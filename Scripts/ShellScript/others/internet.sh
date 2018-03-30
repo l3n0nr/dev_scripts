@@ -9,7 +9,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [29/03/18]      #
+# # ultima ediçao realizada:      [30/03/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Instruções
@@ -35,10 +35,11 @@ func_internet()
 	# ====================================== #
 	# testando conexao internet
 	# ====================================== #	
-	ping -c1 $SERVIDOR >> /dev/null;
+	ping -q -c1 $SERVIDOR > /dev/null
 
 	# verificando valor
-	if [[ $? = "0" ]]; then	
+	# if [[ $? = "0" ]]; then	
+	if [ $? = "0" ]; then	
 		MENSAGEM="Internet funcionando!"
 		notify-send -u normal "$MENSAGEM" -t 2500
 	else				
