@@ -46,14 +46,14 @@ pull_git()
 
 			  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
 			  	let REPO_FOUNDS++		  	
-			else
-				printf ""
-				echo "[-] - Not found": $LOCAL${REPOS[$i]}
-				printf "Download now!\n"			
-				git clone $SERVER${REPOS[$i]}$GIT
+			# else
+			# 	printf ""
+			# 	echo "[-] - Not found": $LOCAL${REPOS[$i]}
+			# 	printf "Download now!\n"			
+			# 	git clone $SERVER${REPOS[$i]}$GIT
 
-				# REPO_NOTFOUNDS=$(($REPO_NOTFOUNDS + 1));        
-				let REPO_NOTFOUNDS++
+			# 	# REPO_NOTFOUNDS=$(($REPO_NOTFOUNDS + 1));        
+			# 	let REPO_NOTFOUNDS++
 			fi
 		fi
 	done	
