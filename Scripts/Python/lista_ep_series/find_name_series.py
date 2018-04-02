@@ -13,7 +13,8 @@ import os, sys, webbrowser
 # INSTRUÇOES
 # Mostra a lista de episodios da serie escolhida
 # 
-# OBS: Digitar 
+# OBS: Digitar palavras, separando-as por underscore
+#	Exemplo: Breaking_Bad
 #
 # variaveis
 new = 2 # abre em nova janela, se possivel
