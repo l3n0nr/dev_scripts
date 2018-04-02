@@ -22,10 +22,6 @@ func_internet()
 {
 	# intervalo de tempo 
 	while true; do	
-		sleep $TEMPO
-
-		# date >> /tmp/internet_log.txt
-
 		# ====================================== #
 		# testando conexao internet
 		# ====================================== #	
@@ -46,12 +42,10 @@ func_internet()
 			echo $MENSAGEM >> /tmp/internet.txt
 
 			notify-send -u normal "$MENSAGEM" -t 5000		
-			# firefox $SERVIDOR
 		fi	
 
-		# mostrando mensagem
-		# echo $MENSAGEM >> /tmp/internet_log.txt
-		# ====================================== #
+		# aguardando tempo especifico
+		sleep $TEMPO
 	done
 }
 

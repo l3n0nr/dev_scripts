@@ -34,8 +34,6 @@ pull_git()
 {
 	# intervalo de tempo 
 	while true; do	
-		sleep $TEMPO
-
 		# # walk to the array
 		for (( i = 1; i <= ${#REPOS[@]}; i++ )); do	
 			# verify local repo disk
@@ -62,6 +60,9 @@ pull_git()
 				fi
 			fi
 		done	
+
+		# aguardando tempo especifico
+		sleep $TEMPO
 	done
 }
 
