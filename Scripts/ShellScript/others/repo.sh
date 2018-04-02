@@ -28,12 +28,17 @@ LOCAL='/home/lenonr/Github/'		# pasta do repositorio
 REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repositorios
 
 # intervalo de tempo
-TEMPO=14400s						# sera executado 3 vezes por dia a cada 4 horas
+TEMPO=14400s 						# sera executado 3 vezes por dia a cada 4 horas
+TEMPO_DATE="14400 seconds"
 
 pull_git()
 {
 	# intervalo de tempo 
 	while true; do	
+
+		#mostrando mensagem
+		notify-send -u normal "Atualizando repositorios do Github" -t 6000				
+
 		# # walk to the array
 		for (( i = 1; i <= ${#REPOS[@]}; i++ )); do	
 			# verify local repo disk
@@ -50,7 +55,9 @@ pull_git()
 				  	git pull >> /tmp/repo.txt
 
 				  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
-				  	let REPO_FOUNDS++		  	
+				  	let REPO_FOUNDS++		
+
+				  	printf "\n" >> /tmp/repo.txt  	
 				else
 					date >> /tmp/repo.txt
 					echo "[-] - Not found": $LOCAL${REPOS[$i]}
@@ -61,6 +68,10 @@ pull_git()
 			fi
 		done	
 
+		# mostrando proxima verificacao
+		echo "Proxima verificação em:" >> /tmp/repo.txt
+		date -d "$TEMPO_DATE" >> /tmp/repo.txt
+
 		# aguardando tempo especifico
 		sleep $TEMPO
 	done
@@ -69,6 +80,7 @@ pull_git()
 # data de inicio do script
 echo "Inicio do script" > /tmp/repo.txt
 date > /tmp/repo.txt
+printf "\n" >> /tmp/repo.txt
 
 # chamando funcao
 pull_git
