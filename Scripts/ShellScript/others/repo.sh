@@ -28,7 +28,8 @@ LOCAL='/home/lenonr/Github/'		# pasta do repositorio
 REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repositorios
 
 # intervalo de tempo
-TEMPO=14400s						# sera executado 3 vezes por dia a cada 4 horas
+# TEMPO=14400s						# sera executado 3 vezes por dia a cada 4 horas
+TEMPO=300s						# 5 minutos
 
 pull_git()
 {
