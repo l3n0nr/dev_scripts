@@ -106,14 +106,6 @@ auto_git()
 	done		
 }
 
-# # verificando internet
-# if [[ $internet = "0" ]]; then
-# 	# chamando funcao
-# 	auto_git
-# else
-# 	echo "sem internet"
-# fi
-
 auto_git
 
 # data do final do script
