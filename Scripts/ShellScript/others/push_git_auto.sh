@@ -20,22 +20,24 @@ LOCAL='/home/lenonr/Github/'		# pasta do repositorio
 # repositorios disponiveis
 REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repositorios
 
+chave="0"
 # Verifica se repositorio do github, contem modificacao
-verifica_mudanca=$(git status | grep "Changes not" > /dev/null; echo $?)
-verifica_naotraqueados=$(git status | grep "Untracked files" > /dev/null; echo $?)
+# verifica_mudanca=$(git status | grep "Changes not" > /dev/null; echo $?)
+# verifica_naotrackeados=$(git status | grep "Untracked files" > /dev/null; echo $?)
 
 # comando git
 # comando=$(git pull)
 
 # internet
 # internet=$(ping -c1 google.com > /dev/null)
-
 # intervalo de tempo
 # TEMPO=14400s 						# sera executado 3 vezes por dia a cada 4 horas
 # TEMPO_DATE="14400 seconds"
 
 auto_git()
 {
+	clear
+
 	# # walk to the array
 	for (( i = 1; i <= ${#REPOS[@]}; i++ )); do	
 		# verify local repo disk
@@ -43,49 +45,54 @@ auto_git()
 			# verify local repo
 			if [ -e "$LOCAL${REPOS[$i]}" ]; then 	  	 
 				date >> /tmp/repo.txt
-			  	echo "[+] - Atualizando repositorio:" $LOCAL${REPOS[$i]} >> /tmp/repo.txt
+			  	echo "[+] - Atualizando repositorio:" $LOCAL${REPOS[$i]} >> /tmp/repo.txt				
 
-				# into folder location
-			  	cd $LOCAL${REPOS[$i]}
-
-			  	# show folder status
-			  	echo $LOCAL${REPOS[$i]}
-
-				#######################################			
-				# echo "Valor: $verifica"				
-
-				# verifica=$(git status | grep "Changes not" > /dev/null; echo $?)
-
-				if [[ $verifica_mudanca == "0" ]]; then
-					# echo "sem modificacao"
-					printf
-				elif [[ $verifica_mudanca == "1" ]]; then
-					echo "com modificacao - MUDANCA"
-				else
-					echo "erro"
-				fi
-
-				if [[ $verifica_naotraqueados == "0" ]]; then
-					# echo "sem modificacao"
-					printf
-				elif [[ $verifica_naotraqueados == "1" ]]; then
-					echo "com modificacao - NAO TRAQUEADO"
-				else
-					echo "erro"
-				fi
-				########################################			  	
-
-			  	# update repositories
-			  	# $comando >> /tmp/repo.txt
-
-			  	# if update repositorie not work
+				# if update repositorie work
 			  	if [[ $? == "0" ]]; then
-					# echo "Repositorie ${REPOS[$i]} fine!" >> /tmp/repo.txt
-					printf ""
+		  			# into folder location
+				  	cd $LOCAL${REPOS[$i]}			  					
+
+					# check status
+					git status | grep "Changes not" > /dev/null
+						
+					# if value = 0, then comparation is true
+					if [[ $? == "0" ]]; then
+						# show folder status
+						# echo "[Modificado]: $LOCAL${REPOS[$i]}"											
+
+						saida=$(git status | grep "modified:" | sed -e "s;modified:   ;;g")
+
+						cd $LOCAL${REPOS[$i]}					
+
+						echo $saida
+
+						break;
+					else
+						# echo "sem modificacao"
+						printf ""
+					fi				
+
+					git status | grep "Untracked files:" > /dev/null
+
+					# if value = 0, then comparation is true
+					if [[ $? == "0" ]]; then
+						# show folder status
+						# echo "[Nao Trackeado]: $LOCAL${REPOS[$i]}"
+						git status
+
+						cd $LOCAL${REPOS[$i]}													
+
+						break;
+					else
+						# echo "sem modificacao"
+						printf ""
+					fi			
+					
+				# if update repositorie not work		
 			  	else				  		
 					echo "Repositorie Error ${REPOS[$i]}!" >> /tmp/repo.txt
-			  	fi
-
+			  	fi				
+				
 			  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
 			  	let REPO_FOUNDS++		
 
