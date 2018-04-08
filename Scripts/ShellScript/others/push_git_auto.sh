@@ -62,9 +62,7 @@ auto_git()
 
 						saida=$(git status | grep "modified:" | sed -e "s;modified:   ;;g")
 
-						cd $LOCAL${REPOS[$i]}					
-
-						echo $saida
+						echo "$LOCAL${REPOS[$i]}:$saida" 
 
 						break;
 					else
