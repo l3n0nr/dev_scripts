@@ -1,5 +1,5 @@
 #!/bin/zsh
-# repo="/home/lenonr/Github/dev_xfce/"
+# Verifica se repositorio do github, contem modificacao
 verifica=$(git status | grep "Changes not" > /dev/null; echo $?)
 
 if [[ $verifica == "0" ]]; then
