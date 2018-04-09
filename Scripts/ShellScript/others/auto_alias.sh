@@ -8,47 +8,58 @@ var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)
 
 auto_alias()	
 {		
-	# while [[ $1 != "$var_alias[$i]" ]]; do	
-		for (( i = 0; i <= ${#var_alias[@]}; i++ )); do	
-			# verify local repo disk
-			if [[ $LOCAL${var_alias[$i]} != $LOCAL ]]; then
-				# verify local repo
-				if [ -e "$LOCAL${var_alias[$i]}" ]; then 	  	 		
-					# compare values
-					if [[ $1 == ${var_alias[$i]} ]]; then						
-				 		entra_pasta=$LOCAL${var_alias[$i]}			  		
-				 		# echo $entra_pasta
-					  # 	echo "ACHOU!"
-					  	break
-				 	fi					  			
+	for (( i = 0; i <= ${#var_alias[@]}; i++ )); do	
+		# verify local repo disk
+		if [[ $LOCAL${var_alias[$i]} != $LOCAL ]]; then
+			# verify local repo
+			if [ -e "$LOCAL${var_alias[$i]}" ]; then 	  	 		
+				# compare values
+				if [[ $1 == ${var_alias[$i]} ]]; then						
+			 		entra_pasta=$LOCAL${var_alias[$i]}			  						  	
+			 	fi					  			
 
-					# add  
-				  	let repo_founds++		
+				# add  
+			  	let repo_founds++		
 
-				  	printf "\n" >> /tmp/repo.txt  	
-				else
-					date >> /tmp/repo.txt
-					echo "[-] - Not found": $LOCAL${var_alias[$i]}
+			  	printf "\n" >> /tmp/repo.txt  	
+			else
+				date >> /tmp/repo.txt
+				echo "[-] - Not found": $LOCAL${var_alias[$i]}
 
-					# repo_notfounds=$(($repo_notfounds + 1));        
-					let repo_notfounds++
-				fi
+				# repo_notfounds=$(($repo_notfounds + 1));        
+				let repo_notfounds++
 			fi
-		done
-	# done
+		fi
+	done
 }
 
-# chamando funcao
-auto_alias $1		
+menu()
+{		
+	if [[ $1 == "" ]]; then
+		echo "Parametros disponiveis: $var_alias"
+		exit;
+	else 		
+		# chamando funcao
+		auto_alias $1		
 
-clear
-echo $entra_pasta
-echo "########## LISTA DE ARQUIVOS ##########" 
-# cd $LOCAL${var_alias[$i]}			  		
-cd $entra_pasta
-ls
-echo "######################################"	
-#############################################################
+		#abrindo pasta posteriormente
+		echo "########## LISTA DE ARQUIVOS ##########" 
+		# cd $LOCAL${var_alias[$i]}			  		
+		cd $entra_pasta
+		ls
+		echo "######################################"	
+
+		echo "Dentro do menu: $(pwd)"
+	fi
+}
+
+echo "Antes do menu: $(pwd)"
+
+menu $1
+
+echo "Fora do menu: $(pwd)"
+
+############################################################
 
 # dev_xfce() 
 # {	
