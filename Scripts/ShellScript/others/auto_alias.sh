@@ -9,26 +9,19 @@ var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)
 auto_alias()	
 {		
 	# while [[ $1 != "$var_alias[$i]" ]]; do	
-		for (( i = 1; i <= ${#var_alias[@]}; i++ )); do	
+		for (( i = 0; i <= ${#var_alias[@]}; i++ )); do	
 			# verify local repo disk
 			if [[ $LOCAL${var_alias[$i]} != $LOCAL ]]; then
 				# verify local repo
-				if [ -e "$LOCAL${var_alias[$i]}" ]; then 	  	 
-					# if update var_aliasitorie work
-				  	if [[ $? == "0" ]]; then		  	
-				  		# into folder location							
-						echo "########## LISTA DE ARQUIVOS ##########" 
-					  	cd $LOCAL${var_alias[$i]}			  		
-					  	ls
-					  	echo "######################################"	
+				if [ -e "$LOCAL${var_alias[$i]}" ]; then 	  	 		
+					# compare values
+					if [[ $1 == ${var_alias[$i]} ]]; then						
+				 		entra_pasta=$LOCAL${var_alias[$i]}			  		
+				 		# echo $entra_pasta
+					  # 	echo "ACHOU!"
+					  	break
+				 	fi					  			
 
-					  	entra_pasta=$LOCAL${var_alias[$i]}			  		
-
-					  	break									
-				  	else				  		
-						echo "var_alias repositorie Error ${var_alias[$i]}!" >> /tmp/repo.txt
-				  	fi				
-					
 					# add  
 				  	let repo_founds++		
 
@@ -45,15 +38,16 @@ auto_alias()
 	# done
 }
 
-menu()
-{
-	auto_alias $1
-}
-
 # chamando funcao
-menu
+auto_alias $1		
 
+clear
+echo $entra_pasta
+echo "########## LISTA DE ARQUIVOS ##########" 
+# cd $LOCAL${var_alias[$i]}			  		
 cd $entra_pasta
+ls
+echo "######################################"	
 #############################################################
 
 # dev_xfce() 
