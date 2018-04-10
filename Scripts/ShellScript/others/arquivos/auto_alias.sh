@@ -4,8 +4,8 @@
 # local_repo='/home/lenonr/Github/'		
 local_repo='/tmp/lista_compras/'		
 
-# var_aliasitorios
-var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)	
+# var_alias
+# var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)	
 var_alias=(frutas verduras graos)
 
 auto_alias()	
