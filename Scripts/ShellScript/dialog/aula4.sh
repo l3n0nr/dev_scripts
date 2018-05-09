@@ -26,7 +26,7 @@
 #echo $?
 
 # criando loop
-while true; do
+# while true; do
 
 # capturando valor
 valor=$(
