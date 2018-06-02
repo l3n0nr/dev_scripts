@@ -36,9 +36,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.37.0.0.0]   #
+# # versão do script:           [0.0.40.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [09/03/18]      #
+# # ultima ediçao realizada:      [02/06/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -77,11 +77,12 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-# VARIAVEIS DE VERIFICAÇÃO
+## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
+## valores menores ja travaram!
+TAXA=50 
+
 # # # MEMORIA
-# MEM_TOTAL=$(awk '/^MemTotal/ { print $2; }' /proc/meminfo)
 MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
-# MEM_LIVRE=$(awk '/^MemAvailable/ { print $2; }' /proc/meminfo)
 
 # # # SWAP 
 ## Kb
@@ -97,21 +98,12 @@ SWAP_LIVRE_MB=$(($SWAP_LIVRE / 1024))
 # calculo de espaço disponivel
 SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
 
-# aplicando margem de segurança - evitando travamentos - 40% extra
-SWAP_USADA=$(((($SWAP_USADA * 40)/100) + $SWAP_USADA))
+# aplicando margem de segurança
+SWAP_USADA=$(((($SWAP_USADA * $TAXA)/100) + $SWAP_USADA))
 
 # realizando calculo para MB
 MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
-
-# # adicionando taxa de segurança(menor) 
-# MEM_LIVRE_MB_C=$(( $MEM_LIVRE_MB * 0,20 ))
-# MEM_LIVRE_MB_Cal=$(( $MEM_LIVRE_MB - MEM_LIVRE_MB_C))
-
 SWAP_USADA_MB=$(($SWAP_USADA / 1024))
-
-# echo $MEM_LIVRE_MB
-# echo $MEM_LIVRE_MB_C
-# echo $MEM_LIVRE_MB_Cal
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # -lt : (less than), menor que, equivalente ao <.
@@ -124,16 +116,6 @@ SWAP_USADA_MB=$(($SWAP_USADA / 1024))
 
 # limpando tela
 clear
-
-# echo "Memoria total do computador:" $MEM_TOTAL "Kb"
-# echo "Memoria livre do computador:" $MEM_LIVRE "Kb"
-
-# echo "Swap total do computador:" $SWAP_TOTAL "Kb"
-# echo "Swap livre do computador:" $SWAP_LIVRE "Kb"
-
-# echo "Swap usada:" $SWAP_USADA "Kb"
-# echo "Memoria livre " $MEM_LIVRE_MB "MB"
-# echo "Swap usada " $SWAP_USADA_MB "MB"
 
 # realizando verificação de sudo
 if [[ `id -u` -ne 0 ]]; then
