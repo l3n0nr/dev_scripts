@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.60.0.0.0     #
-# # ultima ediçao realizada:      [08/03/18]      #
+# versão do script:              0.0.70.0.0.0     #
+# # ultima ediçao realizada:      [07/06/18]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -34,8 +34,9 @@
 #
 ################################################################################
 #
-# Script testado em
-#	-Xubuntu 16.04
+# Script testado em Linux
+#	- Xubuntu 16.04
+#	- Debian 10
 #
 ################################################################################
 #
@@ -126,10 +127,13 @@ filmes_pendentes()
     sleep 2
     
     # gerando arquivo
-    tree $caminhofilmes_a_origem | grep "-" | sort > $caminhofilmes_a_destino
+    tree $caminhofilmes_a_origem | grep "[+]" | sort > $caminhofilmes_a_destino
     
+    fp=`cat $caminhofilmes_a_destino | wc -l`
+	printf "\n Este arquivo contem $fp filmes pendentes!" >> $caminhofilmes_a_destino
+
     # copiando arquivo
-    cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
+    cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd    
 }
 
 seriados()
@@ -169,6 +173,7 @@ if [ -e "$LOCAL_DESTINO" ]; then
     else
         filmes
         filmes_assistidos
+        filmes_pendentes
         seriados
     fi
     printf "################################################### \n"
