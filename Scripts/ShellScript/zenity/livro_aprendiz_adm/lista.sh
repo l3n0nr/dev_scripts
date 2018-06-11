@@ -1,0 +1,14 @@
+zenity \
+	--title="Distribuicao preferida" \
+	--width="300" --height=250 \
+	--list \
+	--text="Selecione suas distruicoes" \
+	--column=" " \
+	--column="ID" \
+	--column="Distribuicoes" \
+	--checklist FALSE 1 "Debian" \
+	--checklist FALSE 2 "Arch" \
+	--checklist FALSE 3 "Slackware" \
+	--checklist FALSE 4 "Gentoo" \
+	--separator=" " \
+	--hide-column="2"
