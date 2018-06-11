@@ -3,6 +3,7 @@
 # # Receitinha de bolo para criar senha simples e faceis de lembrar, XD.
 #
 # Criado em: 11/06/18
+# Ultima modificacao: 11/06/18
 # Autor: lenonr
 #
 ## HEAD
@@ -19,18 +20,18 @@ def main():
 	qtd_caracteres = input("Digite a qtd_caracteres utilizar, partindo do nome do servico como base: ")
 	print
 	print "Opcoes de senhas"
-	print "{" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "*" + str(qtd_caracteres) + "}"
-	print "[" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "+" + str(qtd_caracteres) + "]"
-	print "(" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "#" + str(qtd_caracteres) + ")"
-	print "|" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "-" + str(qtd_caracteres) + "|"
+	print "{" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "*" + str(len(nome_servico)) + "}"
+	print "[" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "+" + str(len(nome_servico)) + "]"
+	print "(" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "#" + str(len(nome_servico)) + ")"
+	print "|" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "-" + str(len(nome_servico)) + "|"
 
 	pass
 
 ## executando script
 print("Gerador de senhas - v1")
 print("======================")
-
 # chamando funcao
 main()
+print("======================")
 
 ## FOOTER
