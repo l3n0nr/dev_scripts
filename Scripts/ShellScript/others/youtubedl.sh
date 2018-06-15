@@ -42,7 +42,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [14/06/18]      #
+# # ultima ediçao realizada:      [15/06/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -55,7 +55,10 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.20.0.0.0"  
+	versao="0.0.21.0.0.0"  
+
+	# formato do audio
+	format=mp3
 
 	# variaveis	
 	quality="320k"	
@@ -69,32 +72,20 @@
 # definindo funcoes
 f_youtube-dl()
 {
-	# url=$(dialog --stdout \
-	# 			 --title "Youtube-DL Audio Conversor" \
-	# 			 --backtitle "$back_title" \
-	# 			 --inputbox "Digite a URL do video" 0 0)
-
 	url=$(zenity --title="Youtube-DL Audio Conversor?" \
 				 --text "Digite a URL do video?" \
-				 --entry)	
+				 --entry)
 
-	format=$(zenity --list \
-					--text "Selecione o formato do audio" \
-				    --radiolist \
-				    --column "Marcar" \
-				    --column "Formato" \
-					    FALSE acc	\
-					    FALSE flac 	\
-					    TRUE mp3 	\
-					    FALSE m4a	\
-					    FALSE opus	\
-					    FALSE vorbis);
+	echo $?	
 
-	local=$(zenity --file-selection --directory --title="Selecione o local para salvar")
+	# local=$(zenity --file-selection \
+	# 			   --directory \
+	# 			   --title="Selecione o local para salvar")
 
-	# convertendo link
-	printf "Convertendo video, aguarde! \n"S
-	youtube-dl --embed-thumbnail --audio-quality "$quality" --extract-audio --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url"						
+	# youtube-dl --embed-thumbnail \
+	# 		   --audio-quality "$quality" \
+	# 		   --extract-audio \
+	# 		   --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url"						
 }
 
 main()
@@ -103,7 +94,7 @@ main()
 }
 
 ## chamando funcao principal
-main $@
+main
 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
