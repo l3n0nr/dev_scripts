@@ -11,7 +11,19 @@
 # # # # # # # # # # # # #
 #
 # Slackjeff 
-# Source: <https://notabug.org/jeffersonrocha/youtube2mp3>
+# 	Source: <https://notabug.org/jeffersonrocha/youtube2mp3>
+#
+# Github - youtube-dl
+#	Source: <https://github.com/rg3/youtube-dl/>
+#
+# Fabio Reis - Zenity – Exibindo caixas de diálogo com scripts do Shell no Linux
+#	Source: <http://www.bosontreinamentos.com.br/shell-script/zenity-exibindo-caixas-de-dialogo-com-scripts-do-shell-no-linux/>
+#
+# How do I prompt users with a GUI dialog box to choose file/directory path, via the command-line?
+#	Source: <https://askubuntu.com/questions/488350/how-do-i-prompt-users-with-a-gui-dialog-box-to-choose-file-directory-path-via-t>
+#
+# How to set up default download location in youtube-dl
+# 	Source: <https://stackoverflow.com/questions/32482230/how-to-set-up-default-download-location-in-youtube-dl>
 #
 # # # # # # # # # # # # #
 #   DESENVOLVIDO POR    #
@@ -42,16 +54,10 @@
 # 	f = desenvolver
 #
 # variaveis do script
-#
-# contatos do autor
-    email="lenonrmsouza@gmail.com"   
-    twitter="twitter.com/lenonr1"
+	# versao do script
+	versao="0.0.20.0.0.0"  
 
-# versao do script
-    versao="0.0.10.0.0.0"  
-
-# variaveis	
-	format="mp3"	# "aac", "flac", "mp3", "m4a",  "opus",  "vorbis",  or  "wav"
+	# variaveis	
 	quality="320k"	
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -63,15 +69,38 @@
 # definindo funcoes
 f_youtube-dl()
 {
+	# url=$(dialog --stdout \
+	# 			 --title "Youtube-DL Audio Conversor" \
+	# 			 --backtitle "$back_title" \
+	# 			 --inputbox "Digite a URL do video" 0 0)
+
+	url=$(zenity --title="Youtube-DL Audio Conversor?" \
+				 --text "Digite a URL do video?" \
+				 --entry)	
+
+	format=$(zenity --list \
+					--text "Selecione o formato do audio" \
+				    --radiolist \
+				    --column "Marcar" \
+				    --column "Formato" \
+					    FALSE acc	\
+					    FALSE flac 	\
+					    TRUE mp3 	\
+					    FALSE m4a	\
+					    FALSE opus	\
+					    FALSE vorbis);
+
+	local=$(zenity --file-selection --directory --title="Selecione o local para salvar")
+	# local="/home/$USER/Downloads"
+
 	# convertendo link
-	youtube-dl --embed-thumbnail --audio-quality "$quality"  --extract-audio --audio-format "$format" "$@"						
+	# printf "Convertendo video, aguarde! \n"S
+	youtube-dl --embed-thumbnail --audio-quality "$quality" --extract-audio --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url"						
 }
 
 main()
 {
-	# verificando parametros
-	[[ $# -eq 0 ]] && printf "Chame o script e cole um link de video do Youtube!" && exit 1 \
-				   || f_youtube-dl $@
+	f_youtube-dl
 }
 
 ## chamando funcao principal
