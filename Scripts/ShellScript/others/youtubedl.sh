@@ -91,10 +91,9 @@ f_youtube-dl()
 					    FALSE vorbis);
 
 	local=$(zenity --file-selection --directory --title="Selecione o local para salvar")
-	# local="/home/$USER/Downloads"
 
 	# convertendo link
-	# printf "Convertendo video, aguarde! \n"S
+	printf "Convertendo video, aguarde! \n"S
 	youtube-dl --embed-thumbnail --audio-quality "$quality" --extract-audio --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url"						
 }
 
