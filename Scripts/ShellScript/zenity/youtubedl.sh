@@ -45,7 +45,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [15/06/18]      #
+# # ultima ediçao realizada:      [16/06/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -58,7 +58,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.21.0.0.0"  
+	versao="0.0.30.0.0.0"  
 
 	# formato do audio
 	format=mp3
@@ -66,12 +66,19 @@
 	# variaveis	
 	quality="320k"	
 
+	# iniciando variaveis de verificacao
+	url="0"
+	local="0"
+	start="0"
+	option_m="0"
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
 #                           CORPO DO SCRIPT                               	  #
 #                                                                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
+## status
 f_verifca_sucesso()
 {
 	[[ $? == "0" ]] && \
@@ -86,6 +93,7 @@ f_verifica_erro()
 		exit 1
 }
 
+## arquivo unico
 # definindo funcoes
 f_youtube-dl()
 {
@@ -96,51 +104,53 @@ f_youtube-dl()
 	local=$(zenity --file-selection \
 				   --directory \
 				   --title="Selecione o local para salvar") ; f_verifica_erro
+}
 
+f_youtube-dl_audio()
+{
 	youtube-dl --embed-thumbnail \
+			   --contiune \
 			   --audio-quality "$quality" \
 			   --extract-audio \
 			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url" ; f_verifca_sucesso 						
 }
 
+f_youtube-dl_video()
+{
+	youtube-dl -o "$local/%(title)s.%(ext)s" "$url" ; f_verifca_sucesso 						
+}
+
+## varios arquivos
 f_vetor()
 {	
-	videos=$(zenity --text-info \
-					--width 530 \
-					--height 300 \
-					--font='DejaVu Sans Mono' \
-					--editable) ; f_verifica_erro
-
 	local=$(zenity --file-selection \
 				   --directory \
-				   --title="Selecione o local para salvar") ; f_verifica_erro
+				   --title="Selecione o local para salvar") ; f_verifica_erro	   	
+}
 
-	echo $videos > $local/lista.txt && cat $local/lista.txt > $batch-file
+f_vetor_audio()
+{	
+	echo "# Cole os links, um abaixo do outro..." > $local/list.txt
+	echo "# Salve(Ctrl+s) e apenas feche." >> $local/list.txt
+	echo >> $local/list.txt
 
-	# exec < $local/lista.txt
+	mousepad $local/list.txt
 
-	# while read -r line
-	# do
-	    youtube-dl --embed-thumbnail \
+	youtube-dl --embed-thumbnail \
 			   --continue \
 			   --audio-quality "$quality" \
 			   --extract-audio \
-			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$videos"; f_verifca_sucesso		   
-	# done
-	
-	# exec < "$terminal"
+			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt; f_verifca_sucesso && rm $local/list.txt
+}
 
-	# youtube-dl --embed-thumbnail \
-	# 		   --audio-quality "$quality" \
-	# 		   --extract-audio \
-	# 		   --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$videos"	
+f_vetor_video()
+{	
+	echo "# Cole os links, um abaixo do outro..." > $local/list.txt
+	echo "# Salve(Ctrl+s) e apenas feche." >> $local/list.txt
 
-	# for url in "$@" do
-	# 	youtube-dl  --embed-thumbnail \
-	# 			 	--extract-audio \
-	#   			 	--audio-quality "$quality" \
-	#   			 	--audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url" 
-	# done
+	mousepad $local/list.txt
+
+	youtube-dl -o "$local/%(title)s.%(ext)s" -a $local/list.txt; f_verifca_sucesso && rm $local/list.txt	   	
 }
 
 main()
@@ -157,9 +167,35 @@ main()
     							FALSE Many) && f_verifica_erro
 
     if [[ $start == "Single" ]]; then
-    	f_youtube-dl
+    	option_m=$(zenity  --list  \
+					--text "Midia Type.." \
+    				--radiolist \
+    				--column "Check" \
+    				--column "Format" \
+    							TRUE Audio \
+    							FALSE Video) && f_verifica_erro
+		
+		f_youtube-dl
+    	if [[ $option_m == "Audio" ]]; then    		
+    		f_youtube-dl_audio
+    	else
+			f_youtube-dl_video
+    	fi    	
     else
+    	option_m=$(zenity  --list  \
+					--text "Midia Type.." \
+    				--radiolist \
+    				--column "Check" \
+    				--column "Format" \
+    							TRUE Audio \
+    							FALSE Video) && f_verifica_erro
+
     	f_vetor
+    	if [[ $option_m == "Audio" ]]; then    		
+    		f_vetor_audio
+    	else
+			f_vetor_video
+    	fi    	
     fi
 }
 
