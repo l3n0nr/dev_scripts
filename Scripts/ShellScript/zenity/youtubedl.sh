@@ -45,7 +45,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [16/06/18]      #
+# # ultima ediçao realizada:      [17/06/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -58,7 +58,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.30.0.0.0"  
+	versao="0.0.35.0.0.0"  
 
 	# formato do audio
 	format=mp3
@@ -67,9 +67,7 @@
 	quality="320k"	
 
 	# iniciando variaveis de verificacao
-	url="0"
 	local="0"
-	start="0"
 	option_m="0"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -79,45 +77,11 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 ## status
-f_verifca_sucesso()
+f_verifica()
 {
-	[[ $? == "0" ]] && \
-		zenity --notification \
-			   --text "Download finalizado!"		
-}
-
-f_verifica_erro()
-{
-	# se usuario clicar em cancelar no zenity - sai do script
 	[[ $? == "1" ]] && \
-		exit 1
-}
-
-## arquivo unico
-# definindo funcoes
-f_youtube-dl()
-{
-	url=$(zenity --title="Youtube-DL Audio Conversor?" \
-				 --text "Digite a URL do video?" \
-				 --entry) ; f_verifica_erro
-
-	local=$(zenity --file-selection \
-				   --directory \
-				   --title="Selecione o local para salvar") ; f_verifica_erro
-}
-
-f_youtube-dl_audio()
-{
-	youtube-dl --embed-thumbnail \
-			   --contiune \
-			   --audio-quality "$quality" \
-			   --extract-audio \
-			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" "$url" ; f_verifca_sucesso 						
-}
-
-f_youtube-dl_video()
-{
-	youtube-dl -o "$local/%(title)s.%(ext)s" "$url" ; f_verifca_sucesso 						
+		zenity --notification \
+			   --text "Script finalizado, antes do esperado!" && exit 1
 }
 
 ## varios arquivos
@@ -125,7 +89,7 @@ f_vetor()
 {	
 	local=$(zenity --file-selection \
 				   --directory \
-				   --title="Selecione o local para salvar") ; f_verifica_erro	   	
+				   --title="Selecione o local para salvar") ; f_verifica   	
 }
 
 f_vetor_audio()
@@ -140,7 +104,9 @@ f_vetor_audio()
 			   --continue \
 			   --audio-quality "$quality" \
 			   --extract-audio \
-			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt; f_verifca_sucesso && rm $local/list.txt
+			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt ; \
+			    f_verifica && rm $local/list.txt || \
+			    zenity --notification --text "Download finalizado!" 
 }
 
 f_vetor_video()
@@ -150,7 +116,7 @@ f_vetor_video()
 
 	mousepad $local/list.txt
 
-	youtube-dl -o "$local/%(title)s.%(ext)s" -a $local/list.txt; f_verifca_sucesso && rm $local/list.txt	   	
+	youtube-dl -o "$local/%(title)s.%(ext)s" -a $local/list.txt; f_verifica && rm $local/list.txt	   	
 }
 
 main()
@@ -158,44 +124,19 @@ main()
 	# limpando a tela
 	clear 
 
-	start=$(zenity  --list  \
-					--text "Iniciar como.." \
-    				--radiolist \
-    				--column "Marcar" \
-    				--column "Qtd. Videos" \
-    							TRUE Single \
-    							FALSE Many) && f_verifica_erro
-
-    if [[ $start == "Single" ]]; then
-    	option_m=$(zenity  --list  \
-					--text "Midia Type.." \
-    				--radiolist \
-    				--column "Check" \
-    				--column "Format" \
-    							TRUE Audio \
-    							FALSE Video) && f_verifica_erro
-		
-		f_youtube-dl
-    	if [[ $option_m == "Audio" ]]; then    		
-    		f_youtube-dl_audio
-    	else
-			f_youtube-dl_video
-    	fi    	
-    else
-    	option_m=$(zenity  --list  \
-					--text "Midia Type.." \
-    				--radiolist \
-    				--column "Check" \
-    				--column "Format" \
-    							TRUE Audio \
-    							FALSE Video) && f_verifica_erro
-
-    	f_vetor
-    	if [[ $option_m == "Audio" ]]; then    		
-    		f_vetor_audio
-    	else
-			f_vetor_video
-    	fi    	
+	option_m=$(zenity  --list  \
+				--text "Midia Type.." \
+				--radiolist \
+				--column "Check" \
+				--column "Format" \
+							TRUE Audio \
+							FALSE Video) ; f_verifica
+	
+	f_vetor
+	if [[ $option_m == "Audio" ]]; then    		
+		f_vetor_audio
+	else
+		f_vetor_video  	
     fi
 }
 
