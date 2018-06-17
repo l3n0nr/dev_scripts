@@ -130,7 +130,8 @@ main()
 				--column "Check" \
 				--column "Format" \
 							TRUE Audio \
-							FALSE Video) ; f_verifica
+							FALSE Video
+	) ; f_verifica
 	
 	f_vetor
 	if [[ $option_m == "Audio" ]]; then    		
