@@ -9,34 +9,57 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [06/04/18]      #
-# # ultima ediçao realizada:      [06/04/18]      #
+# # ultima ediçao realizada:      [19/06/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # DESCRICAO
 # Reinicia dropbox automaticamente
 
-var_dropbox=$(which dropbox)
+f_dropbox()
+{
+	var_dropbox=$(which dropbox)
 
-if [[ -e $var_dropbox ]]; then
-	# fechando dropbox
-	printf "\nReiniciando Dropbox"
-	printf "\nReiniciando Dropbox" >> /tmp/dropbox.txt
+	if [[ -e $var_dropbox ]]; then
+		# fechando dropbox
+		printf "\nReiniciando Dropbox"
+		printf "\nReiniciando Dropbox" >> /tmp/dropbox.txt
 
-	dropbox stop 2>> /dev/null
+		dropbox stop 2>> /dev/null
 
-	# verificando se dropbox foi fechado corretamente
-	if [[ $? == "0" ]]; then
-		printf "\nIniciando Dropbox"
-		printf "\nIniciando Dropbox" >> /tmp/dropbox.txt
+		# testa_dropbox=$(pgrep -f dropbox)
+		# while [[ $testa_dropbox != 0 ]]; do
+		# 	printf "\n mata dropbox"
+		# 	kill $testa_dropbox	
+		# done	
 
-		# iniciando dropbox
-		dbus-launch dropbox start 2>> /dev/null 
+		echo $?
+
+		# if [[ $? -eq 1 ]]; then
+			# verificando se dropbox foi fechado corretamente
+			if [[ $? -eq 0 ]]; then
+				printf "\nIniciando Dropbox"
+				printf "\nIniciando Dropbox" >> /tmp/dropbox.txt
+
+				# iniciando dropbox
+				dbus-launch dropbox start 2>> /dev/null 
+			else
+				printf "\nERRO" >> /tmp/dropbox.txt
+			fi
+		# fi	
 	else
-		printf "\nERRO" >> /tmp/dropbox.txt
+		printf "\nDropbox nao esta instalado nesse sistema"
 	fi
-else
-	printf "\nDropbox nao esta instalado nesse sistema"
-fi
+}
+
+main()
+{
+	clear
+
+	f_dropbox
+}
+
+## chamando funcao
+main
 
 #dropbox stop && DBUS_SESSION_BUS_ADDRESS="" && dropbox start
 #dropbox start -i
