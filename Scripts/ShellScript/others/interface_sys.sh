@@ -45,16 +45,38 @@ f_wifi()
 {
 	if [[ $otimiza == "Otimizar" ]]; then
 		echo "| ======================================================= |"
-		echo "| Desativando Wifi|"
+		echo "| Desativando o wifi |"
 		echo 0 >  /sys/class/rfkill/rfkill0/state
 		echo "| ======================================================= |"
 	elif [[ $otimiza == "Default" ]]; then
 		echo "| ======================================================= |"
-		echo "| Ativando Wifi|"
+		echo "| Ativando o wifi |"
 		echo 1 >  /sys/class/rfkill/rfkill0/state
 		echo "| ======================================================= |"
 	else
 		echo "Nao entendi, WIFI!"
+	fi
+}
+
+f_brightness()
+{
+	## values default - not change!
+	brightness_min="500"
+	brightness_med="2441"
+	brightness_max="4882"
+
+	if [[ $otimiza == "Otimizar" ]]; then
+		echo "| ======================================================= |"
+		echo "| Reduzindo o brilho  |"
+		echo $brightness_min > /sys/class/backlight/intel_backlight/brightness
+		echo "| ======================================================= |"
+	elif [[ $otimiza == "Default" ]]; then
+		echo "| ======================================================= |"
+		echo "| Aumentando o brilho	|"
+		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
+		echo "| ======================================================= |"
+	else
+		echo "Nao entendi, BRILHO"
 	fi
 }
 
@@ -73,6 +95,7 @@ f_notebook()
 
 	f_cpu	
 	f_wifi
+	f_brightness
 }
 
 ## funcao principal
