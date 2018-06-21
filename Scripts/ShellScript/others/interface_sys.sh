@@ -1,4 +1,17 @@
 #!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# # # # # # # # # # # #
+#   DEVELOPMENT BY 	  #
+# # # # # # # # # # # #
+#
+# por lenonr(Lenon Ricardo)
+#       contato: <lenonrmsouza@gmail.com>
+#
+# # # # # # # # # # # # # # # # # # # # # # # ## # # #
+# Date create script:    	  		[20/06/18]       #
+# Last modification script: 		[21/06/18]       #
+# # # # # # # # # # # # # # # # # # # # # # # ## # # #
 
 
 # DESCRICAO DO SCRIPT:
@@ -8,114 +21,116 @@
 # 	- Reduz/Aumenta o brilho
 
 ## variaveis do script
-hostname=$(echo $HOSTNAME)
+	# nome da maquina
+	hostname=$(echo $HOSTNAME)
+
+	# configuracoes de brilho padrao
+	brightness_min="1000"
+	brightness_med="2441"
+
+	# arquivo do bluetooth
+	bluetooh="/etc/init.d/bluetooth"
+
+	# chave do script
+	chave=1
+
+	# status script
+	modo="Desativado"
 
 ## funcao de verificacao
 f_verifica()
 {
-	[[ $? == "1" ]] && \
-		zenity --notification \
-			   --text "Script finalizado, antes do esperado!" && exit 1
+	[[ $? == "1" ]] && exit 1
 }
 
-## funcao nucleos
-f_cpu()
+f_ativa()
 {
-	if [[ $otimiza == "Otimizar" ]]; then
+	if [[ $modo == "Desativado" ]]; then		
+		## processador
 		echo "| ======================================================= |"
 		echo "| Desativando nucleo do processador 1,2,3 respectivamente |"
 		echo 0 >> /sys/devices/system/cpu/cpu1/online
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
 		echo 0 >> /sys/devices/system/cpu/cpu3/online       
-		echo "| ======================================================= |"
-	elif [[ $otimiza == "Default" ]]; then
-		echo "| ======================================================= |"
-		echo "| Ativando nucleo do processador 1,2,3 respectivamente    |"
-		echo 1 >>  /sys/devices/system/cpu/cpu1/online
-	  	echo 1 >>  /sys/devices/system/cpu/cpu2/online
-	 	echo 1 >>  /sys/devices/system/cpu/cpu3/online
-	 	echo "| ======================================================= |"
-	else
-		echo "Nao entendi, CPU!"
-	fi
-}
+		echo "| ======================================================= |"		
 
-## funcao wifi
-f_wifi()
-{
-	if [[ $otimiza == "Otimizar" ]]; then
+		## wifi
 		echo "| ======================================================= |"
 		echo "| Desativando o wifi |"
 		echo 0 >  /sys/class/rfkill/rfkill0/state
 		echo "| ======================================================= |"
-	elif [[ $otimiza == "Default" ]]; then
-		echo "| ======================================================= |"
-		echo "| Ativando o wifi |"
-		echo 1 >  /sys/class/rfkill/rfkill0/state
-		echo "| ======================================================= |"
-	else
-		echo "Nao entendi, WIFI!"
-	fi
-}
 
-f_brightness()
-{
-	## values default - not change!
-	brightness_min="1000"
-	brightness_med="2441"
-	# brightness_max="4882"
-
-	if [[ $otimiza == "Otimizar" ]]; then
+		## brilho
 		echo "| ======================================================= |"
 		echo "| Reduzindo o brilho  |"
 		echo $brightness_min > /sys/class/backlight/intel_backlight/brightness		
 		echo "| ======================================================= |"
-	elif [[ $otimiza == "Default" ]]; then
-		echo "| ======================================================= |"
-		echo "| Aumentando o brilho	|"
-		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
-		echo "| ======================================================= |"
-	else
-		echo "Nao entendi, BRILHO"
-	fi
-}
 
-f_bluetooh()
-{
-	bluetooh="/etc/init.d/bluetooth"
-
-	if [[ $otimiza == "Otimizar" ]]; then
+		## bluetooth
 		echo "| ======================================================= |"
 		echo "| Desligando o bluetooh  |"
 		$bluetooh stop > /dev/null
 		echo "| ======================================================= |"
-	elif [[ $otimiza == "Default" ]]; then
+
+		## contador	
+		let chave++
+	fi
+}
+
+f_desativa()
+{
+	if [[ $modo == "Ativado" ]]; then		
+		## processador
+		echo "| ======================================================= |"
+		echo "| Ativando nucleo do processador 1,2,3 respectivamente    |"
+		echo 1 >>  /sys/devices/system/cpu/cpu1/online
+		echo 1 >>  /sys/devices/system/cpu/cpu2/online
+		echo 1 >>  /sys/devices/system/cpu/cpu3/online
+		echo "| ======================================================= |"
+
+		## wifi
+		echo "| ======================================================= |"
+		echo "| Ativando o wifi |"
+		echo 1 >  /sys/class/rfkill/rfkill0/state
+		echo "| ======================================================= |"
+
+		## brilho
+		echo "| ======================================================= |"
+		echo "| Aumentando o brilho	|"
+		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
+		echo "| ======================================================= |"
+
+		## bluetooth
 		echo "| ======================================================= |"
 		echo "| Mantendo o bluetooh desligado... hehehe	|"
 		$bluetooh stop > /dev/null
 		echo "| ======================================================= |"
-	else
-		echo "Nao entendi, BRILHO"
+
+		## contador	
+		let chave--
 	fi
 }
 
 f_notebook()
 {
+	## valor padrao
+	chave=1
+
 	otimiza=$(zenity --list \
-		   --title="Otimizar Bateria" \
-		   --text="O que deseja fazer?"  \
+		   --title="Bateria" \
+		   --text="O que deseja fazer? [Script $modo]"  \
 		   --width "300" \
 		   --height "200" \
 		   --column "" --column="Marque" \
 		   --radiolist \
-	            FALSE Default \
-	            FALSE Otimizar    
+	            TRUE Default \
+	            FALSE Otimizar \
 	) 
 
-	f_cpu	
-	f_wifi
-	f_brightness
-	f_bluetooh
+	f_verifica
+
+	[[ $otimiza == "Default" ]] && f_desativa \
+							    || f_ativa 
 }
 
 ## funcao principal
@@ -123,12 +138,16 @@ main()
 {
 	# verifica se root
 	[[ `id -u` -ne 0 ]] && \
-    	zenity --info --text "Root e necessario" && \
-    	exit 1    	
+    	zenity --info --text "Root e necessario" && exit 1    	
 
-    ## verifica se e notebook
-	[[ ! $hostname -eq "notebook" ]] && echo "Nao serve!" && exit 1 \
-									 || f_notebook
+    while true; do    
+	    ## verifica hostname = notebook, senao for sai!
+		[[ ! $hostname -eq "notebook" ]] && echo "Nao serve!" && exit 1 \
+										 || f_notebook		
+
+		## se todos os modulos ativados - entao script "ON"
+		[[ $chave == "2" ]] && modo="Ativado" || modo="Desativado"
+	done
 }
 
 ## chamando script
