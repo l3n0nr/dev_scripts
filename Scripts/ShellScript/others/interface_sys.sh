@@ -61,19 +61,38 @@ f_wifi()
 f_brightness()
 {
 	## values default - not change!
-	brightness_min="500"
+	brightness_min="1000"
 	brightness_med="2441"
-	brightness_max="4882"
+	# brightness_max="4882"
 
 	if [[ $otimiza == "Otimizar" ]]; then
 		echo "| ======================================================= |"
 		echo "| Reduzindo o brilho  |"
-		echo $brightness_min > /sys/class/backlight/intel_backlight/brightness
+		echo $brightness_min > /sys/class/backlight/intel_backlight/brightness		
 		echo "| ======================================================= |"
 	elif [[ $otimiza == "Default" ]]; then
 		echo "| ======================================================= |"
 		echo "| Aumentando o brilho	|"
 		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
+		echo "| ======================================================= |"
+	else
+		echo "Nao entendi, BRILHO"
+	fi
+}
+
+f_bluetooh()
+{
+	bluetooh="/etc/init.d/bluetooth"
+
+	if [[ $otimiza == "Otimizar" ]]; then
+		echo "| ======================================================= |"
+		echo "| Desligando o bluetooh  |"
+		$bluetooh stop > /dev/null
+		echo "| ======================================================= |"
+	elif [[ $otimiza == "Default" ]]; then
+		echo "| ======================================================= |"
+		echo "| Mantendo o bluetooh desligado... hehehe	|"
+		$bluetooh stop > /dev/null
 		echo "| ======================================================= |"
 	else
 		echo "Nao entendi, BRILHO"
@@ -96,6 +115,7 @@ f_notebook()
 	f_cpu	
 	f_wifi
 	f_brightness
+	f_bluetooh
 }
 
 ## funcao principal
