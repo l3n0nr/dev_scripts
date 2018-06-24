@@ -35,7 +35,7 @@ advance_info()
 	swap_usage=$(free -m | awk '/Swap/ { printf("%3.1f%%", "exit !$2;$3/$2*100") }')
 	time=$(uptime | grep -ohe 'up .*' | sed 's/,/\ hours/g' | awk '{ printf $2" "$3 }')
 	processes=$(ps aux | wc -l)
-
+	
 	printf "\tSystem load:\t%s\t\tProcesses:\t%s\n" "$load" "$processes"
 	printf "\tMemory usage:\t%s/%s\t\tUptime:\t\t%s\n" "$memory_usage" "$total_memory" "$time"
 	printf "\tDisk usage:\t%s\t\tSwap:\t\t%s\n\n" "$root_usage" "$swap_usage"
