@@ -7,10 +7,13 @@
 ###################
 # datas script
     data_nasc="03/07/18"
-    data_present="03/07/18"
+    ultima_modific="04/07/18"
 
 # versao do script
-    versao="0.10.0"     
+    versao="0.11"     
+
+# arquivo de log
+	log="/tmp/clamscan.log"
 
 ###################
 ## PRE-VERIFICACOES DO SCRIPT
@@ -35,7 +38,7 @@ f_clamav()
 
 	## executando escaneamento
 	## remove tudo que encontrar - full-agressive.... \0-0/
-	clamscan -r --remove $caminho
+	clamscan -r --remove $caminho $log
 }
 
 main()
