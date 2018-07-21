@@ -6,14 +6,14 @@
 ##### LOG's
 #
 # TESTADO EM: Debian Stable
-# VERSAO: 0.15
+# VERSAO: 0.30
 # ULT_EDICAO= 21/07/18 
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
-url="https://www.torproject.org/dist/torbrowser/7.5.3/tor-browser-linux64-7.5.3_en-US.tar.xz"
+versao_tor="7.5.6"
+url_tor="https://dist.torproject.org/torbrowser/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
 apelido="tor.tar.xz"
-server="google.com"
 
 ##### FUNCOES
 # verifica se root
@@ -26,69 +26,81 @@ fi
 # funcao verifica saida do ultimo comando
 f_check_status()
 {
-	[[ $? -ne 0 ]] && echo "ERRO - Saida comando" && exit 1
-}
-
-# funcao para verificar internet
-f_check_internet()
-{
-	ping $server > /dev/null
+	# verifica se ultimo comando nao foi igual a zero 
+	[[ $? -ne 0 ]] && echo "[-] ERRO EM ${acoes[$i]}." && exit 1
 }
 
 # funcao baixa arquivo
 f_download_tor()
 {	
-	printf "\n[*] Baixando arquivo, aguarde.. \n"
+	printf "[*] Baixando arquivo, aguarde.. \n"
 
-	wget -c $url -O $apelido
+	# baixando arquivo via WGET, com possibilidade de contianuacao
+	wget -cb $url_tor -O $apelido > /dev/null
+
+#	-c = continuar
+#	-b = plano de fundo
 }
 
 # funcao verificao pasta destino
 f_check_local()
 {
-	printf "\n[*] Verificando pasta... \n"
+	printf "[*] Verificando pasta... \n"
 
-	mkdir -p $caminho
+	# criando caminho caso nao exista
+	mkdir -p $caminho > /dev/null
 }
 
 # funcao descompacta arquivo
 f_uncomp_file()
 {
-	printf "\n[*] Descompactando arquivo... \n"
+	printf "[*] Descompactando arquivo... \n"
 
-	## enviando pasta para $caminho
-	tar -xvJf $apelido -C $caminho
+	## enviando pasta extraida para $caminho
+	tar -xvJf $apelido -C $caminho > /dev/null
+
+#	-x = extrai
+#	-v = verbose
+#	-J = arquivo XZ
+#	-f = arquivo
 }
 
 # funcao altera permissao
 f_change_perm()
 {
-	printf "\n[*] Alterando permissoes dos arquivos... \n"
+	printf "[*] Alterando permissoes dos arquivos... \n"
 
-	chmod +x ./opt/tor/Browser/start-tor-browser
-	chmod +x ./opt/tor/start-tor-browser.desktop
+	# dando permissao total para modificar o arquivos na pasta
+	chmod 777 -R $caminho
+
+	# modificando arquivos para executar GUI
+	chmod +x /opt/tor/tor-browser_en-US/Browser/start-tor-browser
+	chmod +x /opt/tor/tor-browser_en-US/start-tor-browser.desktop
 }
 
-## funcao principal
+## funcao tor
 f_tor()
 {	
-	f_check_internet 
-	f_check_status
-	f_download_tor  
-	f_check_status
-	# f_check_local  
-	# f_check_status
-	# f_uncomp_file 
-	# f_check_status
-	# f_change_perm 
-	# f_check_status
+	# conjunto de acoes
+	acoes=(f_download_tor f_check_local f_uncomp_file f_change_perm)
+
+	# executando vetor de acoes
+    for (( i = 0; i <= ${#acoes[@]}; i++ )); do             
+        # executanco acao
+        ${acoes[$i]} 
+
+        # verificando se existiu algum erro na execucao - se sim, sai do loop
+		f_check_status        
+    done
 }
 
-#
+# chamando funcao principal
 main()
 {
+	# limpando a tela na inicializacao do script
 	clear
 
+	# chamando funcao para baixar tor
 	f_tor
 }
 
