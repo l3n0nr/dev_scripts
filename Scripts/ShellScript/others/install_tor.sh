@@ -51,12 +51,22 @@ f_check_local()
 	mkdir -p $caminho > /dev/null
 }
 
+f_check_file()
+{
+	if [[ $(ls $caminho) -ne 0 ]]; then
+		printf ""		
+	else
+		printf "[-] Arquivo $caminho ja existe\n"
+		exit 1
+	fi
+}
+
 # funcao descompacta arquivo
 f_uncomp_file()
 {
+	## enviando pasta extraida para $caminho
 	printf "[*] Descompactando arquivo... \n"
 
-	## enviando pasta extraida para $caminho
 	tar -xvJf $apelido -C $caminho > /dev/null
 
 #	-x = extrai
@@ -82,7 +92,7 @@ f_change_perm()
 f_tor()
 {	
 	# conjunto de acoes
-	acoes=(f_download_tor f_check_local f_uncomp_file f_change_perm)
+	acoes=(f_check_file f_download_tor f_check_local f_uncomp_file f_change_perm)
 
 	# executando vetor de acoes
     for (( i = 0; i <= ${#acoes[@]}; i++ )); do             
