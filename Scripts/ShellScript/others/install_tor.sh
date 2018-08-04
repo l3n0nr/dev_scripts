@@ -7,7 +7,7 @@
 #
 # TESTADO EM: Debian Stable
 # VERSAO: 0.30
-# ULT_EDICAO= 21/07/18 
+# ULT_EDICAO: 04/08/18 
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
@@ -84,8 +84,8 @@ f_change_perm()
 	chmod 777 -R $caminho
 
 	# modificando arquivos para executar GUI
-	chmod +x /opt/tor/tor-browser_en-US/Browser/start-tor-browser
-	chmod +x /opt/tor/tor-browser_en-US/start-tor-browser.desktop
+	chmod +x $caminho/Browser/start-tor-browser
+	chmod +x $caminho/tor-browser_en-US/start-tor-browser.desktop
 }
 
 ## funcao tor
