@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 #
 # AUTOR: lenonr
-# DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
 # 
 ##### LOG's
 #
+# ERRO: Verificar permissao execucao arquivo /opt/tor
+#
 # TESTADO EM: Debian Stable
 # VERSAO: 0.30
-# ULT_EDICAO: 04/08/18 
+# ULT_EDICAO: 13/08/18 
+# DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
 versao_tor="7.5.6"
 url_tor="https://dist.torproject.org/torbrowser/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
 apelido="tor.tar.xz"
+acoes=(f_check_file f_download_tor f_check_local f_uncomp_file f_change_perm)
 
 ##### FUNCOES
 # verifica se root
@@ -53,9 +56,10 @@ f_check_local()
 
 f_check_file()
 {
-	if [[ $(ls $caminho) -ne 0 ]]; then
-		printf ""		
-	else
+	## testando caminho
+	ls $caminho 2> /dev/null
+
+	if [[ $? -eq 0 ]]; then
 		printf "[-] Arquivo $caminho ja existe\n"
 		exit 1
 	fi
@@ -81,19 +85,17 @@ f_change_perm()
 	printf "[*] Alterando permissoes dos arquivos... \n"
 
 	# dando permissao total para modificar o arquivos na pasta
-	chmod 777 -R $caminho
+	chmod 755 -R $caminho
 
 	# modificando arquivos para executar GUI
-	chmod +x $caminho/Browser/start-tor-browser
+	chmod +x $caminho/tor-browser_en-US/Browser/start-tor-browser
+	# chmod +x $caminho/start-tor-browser.desktop
 	chmod +x $caminho/tor-browser_en-US/start-tor-browser.desktop
 }
 
 ## funcao tor
 f_tor()
-{	
-	# conjunto de acoes
-	acoes=(f_check_file f_download_tor f_check_local f_uncomp_file f_change_perm)
-
+{		
 	# executando vetor de acoes
     for (( i = 0; i <= ${#acoes[@]}; i++ )); do             
         # executanco acao
