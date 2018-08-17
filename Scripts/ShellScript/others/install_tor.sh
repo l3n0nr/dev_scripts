@@ -7,9 +7,11 @@
 # ERRO: Verificar permissao execucao arquivo /opt/tor
 #
 # TESTADO EM: Debian Stable
-# VERSAO: 0.30
-# ULT_EDICAO: 13/08/18 
+# VERSAO: 0.31
+# ULT_EDICAO: 17/08/18 
+#
 # DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
+# ATENCAO: Verificar f_check_file
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
@@ -57,9 +59,9 @@ f_check_local()
 f_check_file()
 {
 	## testando caminho
-	ls $caminho 2> /dev/null
+	check=$(ls $caminho/tor-browser_en-US 2> /dev/null)
 
-	if [[ $? -eq 0 ]]; then
+	if [[ $check -eq 0 ]]; then
 		printf "[-] Arquivo $caminho ja existe\n"
 		exit 1
 	fi
@@ -89,7 +91,6 @@ f_change_perm()
 
 	# modificando arquivos para executar GUI
 	chmod +x $caminho/tor-browser_en-US/Browser/start-tor-browser
-	# chmod +x $caminho/start-tor-browser.desktop
 	chmod +x $caminho/tor-browser_en-US/start-tor-browser.desktop
 }
 
