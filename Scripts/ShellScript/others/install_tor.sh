@@ -8,7 +8,7 @@
 #
 # TESTADO EM: Debian Stable
 # VERSAO: 0.31
-# ULT_EDICAO: 17/08/18 
+# ULT_EDICAO: 18/08/18 
 #
 # DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
 # ATENCAO: Verificar f_check_file
@@ -59,9 +59,13 @@ f_check_local()
 f_check_file()
 {
 	## testando caminho
-	check=$(ls $caminho/tor-browser_en-US 2> /dev/null)
+	# check=$(ls $caminho/tor-browser_en-US 2> /dev/null)
+	check="$caminho/tor-browser_en-US"
 
-	if [[ $check -eq 0 ]]; then
+	# if [[ $check -eq 0 ]]; then
+	if [[ -e $check ]]; then
+		#statements
+	fi
 		printf "[-] Arquivo $caminho ja existe\n"
 		exit 1
 	fi
