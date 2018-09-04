@@ -7,11 +7,10 @@
 # ERRO: Verificar permissao execucao arquivo /opt/tor
 #
 # TESTADO EM: Debian Stable
-# VERSAO: 0.35
-# ULT_EDICAO: 21/08/18 
+# VERSAO: 0.50
+# ULT_EDICAO: 04/09/18 
 #
 # DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
-# ATENCAO: Verificar f_check_file
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
@@ -19,10 +18,12 @@ versao_tor="7.5.6"
 url_tor="https://dist.torproject.org/torbrowser/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
 apelido="tor.tar.xz"
 check="$caminho/tor-browser_en-US"
+user="lenonr"
 acoes=(f_check_file f_download_tor f_check_local f_uncomp_file f_change_perm)
-
-##### FUNCOES
-# verifica se root
+#
+##### FUNCOES PRINCIPAIS
+# verifica se e igual a root,
+# se for diferente, fecha o script!!
 if [[ `id -u` -ne 0 ]]; then
 	clear
 	printf "[-] PRECISA DE ROOT PARA SER EXECUTADO!"
@@ -54,10 +55,11 @@ f_check_local()
 	mkdir -p $caminho > /dev/null
 }
 
+# funcao verifica se arquivo existe
 f_check_file()
 {
 	if [[ -e $check ]]; then
-		printf "[-] Arquivo $check ja existe! Basta executar agora..\n"
+		printf "[-] Arquivo $check ja existe! Basta executa-lo..\n"
 		exit 1
 	fi
 }
@@ -79,12 +81,11 @@ f_change_perm()
 	# dando permissao total para modificar o arquivos na pasta
 	chmod 755 -R $caminho
 
-	# modificando arquivos para executar GUI
-	chmod 755 $check/start-tor-browser.desktop
-	chmod 755 $check/Browser/start-tor-browser	
+	# alterando permissao para que usuario comum(nao root), consiga utilizar o lancador!
+	chown -R $user $check/Browser
 }
 
-## funcao tor
+## funcao - chama outras acima
 f_tor()
 {		
 	# executando vetor de acoes
