@@ -7,29 +7,22 @@
 # ERRO: Verificar permissao execucao arquivo /opt/tor
 #
 # TESTADO EM: Debian Stable
-# VERSAO: 0.50
-# ULT_EDICAO: 04/09/18 
+# VERSAO: 0.51
+# ULT_EDICAO: 05/09/18 
 #
 # DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
-versao_tor="7.5.6"
-url_tor="https://dist.torproject.org/torbrowser/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
+versao_tor="8.0"
+url="https://dist.torproject.org/torbrowser"
+url_tor="$url/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
 apelido="tor.tar.xz"
 check="$caminho/tor-browser_en-US"
 user="lenonr"
 acoes=(f_check_file f_download_tor f_check_local f_uncomp_file f_change_perm)
 #
 ##### FUNCOES PRINCIPAIS
-# verifica se e igual a root,
-# se for diferente, fecha o script!!
-if [[ `id -u` -ne 0 ]]; then
-	clear
-	printf "[-] PRECISA DE ROOT PARA SER EXECUTADO!"
-	exit 1
-fi
-
 # funcao verifica saida do ultimo comando
 f_check_status()
 {
@@ -88,6 +81,14 @@ f_change_perm()
 ## funcao - chama outras acima
 f_tor()
 {		
+	# verifica se e igual a root,
+	# se for diferente, fecha o script!!
+	if [[ `id -u` -ne 0 ]]; then
+		clear
+		printf "[-] PRECISA DE ROOT PARA SER EXECUTADO!"
+		exit 1
+	fi
+
 	# executando vetor de acoes
     for (( i = 0; i <= ${#acoes[@]}; i++ )); do             
         # executanco acao
@@ -98,16 +99,28 @@ f_tor()
     done
 }
 
+## funcao - checa url
+f_check_url()
+{
+	echo "URL:" $url_tor
+}
+
 # chamando funcao principal
 main()
 {
 	# limpando a tela na inicializacao do script
 	clear
 
+	if [[ $1 == "checa" ]]; then
+		f_check_url
+	else
+		f_tor
+	fi
+
 	# chamando funcao para baixar tor
-	f_tor
+	# f_tor
 }
 
 # chamando script 
-main
+main $1
 
