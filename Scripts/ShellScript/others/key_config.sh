@@ -13,59 +13,64 @@
 
 file_check="/tmp/key_config.txt"
 
-# day/month/year - hour
-key=""$(date +%x-%k%M)		
-key_check=$(cat $file_check | tail -1) 
-
-# checa data da chave
-time_check()
-{	
-	echo "$key" >> $file_check
-}
-
-key_check()
-{
-	if [[ "$key_check" != "$key" ]]; then
-		echo "Atualizado com sucesso"
-	else
-		echo "Nada para fazer, ultima modificacao em" $key_check
-	fi
-}
-
 update_check()
 {
-	check_update=$(grep "UPDATE" /tmp/key_config.txt | tail -1 | sed -e "s;UPDATE:;;g")
+	check_update=$(grep "UPDATE" $file_check | tail -1 | sed -e "s;UPDATE:;;g")
 
-	if [[ "$key_check" != "$check_update" ]]; then
-		echo "Atualizado com sucesso"
+	if [[ "$key" != "$check_update" ]]; then
+		echo "Atualizado com sucesso - UPDATE"
 
 		echo "UPDATE:"$key >> $file_check
 	else
-		echo "[UPDATE] Nada para fazer"
+		echo "[UPDATE] - Nada para fazer aqui"
 	fi
 }
 
 clear_check()
 {
-	echo "CLEAR:"$key >> $file_check
+	check_clear=$(grep "CLEAR" $file_check | tail -1 | sed -e "s;CLEAR:;;g")
+
+	if [[ "$key" != "$check_update" ]]; then
+		echo "Atualizado com sucesso - CLEAR"
+
+		echo "CLEAR:"$key >> $file_check
+	else
+		echo "[CHECK] - Nada para fazer aqui"
+	fi
 }
 
 check_files()
 {
-	echo "CHECK:"$key >> $file_check
+	check_files=$(grep "FILES" $file_check | tail -1 | sed -e "s;FILES:;;g")
+
+	if [[ "$key" != "$check_files" ]]; then
+		echo "Atualizando com sucesso - FILES"
+
+		echo "FILES:"$key >> $file_check
+	else
+		echo "[FILES] - Nada para fazer aqui"
+	fi	
 }
 
 # chamando todas as funcoes para serem executadas
 main()
 {
+	key=""$(date +%x-%k)	# hours
+	
 	clear
 
-	# time_check
-	# key_check
+	echo "DATA:" $key
+
 	update_check
 	clear_check
 	check_files
 }
 
 ## chamando funcao principal
-main
+# main
+
+while [[ TRUE ]]; do
+	main
+
+	sleep 10
+done
