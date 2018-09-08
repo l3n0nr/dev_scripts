@@ -1,10 +1,19 @@
-# !bin/bash
-#limpando a tela
-clear
+#!/usr/bin/env bash
+#
+check_battery()
+{
+	while TRUE; do
+		tlp stat -b | grep /sys/class/power_supply/BAT0/current_now
+		tlp stat -b | grep /sys/class/power_supply/BAT0/charge_now
+	done
+}
 
-while true
-    clear
-    sudo tlp stat -b | grep /sys/class/power_supply/BAT0/current_now
-    sudo tlp stat -b | grep /sys/class/power_supply/BAT0/charge_now
-    sleep 5
-do
+main()
+{
+	clear
+
+	check_battery()
+}
+
+## chamando funcao principal
+main()
