@@ -7,7 +7,6 @@
 # LAST DATE: 08/09/18
 #####################
 #
-qtd="5"
 
 main()
 {
@@ -18,8 +17,13 @@ main()
 
 	echo
 
-	echo "Processos que demoram mais para iniciar no seu sistema"
-	systemd-analyze blame | head -$qtd	
+	if [[ $1 == "" ]]; then
+		echo "Processos que demoram mais para iniciar no seu sistema"
+		systemd-analyze blame | head -5
+	else
+		echo "Processos que demoram mais para iniciar no seu sistema"
+		systemd-analyze blame | head -$1
+	fi	
 }
 
-main
+main $1
