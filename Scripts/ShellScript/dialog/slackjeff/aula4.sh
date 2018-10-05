@@ -45,17 +45,13 @@ dialog  --stdout --title "Automatizador de Tarefas" --backtitle "AutoConfig v4" 
 # deixando toda saidas em minusculo
 valor=${valor,,}
 
-# tratando saidas
-	case $valor in 
-		internet) firefox >&- 2>&- &;;
-		ler)
-		 dialog --timeout 2 --msgbox "\n O futuro so depende de voce!" 8 40;;
-		mensagem) mousepad >&- 2>&- &;;
-	esac
-done
+case $valor in 
+	internet) firefox >&- 2>&- &;;
+	ler) dialog --timeout 2 --msgbox "\n O futuro so depende de voce!" 8 40;;
+	mensagem) mousepad >&- 2>&- &;;
+esac
 # imprimindo mensagem na tela
 #echo $valor
-
 
 
 # RODAPE
