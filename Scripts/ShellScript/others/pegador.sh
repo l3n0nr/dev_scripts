@@ -48,5 +48,5 @@ EOF
 ## chamando navegador
 firefox pegador.html
 
-## removendo arquivo gerado automaticamente
+## removendo arquivo gerado automagicamente
 rm pegador.html
