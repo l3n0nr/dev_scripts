@@ -1,0 +1,42 @@
+## O que e o CRON?
+- Agendador de tarefas
+- Ele e um servico que roda em background
+
+## CRONTab - Tabela do CRON
+- Cada usuario tem a sua tabela propria
+
+## Niveis de crontab's
+- 0 	= Administrador do sistema(+ pastas correspondentes)
+- 1000  = Usuarios comuns do sistema(+ pastas correspondentes)
+
+Referencia: <https://youtu.be/wPDcDHh-7Fc>
+
+* * * * * * /comando
+
+* - [MINUTO] 		= 0-59
+* - [HORA] 			= 0-23
+* - [DIA DO MES] 	= 1-31
+* - [MES] 			= 1-12
+	1 - Janeiro
+	2 - Fevereiro
+	3 - Março
+	4 - Abril
+	5 - Maio
+	6 - Junho
+	7 - Julho
+	8 - Agosto
+	9 - Setembro
+	10 - Outubro
+	11 - Novembro
+	12 - Dezembro
+
+* - [DIA DA SEMANA] = 0-6
+	0 - Domingo
+	1 - Segunda
+	2 - Terça
+	3 - Quarta
+	4 - Quinta
+	5 - Sexta
+	6 - Sabado
+
+[COMANDO/SCRIPT] - caminho absoluto
