@@ -16,7 +16,7 @@
 #################################################################################
 #
 ##################################
-# versão do script: 0.0.15.0.0.0 #
+# versão do script: 0.0.20.0.0.0 #
 ##################################
 #
 # legenda: a.b.c.d.e.f
@@ -29,54 +29,66 @@
 ################################################################################
 #
 # Script testado em
-#	-Xubuntu 16.04
+#	- Xubuntu 16.04
+#	- Debian Stable
 #
 ################################################################################
 #
 ################################################################################
 # FUNCOES
-#   -Captura imagem do wallhaven de plano de fundo e abre diretamente no site
+#   - Captura imagem do wallhaven de plano de fundo 
+#	- Abre diretamente no site(alpha.wallhaven.cc)
 #
 ################################################################################
 #limpando a tela
 clear
 # 
-# #criando arquivos temporarios
-touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
-# 
-# #capturando caminho completo imagem
-xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image > .caminhocompleto.txt
-echo "Caminho do Wallpaper: " 
 
-#extraindo caminho base
-cat .caminhocompleto.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .caminho.txt 
+procura()
+{
+	# #criando arquivos temporarios
+	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
+	# 
+	# #capturando caminho completo imagem
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace$1/last-image > .caminhocompleto.txt
+	echo "Caminho do Wallpaper: " 
 
-#mostrando localização da pasta para o usuário
-cat .caminho.txt
+	#extraindo caminho base
+	cat .caminhocompleto.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .caminho.txt 
 
-# #removendo raiz
-echo "Por favor, digite o caminho da imagem"
-read -p "" local
+	#mostrando localização da pasta para o usuário
+	cat .caminho.txt
 
-#extraindo caminho base
-cat .caminho.txt | sed -e "s;$local;;g" > .base.txt 
+	# #removendo raiz
+	echo "Por favor, digite o caminho da imagem"
+	read -p "" local
 
-#extraindo wallhaven
-cat .base.txt | sed -e "s;wallhaven-;;g" > .imagem.txt
+	#extraindo caminho base
+	cat .caminho.txt | sed -e "s;$local;;g" > .base.txt 
 
-#extraindo extensao
-cat .imagem.txt | sed -e "s;.jpg;;g" > .numero.txt 
-#cat .imagem.txt | sed -e "s;.png;;g" > .numero.txt
+	#extraindo wallhaven
+	cat .base.txt | sed -e "s;wallhaven-;;g" > .imagem.txt
 
-#salvando numero da imagem em uma variavel
-url=`cat .numero.txt` 
+	#extraindo extensao
+	cat .imagem.txt | sed -e "s;.jpg;;g" > .numero.txt 
+	#cat .imagem.txt | sed -e "s;.png;;g" > .numero.txt
 
-#iniciando o firefox
-echo "Imagem identificada! Abrindo o Firefox..."
-firefox https://alpha.wallhaven.cc/wallpaper/$url
+	#salvando numero da imagem em uma variavel
+	url=`cat .numero.txt` 
 
-# removendo arquivos temporarios
-rm -r .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
+	#iniciando o firefox
+	echo "Imagem identificada! Abrindo o Firefox..."
+	firefox https://alpha.wallhaven.cc/wallpaper/$url
 
-#limpando a tela
-clear
+	# removendo arquivos temporarios
+	rm -r .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
+
+}
+
+main()
+{
+	procura $1
+}
+
+
+main $1
