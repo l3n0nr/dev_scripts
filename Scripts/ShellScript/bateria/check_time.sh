@@ -15,7 +15,12 @@
 
 check()
 {
-	tlp stat -b | grep /sys/class/power_supply/BAT0/charge_now | awk ('print $4')
+	# tlp stat -b | grep /sys/class/power_supply/BAT0/charge_now
+	# tlp stat -b | grep /sys/class/power_supply/BAT0/current_now
+
+
+	## verificar comando
+	upower -i /org/freedesktop/UPower/devices/battery_BAT0
 }
 
 ## funcao principal
