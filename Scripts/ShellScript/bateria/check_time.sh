@@ -7,7 +7,7 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	10/01/19
-# VERSAO	:	0.35
+# VERSAO	:	0.40
 #		BUG: Verificar calculo de tempo da bateria via date
 # AUTOR 	:	lenonr
 #
@@ -21,15 +21,17 @@ check()
 	status="$(cat /sys/class/power_supply/BAT0/status)"
 	full_battery="$(($(cat /sys/class/power_supply/BAT0/charge_full) / 1000))"
 	charge_now="$(($(cat /sys/class/power_supply/BAT0/charge_now) / 1000))"
-	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
+	# current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
+	current="$(cat /sys/class/power_supply/BAT0/current_now)"
 
-	battery_res="$((($full_battery * 60) / $current_now))"
-
-	battery_res_h="$(($battery_res / 60))"
-	perc_batery="$(((($charge_now * 100)) / $full_battery))"
-	battery_full="$((($full_battery*60)/$current_now))"
-
-	calc_time=$(($battery_full - $battery_res))
+	if [[ $current > 0 ]]; then
+		current_now="$(($current / 1000))"	
+		battery_res="$((($full_battery * 60) / $current_now))"
+		battery_res_h="$(($battery_res / 60))"
+		perc_batery="$(((($charge_now * 100)) / $full_battery))"
+		battery_full="$((($full_battery*60)/$current_now))"
+		calc_time=$(($battery_full - $battery_res))
+	fi				
 
 	low_res="$((($full_battery * 40) / 100))"
 	med_res="$((($full_battery * 60) / 100))"
@@ -78,6 +80,8 @@ check()
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
 		echo "Current battery now:" $current_now "mA"		
 		echo "Consuming level:" $consuming_level
+	elif [[ $status == "Full" ]]; then
+		echo "Status battery: Full"
 	else
 		echo "ERROR"
 	fi			
