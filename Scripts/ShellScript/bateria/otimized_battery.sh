@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[07/01/19]       #
+# Last modification script: 		[17/01/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
@@ -88,7 +88,7 @@ f_desativa()
 	if [[ $modo == "ON" ]]; then		
 		## processador
 		echo "| ======================================================= |"
-		echo "| Ativando nucleo do processador 1,2,3 respectivamente    |"
+		echo "| Ativando nucleo do processador 2,3 respectivamente    	|"
 		echo 1 >>  /sys/devices/system/cpu/cpu1/online
 		echo 1 >>  /sys/devices/system/cpu/cpu2/online
 		echo 1 >>  /sys/devices/system/cpu/cpu3/online
@@ -142,7 +142,7 @@ f_notebook()
 
 f_mensagem()
 {
-    dialog --msgbox "O script ira: \n-Desligar os nucleos do processador[1:2:3]; \n-Bluetooth + Wi-fi; \n-Reduzira o brilho! \n\n\n         TOME CUIDADO AO UTILIZA-LO!" 0 0
+    dialog --msgbox "O script ira: \n-Desligar os nucleos do processador[2:3]; \n-Bluetooth + Wi-fi; \n-Reduzira o brilho! \n\n\n         TOME CUIDADO AO UTILIZA-LO!" 0 0
 }
 
 f_notebook_dialog()
