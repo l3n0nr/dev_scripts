@@ -15,9 +15,10 @@
 #																				#
 #################################################################################
 #
-##################################
-# versão do script: 0.0.20.0.0.0 #
-##################################
+####################################
+# ultima modificacao: 		28/01/19
+# versão do script: 	0.0.25.0.0.0
+####################################
 #
 # legenda: a.b.c.d.e.f
 # 	a = alpha[0], beta[1];
@@ -36,7 +37,8 @@
 #
 ################################################################################
 # FUNCOES
-#   - Captura imagem do wallhaven de plano de fundo 
+#   - Captura imagem da area de trabalho(Xfce4)
+#	- Mostra caminho da imagem 
 #	- Abre diretamente no site(alpha.wallhaven.cc)
 #
 ################################################################################
@@ -76,13 +78,12 @@ procura()
 	#salvando numero da imagem em uma variavel
 	url=`cat .numero.txt` 
 
-	#iniciando o firefox
-	echo "Imagem identificada! Abrindo o Firefox..."
-	firefox https://alpha.wallhaven.cc/wallpaper/$url
-
 	# removendo arquivos temporarios
 	rm -r .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
 
+	#iniciando o firefox
+	echo "Imagem identificada! Abrindo o Firefox..."
+	firefox https://alpha.wallhaven.cc/wallpaper/$url &
 }
 
 main()
