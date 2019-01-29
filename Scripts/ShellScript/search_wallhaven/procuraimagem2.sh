@@ -16,30 +16,15 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		28/01/19
-# versão do script: 	0.0.25.0.0.0
+# ultima modificacao: 		29/01/19
+# versão do script: 			0.30
 ####################################
-#
-# legenda: a.b.c.d.e.f
-# 	a = alpha[0], beta[1];
-# 	b = erros na execução;	
-# 	c = interações com o script + versões funcionando;
-# 	d = correções necessárias;
-# 	e = pendencias
-# 	f = desenvolver
-################################################################################
-#
-# Script testado em
-#	- Xubuntu 16.04
-#	- Debian Stable
-#
-################################################################################
 #
 ################################################################################
 # FUNCOES
 #   - Captura imagem da area de trabalho(Xfce4)
 #	- Mostra caminho da imagem 
-#	- Abre diretamente no site(alpha.wallhaven.cc)
+#	- Abre diretamente no $site
 #
 ################################################################################
 #limpando a tela
@@ -48,6 +33,8 @@ clear
 
 procura()
 {
+	site="https://alpha.wallhaven.cc"
+
 	# #criando arquivos temporarios
 	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
 	# 
@@ -83,7 +70,8 @@ procura()
 
 	#iniciando o firefox
 	echo "Imagem identificada! Abrindo o Firefox..."
-	firefox https://alpha.wallhaven.cc/wallpaper/$url &
+	# firefox https://alpha.wallhaven.cc/wallpaper/$url &
+	firefox $site/wallpaper/$url &
 }
 
 main()
