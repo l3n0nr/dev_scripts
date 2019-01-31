@@ -34,21 +34,22 @@ clear
 procura()
 {
 	site="https://alpha.wallhaven.cc"
+	local="/home/lenonr/Imagens/Pictures/"
 
-	# #criando arquivos temporarios
+	#criando arquivos temporarios
 	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
-	# 
-	# #capturando caminho completo imagem
+	 
+	#capturando caminho completo imagem
 	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace$1/last-image > .caminhocompleto.txt
 	echo "Caminho do Wallpaper: " 
 
 	#extraindo caminho base
-	cat .caminhocompleto.txt | sed -e "s;/home/lenonr/MEGA/Imagens/Pictures/;;g" >  .caminho.txt 
+	cat .caminhocompleto.txt | sed -e "s;$local;;g" >  .caminho.txt 
 
 	#mostrando localização da pasta para o usuário
 	cat .caminho.txt
 
-	# #removendo raiz
+	#removendo raiz
 	echo "Por favor, digite o caminho da imagem"
 	read -p "" local
 
@@ -60,9 +61,8 @@ procura()
 
 	#extraindo extensao
 	cat .imagem.txt | sed -e "s;.jpg;;g" > .numero.txt 
-	#cat .imagem.txt | sed -e "s;.png;;g" > .numero.txt
 
-	#salvando numero da imagem em uma variavel
+	# salvando numero da imagem em uma variavel
 	url=`cat .numero.txt` 
 
 	# removendo arquivos temporarios
@@ -70,13 +70,16 @@ procura()
 
 	#iniciando o firefox
 	echo "Imagem identificada! Abrindo o Firefox..."
-	# firefox https://alpha.wallhaven.cc/wallpaper/$url &
 	firefox $site/wallpaper/$url &
 }
 
 main()
 {
-	procura $1
+	if [[ $1 == "" ]]; then
+		procura 1
+	else
+		procura $1
+	fi	
 }
 
 
