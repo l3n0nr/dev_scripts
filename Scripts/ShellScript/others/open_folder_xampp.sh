@@ -1,1 +1,0 @@
-thunar /opt/lampp/htdocs
