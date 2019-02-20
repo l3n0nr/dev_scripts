@@ -25,7 +25,7 @@ check_dropbox()
 {
 	dropbox="0"
 
-	ps aux | grep .dropbox-dist | grep Ssl >> /dev/null
+	ps aux | grep .dropbox-dist | grep pts/2 >> /dev/null
 
 	if [[ $? == "0" ]]; then		
 		dropbox="1"
