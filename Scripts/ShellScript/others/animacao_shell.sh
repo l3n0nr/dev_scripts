@@ -1,19 +1,32 @@
 #!/bin/bash
 
-# CABECALHO
-#
-# CORPO DO SCRIPT
-#
-# limpando tela
-clear
+animacao_0()
+{
+	while :; do
+	    for i in / - \\ \|; do      # alterar animação
+	        echo -ne "\b$i"
+	    done
+	done
+}
 
-# criando loop para mostrar animação
-while :; do
-    for i in / - \\ \|; do      # alterar animação
-        echo -ne "\b$i"
-    done
+animacao_1()
+{
+	lista=('[.  ]' '[.. ]' '[...]')
 
-done
-#
-# RODAPE DO SCRIPT
-# for i in O o 0; do    # animação em O
+	while true; do
+		for (( i = 0; i <= ${#lista[@]}-1; i++ )); do  
+			clear
+			printf "${lista[$i]}"
+			sleep 0.5
+		done
+	done
+}
+
+main()
+{
+	clear	
+	# animacao_0
+	animacao_1
+}
+
+main
