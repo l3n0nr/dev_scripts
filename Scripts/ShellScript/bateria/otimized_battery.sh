@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # # # # # # # # # # # #
@@ -14,22 +14,20 @@
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
-# Otimiza recursos da maquina, para economizar bateria(notebook)
-# 	- Desliga/Liga nucleos extras(1-2-3) 
-# 		Nucleo 0 sempre ligado - CUIDADO, nunca desliga-lo!!
-# 	- Desliga/Liga Wifi
-# 	- Reduz/Aumenta o brilho automaticamente
+# 	Otimiza recursos da maquina, para economizar bateria(notebook)
+# 		- Desliga/Liga nucleos extras(1-2-3) 
+# 			Nucleo 0 sempre ligado - CUIDADO, nunca desliga-lo!!
+# 		- Desliga/Liga Wifi
+# 		- Reduz/Aumenta o brilho automaticamente
 #
 ## variaveis do script
-	# versao do script
-	versao="0.51"
+	versao="0.60"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
 
 	# configuracoes de brilho padrao
-	# brightness_min="1000"
-	brightness_med="2440"
+	brightness_med="2000"
 	brightness_max="4000"
 
 	# arquivo do bluetooth
@@ -40,6 +38,10 @@
 
 	# status script
 	modo="OFF"
+
+	# ibam
+	time="$(ibam --bios | grep "Bios time left:"| awk {'print $4'})"
+	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
 
 ## funcao de verificacao
 f_verifica()
@@ -52,9 +54,7 @@ f_ativa()
 	if [[ $modo == "OFF" ]]; then		
 		## processador
 		echo "| ======================================================= |"
-		# echo "| Desativando nucleo do processador 1,2,3 respectivamente |"
 		echo "| Desativando nucleo do processador 2,3 respectivamente |"
-		# echo 0 >> /sys/devices/system/cpu/cpu1/online
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
 		echo 0 >> /sys/devices/system/cpu/cpu3/online       
 		echo "| ======================================================= |"		
@@ -68,7 +68,6 @@ f_ativa()
 		## brilho
 		echo "| ======================================================= |"
 		echo "| Otimizando o brilho  |"
-		# echo $brightness_min > /sys/class/backlight/intel_backlight/brightness		
 		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness		
 		echo "| ======================================================= |"
 
@@ -103,7 +102,6 @@ f_desativa()
 		## brilho
 		echo "| ======================================================= |"
 		echo "| Restaurando o brilho	|"
-		# echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
 		echo $brightness_max > /sys/class/backlight/intel_backlight/brightness
 		echo "| ======================================================= |"
 
@@ -140,21 +138,32 @@ f_notebook()
 							    || f_ativa 
 }
 
-f_mensagem()
+f_dialog_box()
 {
-    dialog --msgbox "O script ira: \n-Desligar os nucleos do processador[2:3]; \n-Bluetooth + Wi-fi; \n-Reduzira o brilho! \n\n\n         TOME CUIDADO AO UTILIZA-LO!" 0 0
+	if [[ $? == "1" ]]; then
+		exit 0
+	else
+		while [[ TRUE ]]; do
+			dialog \
+        	--yes-label "Voltar" --no-label "SAIR" \
+        	--yesno "$time/$percent" 0 0
+
+        	if [[ $? == "0" ]]; then
+        		f_notebook_dialog
+        	else
+        		exit 1
+        	fi
+		done		
+	fi	
 }
 
 f_notebook_dialog()
 {
-	## valor padrao
 	chave=1
 
 	otimiza=$(dialog \
-            --stdout --ok-label "Executar" --cancel-label "Cancelar" \
-            --help-button --help-label "Ajuda" \
-            --menu "Otimizar recursos? [$modo]" \
-            0 0 0 \
+            --stdout --ok-label "Executar" --cancel-label "SAIR" \
+            --menu "Otimizar recursos?" 0 0 0 \
             "LIG" "Ativar" \
             "DES" "Desativar" )
 
@@ -166,24 +175,10 @@ f_notebook_dialog()
     elif [[ $otimiza == "DES" ]]; then
         f_desativa
     elif [[ $otimiza == "LIG" ]]; then
-        f_ativa        
-
-	 #    while [[ TRUE ]]; do
-		# 	f_dialog_box
-		# 	sleep 0.5
-		# done        
-    else
-        ## catch error
+        f_ativa        	    
+        f_dialog_box
         exit 1
-    fi    
-}
-
-f_dialog_box()
-{
-	time="$(ibam --bios | grep "Bios time left:"| awk {'print $4'})"
-	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
-
-	dialog --infobox $time/$percent 0 0
+    fi        
 }
 
 ## funcao principal
