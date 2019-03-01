@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[17/01/19]       #
+# Last modification script: 		[01/03/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
@@ -109,7 +109,7 @@ f_desativa()
 
 		## bluetooth
 		echo "| ======================================================= |"
-		echo "| Mantendo o bluetooh desligado... hehehe	|"
+		echo "| Mantendo o bluetooh desligado		|"
 		$bluetooh stop > /dev/null
 		echo "| ======================================================= |"
 
@@ -166,11 +166,24 @@ f_notebook_dialog()
     elif [[ $otimiza == "DES" ]]; then
         f_desativa
     elif [[ $otimiza == "LIG" ]]; then
-        f_ativa
+        f_ativa        
+
+	    while [[ TRUE ]]; do
+			f_dialog_box
+			sleep 0.5
+		done        
     else
         ## catch error
         exit 1
-    fi
+    fi    
+}
+
+f_dialog_box()
+{
+	time="$(ibam --bios | grep "Bios time left:"| awk {'print $4'})"
+	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
+
+	dialog --infobox $time/$percent 0 0
 }
 
 ## funcao principal
@@ -186,7 +199,7 @@ main()
 										 || f_notebook_dialog		
 
 		## se todos os modulos ativados - entao script "ON"
-		[[ $chave == "2" ]] && modo="ON" || modo="OFF"
+		[[ $chave == "2" ]] && modo="ON" || modo="OFF"		
 	done
 }
 
