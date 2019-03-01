@@ -168,10 +168,10 @@ f_notebook_dialog()
     elif [[ $otimiza == "LIG" ]]; then
         f_ativa        
 
-	    while [[ TRUE ]]; do
-			f_dialog_box
-			sleep 0.5
-		done        
+	 #    while [[ TRUE ]]; do
+		# 	f_dialog_box
+		# 	sleep 0.5
+		# done        
     else
         ## catch error
         exit 1
