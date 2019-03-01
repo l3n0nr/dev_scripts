@@ -1,51 +1,38 @@
 #!/usr/bin/env bash
 
-check_mega()
+kill_services()
 {
-	mega="0"
-
-	ps aux | grep megasync | grep Sl >> /dev/null
-
-	if [[ $? == "0" ]]; then		
-		mega="1"
-	fi
-
-	if [[ $mega == "0" ]]; then
-		echo "- Subindo o MEGA"
-		megasync &
-	elif [[ $mega == "1" ]]; then
-		echo "- Derrubando o MEGA"
-		killall -9 megasync 
-	else		
-		echo "Error - Mega"
-	fi
+	killall -9 megasync
+	killall -9 dropbox 	
 }
 
-check_dropbox()
+up_services()
 {
-	dropbox="0"
+	megasync &	
+	dropbox start
+}
 
-	ps aux | grep .dropbox-dist | grep pts/2 >> /dev/null
+check()
+{
+	escolha=$(dialog \
+            --stdout --ok-label "Executar" --cancel-label "Sair" \
+            --menu "Escolha uma opçao:" \
+            0 0 0 \
+            "Derrubar" "1" \
+            "Subir" "2" ) ; 
 
-	if [[ $? == "0" ]]; then		
-		dropbox="1"
-	fi
-
-	if [[ $dropbox == "0" ]]; then
-		echo "- Subindo o Dropbox"
-		dropbox start >> /dev/null
-	elif [[ $dropbox == "1" ]]; then
-		echo "- Derrubando o Dropbox"
-		killall -9 dropbox >> /dev/null
-	else		
-		echo "Error - Dropbox"
-	fi
+    if [[ $escolha == "Derrubar" ]]; then    	
+ 		kill_services   	
+ 	elif [[ $escolha == "Subir" ]]; then
+ 		up_services
+ 	else
+ 		echo "ERROR"
+    fi
 }
 
 main()
 {
-	check_mega
-	check_dropbox
+	check
 }
 
 main
