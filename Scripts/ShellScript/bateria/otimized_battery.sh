@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[01/03/19]       #
+# Last modification script: 		[07/03/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
@@ -21,7 +21,7 @@
 # 		- Reduz/Aumenta o brilho automaticamente
 #
 ## variaveis do script
-	versao="0.60"
+	versao="0.65"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
@@ -176,8 +176,8 @@ f_notebook_dialog()
         f_desativa
     elif [[ $otimiza == "LIG" ]]; then
         f_ativa        	    
-        f_dialog_box
-        exit 1
+        # f_dialog_box
+        # exit 1
     fi        
 }
 
