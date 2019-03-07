@@ -38,9 +38,8 @@ jquery()
 }
 
 main()
-{
+{	
 	basic
-	# jquery
 }
 
 main
