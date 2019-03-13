@@ -1,4 +1,4 @@
-ORIGINAL SCRIPT: https://github.com/pylenin/twitter_bot/blob/master/twitter_bot.py
+# MANUAL #
 
 python 'script.py' 'command' 'parameter'
 
@@ -16,3 +16,7 @@ External files:
 
 	path_input_twitts = "/tmp/twitter"
 		- Local text file twitts
+
+REFERENCES 
+	https://github.com/pylenin/twitter_bot/blob/master/twitter_bot.py
+	https://stackoverflow.com/questions/4710067/using-python-for-deleting-a-specific-line-in-a-file

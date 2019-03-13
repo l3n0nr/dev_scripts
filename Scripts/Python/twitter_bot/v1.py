@@ -5,14 +5,14 @@ import tweepy, argparse, csv
 ##############################
 # create date:       12/03/19
 # last modification: 12/03/19
-# version:              0.20
+# version:              0.50
 ##############################
 
 ## CHECK
 #       Duplicated links
 
 path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
-path_input_twitts = "/tmp/twitter"
+path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 
 def twitt():
     parser = argparse.ArgumentParser(description='Provide your tweet')
@@ -45,10 +45,19 @@ def twitt():
             allData = list(reader)
 
         for x in xrange(len(allData)):
-            api.update_status(', '.join(allData[x]))
-        
-        print("Your's tweets successfully posted!")
+            if x == 0:
+                ### post new twitt
+                api.update_status(', '.join(allData[x]))                
+                print("Your tweet successfully posted!")
 
+                ### remove twitt posted
+                with open(path_input_twitts,"r+") as f:
+                    new_f = f.readlines()
+                    f.seek(0)
+                    for line in new_f:
+                        if (', '.join(allData[x])) not in line:
+                            f.write(line)
+                    f.truncate()   
     if args.rt:
         api.retweet(args.rt)
         print("Your retweet successfully done!")
