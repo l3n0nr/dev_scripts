@@ -3,14 +3,14 @@
 #########################
 # data criacao = 13/03/19
 # ultima modif = 14/03/19
-# versao 	   = 0.20
+# versao 	   = 0.22
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
-		spacetoday.com.br ceticismo.net sempreupdate.com.br \
+		spacetoday.com.br ceticismo.net teslarati.com \
 		mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
-		wemartians.com alociencia.com.br manualdomundo.com.br \
-		emagrecerdevez.com teslarati.com rocketsciencebr.com )
+		alociencia.com.br manualdomundo.com.br emagrecerdevez.com \
+		rocketsciencebr.com )
 
 ## saida oficial
 # saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
