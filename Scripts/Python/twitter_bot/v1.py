@@ -5,15 +5,15 @@ import tweepy, argparse, csv
 ##############################
 # create date:       12/03/19
 # last modification: 12/03/19
-# version:              0.50
+# version:              0.52
 ##############################
 
 ## CHECK
 #       Duplicated links
 
 path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
-# path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-path_input_twitts = "/tmp/testando_twitter"
+path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+# path_input_twitts = "/tmp/testando_twitter"
 
 def twitt():
     parser = argparse.ArgumentParser(description='Provide your tweet')
