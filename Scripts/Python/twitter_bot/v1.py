@@ -12,8 +12,8 @@ import tweepy, argparse, csv
 #       Duplicated links
 
 path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
-path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-# path_input_twitts = "/tmp/testando_twitter"
+# path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+path_input_twitts = "/tmp/testando_twitter"
 
 def twitt():
     parser = argparse.ArgumentParser(description='Provide your tweet')
