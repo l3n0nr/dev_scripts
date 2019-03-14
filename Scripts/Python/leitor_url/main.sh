@@ -6,7 +6,7 @@
 # versao 	   = 0.15
 #########################
 #
-array=(nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br spacetoday.com.br ceticismo.net ablc.org.br sempreupdate.com.br mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br wemartians.com alociencia.com.br)
+array=(nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br spacetoday.com.br ceticismo.net sempreupdate.com.br mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br wemartians.com alociencia.com.br manualdomundo.com.br)
 saida="/tmp/testando_twitter"
 saida1="/tmp/testando_twitter1"
 #
