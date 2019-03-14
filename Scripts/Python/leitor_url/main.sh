@@ -2,11 +2,11 @@
 
 #########################
 # data_criacao = 13/03/19
-# ultima modif = 13/03/19
-# versao 	   = 0.10
+# ultima modif = 14/03/19
+# versao 	   = 0.15
 #########################
 
-array=(nasaspaceflight.com ceticismo.net ablc.org.br sempreupdate.com.br)
+array=(nasaspaceflight.com ceticismo.net ablc.org.br sempreupdate.com.br mensageirosideral.blogfolha.uol.com.br cienciaempauta.com.br segurancalegal.com)
 saida="/tmp/testando_twitter"
 
 catch()
@@ -16,7 +16,7 @@ catch()
 
 		lynx --dump $link | \
 		jq --indent 0 '.[] | [.title.rendered, .link]' | \
-		sed -e 's/\(\["\|"\]\)//g' >> $saida
+		sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida
 	done
 }
 
