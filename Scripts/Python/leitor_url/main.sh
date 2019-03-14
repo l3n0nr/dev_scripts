@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-
+#
 #########################
 # data_criacao = 13/03/19
 # ultima modif = 13/03/19
-# versao 	   = 0.10
+# versao 	   = 0.15
 #########################
-
+#
 array=(nasaspaceflight.com ceticismo.net ablc.org.br sempreupdate.com.br)
 saida="/tmp/testando_twitter"
-
+#
 catch()
 {
 	for (( i = 0; i <= ${#array[@]}-1; i++ )); do	
