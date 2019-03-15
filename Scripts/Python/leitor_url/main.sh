@@ -9,7 +9,8 @@
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
 		spacetoday.com.br ceticismo.net teslarati.com \
 		mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
-		alociencia.com.br manualdomundo.com.br rocketsciencebr.com )
+		alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
+		dragoesdegaragem.com )
 
 # array=( nasaspaceflight.com )
 
