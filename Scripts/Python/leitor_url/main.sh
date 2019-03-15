@@ -10,15 +10,15 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
-        dragoesdegaragem.com )
+        dragoesdegaragem.com avioesemusicas.com )
 
 # array=( nasaspaceflight.com )
 
 ## saida oficial
-# saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 
 ## saida de teste
-saida="/tmp/testando_twitter"
+# saida="/tmp/testando_twitter"
 
 ## saida para organizacao dos links pelo script = NAO COMENTAR
 saida1="/tmp/testando_twitter1"
