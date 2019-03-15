@@ -21,8 +21,8 @@ array_hastag=( NASASpaceflight SpaceflightNow cafeeciencia1 \
                almaobs rodrigo_polesso jcsouto )
 
 ## saida do arquivo
-saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-# saida="/tmp/testando_twitter"
+# saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+saida="/tmp/testando_twitter"
 
 ## saida para organizacao dos links pelo script = NAO COMENTAR
 saida1="/tmp/testando_twitter1"
