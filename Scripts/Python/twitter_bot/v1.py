@@ -4,16 +4,26 @@ import tweepy, argparse, csv
 
 ##############################
 # create date:       12/03/19
-# last modification: 12/03/19
-# version:              0.52
+# last modification: 15/03/19
+# version:              0.60
 ##############################
-
-## CHECK
-#       Duplicated links
 
 path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
 path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 # path_input_twitts = "/tmp/testando_twitter"
+
+def remove():
+    with open(path_input_twitts, "rb") as infile:
+            reader = csv.reader(infile, delimiter="\t")
+            allData = list(reader)
+
+    with open(path_input_twitts,"r+") as f:
+        new_f = f.readlines()
+        f.seek(0)
+        for line in new_f:
+            if (', '.join(allData[0])) not in line:
+                f.write(line)
+        f.truncate() 
 
 def twitt():
     parser = argparse.ArgumentParser(description='Provide your tweet')
@@ -46,18 +56,15 @@ def twitt():
             allData = list(reader)
 
         for x in xrange(len(allData)):
-            if x == 0:
-                api.update_status(', '.join(allData[x]))                
-                print("Your tweet successfully posted!")
+            if x == 0:  
+                try:
+                    api.update_status(', '.join(allData[x]))                
+                    print("Your tweet successfully posted!")  
+                    remove()                  
+                except Exception as e:
+                    remove()
+                    twitt()
 
-                ### remove twitt posted
-                with open(path_input_twitts,"r+") as f:
-                    new_f = f.readlines()
-                    f.seek(0)
-                    for line in new_f:
-                        if (', '.join(allData[x])) not in line:
-                            f.write(line)
-                    f.truncate()   
     if args.rt:
         api.retweet(args.rt)
         print("Your retweet successfully done!")
