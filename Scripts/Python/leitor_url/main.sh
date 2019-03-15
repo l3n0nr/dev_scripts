@@ -3,7 +3,7 @@
 #########################
 # data criacao = 13/03/19
 # ultima modif = 15/03/19
-# versao       = 0.40
+# versao       = 0.41
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
