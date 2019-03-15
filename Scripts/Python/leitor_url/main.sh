@@ -3,7 +3,7 @@
 #########################
 # data criacao = 13/03/19
 # ultima modif = 15/03/19
-# versao       = 0.30
+# versao       = 0.40
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
@@ -14,7 +14,13 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         sempreupdate.com.br almaobservatory.org emagrecerdevez.com \
         ablc.org.br)
 
-# array=( nasaspaceflight.com )
+array_hastag=( NASASpaceflight SpaceflightNow cafeeciencia1 \
+               SpaceToday1 ceticismo Teslarati \
+               salnog SegurancaLegal lucianopires \
+               alociencia manualdomundo PassoPequeno \
+               dragoesgaragem avioesemusicas esaspaceflight \
+               SempreUpdate almaobs rodrigo_polesso \
+               jcsouto )
 
 ## saida do arquivo
 # saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
@@ -25,22 +31,13 @@ saida1="/tmp/testando_twitter1"
 #
 catch()
 {
-    teste="OLA"
     for (( i = 0; i <= ${#array[@]}-1; i++ )); do 
-    # for (( i = 0; i <= ${#array[@]}; i++ )); do 
         link=${array[$i]}"/wp-json/wp/v2/posts/"
 
         lynx --dump $link | \
         jq --indent 0 '.[] | [.title.rendered, .link]' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida     
-
-        # if [[ $i == "0" ]]; then
-        #   # printf "OLA "  >> $saida
-
-        #   lynx --dump $link | \
-        #   jq --indent 0 '.[] | [.title.rendered, .link]' | \
-        #   sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' $teste >> $saida      
-        # fi        
+        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
+        sed 's/$/ @'${array_hastag[$i]}'/' >> $saida      
     done
 }
 
