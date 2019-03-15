@@ -3,22 +3,22 @@
 #########################
 # data criacao = 13/03/19
 # ultima modif = 15/03/19
-# versao       = 0.25
+# versao       = 0.30
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
-        dragoesdegaragem.com avioesemusicas.com )
+        dragoesdegaragem.com avioesemusicas.com blogs.esa.int \
+        sempreupdate.com.br almaobservatory.org emagrecerdevez.com \
+        ablc.org.br)
 
 # array=( nasaspaceflight.com )
 
-## saida oficial
-saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-
-## saida de teste
-# saida="/tmp/testando_twitter"
+## saida do arquivo
+# saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+saida="/tmp/testando_twitter"
 
 ## saida para organizacao dos links pelo script = NAO COMENTAR
 saida1="/tmp/testando_twitter1"
