@@ -1,23 +1,32 @@
 #!/usr/bin/env bash
 
-twitt()
+entrada="/tmp/launch"
+saida="/tmp/launch1"
+
+check_launch()
 {
 	log_twitter="/tmp/launch_log"
 
-	acao=$(python v1.py)
+	acao=$(python read.py)
 
-	# if [[ $acao != "" ]]; then
-	# 	printf "NEW POST   - " >> $log_twitter && date >> $log_twitter
-	# else
-	# 	printf "NOT POSTED - " >> $log_twitter && date >> $log_twitter			
-	# fi
+	cat $entrada | sed 's/$/ #TeamCanoTecnologico/' > $saida	
+}
 
-	printf "LAUNCH   - " >> $log_twitter && date >> $log_twitter
+twitt_post()
+{
+	acao1=$(python post.py)
+
+	if [[ $acao1 != "" ]]; then
+		printf "CHECK   - " >> $log_twitter && date >> $log_twitter
+	else
+		printf "NOT CHECK   - " >> $log_twitter && date >> $log_twitter
+	fi	
 }
 
 main()
 {
-	twitt
+	check_launch
+	twitt_post
 }
 
 main

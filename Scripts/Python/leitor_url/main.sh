@@ -16,7 +16,7 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
 
 array_hastag=( NASASpaceflight SpaceflightNow cafeeciencia1 \
                SpaceToday1 ceticismo Teslarati \
-               salnog SegurancaLegal lucianopires \
+               salnog SegurancaLegal Cafe_Brasil \
                alociencia manualdomundo PassoPequeno \
                dragoesgaragem avioesemusicas esaspaceflight \
                SempreUpdate almaobs rodrigo_polesso \
