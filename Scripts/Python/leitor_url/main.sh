@@ -11,16 +11,14 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
         dragoesdegaragem.com avioesemusicas.com blogs.esa.int \
-        sempreupdate.com.br almaobservatory.org emagrecerdevez.com \
-        ablc.org.br)
+        almaobservatory.org emagrecerdevez.com ablc.org.br)
 
 array_hastag=( NASASpaceflight SpaceflightNow cafeeciencia1 \
                SpaceToday1 ceticismo Teslarati \
                salnog SegurancaLegal Cafe_Brasil \
                alociencia manualdomundo PassoPequeno \
                dragoesgaragem avioesemusicas esaspaceflight \
-               SempreUpdate almaobs rodrigo_polesso \
-               jcsouto )
+               almaobs rodrigo_polesso jcsouto )
 
 ## saida do arquivo
 saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
