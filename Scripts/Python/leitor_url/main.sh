@@ -9,8 +9,9 @@
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
 		spacetoday.com.br ceticismo.net teslarati.com \
 		mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
-		alociencia.com.br manualdomundo.com.br emagrecerdevez.com \
-		rocketsciencebr.com )
+		alociencia.com.br manualdomundo.com.br rocketsciencebr.com )
+
+# array=( nasaspaceflight.com )
 
 ## saida oficial
 # saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
@@ -23,12 +24,22 @@ saida1="/tmp/testando_twitter1"
 #
 catch()
 {
-	for (( i = 0; i <= ${#array[@]}-1; i++ )); do	
+	teste="OLA"
+	# for (( i = 0; i <= ${#array[@]}-1; i++ )); do	
+	for (( i = 0; i <= ${#array[@]}; i++ )); do	
 		link=${array[$i]}"/wp-json/wp/v2/posts/"
 
 		lynx --dump $link | \
 		jq --indent 0 '.[] | [.title.rendered, .link]' | \
 		sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida		
+
+		# if [[ $i == "0" ]]; then
+		# 	# printf "OLA "  >> $saida
+
+		# 	lynx --dump $link | \
+		# 	jq --indent 0 '.[] | [.title.rendered, .link]' | \
+		# 	sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' $teste >> $saida		
+		# fi		
 	done
 }
 

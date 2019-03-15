@@ -47,7 +47,6 @@ def twitt():
 
         for x in xrange(len(allData)):
             if x == 0:
-                ### post new twitt
                 api.update_status(', '.join(allData[x]))                
                 print("Your tweet successfully posted!")
 
