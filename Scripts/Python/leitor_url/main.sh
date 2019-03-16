@@ -11,14 +11,8 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
         dragoesdegaragem.com avioesemusicas.com blogs.esa.int \
-        almaobservatory.org emagrecerdevez.com ablc.org.br)
-
-array_hastag=( NASASpaceflight SpaceflightNow cafeeciencia1 \
-               SpaceToday1 ceticismo Teslarati \
-               salnog SegurancaLegal Cafe_Brasil \
-               alociencia manualdomundo PassoPequeno \
-               dragoesgaragem avioesemusicas esaspaceflight \
-               almaobs rodrigo_polesso jcsouto )
+        almaobservatory.org emagrecerdevez.com ablc.org.br \
+        revistapesquisa.fapesp.br )
 
 ## saida do arquivo
 saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
@@ -35,7 +29,6 @@ catch()
         lynx --dump $link | \
         jq --indent 0 '.[] | [.title.rendered, .link]' | \
         sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida
-        # sed 's/$/ @'${array_hastag[$i]}'/' >> $saida     ### NAO DA PARA FAZER, TWITTER ENTENDE COMO SPAM !! 
     done
 }
 
