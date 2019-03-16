@@ -58,18 +58,18 @@ def twitt():
         for x in xrange(len(allData)):
             if x == 0:  
                 ### LOG ON
-                # api.update_status(', '.join(allData[x]))                
-                # print("Your tweet successfully posted!")  
-                # remove()   
+                api.update_status(', '.join(allData[x]))                
+                print("Your tweet successfully posted!")  
+                remove()   
 
                 ### LOG OFF
-                try:
-                    api.update_status(', '.join(allData[x]))                
-                    print("Your tweet successfully posted!")  
-                    remove()                  
-                except Exception as e:
-                    remove()
-                    twitt()
+                # try:
+                #     api.update_status(', '.join(allData[x]))                
+                #     print("Your tweet successfully posted!")  
+                #     remove()                  
+                # except Exception as e:
+                #     remove()
+                #     twitt()
 
     if args.rt:
         api.retweet(args.rt)
