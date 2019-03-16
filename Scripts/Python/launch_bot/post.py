@@ -10,7 +10,7 @@ import tweepy, argparse, csv, json
 
 def launches():
     path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
-    path_input_launch = "/tmp/launch1"
+    path_input_launch = "/tmp/launch"
     
     with open(path_keys, "rb") as infile:
         reader = csv.reader(infile, delimiter="\t")

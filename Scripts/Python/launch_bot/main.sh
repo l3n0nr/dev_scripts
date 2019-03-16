@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-entrada="/tmp/launch"
-saida="/tmp/launch1"
+# entrada="/tmp/launch"
+# saida="/tmp/launch1"
 
 check_launch()
 {
@@ -9,7 +9,7 @@ check_launch()
 
 	acao=$(python read.py)
 
-	cat $entrada | sed 's/$/ #TeamCanoTecnologico/' > $saida	
+	# cat $entrada | sed 's/$/ #TeamCanoTecnologico/' > $saida	l
 }
 
 twitt_post()
