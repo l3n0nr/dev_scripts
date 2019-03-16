@@ -34,8 +34,8 @@ catch()
 
         lynx --dump $link | \
         jq --indent 0 '.[] | [.title.rendered, .link]' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
-        sed 's/$/ @'${array_hastag[$i]}'/' >> $saida      
+        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida
+        # sed 's/$/ @'${array_hastag[$i]}'/' >> $saida     ### NAO DA PARA FAZER, TWITTER ENTENDE COMO SPAM !! 
     done
 }
 
