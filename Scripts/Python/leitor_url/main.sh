@@ -3,16 +3,15 @@
 #########################
 # data criacao = 13/03/19
 # ultima modif = 17/03/19
-# versao       = 0.44
+# versao       = 0.45
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
-        dragoesdegaragem.com avioesemusicas.com blogs.esa.int \
-        almaobservatory.org emagrecerdevez.com ablc.org.br \
-        revistapesquisa.fapesp.br )
+        dragoesdegaragem.com avioesemusicas.com revistapesquisa.fapesp.br \
+        almaobservatory.org emagrecerdevez.com ablc.org.br )
 
 ## saida do arquivo
 saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
