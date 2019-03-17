@@ -11,13 +11,14 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
         dragoesdegaragem.com avioesemusicas.com revistapesquisa.fapesp.br \
-        almaobservatory.org emagrecerdevez.com ablc.org.br )
+        almaobservatory.org emagrecerdevez.com ablc.org.br \
+        space.nss.org )
 
 post="/wp-json/wp/v2/posts/"
 
 ## saida do arquivo
-# saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-saida="/tmp/testando_twitter"
+saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+# saida="/tmp/testando_twitter"
 
 ## saida para organizacao dos links pelo script = NAO COMENTAR
 saida1="/tmp/testando_twitter1"
