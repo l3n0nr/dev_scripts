@@ -4,13 +4,13 @@ import tweepy, argparse, csv, json
 
 ##############################
 # create date:       15/03/19
-# last modification: 15/03/19
-# version:              0.10
+# last modification: 17/03/19
+# version:              0.12
 ##############################
 
 def launches():
     path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
-    path_input_launch = "/tmp/launch"
+    path_input_launch = "/tmp/launch1"
     
     with open(path_keys, "rb") as infile:
         reader = csv.reader(infile, delimiter="\t")
