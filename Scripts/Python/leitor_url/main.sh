@@ -10,7 +10,7 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
         mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
-        dragoesdegaragem.com avioesemusicas.com revistapesquisa.fapesp.br \
+        dragoesdegaragem.com revistapesquisa.fapesp.br \
         almaobservatory.org emagrecerdevez.com ablc.org.br \
         space.nss.org )
 
