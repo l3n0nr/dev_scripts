@@ -3,16 +3,15 @@
 #########################
 # data criacao = 13/03/19
 # ultima modif = 17/03/19
-# versao       = 0.47
+# versao       = 0.48
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
-        mensageirosideral.blogfolha.uol.com.br segurancalegal.com portalcafebrasil.com.br \
+        segurancalegal.com portalcafebrasil.com.br space.nss.org \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
         dragoesdegaragem.com revistapesquisa.fapesp.br \
-        almaobservatory.org emagrecerdevez.com ablc.org.br \
-        space.nss.org )
+        almaobservatory.org emagrecerdevez.com ablc.org.br )
 
 post="/wp-json/wp/v2/posts/"
 
