@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-twitt()
+post()
 {
 	log_twitter="/tmp/twitter_log"
 
@@ -15,7 +15,7 @@ twitt()
 
 main()
 {
-	twitt
+	post
 }
 
 main
