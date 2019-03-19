@@ -10,8 +10,8 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
         segurancalegal.com portalcafebrasil.com.br space.nss.org \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
-        dragoesdegaragem.com revistapesquisa.fapesp.br \
-        almaobservatory.org emagrecerdevez.com ablc.org.br )
+        dragoesdegaragem.com revistapesquisa.fapesp.br almaobservatory.org \
+        emagrecerdevez.com ablc.org.br)
 
 post="/wp-json/wp/v2/posts/"
 
