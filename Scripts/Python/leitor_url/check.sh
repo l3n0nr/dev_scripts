@@ -2,20 +2,20 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 17/03/19
-# versao       = 0.10
+# ultima modif = 20/03/19
+# versao       = 0.12
 #########################
 #
 ## variaveis
 arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 saida="/tmp/twitter_scanner"
-verifica=$(cat $arquivo)
+verifica=$(wc -l $arquivo | awk '{print $1}')
 data=$(date)
 
 check()
 {
 	## verificando se arquivo esta vazio
-	if [[ -z $verifica ]]; then
+	if [[ $verifica == "0" ]]; then
 		echo "Scaneando sites | $data" >> $saida
 		source main.sh
 	else
