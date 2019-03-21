@@ -4,12 +4,12 @@ import urllib, json
 
 ##############################
 # create date:       13/03/19
-# last modification: 17/03/19
-# version:              0.22
+# last modification: 21/03/19
+# version:              0.24
 ##############################
 
 def launches():
-    path_input_launch = "/tmp/launch1"
+    path_input_launch = "/tmp/launch"
     url = "https://launchlibrary.net/1.2/launch?next=01&mode=verbose"
     response = urllib.urlopen(url)
     data = json.loads(response.read())

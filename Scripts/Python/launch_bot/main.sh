@@ -2,11 +2,25 @@
 
 entrada="/tmp/launch"
 saida="/tmp/launch1"
+log_twitter="/tmp/launch_log"
+
+check_files()
+{
+	if [[ -e $entrada ]]; then
+		touch $entrada
+	fi
+
+	if [[ -e $saida ]]; then
+		touch $saida
+	fi
+
+	if [[ -e $log_twitter ]]; then
+		touch $log_twitter
+	fi
+}
 
 check_launch()
 {
-	log_twitter="/tmp/launch_log"
-
 	acao=$(python read.py)
 
 	cat $entrada | sed 's/$/ (BOT READ:'$(date +%d-%h_%H:%M)')/' > $saida
@@ -25,6 +39,7 @@ twitt_post()
 
 main()
 {
+	check_files
 	check_launch
 	twitt_post
 }
