@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 17/03/19
-# versao       = 0.48
+# ultima modif = 21/03/19
+# versao       = 0.50
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
@@ -16,12 +16,25 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
 post="/wp-json/wp/v2/posts/"
 
 ## saida do arquivo
-saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+# saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 # saida="/tmp/testando_twitter"
+saida="/home/lenonr/Downloads/Arquivos/Twitter/posts"
 
 ## saida para organizacao dos links pelo script = NAO COMENTAR
 saida1="/tmp/testando_twitter1"
 #
+
+check_files()
+{
+    if [[ -e $saida ]]; then
+        touch $saida
+    fi
+
+    if [[ -e $saida1 ]]; then
+        touch $saida1
+    fi
+}
+
 catch()
 {
     for (( i = 0; i <= ${#array[@]}-1; i++ )); do 
@@ -36,6 +49,7 @@ catch()
 
 main()
 {
+    check_files
     echo "" > $saida    
     catch
     awk 'NF' $saida > $saida1
