@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 21/03/19
-# versao       = 0.50
+# ultima modif = 22/03/19
+# versao       = 0.51
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
@@ -43,7 +43,7 @@ catch()
         lynx --dump $link | \
         jq --indent 0 '.[] | [.title.rendered, .link]' | \
         sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
-        sed 's/$/ (BOT READ:'$(date +%d-%h_%H:%M)')/' >> $saida 
+        sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' >> $saida 
     done
 }
 

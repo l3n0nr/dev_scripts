@@ -23,7 +23,7 @@ check_launch()
 {
 	acao=$(python read.py)
 
-	cat $entrada | sed 's/$/ (BOT READ:'$(date +%d-%h_%H:%M)')/' > $saida
+	cat $entrada | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
 }
 
 twitt_post()
