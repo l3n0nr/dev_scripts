@@ -16,12 +16,14 @@ twitt()
 
 main()
 {
+	arquivo="/home/lenonr/Github/dev_scripts/Scripts/Python/twitter_bot/v1.py"
+
 	twitt
 
 	if [[ -z $mensagem ]]; then
 		exit 1
 	else		
-		python v1.py -t "$mensagem"
+		python $arquivo -t "$mensagem"
 	fi	
 }
 
