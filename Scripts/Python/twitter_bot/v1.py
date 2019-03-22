@@ -5,12 +5,13 @@ import tweepy, argparse, csv
 ##############################
 # create date:       12/03/19
 # last modification: 21/03/19
-# version:              0.66
+# version:              0.67
 ##############################
 
 # path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
 path_keys="/home/lenonr/Downloads/Arquivos/Twitter/keys"
-path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+path_input_twitts="/home/lenonr/Downloads/Arquivos/Twitter/posts"
+# path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 # path_input_twitts = "/tmp/testando_twitter"
 
 def remove():
