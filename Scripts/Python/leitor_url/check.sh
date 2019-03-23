@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 21/03/19
-# versao       = 0.15
+# ultima modif = 23/03/19
+# versao       = 0.16
 #########################
 #
 ## variaveis
@@ -29,7 +29,7 @@ check_scan()
 	## verificando se arquivo esta vazio
 	if [[ $verifica == "0" ]]; then
 		echo "Scaneando sites | $data" >> $saida
-		source main.sh
+		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
 	else
 		echo "Escaneamento nao é necessário | $data" >> $saida
 		exit 0
