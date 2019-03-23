@@ -16,9 +16,9 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
 post="/wp-json/wp/v2/posts/"
 
 ## saida do arquivo
-# saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 # saida="/tmp/testando_twitter"
-saida="/home/lenonr/Downloads/Arquivos/Twitter/posts"
+# saida="/home/lenonr/Downloads/Arquivos/Twitter/posts"
 
 ## saida para organizacao dos links pelo script = NAO COMENTAR
 saida1="/tmp/testando_twitter1"

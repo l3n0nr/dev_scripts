@@ -7,8 +7,8 @@
 #########################
 #
 ## variaveis
-# arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-arquivo="/home/lenonr/Downloads/Arquivos/Twitter/posts"
+arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+# arquivo="/home/lenonr/Downloads/Arquivos/Twitter/posts"
 saida="/tmp/twitter_scanner"
 verifica=$(wc -l $arquivo | awk '{print $1}')
 data=$(date)
