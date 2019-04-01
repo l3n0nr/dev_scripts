@@ -2,13 +2,12 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 23/03/19
-# versao       = 0.16
+# ultima modif = 31/03/19
+# versao       = 0.20
 #########################
 #
 ## variaveis
 arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-# arquivo="/home/lenonr/Downloads/Arquivos/Twitter/posts"
 saida="/tmp/twitter_scanner"
 verifica=$(wc -l $arquivo | awk '{print $1}')
 data=$(date)
@@ -26,15 +25,16 @@ check_files()
 
 check_scan()
 {
-	## verificando se arquivo esta vazio
-	if [[ $verifica == "0" ]]; then
+	## verifica quantidades de linhas do arquivo com a lista de links
+	qtd="5"
+
+	if [[ $verifica == $qtd ]]; then
 		echo "Scaneando sites | $data" >> $saida
 		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
 	else
 		echo "Escaneamento nao é necessário | $data" >> $saida
 		exit 0
 	fi
-
 }
 
 main()
