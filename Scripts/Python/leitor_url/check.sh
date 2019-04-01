@@ -3,7 +3,7 @@
 #########################
 # data criacao = 17/03/19
 # ultima modif = 31/03/19
-# versao       = 0.20
+# versao       = 0.22
 #########################
 #
 ## variaveis
@@ -26,9 +26,9 @@ check_files()
 check_scan()
 {
 	## verifica quantidades de linhas do arquivo com a lista de links
-	qtd="5"
+	qtd="3"
 
-	if [[ $verifica == $qtd ]]; then
+	if [[ $verifica -le $qtd ]]; then
 		echo "Scaneando sites | $data" >> $saida
 		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
 	else
