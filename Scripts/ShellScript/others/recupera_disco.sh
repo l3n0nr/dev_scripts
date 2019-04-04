@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 ####################
 # DESENVOLVIDO POR #
@@ -7,30 +7,16 @@
 # por lenonr(Lenon Ricardo) 
 # 	contato: <lenonrmsouza@gmail.com>
 #
-#################################################################################
-#										#
-#	If I have seen further it is by standing on the shoulders of Giants.	#
-#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
-#							~Isaac Newton		#
-#										#
-#################################################################################
-#
 ##################################
-# versão do script: 0.0.15.0.0.0 #
+# versão do script: 	  0.20 
+# ultima modificao: 	04/04/19
 ##################################
-#
-# legenda: a.b.c.d.e.f
-# 	a = alpha[0], beta[1];
-# 	b = erros na execução;	
-# 	c = interações com o script + versões funcionando;
-# 	d = correções necessárias;
-# 	e = pendencias
-# 	f = desenvolver
 #
 ################################################################################
 #
 # Script testado em
-#	-Xubuntu 16.04
+#	-	Xubuntu 16.04
+# 	-	Debian Stable
 #
 ################################################################################
 #
@@ -40,17 +26,42 @@
 #
 ################################################################################
 #
-#limpando a tela
-clear
 
-#verificando a particao alvo
-sudo fdisk -l
+check_root()
+{
+	if [[ ! $USER == "root" ]]; then
+		echo "Precisa de ROOT para funcionar!!!"
 
-particao=`/dev/sdc1`
+		exit 1
+	fi
+}
 
-#tentando corrigir
-sudo fsck $particao -y -C -f 
+fix()
+{
+	## verifica se parametro esta vazio
+	if [[ $1 == "" ]]; then
+		## mostra opcoes e sai
+		fdisk -l 
+		echo
 
-#reiniciando a maquina
-#reboot
+		exit 1
+	else
+		particao=$1		
+	fi
+
+	#tentando corrigir
+	fsck $particao -y -C -f 
+}
+
+main()
+{
+	clear
+
+	check_root
+	fix $1
+}
+
+## chamando funcao principal
+main $1
+
 ################################################################################
