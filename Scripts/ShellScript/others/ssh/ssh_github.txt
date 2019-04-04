@@ -1,0 +1,15 @@
+# Definindo chave SSH para comunicacao com Github.
+
+# Gerando senha, a partir do e-mail cadastrado
+ssh-keygen -t rsa -b 4096 -C "email"
+
+# Adicionando chave SSH gerada
+ssh-add ~/.ssh/id_rsa
+
+# Instalando aplicacao para manipular chave criada
+sudo apt install xclip
+
+# Copiando chave gerada, para area de transferencia
+xclip -sel clip < ~/.ssh/id_rsa.pub
+
+# Depois basta entrar na conta do Github, em Settings, SSH and GPG keys, New SSH Key, definir um titulo e colar a chave gerada.
