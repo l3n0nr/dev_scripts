@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 def perm_user():	
 	# criando lista
-	user_y = ['lenon', 'ricardo']	
+	user_y = ['lenon', 'ricardo', 'lenonricardo']	
 
 	# entrando com valor
 	user = raw_input("Qual o seu nome:")
@@ -11,7 +11,8 @@ def perm_user():
 	test = user in user_y
 
 	if test == True:
-		print "\o, %s" % user
+		# print "\o, %s" % user
+		print "Salve -" + user + "- \o"
 	else:
 		print "Usuario NAO habilitado, saia daqui!"
 
