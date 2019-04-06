@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 31/03/19
-# versao       = 0.22
+# ultima modif = 06/04/19
+# versao       = 0.23
 #########################
 #
 ## variaveis
@@ -29,10 +29,10 @@ check_scan()
 	qtd="3"
 
 	if [[ $verifica -le $qtd ]]; then
-		echo "Scaneando sites | $data" >> $saida
+		echo "CHECK | $data" >> $saida
 		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
 	else
-		echo "Escaneamento nao é necessário | $data" >> $saida
+		echo "NOT CHECK | $data" >> $saida
 		exit 0
 	fi
 }
