@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 22/03/19
-# versao       = 0.51
+# ultima modif = 10/04/19
+# versao       = 0.55
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
@@ -13,14 +13,17 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         dragoesdegaragem.com revistapesquisa.fapesp.br almaobservatory.org \
         emagrecerdevez.com ablc.org.br)
 
-post="/wp-json/wp/v2/posts/"
+## quantidades de posts para serem listados
+qtd="99"
+post="/wp-json/wp/v2/posts/?per_page=$qtd"
 
-## saida do arquivo
+## saida do arquivo padrao
 saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-# saida="/tmp/testando_twitter"
-# saida="/home/lenonr/Downloads/Arquivos/Twitter/posts"
 
-## saida para organizacao dos links pelo script = NAO COMENTAR
+## saida do arquivo para testes
+# saida="/tmp/testando_twitter"
+
+## saida para organizacao dos links pelo script = NAO MODIFICAR
 saida1="/tmp/testando_twitter1"
 #
 
