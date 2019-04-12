@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 10/04/19
-# versao       = 0.55
+# ultima modif = 11/04/19
+# versao       = 0.56
 #########################
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
@@ -11,10 +11,10 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         segurancalegal.com portalcafebrasil.com.br space.nss.org \
         alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
         dragoesdegaragem.com revistapesquisa.fapesp.br almaobservatory.org \
-        emagrecerdevez.com ablc.org.br)
+        emagrecerdevez.com ablc.org.br avioesemusicas.com)
 
 ## quantidades de posts para serem listados
-qtd="99"
+qtd="99" # MAX
 post="/wp-json/wp/v2/posts/?per_page=$qtd"
 
 ## saida do arquivo padrao
