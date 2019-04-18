@@ -2,9 +2,12 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 11/04/19
-# versao       = 0.56
+# ultima modif = 18/04/19
+# versao       = 0.57
 #########################
+#
+#### DESCRICAO
+## Lista arquivos compativeis com wordpress
 #
 array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         spacetoday.com.br ceticismo.net teslarati.com \
@@ -13,8 +16,10 @@ array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
         dragoesdegaragem.com revistapesquisa.fapesp.br almaobservatory.org \
         emagrecerdevez.com ablc.org.br avioesemusicas.com)
 
-## quantidades de posts para serem listados
-qtd="99" # MAX
+## quantidades de posts para serem listados  - MAXIMO
+qtd="99"
+
+## percorre caminho completo do wordpress
 post="/wp-json/wp/v2/posts/?per_page=$qtd"
 
 ## saida do arquivo padrao
@@ -25,7 +30,6 @@ saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 
 ## saida para organizacao dos links pelo script = NAO MODIFICAR
 saida1="/tmp/testando_twitter1"
-#
 
 check_files()
 {
