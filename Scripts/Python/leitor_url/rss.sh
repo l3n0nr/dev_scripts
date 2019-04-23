@@ -2,53 +2,42 @@
 #
 #########################
 # data criacao = 18/03/19
-# ultima modif = 22/04/19
-# versao       = 0.20
+# ultima modif = 23/04/19
+# versao       = 0.21
 #########################
 #
-#### DESCRICAO
-## base de conversao
-rsstojson="https://feeds-hourly.com/rss_2_json.php?nolimit=Yes&fd=https://feeds.feedburner.com/"
-
-## lista de url via RSS, nao compativeis com o wordpress
-# array=( naruhodopodcast pizzadedados CastalioPodcastMP3 )            ## VERIFICAR ERRO
-array=( pizzadedados )
-
-## saida do arquivo
-saida="/tmp/rss_leitor"
-
-## area de transferencia do script
-saida1="/tmp/trash_leitor"
+## chamando arquivo externo de variaveis
+source variables.conf
 
 check_files()
 {
-    if [[ -e $saida ]]; then
-        touch $saida
+    if [[ -e $saida_rss ]]; then
+        touch $saida_rss
     fi
 
-    if [[ -e $saida1 ]]; then
-        touch $saida1
+    if [[ -e $trash_rss ]]; then
+        touch $trash_rss
     fi
 }
 
 catch()
 {
-    for (( i = 0; i <= ${#array[@]}-1; i++ )); do 
-        link="$rsstojson"${array[$i]}
+    for (( i = 0; i <= ${#array_rss[@]}-1; i++ )); do 
+        link="$rsstojson"${array_rss[$i]}
 
         lynx --dump $link | \
         jq --indent 0 ' . | .items[] | [.url]' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' -e 's/\[null]//g' >> $saida
+        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' -e 's/\[null]//g' >> $saida_rss
     done
 }
 
 main()
 {
     check_files
-    echo "" > $saida    
+    echo "" > $saida_rss    
     catch
-    awk 'NF' $saida > $saida1
-    sort -R $saida1 > $saida
+    awk 'NF' $saida_rss > $trash_rss
+    sort -R $trash_rss > $saida_rss
 }
 
 main
