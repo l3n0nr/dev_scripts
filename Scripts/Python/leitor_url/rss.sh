@@ -10,8 +10,8 @@
 ## base de conversao
 rsstojson="https://feeds-hourly.com/rss_2_json.php?nolimit=Yes&fd=https://feeds.feedburner.com/"
 
-## lista de url  via RSS, nao compativeis com o wordpress
-# array=( naruhodopodcast pizzadedados )            ## VERIFICAR ERRO
+## lista de url via RSS, nao compativeis com o wordpress
+# array=( naruhodopodcast pizzadedados CastalioPodcastMP3 )            ## VERIFICAR ERRO
 array=( pizzadedados )
 
 ## saida do arquivo
