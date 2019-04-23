@@ -1,66 +1,54 @@
 #!/usr/bin/env bash
 #
 #########################
-# data criacao = 13/03/19
-# ultima modif = 18/04/19
-# versao       = 0.57
+# data criacao = 22/04/19
+# ultima modif = 22/04/19
+# versao       = 0.15
 #########################
 #
 #### DESCRICAO
-## Lista arquivos compativeis com wordpress
+## Gerencia lista de links dos arquivos ~ wordpress | rss ~
 #
-array=( nasaspaceflight.com spaceflightnow.com cafeeciencia.com.br \
-        spacetoday.com.br ceticismo.net teslarati.com \
-        segurancalegal.com portalcafebrasil.com.br space.nss.org \
-        alociencia.com.br manualdomundo.com.br rocketsciencebr.com \
-        dragoesdegaragem.com revistapesquisa.fapesp.br almaobservatory.org \
-        emagrecerdevez.com ablc.org.br avioesemusicas.com)
+## VARIAVEIS
+## saida padrao da lista do wordpress
+saida_wordpress="/tmp/wordpress_leitor"
 
-## quantidades de posts para serem listados  - MAXIMO
-qtd="99"
+## saida padrao da lista do rss
+saida_rss="/tmp/rss_leitor"
 
-## percorre caminho completo do wordpress
-post="/wp-json/wp/v2/posts/?per_page=$qtd"
+## saida padrao das listas
+merge_posts="/tmp/merge_leitor"
 
-## saida do arquivo padrao
-saida="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+## saida final(wordpress+rss)
+posts_twitter="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 
-## saida do arquivo para testes
-# saida="/tmp/testando_twitter"
-
-## saida para organizacao dos links pelo script = NAO MODIFICAR
-saida1="/tmp/testando_twitter1"
-
-check_files()
+check_wordpress()
 {
-    if [[ -e $saida ]]; then
-        touch $saida
-    fi
-
-    if [[ -e $saida1 ]]; then
-        touch $saida1
-    fi
+    source wordpress.sh
 }
 
-catch()
+check_rss()
 {
-    for (( i = 0; i <= ${#array[@]}-1; i++ )); do 
-        link=${array[$i]}"$post"
+    source rss.sh
+}
 
-        lynx --dump $link | \
-        jq --indent 0 '.[] | [.title.rendered, .link]' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
-        sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' >> $saida 
-    done
+merge_files()
+{
+    cat $saida_wordpress >> $merge_posts
+    cat $saida_rss >> $merge_posts        
+}
+
+sort_posts()
+{
+    sort -R $merge_posts > $posts_twitter
 }
 
 main()
 {
-    check_files
-    echo "" > $saida    
-    catch
-    awk 'NF' $saida > $saida1
-    sort -R $saida1 > $saida
+    check_wordpress
+    check_rss
+    merge_files    
+    sort_posts
 }
 
 main

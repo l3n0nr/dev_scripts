@@ -2,14 +2,21 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 06/04/19
-# versao       = 0.23
+# ultima modif = 22/04/19
+# versao       = 0.25
 #########################
 #
-## variaveis
+## VARIAVEIS
+## arquivo que possui a lista de posts
 arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+
+## saida de log do arquivo
 saida="/tmp/twitter_scanner"
+
+## verifica quantidade de linhas do arquivo
 verifica=$(wc -l $arquivo | awk '{print $1}')
+
+## verifica data do scanner
 data=$(date)
 
 check_files()

@@ -1,5 +1,8 @@
 # MANUAL
-	Identifica post's atraves dos sites wordpress, passados via array e envia para arquivo $saida.
+	Identifica post's dos sites passados via array e envia para arquivo $saida.
+		# Compativel com:
+			- Wordpress
+			- RSS
 
 # REFERENCE
 	https://youtu.be/nJO6qLS70tU
