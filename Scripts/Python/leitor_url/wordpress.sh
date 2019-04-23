@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 22/04/19
-# versao       = 0.60
+# ultima modif = 23/04/19
+# versao       = 0.61
 #########################
 #
 #### DESCRICAO
@@ -46,9 +46,8 @@ catch()
 
         lynx --dump $link | \
         jq --indent 0 '.[] | [.title.rendered, .link]' | \
-        # sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
-        # sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' >> $saida 
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida 
+        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
+        sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' >> $saida 
     done
 }
 

@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 22/04/19
-# versao       = 0.15
+# ultima modif = 23/04/19
+# versao       = 0.16
 #########################
 #
 #### DESCRICAO
@@ -20,7 +20,8 @@ saida_rss="/tmp/rss_leitor"
 merge_posts="/tmp/merge_leitor"
 
 ## saida final(wordpress+rss)
-posts_twitter="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+posts_twitter="/home/lenonr/Dropbox/Arquivos/Twitter/posts"       ## DEFAULT
+# posts_twitter="/tmp/posts_twitter"
 
 check_wordpress()
 {

@@ -38,7 +38,7 @@ catch()
 
         lynx --dump $link | \
         jq --indent 0 ' . | .items[] | [.url]' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' -e 's/\[null]//g' >> $saida 
+        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' -e 's/\[null]//g' >> $saida
     done
 }
 
