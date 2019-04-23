@@ -2,31 +2,28 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 22/04/19
-# versao       = 0.25
+# ultima modif = 23/04/19
+# versao       = 0.26
 #########################
 #
 ## VARIAVEIS
-## arquivo que possui a lista de posts
-arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-
-## saida de log do arquivo
-saida="/tmp/twitter_scanner"
+## chamando arquivo externo com variaveis
+source variables.conf
 
 ## verifica quantidade de linhas do arquivo
-verifica=$(wc -l $arquivo | awk '{print $1}')
+verifica=$(wc -l $posts_twitter | awk '{print $1}')
 
 ## verifica data do scanner
 data=$(date)
 
 check_files()
 {
-	if [[ -e $arquivo ]]; then
-		touch $arquivo
+	if [[ -e $posts_twitter ]]; then
+		touch $posts_twitter
 	fi
 
-	if [[ -e $saida ]]; then
-		touch $saida
+	if [[ -e $saida_log ]]; then
+		touch $saida_log
 	fi
 }
 
@@ -36,10 +33,10 @@ check_scan()
 	qtd="3"
 
 	if [[ $verifica -le $qtd ]]; then
-		echo "CHECK | $data" >> $saida
+		echo "CHECK | $data" >> $saida_log
 		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
 	else
-		echo "NOT CHECK | $data" >> $saida
+		echo "NOT CHECK | $data" >> $saida_log
 		exit 0
 	fi
 }
