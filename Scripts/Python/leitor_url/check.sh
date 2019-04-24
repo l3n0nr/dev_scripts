@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 23/04/19
-# versao       = 0.26
+# ultima modif = 24/04/19
+# versao       = 0.27
 #########################
 #
 ## VARIAVEIS
@@ -32,12 +32,13 @@ check_scan()
 	## verifica quantidades de linhas do arquivo com a lista de links
 	qtd="3"
 
+	## se quantidade for menor ou igual a $qtd
 	if [[ $verifica -le $qtd ]]; then
 		echo "CHECK | $data" >> $saida_log
 		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
-	else
-		echo "NOT CHECK | $data" >> $saida_log
-		exit 0
+	# else
+	# 	echo "NOT CHECK | $data" >> $saida_log
+	# 	exit 0
 	fi
 }
 
