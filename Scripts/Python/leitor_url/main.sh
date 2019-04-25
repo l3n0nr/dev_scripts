@@ -2,12 +2,9 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 23/04/19
-# versao       = 0.17
+# ultima modif = 25/04/19
+# versao       = 0.18
 #########################
-#
-#### DESCRICAO
-## Gerencia lista de links dos arquivos ~ wordpress | rss ~
 #
 ## chamando arquivo externo de variaveis
 source variables.conf

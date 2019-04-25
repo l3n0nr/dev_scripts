@@ -2,12 +2,9 @@
 #
 #########################
 # data criacao = 13/03/19
-# ultima modif = 23/04/19
-# versao       = 0.62
+# ultima modif = 25/04/19
+# versao       = 0.63
 #########################
-#
-#### DESCRICAO
-## Lista arquivos compativeis com wordpress
 #
 ## chamando arquivo externo com variaveis
 source variables.conf
