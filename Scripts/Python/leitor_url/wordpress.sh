@@ -27,8 +27,8 @@ catch()
 
         lynx --dump $link | \
         jq --indent 0 '.[] | [.title.rendered, .link]' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' | \
-        sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' >> $saida_wordpress 
+        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' >> $saida_wordpress 
+        # sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' >> $saida_wordpress 
     done
 }
 
