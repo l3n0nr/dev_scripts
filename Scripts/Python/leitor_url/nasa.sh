@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 28/04/19
-# ultima modif = 28/04/19
-# versao       = 0.15
+# ultima modif = 29/04/19
+# versao       = 0.16
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -39,7 +39,8 @@ catch_posts()
 		lynx --dump $link | \
 		jq --indent 0 '.[] | .items | .[] | .links | .[] | .href' | \
 		sed -e 's/\(\["\|"\]\)//g' | \
-		sed 's/"//g' > $output_url
+		sed 's/"//g' | \
+		sed 's/thumb/orig/g' > $output_url
 
 		# COUNT
 		count=$(wc -l $output_title | awk '{print $1}')
