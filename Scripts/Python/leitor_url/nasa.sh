@@ -3,7 +3,7 @@
 #########################
 # data criacao = 28/04/19
 # ultima modif = 29/04/19
-# versao       = 0.16
+# versao       = 0.20
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -26,7 +26,7 @@ check_files()
 
 catch_posts()
 {
-	for (( i = 0; i <= ${#array_nasa[@]}-1; i++ )); do 	
+	for (( i = 0; i <= ${#array_nasa[@]}-1; i++ )); do 			
 		link="https://images-api.nasa.gov/search?q=${array_nasa[$i]}&media_type=image"
 
 		# TITLE
@@ -35,14 +35,31 @@ catch_posts()
 		sed -e 's/\(\["\|"\]\)//g' | \
 		sed 's/"//g' > $output_title
 
-		# URL
+		# # URL - image
 		lynx --dump $link | \
 		jq --indent 0 '.[] | .items | .[] | .links | .[] | .href' | \
 		sed -e 's/\(\["\|"\]\)//g' | \
-		sed 's/"//g' | \
-		sed 's/thumb/orig/g' > $output_url
+		sed 's/"//g' > $output_url
 
-		# COUNT
+		## VERIFICAR - audio
+		# link="https://images-api.nasa.gov/search?q=${array_nasa[$i]}&media_type=audio"
+		
+		# URL - audio
+		# lynx --dump $link | \
+		# jq --indent 0 '.[] | .items | .[] | .href' | \
+		# sed -e 's/\(\["\|"\]\)//g' | \
+		# sed 's/"//g' > $output_url
+
+		# ## VERIFICAR - video
+		# link="https://images-api.nasa.gov/search?q=${array_nasa[$i]}&media_type=video"
+		
+		# # URL - video
+		# lynx --dump $link | \
+		# jq --indent 0 '.[] | .items | .[] | .href' | \
+		# sed -e 's/\(\["\|"\]\)//g' | \
+		# sed 's/"//g' > $output_url
+
+		# COUNT LINES FILE
 		count=$(wc -l $output_title | awk '{print $1}')
 
 		for (( j = 1; j <= $count; j++ )); do

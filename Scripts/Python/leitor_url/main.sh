@@ -9,10 +9,10 @@
 ## chamando arquivo externo de variaveis
 source variables.conf
 
-check_wordpress()
-{
-    source wordpress.sh
-}
+# check_wordpress()
+# {
+#     source wordpress.sh
+# }
 
 check_rss()
 {
@@ -25,10 +25,16 @@ check_nasa()
 }
 
 ## agrupando arquivos
+# merge_files()
+# {
+#     cat $saida_wordpress > $merge_posts
+#     cat $saida_rss >> $merge_posts    
+#     cat $saida_nasa >> $merge_posts    
+# }
+
 merge_files()
 {
-    cat $saida_wordpress > $merge_posts
-    cat $saida_rss >> $merge_posts    
+    cat $saida_rss > $merge_posts    
     cat $saida_nasa >> $merge_posts    
 }
 
@@ -40,7 +46,7 @@ sort_posts()
 
 main()
 {
-    check_wordpress
+    # check_wordpress
     check_rss
     check_nasa
     
