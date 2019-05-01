@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		30/01/19
-# versão do script: 			0.32
+# ultima modificacao: 		01/05/19
+# versão do script: 			1.10
 ####################################
 #
 ################################################################################
@@ -25,11 +25,14 @@
 #   - Captura imagem da area de trabalho(Xfce4)
 #	- Mostra caminho da imagem 
 #	- Abre diretamente no $site
-#
 ################################################################################
-#limpando a tela
-clear
-# 
+
+func_verifica()
+{
+	if [[ $? == "1" ]]; then
+		exit 0
+	fi
+}
 
 procura()
 {
@@ -40,7 +43,7 @@ procura()
 	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
 	 
 	#capturando caminho completo imagem
-	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace$1/last-image > .caminhocompleto.txt
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace$escolha/last-image > .caminhocompleto.txt
 	echo "Caminho do Wallpaper: " 
 
 	#extraindo caminho base
@@ -70,16 +73,26 @@ procura()
 
 	#iniciando o firefox
 	echo "Imagem identificada! Abrindo o Firefox..."
-	firefox $site/wallpaper/$url &
+	firefox $site/wallpaper/$url
+}
+
+interface()
+{
+	escolha=$(dialog \
+            --stdout --ok-label "Choice" --cancel-label "Exit" \
+            --menu "Select workspace:" \
+            0 0 0 \
+            "0" "First" \
+            "1" "Second" ) ; 
+
+    func_verifica && procura
 }
 
 main()
 {
-	if [[ $1 == "" ]]; then
-		procura 1
-	else
-		procura $1
-	fi	
+	clear
+
+	interface
 }
 
 
