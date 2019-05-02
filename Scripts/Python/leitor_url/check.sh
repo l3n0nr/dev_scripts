@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 26/04/19
-# versao       = 0.31
+# ultima modif = 02/05/19
+# versao       = 0.32
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -23,30 +23,18 @@ check_files()
 check_scan()
 {
 	## verifica quantidade de linhas do arquivo
-	verifica=$(wc -l $posts_twitter | awk '{print $1}')
+	verifica=$(cat $posts_twitter | wc -l)
 
-	if [[ $verifica -le $qtd ]]; then
+	if [[ $verifica -le $qtd ]]; then		
 		echo "CHECK | $data" >> $saida_log
-		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh
+		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh		
 	fi
-}
-
-internet()
-{
-  	check_files
-
-  	ping -c1 $site >> /dev/null
-
-  	if [[ ! $? -eq "0" ]]; then
-  		echo "NOT CONNECTION | $data" >> $saida_log
-  	else
-  		check_scan
-  	fi	
 }
 
 main()
 {
-	internet
+	check_files
+	check_scan
 }
 
 ## chamando funcao principal
