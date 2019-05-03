@@ -2,17 +2,17 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 28/04/19
-# versao       = 0.20
+# ultima modif = 03/05/19
+# versao       = 0.21
 #########################
 #
 ## chamando arquivo externo de variaveis
 source variables.conf
 
-# check_wordpress()
-# {
-#     source wordpress.sh
-# }
+check_wordpress()
+{
+    source wordpress.sh
+}
 
 check_rss()
 {
@@ -24,17 +24,11 @@ check_nasa()
 	source nasa.sh
 }
 
-## agrupando arquivos
-# merge_files()
-# {
-#     cat $saida_wordpress > $merge_posts
-#     cat $saida_rss >> $merge_posts    
-#     cat $saida_nasa >> $merge_posts    
-# }
-
+# agrupando arquivos
 merge_files()
 {
-    cat $saida_rss > $merge_posts    
+    cat $saida_wordpress > $merge_posts
+    cat $saida_rss >> $merge_posts    
     cat $saida_nasa >> $merge_posts    
 }
 
@@ -44,11 +38,16 @@ sort_posts()
     sort -R $merge_posts > $posts_twitter
 }
 
-main()
+check()
 {
-    # check_wordpress
+    check_wordpress
     check_rss
     check_nasa
+}
+
+main()
+{
+    check
     
     merge_files    
     sort_posts
