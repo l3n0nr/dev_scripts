@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 17/03/19
-# ultima modif = 02/05/19
-# versao       = 0.32
+# ultima modif = 05/05/19
+# versao       = 0.33
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -26,7 +26,7 @@ check_scan()
 	verifica=$(cat $posts_twitter | wc -l)
 
 	if [[ $verifica -le $qtd ]]; then		
-		echo "CHECK | $data" >> $saida_log
+		echo $data >> $saida_log
 		source /home/lenonr/Github/dev_scripts/Scripts/Python/leitor_url/main.sh		
 	fi
 }
