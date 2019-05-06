@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 18/03/19
-# ultima modif = 27/04/19
-# versao       = 0.23
+# ultima modif = 05/05/19
+# versao       = 0.25
 #########################
 #
 ## chamando arquivo externo de variaveis
@@ -31,7 +31,9 @@ catch()
 
         lynx --dump $link | \
         jq --indent 0 ' . | .items[] | .url' | \
-        sed -e 's/\(\["\|"\]\)//g' -e 's/"."/: /' -e 's/\[null]//g' >> $saida_rss
+        sed -e 's/\(\["\|"\]\)//g' | \
+        sed -e 's/"."/: /' | \
+        sed -e 's/null//g' >> $saida_rss
     done
 }
 
