@@ -10,8 +10,8 @@ import tweepy, argparse, csv
 
 path_keys="/home/lenonr/Dropbox/Arquivos/Twitter/keys"
 
-path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-# path_input_twitts = "/tmp/testando_twitter"
+path_input_twitts = "/home/lenonr/Dropbox/Arquivos/Twitter/posts"     ## DEFAULT
+# path_input_twitts = "/tmp/posts_twitter"                              ## TEST
 
 def remove():
     with open(path_input_twitts, "rb") as infile:
