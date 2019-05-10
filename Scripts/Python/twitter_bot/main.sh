@@ -2,20 +2,21 @@
 
 ##############################
 # create date:       12/03/19
-# last modification: 09/05/19
-# version:              0.50
+# last modification: 10/05/19
+# version:              0.52
 ##############################
 
 log_twitter="/tmp/twitter_log"
+data=$(date +%x-%X)
 
 post()
 {
 	acao=$(python v1.py -file)
 
 	if [[ $acao != "" ]]; then
-		printf "NEW POST   - " >> $log_twitter && date >> $log_twitter
+		printf "NEW POST   - " >> $log_twitter && echo $data >> $log_twitter
 	else
-		printf "NOT POSTED - " >> $log_twitter && date >> $log_twitter			
+		printf "NOT POSTED - " >> $log_twitter && echo $data >> $log_twitter			
 	fi
 }
 
@@ -30,7 +31,7 @@ verifica_internet()
   	if [[ $? -eq 0 ]]; then
   		post
   	else
-  		printf "NOT CONNECTION - " >> $log_twitter && date >> $log_twitter
+  		printf "NOT CONNECTION - " >> $log_twitter && echo $data >> $log_twitter
   		exit 1  		
   	fi
 }
