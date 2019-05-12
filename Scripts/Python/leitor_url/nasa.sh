@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 28/04/19
-# ultima modif = 29/04/19
-# versao       = 0.20
+# ultima modif = 11/05/19
+# versao       = 0.21
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -13,14 +13,20 @@ check_files()
 {
     if [[ -e $output_title ]]; then
         touch $output_title
+    else
+    	echo "" > $output_title
     fi
 
     if [[ -e $output_url ]]; then
         touch $output_url
+    else
+    	echo "" > $output_url
     fi
 
     if [[ -e $saida_nasa ]]; then
         touch $saida_nasa
+    else
+    	echo "" > $saida_nasa
     fi
 }
 

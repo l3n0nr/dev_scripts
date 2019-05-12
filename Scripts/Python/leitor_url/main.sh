@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 03/05/19
-# versao       = 0.21
+# ultima modif = 11/05/19
+# versao       = 0.22
 #########################
 #
 ## chamando arquivo externo de variaveis
@@ -24,12 +24,18 @@ check_nasa()
 	source nasa.sh
 }
 
+check_hubble()
+{
+    source hubble.sh
+}
+
 # agrupando arquivos
 merge_files()
 {
     cat $saida_wordpress > $merge_posts
     cat $saida_rss >> $merge_posts    
-    cat $saida_nasa >> $merge_posts    
+    cat $saida_nasa >> $merge_posts  
+    cat $saida_hubble >> $merge_posts  
 }
 
 ## misturando linhas
@@ -43,6 +49,7 @@ check()
     check_wordpress
     check_rss
     check_nasa
+    check_hubble
 }
 
 main()

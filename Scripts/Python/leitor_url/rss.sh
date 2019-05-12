@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 18/03/19
-# ultima modif = 05/05/19
-# versao       = 0.25
+# ultima modif = 11/05/19
+# versao       = 0.26
 #########################
 #
 ## chamando arquivo externo de variaveis
@@ -17,10 +17,14 @@ check_files()
 {
     if [[ -e $saida_rss ]]; then
         touch $saida_rss
+    else
+        echo "" > $saida_rss
     fi
 
     if [[ -e $trash_rss ]]; then
         touch $trash_rss
+    else
+        echo "" > $trash_rss
     fi
 }
 
