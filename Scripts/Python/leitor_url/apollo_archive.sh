@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 12/05/19
-# ultima modif = 12/05/19
-# versao       = 0.10
+# ultima modif = 13/05/19
+# versao       = 0.11
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -38,7 +38,7 @@ check_files()
 
 catch_posts()
 {
-	link="https://public.opendatasoft.com/api/records/1.0/search/?dataset=project-apollo-archive&rows=$qtd"
+	link="https://public.opendatasoft.com/api/records/1.0/search/?dataset=project-apollo-archive&rows=$qtd_apollo"
 
 	# TITLE
 	lynx --dump $link | \
