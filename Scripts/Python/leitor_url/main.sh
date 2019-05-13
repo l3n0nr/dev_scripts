@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 12/05/19
-# versao       = 0.23
+# ultima modif = 13/05/19
+# versao       = 0.24
 #########################
 #
 ## chamando arquivo externo de variaveis
@@ -13,26 +13,31 @@ source variables.conf
 check_wordpress()
 {
     source wordpress.sh
+    cat $saida_wordpress >> $merge_posts
 }
 
 check_rss()
 {
     source rss.sh
+    cat $saida_rss >> $merge_posts   
 }
 
 check_nasa()
 {
 	source nasa.sh
+    cat $saida_nasa >> $merge_posts  
 }
 
 check_hubble()
 {
     source hubble.sh
+    cat $saida_hubble >> $merge_posts 
 }
 
 check_apollo()
 {
     source apollo_archive.sh
+    cat $saida_apollo >> $merge_posts
 }
 
 ## chamando arquivos externos
@@ -52,11 +57,7 @@ merge_files()
     echo "" > $merge_posts
 
     ## juntando arquivos
-    cat $saida_wordpress >> $merge_posts
-    cat $saida_rss >> $merge_posts    
-    cat $saida_nasa >> $merge_posts  
-    cat $saida_hubble >> $merge_posts 
-    cat $saida_apollo >> $merge_posts 
+    check
 }
 
 ## misturando linhas | NAO MODIFICAR
@@ -68,8 +69,6 @@ sort_posts()
 ## chamando funcao principal | NAO MODIFICAR
 main()
 {
-    check
-    
     merge_files    
     sort_posts
 }
