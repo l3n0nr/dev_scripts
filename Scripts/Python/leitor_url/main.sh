@@ -50,7 +50,7 @@ check()
     check_apollo
 }
 
-# agrupando arquivos
+# agrupando arquivos | NAO MODIFICAR
 merge_files()
 {
     ## limpando arquivo
