@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 11/05/19
-# ultima modif = 11/05/19
-# versao       = 0.15
+# ultima modif = 12/05/19
+# versao       = 0.16
 #########################
 #
 ## chamando arquivo externo com variaveis
@@ -26,7 +26,7 @@ check_files()
     if [[ -e $saida_hubble ]]; then
         touch $saida_hubble
     else
-    	echo "" $saida_hubble
+    	echo "" > $saida_hubble
     fi
 }
 
