@@ -35,10 +35,24 @@ check_apollo()
     source apollo_archive.sh
 }
 
+## chamando arquivos externos
+check()
+{
+    check_wordpress
+    check_rss
+    check_nasa
+    check_hubble
+    check_apollo
+}
+
 # agrupando arquivos
 merge_files()
 {
-    cat $saida_wordpress > $merge_posts
+    ## limpando arquivo
+    echo "" > $merge_posts
+
+    ## juntando arquivos
+    cat $saida_wordpress >> $merge_posts
     cat $saida_rss >> $merge_posts    
     cat $saida_nasa >> $merge_posts  
     cat $saida_hubble >> $merge_posts 
@@ -49,16 +63,6 @@ merge_files()
 sort_posts()
 {
     sort -R $merge_posts > $posts_twitter
-}
-
-## chamando arquivos externos
-check()
-{
-    check_wordpress
-    check_rss
-    check_nasa
-    check_hubble
-    check_apollo
 }
 
 ## chamando funcao principal | NAO MODIFICAR
