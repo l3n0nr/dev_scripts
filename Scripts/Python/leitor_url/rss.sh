@@ -2,16 +2,12 @@
 #
 #########################
 # data criacao = 18/03/19
-# ultima modif = 11/05/19
-# versao       = 0.26
+# ultima modif = 15/05/19
+# versao       = 0.28
 #########################
 #
 ## chamando arquivo externo de variaveis
 source variables.conf
-
-## CHECK
-# É necessario tratar a variavel ~item~
-# por causa de caracters especiais no titulo.
 
 check_files()
 {
@@ -34,10 +30,13 @@ catch()
         link="$rsstojson"${array_rss[$i]}
 
         lynx --dump $link | \
-        jq --indent 0 ' . | .items[] | .url' | \
-        sed -e 's/\(\["\|"\]\)//g' | \
-        sed -e 's/"."/: /' | \
-        sed -e 's/null//g' >> $saida_rss
+        jq -R --raw-output '.' | grep 'url' | \
+        awk '{print $3}' | \
+        sed 's/\(\["\|"\]\)//g' | \
+        sed 's/"."/: /' | \
+        sed 's/,/ /' | \
+        sed 's/"",//g'  | \
+        sed 's/""//g' >> $saida_rss
     done
 }
 
