@@ -43,7 +43,7 @@ check_apollo()
 ## chamando arquivos externos
 check()
 {
-    check_wordpress
+    # check_wordpress
     check_rss
     check_nasa
     check_hubble
