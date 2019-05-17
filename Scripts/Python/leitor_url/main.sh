@@ -10,10 +10,16 @@
 source variables.conf
 
 ## importando arquivos 
-check_wordpress()
+check_wordpress_news()
 {
-    source wordpress.sh
-    cat $saida_wordpress >> $merge_posts
+    source wordpress_news.sh
+    cat $saida_wordpress_news >> $merge_posts
+}
+
+check_wordpress_podcast()
+{
+    source wordpress_podcast.sh
+    cat $saida_wordpress_podcast >> $merge_posts
 }
 
 check_rss()
@@ -43,7 +49,8 @@ check_apollo()
 ## chamando arquivos externos
 check()
 {
-    # check_wordpress
+    # check_wordpress_news
+    # check_wordpress_podcast
     check_rss
     check_nasa
     check_hubble
