@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		01/05/19
-# versão do script: 			1.10
+# ultima modificacao: 		27/07/19
+# versão do script: 			1.12
 ####################################
 #
 ################################################################################
@@ -36,7 +36,7 @@ func_verifica()
 
 procura()
 {
-	site="https://alpha.wallhaven.cc"
+	site="https://wallhaven.cc"
 	local="/home/lenonr/Imagens/Pictures/"
 
 	#criando arquivos temporarios
@@ -73,7 +73,7 @@ procura()
 
 	#iniciando o firefox
 	echo "Imagem identificada! Abrindo o Firefox..."
-	firefox $site/wallpaper/$url
+	firefox $site/w/$url
 }
 
 interface()
