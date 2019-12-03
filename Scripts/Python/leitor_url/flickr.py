@@ -7,7 +7,7 @@ sys.setdefaultencoding('utf8')
 #
 #########################
 # data criacao = 29/11/19
-# ultima modif = 02/12/19
+# ultima modif = 03/12/19
 # versao       = 0.40
 #########################
 #
@@ -59,7 +59,8 @@ def search_api():
 					title   = photos['photo'][y]['title']		
 					url 	= photos['photo'][y][extras]
 
-				title_url = (array[x] + ' - ' + title + ': ' + url)
+				# title_url = (array[x] + ' - ' + title + ': ' + url)
+				title_url = (title + ': ' + url)
 
 				from pprint import pprint
 				text_file.write("%s\n" % title_url)
