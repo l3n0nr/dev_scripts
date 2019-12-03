@@ -6,10 +6,10 @@
 # versao       = 0.24
 #########################
 #
-## chamando arquivo externo de variaveis
+#################### chamando arquivo externo de variaveis
 source variables.conf
 
-## importando arquivos 
+#################### importando arquivos 
 check_wordpress_news()
 {
     source wordpress_news.sh
@@ -46,15 +46,22 @@ check_apollo()
     cat $saida_apollo >> $merge_posts
 }
 
-## chamando arquivos externos
+check_flickr()
+{
+    python flickr.py     
+    cat $saida_flickr >> $merge_posts
+}
+
+#################### chamando funcoes
 check()
 {
     # check_wordpress_news
     # check_wordpress_podcast
-    check_rss
+    # check_rss
     check_nasa
     check_hubble
     check_apollo
+    check_flickr
 }
 
 # agrupando arquivos | NAO MODIFICAR
