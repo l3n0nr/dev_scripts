@@ -37,7 +37,7 @@ def search_api():
 				'Delta ULA', 'Atlas ULA', 
 				'NewShepard BlueOrigin', 'SpaceX Falcon',
 				'Electron RocketLab', 'PSLV ISRO',
-				'STS NASA' ]
+				'STS NASA', 'Spacewalk' ]
 
 	with open(saida_flickr, "w") as text_file:
 		for x in range(0,len(array)):	
