@@ -6,8 +6,8 @@ import csv
 
 ##############################
 # create date:       12/03/19
-# last modification: 23/03/19
-# version:              0.69
+# last modification: 30/12/19
+# version:              0.70
 ##############################
 
 path_keys = "/home/lenonr/Dropbox/Arquivos/Twitter/keys"
