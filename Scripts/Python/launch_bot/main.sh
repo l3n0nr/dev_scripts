@@ -37,11 +37,20 @@ twitt_post()
 	fi	
 }
 
-main()
+notify()
 {
-	check_files
-	check_launch
-	twitt_post
+	notify-send "`tail /tmp/launch`" -t 15000
 }
 
-main
+main()
+{
+	if [[ $1 == "notify" ]]; then
+		notify
+	else
+		check_files
+		check_launch
+		twitt_post
+	fi	
+}
+
+main $1
