@@ -39,7 +39,18 @@ twitt_post()
 
 notify()
 {
-	notify-send "`tail /tmp/launch`" -t 15000
+	file="/tmp/launch"
+
+	if [[ -e $file ]]; then
+		notify-send "`cat $file`" -t 15000
+	else
+		clear		
+		echo "## LAUNCH NOT FOUND ##"
+		echo "-- Check, please waiting.."
+		check_files
+		check_launch
+		twitt_post
+	fi	
 }
 
 main()
