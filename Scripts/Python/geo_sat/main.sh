@@ -2,8 +2,8 @@
 #
 #######################
 # dat_criacao: 16/12/19
-# ult_modific: 17/12/19
-# versao: 		0.15.1
+# ult_modific: 11/02/20
+# versao: 		0.18.1
 #######################
 #
 # VERIFICAR; Posicao "0" do array na leitura do arquivo
@@ -33,24 +33,14 @@ search_sat()
 	sed -e 's/^"//g' | sed -e 's/"//g' > $output_sat
 }
 
+## check if file exist | execute function search
 check_file()
 {
 	if [[ -z $output_sat ]]; then
-		# echo "arquivo nao existe"
-		echo
-
-		if [[ -s $output_sat ]]; then
-			# echo "arquivo cheio"
-			echo 
-		else
-			# echo "arquivo vazio"
-
-			search_sat
-		fi
-	else
-		# echo "arquivo existe"
-		echo
+		touch $output_sat
 	fi
+
+	search_sat
 }
 
 interface_dialog()
@@ -72,26 +62,26 @@ interface_dialog()
 		"8" "Southern South America"
 	) ; f_verifica
 
-	value = "1"
-
 	for (( i = 0; i <= ${#array_sats[@]}; i++ )); do		
 		if [[ $choice = $i ]]; then
-			## show in browser and put in background
-			echo "PEGOU"
-			$browser $(sed ''$i'!d' $output_sat) &
+			if [[ $choice = "0" ]]; then
+				echo "Link:" $(head -1 $output_sat)
+			else
+				echo "Link:" $(sed $i'!d' $output_sat)
+			fi					
 
 			## realiza download do arquivo
 			# wget -c $(sed ''$i'!d' $output_sat)
+
 		fi		
 	done
 }
 
 main()
 {
-	while [[ TRUE ]]; do
-		# clear
+	# while [[ TRUE ]]; do
 		interface_dialog
-	done	
+	# done	
 }
 
 main
