@@ -3,10 +3,12 @@
 #######################
 # dat_criacao: 16/12/19
 # ult_modific: 11/02/20
-# versao: 		0.18.1
+# versao: 		0.25
 #######################
 #
-# VERIFICAR; Posicao "0" do array na leitura do arquivo
+# Formas de utilização 
+#	automatica  - dialog
+# 	manual 		- parametros
 #
 
 sats="http://downlinkapp.com/sources.json"
@@ -56,32 +58,34 @@ interface_dialog()
 		"2" "Himawari-8 Full Disk" \
 		"3" "Continental US" \
 		"4" "Tropical Atlantic" \
-		"5" "US West Coast" \
-		"6" "Northern Pacific" \
-		"7" "Northern South America" \
-		"8" "Southern South America"
+		"5" "Tropical Pacific" \
+		"6" "US West Coast" \
+		"7" "Northern Pacific" \
+		"8" "Northern South America" \
+		"9" "Southern South America"
 	) ; f_verifica
 
-	for (( i = 0; i <= ${#array_sats[@]}; i++ )); do		
+	for (( i = 0; i <= ${#array_sats[@]}; i++ )); do				
 		if [[ $choice = $i ]]; then
-			if [[ $choice = "0" ]]; then
-				echo "Link:" $(head -1 $output_sat)
-			else
-				echo "Link:" $(sed $i'!d' $output_sat)
-			fi					
+			value=$(($i+1))
 
-			## realiza download do arquivo
-			# wget -c $(sed ''$i'!d' $output_sat)
+			# echo "Link -" $(sed $value'!d' $output_sat)
 
-		fi		
+			echo "Realizando download, aguarde..." 
+			wget -P $local_download $(sed ''$value'!d' $output_sat) -bqc
+			# 	-P : local download
+			# 	-b : background
+			# 	-q : turn off wget outputs
+			# 	-c : continue after stop			
+		fi
 	done
 }
 
 main()
 {
-	# while [[ TRUE ]]; do
+	while [[ TRUE ]]; do
 		interface_dialog
-	# done	
+	done	
 }
 
 main
