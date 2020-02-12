@@ -2,13 +2,14 @@
 #
 #######################
 # dat_criacao: 16/12/19
-# ult_modific: 11/02/20
-# versao: 		0.25
+# ult_modific: 12/02/20
+# versao: 		0.30
 #######################
 #
 # Formas de utilização 
 #	automatica  - dialog
 # 	manual 		- parametros
+#	help 		- ajuda
 #
 
 sats="http://downlinkapp.com/sources.json"
@@ -63,29 +64,56 @@ interface_dialog()
 		"7" "Northern Pacific" \
 		"8" "Northern South America" \
 		"9" "Southern South America"
-	) ; f_verifica
+	) ; f_verifica	
 
+	download_image
+}
+
+interface_basic()
+{
+	check_file
+
+	choice=$1
+
+	download_image
+}
+
+download_image()
+{
 	for (( i = 0; i <= ${#array_sats[@]}; i++ )); do				
 		if [[ $choice = $i ]]; then
 			value=$(($i+1))
 
-			# echo "Link -" $(sed $value'!d' $output_sat)
-
-			echo "Realizando download, aguarde..." 
+			echo "Realizando download ->" $(sed ''$value'!d' $output_sat) "<- aguarde..." 
 			wget -P $local_download $(sed ''$value'!d' $output_sat) -bqc
 			# 	-P : local download
 			# 	-b : background
 			# 	-q : turn off wget outputs
-			# 	-c : continue after stop			
+			# 	-c : continue after stop		
+
+			sleep 3	
 		fi
+	done
+}
+
+help()
+{
+	for (( i = 0; i < ${#array_sats[@]}; i++ )); do
+		echo $i ":" ${array_sats[$i]}
 	done
 }
 
 main()
 {
-	while [[ TRUE ]]; do
+	if [[ "$1" = "help" ]]; then
+		help $1
+	elif [[ "$1" = [0-9] ]];then
+		interface_basic $1
+	elif [[ "$1" = "" ]]; then
 		interface_dialog
-	done	
+	else
+		echo "ERROR"
+	fi
 }
 
-main
+main $1
