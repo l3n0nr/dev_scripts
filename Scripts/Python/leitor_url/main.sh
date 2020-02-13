@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 13/05/19
-# versao       = 0.24
+# ultima modif = 13/02/20
+# versao       = 1.10
 #########################
 #
 #################### chamando arquivo externo de variaveis
