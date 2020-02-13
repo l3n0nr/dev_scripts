@@ -55,9 +55,9 @@ check_flickr()
 #################### chamando funcoes
 check()
 {
-    # check_wordpress_news
-    # check_wordpress_podcast
-    # check_rss
+    check_wordpress_news
+    check_wordpress_podcast
+    check_rss
     check_nasa
     check_hubble
     check_apollo
