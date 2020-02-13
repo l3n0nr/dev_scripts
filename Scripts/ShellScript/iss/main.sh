@@ -2,20 +2,30 @@
 #
 #######################
 # dat_criacao: 03/12/19
-# ult_modific: 12/01/20
-# versao: 		 0.30
+# ult_modific: 13/01/20
+# versao: 		 0.35
 #######################
-#
-# Reference: http://api.open-notify.org/
 #
 pass_ISS()
 {
-	lat="-29.8"
-	lon="-55.76"
-	pass="http://api.open-notify.org/iss-pass.json?lat=$lat&lon=$lon"
+	## call external file
+	source location.conf
 
+	output_pass="/tmp/iss_pass.txt"	
+
+	if [[ -z $output_pass ]]; then
+		touch $output_pass
+	fi	
+
+	pass="http://api.open-notify.org/iss-pass.json?lat=$lat&lon=$lon"
+	
 	lynx --dump $pass | \
-	jq '.response[]'
+	jq '.response[]' > $output_pass
+
+	printf "Your location:\n" && \
+	cat location.conf && printf "\n\n" && \
+	cat $output_pass && \
+	printf "\n"
 }
 
 crew_ISS()
@@ -47,7 +57,7 @@ crew_ISS()
 					  sed -e 's/..$//g' $output_crewISS_tmp && \
 					  printf ". Source: " && printf $people && echo " (BOT CHECK:"$(date +%d-%h_%H:%M)')')
 	
-	echo $output_crewISS
+	# echo $output_crewISS
 	python $call_twitt "$(echo $output_crewISS)"
 }
 
