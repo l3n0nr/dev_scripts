@@ -4,8 +4,8 @@ import urllib, json
 
 ##############################
 # create date:       13/03/19
-# last modification: 21/03/19
-# version:              0.24
+# last modification: 19/02/20
+# version:              0.25
 ##############################
 
 def launches():
@@ -19,7 +19,7 @@ def launches():
         date = x['net']
 
     file = open(path_input_launch,"w") 
-    file.write("NEXT LAUNCH: Rocket: " + rocket) 
+    file.write("#NEXT_LAUNCH: Rocket: " + rocket) 
     file.write(", Date: "+ date + "(EDT: -3)") 
     file.close() 
 
