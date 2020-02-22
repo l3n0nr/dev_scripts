@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 20/02/20
-# versao       = 	0.20
+# ultima modif = 21/02/20
+# versao       = 	0.25
 #########################
 #
 # REFERENCE
@@ -27,7 +27,22 @@ dragon()
 	url="https://api.spacexdata.com/v3/capsules"
 
 	lynx --dump $url | \
-	jq --indent 0 '.[] | select(.status=="active") | .capsule_serial, .capsule_id, .reuse_count'
+	jq --indent 0 '.[] | select(.status=="active") | .capsule_serial, .reuse_count' | \
+	sed 's/"/ /g' | \
+	tr '\n' '| '  | \
+	sed 's/$/ [ID | Flights]/g' | \
+	sed 's/^./#SpaceX_Capsules availables: /g' | \
+	sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/'
+}
+
+missions()
+{
+	url="https://api.spacexdata.com/v3/payloads"
+
+	lynx --dump $url | \
+	jq --indent 0 '.[] | select(.norad_id!=[]) | .payload_id, .orbit_params.regime' | \
+	sed 's/"/ /g' | \
+	tr '\n' '| '
 }
 
 
@@ -35,9 +50,16 @@ main()
 {
 	clear
 
-	# boosters
-	dragon
+	if [[ $1 == "boosters" ]]; then
+		boosters
+	elif [[ $1 == "dragon" ]]; then
+		dragon
+	elif [[ $1 == "missions" ]]; then
+		missions
+	else
+		"ERROR"
+	fi
 }
 
 ## call main function
-main
+main $1
