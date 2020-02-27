@@ -2,24 +2,78 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 21/02/20
-# versao       = 	0.25
+# ultima modif = 27/02/20
+# versao       = 	0.30
 #########################
 #
-# REFERENCE
+## REFERENCE
 #	https://docs.spacexdata.com/
 #	https://en.wikipedia.org/wiki/List_of_Falcon_9_first-stage_boosters
+#
+#########################
+#
+check_internet()
+{
+	ping_server="www.google.com"
+
+  	ping -c1 $ping_server >> /dev/null
+
+  	[[ ! $? -eq 0 ]] && clear && notify-send -u normal "Sem internet, saindo do script." -t 10000 && exit 1
+}
 
 boosters()
 {
 	url="https://api.spacexdata.com/v3/cores"
-	lynx --dump $url | \
-	jq --indent 0 '.[] | select(.status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
-	sed 's/"/ /g' | \
-	tr '\n' '| '  | \
-	sed 's/$/ [ID | Flights]/g' | \
-	sed 's/^./#SpaceX_Boosters availables: /g' | \
-	sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/'
+	file="/tmp/launch"
+	validation="/tmp/check_boosters"
+	log_validation="/tmp/log_boosters"	
+
+	# check if file exist	
+	keyword="SpaceX" 	# DEFAULT
+	# keyword="Astra"  	# TEST
+
+	if [[ -e $file ]]; then		
+		search=$(grep -w $keyword $file)		
+
+		# check output - find or not keyword
+		if [[ $? == "0" ]]; then
+			output_boosters=$(lynx --dump $url | \
+			jq --indent 0 '.[] | select(.status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
+			sed 's/"/ /g' | \
+			tr '\n' '| '  | \
+			sed 's/$/ [ID | Flights]/g' | \
+			sed 's/^./#'$keyword'_Boosters availables: /g' | \
+			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')
+
+			# check if file exist
+			if [[ -e $validation ]]; then
+				touch $validation
+			fi
+
+			validation_boosters=$(cat $validation)
+			check_date=$(date +%D)
+
+			# check validation - null or not
+			if [[ $check_date == $validation_boosters ]]; then
+				echo "NOT CHECK -" $check_date >> $log_validation
+
+			elif [[ $check_date != $validation_boosters ]]; then
+				echo $check_date > $validation
+				
+				echo "CHECK     -" $check_date >> $log_validation
+
+				echo $output_boosters
+			else
+				echo "?"
+			fi			
+		else
+			echo "NAO ACHOU"
+		fi
+
+	else
+		clear		
+		echo "## LAUNCH NOT FOUND ##"
+	fi	
 }
 
 dragon()
@@ -49,6 +103,8 @@ missions()
 main()
 {
 	clear
+
+	check_internet
 
 	if [[ $1 == "boosters" ]]; then
 		boosters
