@@ -3,7 +3,7 @@
 #########################
 # data criacao = 19/02/20
 # ultima modif = 27/02/20
-# versao       = 	0.32
+# versao       = 	0.35
 #########################
 #
 ## REFERENCE
@@ -58,14 +58,13 @@ boosters()
 				echo "NOT CHECK -" $check_date >> $log_validation
 
 			elif [[ $check_date != $validation_boosters ]]; then
-				echo $check_date > $validation
-				
+				echo $check_date > $validation				
 				echo "CHECK     -" $check_date >> $log_validation
 
 				## bot post on twitter
 				python $call_twitt "$(echo $output_boosters)"
 			else
-				echo "?"
+				echo "ERROR"
 			fi			
 		else
 			echo "NAO ACHOU"
@@ -114,7 +113,7 @@ main()
 	elif [[ $1 == "missions" ]]; then
 		missions
 	else
-		"ERROR"
+		echo "Parameters availables: boosters | dragon | missions"
 	fi
 }
 
