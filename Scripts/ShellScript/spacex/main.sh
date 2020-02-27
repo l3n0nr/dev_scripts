@@ -3,7 +3,7 @@
 #########################
 # data criacao = 19/02/20
 # ultima modif = 27/02/20
-# versao       = 	0.30
+# versao       = 	0.32
 #########################
 #
 ## REFERENCE
@@ -26,11 +26,11 @@ boosters()
 	url="https://api.spacexdata.com/v3/cores"
 	file="/tmp/launch"
 	validation="/tmp/check_boosters"
-	log_validation="/tmp/log_boosters"	
+	log_validation="/tmp/log_boosters"
+	call_twitt="/home/lenonr/Github/dev_scripts/Scripts/Python/twitter_bot/v1.py -t"	
 
 	# check if file exist	
 	keyword="SpaceX" 	# DEFAULT
-	# keyword="Astra"  	# TEST
 
 	if [[ -e $file ]]; then		
 		search=$(grep -w $keyword $file)		
@@ -62,7 +62,8 @@ boosters()
 				
 				echo "CHECK     -" $check_date >> $log_validation
 
-				echo $output_boosters
+				## bot post on twitter
+				python $call_twitt "$(echo $output_boosters)"
 			else
 				echo "?"
 			fi			
