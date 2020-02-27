@@ -2,8 +2,8 @@
 #
 #######################
 # dat_criacao: 03/12/19
-# ult_modific: 13/01/20
-# versao: 		 0.35
+# ult_modific: 27/02/20
+# versao: 		 0.36
 #######################
 #
 pass_ISS()
@@ -55,7 +55,7 @@ crew_ISS()
 					  cat $output_crewISS_nmb && \
 					  printf ' astronauts in space: ' && \
 					  sed -e 's/..$//g' $output_crewISS_tmp && \
-					  printf ". Source: " && printf $people && echo " (BOT CHECK:"$(date +%d-%h_%H:%M)')')
+					  printf "." && echo " (BOT CHECK:"$(date +%d-%h_%H:%M)')')
 	
 	# echo $output_crewISS
 	python $call_twitt "$(echo $output_crewISS)"
