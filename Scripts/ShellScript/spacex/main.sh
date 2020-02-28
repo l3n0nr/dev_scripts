@@ -3,7 +3,7 @@
 #########################
 # data criacao = 19/02/20
 # ultima modif = 27/02/20
-# versao       = 	0.35
+# versao       = 	0.36
 #########################
 #
 ## REFERENCE
@@ -67,7 +67,7 @@ boosters()
 				echo "ERROR"
 			fi			
 		else
-			echo "NAO ACHOU"
+			echo "NOT CHECK -" $check_date >> $log_validation
 		fi
 
 	else
