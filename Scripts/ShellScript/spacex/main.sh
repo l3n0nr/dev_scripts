@@ -3,7 +3,7 @@
 #########################
 # data criacao = 19/02/20
 # ultima modif = 27/02/20
-# versao       = 	0.36
+# versao       = 	0.37
 #########################
 #
 ## REFERENCE
@@ -30,7 +30,9 @@ boosters()
 	call_twitt="/home/lenonr/Github/dev_scripts/Scripts/Python/twitter_bot/v1.py -t"	
 
 	# check if file exist	
-	keyword="SpaceX" 	# DEFAULT
+	keyword="SpaceX"
+	validation_boosters=$(cat $validation)
+	check_date=$(date +%D)
 
 	if [[ -e $file ]]; then		
 		search=$(grep -w $keyword $file)		
@@ -48,10 +50,7 @@ boosters()
 			# check if file exist
 			if [[ -e $validation ]]; then
 				touch $validation
-			fi
-
-			validation_boosters=$(cat $validation)
-			check_date=$(date +%D)
+			fi			
 
 			# check validation - null or not
 			if [[ $check_date == $validation_boosters ]]; then
