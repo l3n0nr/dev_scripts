@@ -21,6 +21,17 @@ check_internet()
   	[[ ! $? -eq 0 ]] && clear && notify-send -u normal "Sem internet, saindo do script." -t 10000 && exit 1
 }
 
+check_files()
+{
+	if [[ -e $validation ]]; then
+		touch $validation
+	fi
+
+	if [[ -e $log_validation ]]; then
+		touch $log_validation
+	fi			
+}
+
 boosters()
 {
 	url="https://api.spacexdata.com/v3/cores"
@@ -47,15 +58,8 @@ boosters()
 			sed 's/^./#'$keyword'_Boosters availables: /g' | \
 			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')
 
-			# check if file exist | validation
-			if [[ -e $validation ]]; then
-				touch $validation
-			fi
-
-			# check if file exist | log_validation
-			if [[ -e $log_validation ]]; then
-				touch $log_validation
-			fi			
+			# create files
+			check_files
 
 			# check validation - null or not
 			if [[ $check_date == $validation_boosters ]]; then
