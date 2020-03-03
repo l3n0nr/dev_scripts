@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 27/02/20
-# versao       = 	0.37
+# ultima modif = 02/03/20
+# versao       = 	0.38
 #########################
 #
 ## REFERENCE
@@ -47,9 +47,14 @@ boosters()
 			sed 's/^./#'$keyword'_Boosters availables: /g' | \
 			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')
 
-			# check if file exist
+			# check if file exist | validation
 			if [[ -e $validation ]]; then
 				touch $validation
+			fi
+
+			# check if file exist | log_validation
+			if [[ -e $log_validation ]]; then
+				touch $log_validation
 			fi			
 
 			# check validation - null or not
