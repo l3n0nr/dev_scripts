@@ -115,11 +115,21 @@ catch_posts()
 		sed -e 's/\(\["\|"\]\)//g' | \
 		sed 's/"//g' > $output_url_audio
 
+		## TRATANDO SAIDA
 		count_audio=$(wc -l $output_title_audio | awk '{print $1}')
 
+		####################################################
+		# # walk array for convertion
+		for (( i = 0; i < $count_audio ; i++ )); do
+			lynx --dump $(sed -n $i'p' $output_url_audio) | \
+			jq --indent 0 '.[2]' >> $saida_nasa_audio_trash
+		done
+		####################################################
+		
+		# join title + url
 		for (( j = 1; j <= $count_audio; j++ )); do
 			var1=$(sed -n $j'p' $output_title_audio)
-			var2=$(sed -n $j'p' $output_url_audio)
+			var2=$(sed -n $j'p' $saida_nasa_audio_trash)
 
 			echo $var1 $var2 >> $saida_nasa_audio
 		done
@@ -129,24 +139,34 @@ catch_posts()
 	{
 		## VIDEO
 		link_video="https://images-api.nasa.gov/search?q=${array_nasa[$i]}&media_type=video"
-		
+
 		# title
-		lynx --dump $link_video | \
+		lynx --dump $link_audio | \
 		jq --indent 0 '.[] | .items | .[] | {data} | .[] | .[] | .title' | \
 		sed -e 's/\(\["\|"\]\)//g' | \
-		sed 's/"//g' > $output_title_video
-
+		sed 's/"//g' > $output_title_audio
+		
 		# url
 		lynx --dump $link_video | \
 		jq --indent 0 '.[] | .items | .[] | .href' | \
 		sed -e 's/\(\["\|"\]\)//g' | \
-		sed 's/"//g' > $output_url_video
+		sed 's/"//g' > $output_url_audio
 
+		## TRATANDO SAIDA
 		count_video=$(wc -l $output_title_video | awk '{print $1}')
 
+		####################################################
+		# # walk array for convertion
+		for (( i = 0; i < $count_video ; i++ )); do
+			lynx --dump $(sed -n $i'p' $output_url_video) | \
+			jq --indent 0 '.[13]' >> $saida_nasa_video_trash
+		done
+		####################################################
+		
+		# join title + url
 		for (( j = 1; j <= $count_video; j++ )); do
 			var1=$(sed -n $j'p' $output_title_video)
-			var2=$(sed -n $j'p' $output_url_video)
+			var2=$(sed -n $j'p' $saida_nasa_video_trash)
 
 			echo $var1 $var2 >> $saida_nasa_video
 		done
@@ -155,11 +175,11 @@ catch_posts()
 	for (( i = 0; i <= ${#array_nasa[@]}-1; i++ )); do 
 		image
 		audio
-		video			
+		# video			
 	done
 
-	# image + audio + video
-	cat $saida_nasa_image $saida_nasa_audio $saida_nasa_video >> $saida_nasa
+	cat $saida_nasa_image $saida_nasa_audio >> $saida_nasa
+	# cat $saida_nasa_image $saida_nasa_audio $saida_nasa_video >> $saida_nasa
 }
 
 main()
