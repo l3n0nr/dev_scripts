@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 02/03/20
-# versao       = 	0.38
+# ultima modif = 06/03/20
+# versao       = 	0.40
 #########################
 #
 ## REFERENCE
@@ -12,10 +12,10 @@
 #
 #########################
 #
-check_internet()
-{
-	ping_server="www.google.com"
+source variables.conf
 
+check_internet()
+{	
   	ping -c1 $ping_server >> /dev/null
 
   	[[ ! $? -eq 0 ]] && clear && notify-send -u normal "Sem internet, saindo do script." -t 10000 && exit 1
@@ -34,14 +34,11 @@ check_files()
 
 boosters()
 {
-	url="https://api.spacexdata.com/v3/cores"
-	file="/tmp/launch"
-	validation="/tmp/check_boosters"
-	log_validation="/tmp/log_boosters"
-	call_twitt="/home/lenonr/Github/dev_scripts/Scripts/Python/twitter_bot/v1.py -t"	
+	# create files
+	check_files
 
 	# check if file exist	
-	keyword="SpaceX"
+	keyword="Falcon"
 	validation_boosters=$(cat $validation)
 	check_date=$(date +%D)
 
@@ -55,11 +52,8 @@ boosters()
 			sed 's/"/ /g' | \
 			tr '\n' '| '  | \
 			sed 's/$/ [ID | Flights]/g' | \
-			sed 's/^./#'$keyword'_Boosters availables: /g' | \
-			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')
-
-			# create files
-			check_files
+			sed 's/^./#SpaceX_Boosters availables: /g' | \
+			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')			
 
 			# check validation - null or not
 			if [[ $check_date == $validation_boosters ]]; then
