@@ -98,6 +98,7 @@ catch_posts()
 		done
 	}
 	
+	## error blank spaces
 	audio()
 	{
 		## AUDIO
@@ -174,12 +175,11 @@ catch_posts()
 
 	for (( i = 0; i <= ${#array_nasa[@]}-1; i++ )); do 
 		image
-		audio
+		# audio
 		# video			
 	done
 
-	cat $saida_nasa_image $saida_nasa_audio >> $saida_nasa
-	# cat $saida_nasa_image $saida_nasa_audio $saida_nasa_video >> $saida_nasa
+	cat $saida_nasa_image $saida_nasa_audio $saida_nasa_video >> $saida_nasa
 }
 
 main()
