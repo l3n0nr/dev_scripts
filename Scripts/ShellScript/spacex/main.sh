@@ -3,7 +3,7 @@
 #########################
 # data criacao = 19/02/20
 # ultima modif = 06/03/20
-# versao       = 	0.40
+# versao       = 	0.45
 #########################
 #
 ## REFERENCE
@@ -13,7 +13,7 @@
 #########################
 #
 source variables.conf
-
+#
 check_internet()
 {	
   	ping -c1 $ping_server >> /dev/null
@@ -21,33 +21,41 @@ check_internet()
   	[[ ! $? -eq 0 ]] && clear && notify-send -u normal "Sem internet, saindo do script." -t 10000 && exit 1
 }
 
-check_files()
+check_files_boosters()
 {
-	if [[ -e $validation ]]; then
-		touch $validation
+	if [[ -e $validation_boosters ]]; then
+		touch $validation_boosters
 	fi
 
-	if [[ -e $log_validation ]]; then
-		touch $log_validation
+	if [[ -e $log_validation_boosters ]]; then
+		touch $log_validation_boosters
+	fi			
+}
+
+check_files_dragon()
+{
+	if [[ -e $validation_dragon ]]; then
+		touch $validation_dragon
+	fi
+
+	if [[ -e $log_validation_dragon ]]; then
+		touch $log_validation_dragon
 	fi			
 }
 
 boosters()
 {
-	# create files
-	check_files
+	check_files_boosters
 
-	# check if file exist	
 	keyword="Falcon"
-	validation_boosters=$(cat $validation)
-	check_date=$(date +%D)
+	validation_boosters_check=$(cat $validation_boosters)	
 
 	if [[ -e $file ]]; then		
 		search=$(grep -w $keyword $file)		
 
 		# check output - find or not keyword
 		if [[ $? == "0" ]]; then
-			output_boosters=$(lynx --dump $url | \
+			output_boosters=$(lynx --dump $url_boosters | \
 			jq --indent 0 '.[] | select(.status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
 			sed 's/"/ /g' | \
 			tr '\n' '| '  | \
@@ -56,12 +64,12 @@ boosters()
 			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')			
 
 			# check validation - null or not
-			if [[ $check_date == $validation_boosters ]]; then
-				echo "NOT CHECK -" $check_date >> $log_validation
+			if [[ $check_date == $validation_boosters_check ]]; then
+				echo "NOT CHECK -" $check_date >> $log_validation_boosters
 
-			elif [[ $check_date != $validation_boosters ]]; then
-				echo $check_date > $validation				
-				echo "CHECK     -" $check_date >> $log_validation
+			elif [[ $check_date != $validation_boosters_check ]]; then
+				echo $check_date > $validation_boosters		
+				echo "CHECK     -" $check_date >> $log_validation_boosters
 
 				## bot post on twitter
 				python $call_twitt "$(echo $output_boosters)"
@@ -69,9 +77,8 @@ boosters()
 				echo "ERROR"
 			fi			
 		else
-			echo "NOT CHECK -" $check_date >> $log_validation
+			echo "NOT CHECK -" $check_date >> $log_validation_boosters
 		fi
-
 	else
 		clear		
 		echo "## LAUNCH NOT FOUND ##"
@@ -80,15 +87,42 @@ boosters()
 
 dragon()
 {
-	url="https://api.spacexdata.com/v3/capsules"
+	check_files_dragon
 
-	lynx --dump $url | \
-	jq --indent 0 '.[] | select(.status=="active") | .capsule_serial, .reuse_count' | \
-	sed 's/"/ /g' | \
-	tr '\n' '| '  | \
-	sed 's/$/ [ID | Flights]/g' | \
-	sed 's/^./#SpaceX_Capsules availables: /g' | \
-	sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/'
+	keyword="CRS"
+	validation_dragon_check="$(cat $validation_dragon)"
+
+	if [[ -e $file ]]; then		
+		search=$(grep -w $keyword $file)
+
+		if [[ $? == "0" ]]; then			
+			output_dragon=$(lynx --dump $url_dragon | \
+			jq --indent 0 '.[] | select(.status=="active") | .capsule_serial, .reuse_count' | \
+			sed 's/"/ /g' | \
+			tr '\n' '| '  | \
+			sed 's/$/ [ID | Flights]/g' | \
+			sed 's/^./#SpaceX_Capsules availables: /g' | \
+			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')	
+
+			if [[ $check_date == $validation_dragon_check ]]; then
+				echo "NOT CHECK -" $check_date >> $log_validation_dragon
+
+			elif [[ $check_date != $validation_dragon_check ]]; then
+				echo $check_date > $validation_dragon
+				echo "CHECK     -" $check_date >> $log_validation_dragon
+
+				## bot post on twitter
+				python $call_twitt "$(echo $output_dragon)"
+			else
+				echo "ERROR"
+			fi			
+		else
+			echo "NOT CHECK -" $check_date >> $log_validation_dragon
+		fi
+	else
+		clear
+		echo "## LAUNCH NOT FOUND ##"
+	fi
 }
 
 missions()
