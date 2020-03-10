@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 06/03/20
-# versao       = 	0.45
+# ultima modif = 10/03/20
+# versao       = 	0.46
 #########################
 #
 ## REFERENCE
@@ -56,7 +56,7 @@ boosters()
 		# check output - find or not keyword
 		if [[ $? == "0" ]]; then
 			output_boosters=$(lynx --dump $url_boosters | \
-			jq --indent 0 '.[] | select(.status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
+			jq --indent 0 '.[] | select(.status=="active" or .status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
 			sed 's/"/ /g' | \
 			tr '\n' '| '  | \
 			sed 's/$/ [ID | Flights]/g' | \
