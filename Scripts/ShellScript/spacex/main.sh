@@ -3,7 +3,7 @@
 #########################
 # data criacao = 19/02/20
 # ultima modif = 10/03/20
-# versao       = 	0.46
+# versao       = 	0.51
 #########################
 #
 ## REFERENCE
@@ -23,11 +23,11 @@ check_internet()
 
 check_files_boosters()
 {
-	if [[ -e $validation_boosters ]]; then
+	if [[ ! -e $validation_boosters ]]; then
 		touch $validation_boosters
 	fi
 
-	if [[ -e $log_validation_boosters ]]; then
+	if [[ ! -e $log_validation_boosters ]]; then
 		touch $log_validation_boosters
 	fi			
 }
@@ -74,7 +74,7 @@ boosters()
 				## bot post on twitter
 				python $call_twitt "$(echo $output_boosters)"
 			else
-				echo "ERROR"
+				echo "ERROR -" $check_date >> $log_validation_boosters
 			fi			
 		else
 			echo "NOT CHECK -" $check_date >> $log_validation_boosters
