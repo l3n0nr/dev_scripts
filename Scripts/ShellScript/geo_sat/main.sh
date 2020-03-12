@@ -2,8 +2,8 @@
 #
 #######################
 # dat_criacao: 16/12/19
-# ult_modific: 12/02/20
-# versao: 		0.30
+# ult_modific: 12/03/20
+# versao: 		0.31
 #######################
 #
 # Formas de utilização 
@@ -48,25 +48,27 @@ check_file()
 
 interface_dialog()
 {
-	check_file
+	while [[ TRUE ]]; do		
+		check_file
 
-	choice=$( dialog \
-		--stdout --ok-label "Buscar" --cancel-label "Cancelar" \
-		--menu "Serching images..." \
-		0 0 0 \
-		"0" "GOES-East Full Disk" \
-		"1" "GOES-West Full Disk" \
-		"2" "Himawari-8 Full Disk" \
-		"3" "Continental US" \
-		"4" "Tropical Atlantic" \
-		"5" "Tropical Pacific" \
-		"6" "US West Coast" \
-		"7" "Northern Pacific" \
-		"8" "Northern South America" \
-		"9" "Southern South America"
-	) ; f_verifica	
+		choice=$( dialog \
+			--stdout --ok-label "Buscar" --cancel-label "Cancelar" \
+			--menu "Serching images..." \
+			0 0 0 \
+			"0" "GOES-East Full Disk" \
+			"1" "GOES-West Full Disk" \
+			"2" "Himawari-8 Full Disk" \
+			"3" "Continental US" \
+			"4" "Tropical Atlantic" \
+			"5" "Tropical Pacific" \
+			"6" "US West Coast" \
+			"7" "Northern Pacific" \
+			"8" "Northern South America" \
+			"9" "Southern South America"
+		) ; f_verifica	
 
-	download_image
+		download_image
+	done
 }
 
 interface_basic()
