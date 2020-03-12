@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 10/03/20
-# versao       = 	0.51
+# ultima modif = 11/03/20
+# versao       = 	0.52
 #########################
 #
 ## REFERENCE
@@ -54,24 +54,25 @@ boosters()
 		search=$(grep -w $keyword $file)		
 
 		# check output - find or not keyword
-		if [[ $? == "0" ]]; then
-			output_boosters=$(lynx --dump $url_boosters | \
-			jq --indent 0 '.[] | select(.status=="active" or .status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
-			sed 's/"/ /g' | \
-			tr '\n' '| '  | \
-			sed 's/$/ [ID | Flights]/g' | \
-			sed 's/^./#SpaceX_Boosters availables: /g' | \
-			sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')			
-
+		if [[ $? == "0" ]]; then		
 			# check validation - null or not
 			if [[ $check_date == $validation_boosters_check ]]; then
 				echo "NOT CHECK -" $check_date >> $log_validation_boosters
 
 			elif [[ $check_date != $validation_boosters_check ]]; then
+				output_boosters=$(lynx --dump $url_boosters | \
+				jq --indent 0 '.[] | select(.status=="active" or .status=="unknown") | .core_serial, .rtls_landings+.asds_landings' | \
+				sed 's/"/ /g' | \
+				tr '\n' '| '  | \
+				sed 's/$/ [ID | Flights]/g' | \
+				sed 's/^./#SpaceX_Boosters availables: /g' | \
+				sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/')
+
 				echo $check_date > $validation_boosters		
 				echo "CHECK     -" $check_date >> $log_validation_boosters
 
 				## bot post on twitter
+				# echo $output_boosters
 				python $call_twitt "$(echo $output_boosters)"
 			else
 				echo "ERROR -" $check_date >> $log_validation_boosters
