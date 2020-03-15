@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 11/03/20
-# versao       = 	0.52
+# ultima modif = 15/03/20
+# versao       = 	0.54
 #########################
 #
 ## REFERENCE
@@ -57,7 +57,7 @@ boosters()
 		if [[ $? == "0" ]]; then		
 			# check validation - null or not
 			if [[ $check_date == $validation_boosters_check ]]; then
-				echo "NOT CHECK -" $check_date >> $log_validation_boosters
+				echo "NOT CHECK - $check_date" >> $log_validation_boosters
 
 			elif [[ $check_date != $validation_boosters_check ]]; then
 				output_boosters=$(lynx --dump $url_boosters | \
@@ -78,7 +78,7 @@ boosters()
 				echo "ERROR -" $check_date >> $log_validation_boosters
 			fi			
 		else
-			echo "NOT CHECK -" $check_date >> $log_validation_boosters
+			echo "NOT FOUND -" $check_date >> $log_validation_boosters
 		fi
 	else
 		clear		
