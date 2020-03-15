@@ -40,7 +40,7 @@ twitt_post()
 		acao1=$(python post.py)
 
 		if [[ $acao1 != "" ]]; then			
-			printf "CHECK   - " >> $log_twitter && date >> $log_twitter
+			printf "CHECK        - " >> $log_twitter && date >> $log_twitter
 			echo $check_date > $validation_launch
 		fi
 
@@ -52,8 +52,8 @@ twitt_post()
 
 notify()
 {	
-	if [[ -e $file ]]; then
-		notify-send "`cat $file`" -t 15000
+	if [[ -e $entrada ]]; then
+		notify-send "`cat $entrada`" -t 15000
 	else
 		clear		
 		echo "## LAUNCH NOT FOUND ##"
