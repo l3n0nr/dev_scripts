@@ -39,11 +39,11 @@ twitt_post()
 
 		## check
 		if [[ $acao1 != "" ]]; then			
-			printf "CHECK        - " >> $log_twitter && date >> $log_twitter
+			printf "CHECK       - " >> $log_twitter && date >> $log_twitter
 			echo $check_date > $validation_launch
 		fi
 	else		
-		printf "ERROR 	- " >> $log_twitter && date >> $log_twitter
+		printf "ERROR       - " >> $log_twitter && date >> $log_twitter
 	fi	
 }
 
