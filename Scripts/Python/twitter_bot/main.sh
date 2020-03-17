@@ -2,12 +2,11 @@
 
 ##############################
 # create date:       12/03/19
-# last modification: 10/05/19
-# version:              0.52
+# last modification: 16/03/20
+# version:              0.54
 ##############################
 
-log_twitter="/tmp/twitter_log"
-data=$(date +%x-%X)
+source variables.conf
 
 post()
 {
@@ -23,8 +22,6 @@ post()
 verifica_internet()
 {
 	echo "Verificando conexao, aguarde..."
-
-	ping_server="www.google.com"
 	
   	ping -c1 $ping_server >> /dev/null
 
