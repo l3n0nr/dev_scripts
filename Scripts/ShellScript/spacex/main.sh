@@ -2,8 +2,8 @@
 #
 #########################
 # data criacao = 19/02/20
-# ultima modif = 15/03/20
-# versao       = 	0.54
+# ultima modif = 16/03/20
+# versao       = 	0.55
 #########################
 #
 ## REFERENCE
@@ -78,7 +78,7 @@ boosters()
 				echo "ERROR -" $check_date >> $log_validation_boosters
 			fi			
 		else
-			echo "NOT FOUND -" $check_date >> $log_validation_boosters
+			echo "NOT FALCON -" $check_date >> $log_validation_boosters
 		fi
 	else
 		clear		
