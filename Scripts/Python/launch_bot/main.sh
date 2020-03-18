@@ -48,15 +48,13 @@ twitt_post()
 }
 
 notify()
-{	
+{		
 	if [[ -e $entrada ]]; then
-		notify-send "`cat $entrada`" -t 15000
+		notify_entrada=$(cat $entrada | sed 's/#NEXT_LAUNCH: Rocket: //g')
+
+		notify-send "$notify_entrada" -t 15000	
 	else
-		clear		
-		echo "## LAUNCH NOT FOUND ##"
-		echo "-- Check, please waiting.."
-		
-		main
+		twitt_post
 	fi	
 }
 
