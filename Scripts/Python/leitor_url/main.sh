@@ -2,11 +2,12 @@
 #
 #########################
 # data criacao = 22/04/19
-# ultima modif = 13/02/20
-# versao       = 1.10
+# ultima modif = 20/03/20
+# versao       = 1.12
 #########################
 #
 #################### chamando arquivo externo de variaveis
+
 source variables.conf
 
 #################### importando arquivos 
@@ -78,6 +79,8 @@ merge_files()
 sort_posts()
 {
     sort -R $merge_posts > $posts_twitter
+
+    cat $posts_twitter > $merge_posts_bkp
 }
 
 ## chamando funcao principal | NAO MODIFICAR
