@@ -11,13 +11,13 @@ source variables.conf
 
 check_files()
 {
-    if [[ -e $saida_wordpress_podcast ]]; then
+    if [[ ! -e $saida_wordpress_podcast ]]; then
         touch $saida_wordpress_podcast
     else
         echo "" > $saida_wordpress_podcast
     fi
 
-    if [[ -e $trash_wordpress_podcast ]]; then
+    if [[ ! -e $trash_wordpress_podcast ]]; then
         touch $trash_wordpress_podcast
     else
         echo "" > $trash_wordpress_podcast

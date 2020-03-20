@@ -80,7 +80,7 @@ sort_posts()
 {
     sort -R $merge_posts > $posts_twitter
 
-    cat $posts_twitter > $merge_posts_bkp
+    cat $posts_twitter > $posts_twitter_bkp
 }
 
 ## chamando funcao principal | NAO MODIFICAR

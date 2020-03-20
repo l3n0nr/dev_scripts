@@ -11,11 +11,11 @@ source variables.conf
 
 check_files()
 {
-	if [[ -e $posts_twitter ]]; then
+	if [[ ! -e $posts_twitter ]]; then
 		touch $posts_twitter
 	fi
 
-	if [[ -e $saida_log ]]; then
+	if [[ ! -e $saida_log ]]; then
 		touch $saida_log
 	fi
 }

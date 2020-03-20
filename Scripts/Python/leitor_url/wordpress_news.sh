@@ -11,13 +11,13 @@ source variables.conf
 
 check_files()
 {
-    if [[ -e $saida_wordpress_news ]]; then
+    if [[ ! -e $saida_wordpress_news ]]; then
         touch $saida_wordpress_news
     else
         echo "" > $saida_wordpress_news
     fi
 
-    if [[ -e $trash_wordpress_news ]]; then
+    if [[ ! -e $trash_wordpress_news ]]; then
         touch $trash_wordpress_news
     else
         echo "" > $trash_wordpress_news

@@ -11,13 +11,13 @@ source variables.conf
 
 check_files()
 {
-    if [[ -e $saida_rss ]]; then
+    if [[ ! -e $saida_rss ]]; then
         touch $saida_rss
     else
         echo "" > $saida_rss
     fi
 
-    if [[ -e $trash_rss ]]; then
+    if [[ ! -e $trash_rss ]]; then
         touch $trash_rss
     else
         echo "" > $trash_rss

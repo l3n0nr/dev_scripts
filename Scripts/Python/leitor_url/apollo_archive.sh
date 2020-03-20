@@ -11,25 +11,25 @@ source variables.conf
 
 check_files()
 {
-    if [[ -e $output_titleapollo ]]; then
+    if [[ ! -e $output_titleapollo ]]; then
         touch $output_titleapollo
     else
     	echo "" > $output_titleapollo
     fi
 
-    if [[ -e $output_urlapollo ]]; then
+    if [[ ! -e $output_urlapollo ]]; then
         touch $output_urlapollo
     else
     	echo "" > $output_urlapollo
     fi
 
-    if [[ -e $saida_apollo ]]; then
+    if [[ ! -e $saida_apollo ]]; then
         touch $saida_apollo
     else
     	echo "" > $saida_apollo
     fi
 
-    if [[ -e $trash_apollo ]]; then
+    if [[ ! -e $trash_apollo ]]; then
     	touch $trash_apollo
     else
     	echo "" > $trash_apollo

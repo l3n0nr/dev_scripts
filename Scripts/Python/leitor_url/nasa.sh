@@ -12,19 +12,19 @@ source variables.conf
 check_files()
 {
 	# image
-    if [[ -e $output_title_image ]]; then
+    if [[ ! -e $output_title_image ]]; then
         touch $output_title_image
     else
     	echo "" > $output_title_image
     fi
 
-    if [[ -e $output_url_image ]]; then
+    if [[ ! -e $output_url_image ]]; then
         touch $output_url_image
     else
     	echo "" > $output_url_image
     fi
 
-    if [[ -e $saida_nasa_image ]]; then
+    if [[ ! -e $saida_nasa_image ]]; then
         touch $saida_nasa_image
     else
     	echo "" > $saida_nasa_image

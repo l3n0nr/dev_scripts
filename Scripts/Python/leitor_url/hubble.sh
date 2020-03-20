@@ -11,19 +11,19 @@ source variables.conf
 
 check_files()
 {
-    if [[ -e $output_titlehubble ]]; then
+    if [[ ! -e $output_titlehubble ]]; then
         touch $output_titlehubble
     else
     	echo "" > $output_titlehubble
     fi
 
-    if [[ -e $output_urlhubble ]]; then
+    if [[ ! -e $output_urlhubble ]]; then
         touch $output_urlhubble
     else
     	echo "" > $output_urlhubble
     fi
 
-    if [[ -e $saida_hubble ]]; then
+    if [[ ! -e $saida_hubble ]]; then
         touch $saida_hubble
     else
     	echo "" > $saida_hubble
