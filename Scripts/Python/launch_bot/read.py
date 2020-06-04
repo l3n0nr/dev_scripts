@@ -1,18 +1,23 @@
 #!/usr/bin/env python
 
-import urllib, json
+import json
+from urllib.request import Request, urlopen
 
 ##############################
 # create date:       13/03/19
-# last modification: 19/02/20
-# version:              0.25
+# last modification: 03/06/20
+# version:              0.28
 ##############################
 
 def launches():
     path_input_launch = "/tmp/launch"
     url = "https://launchlibrary.net/1.2/launch?next=01&mode=verbose"
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
+    
+    # response = urllib.request.urlopen(url)
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    response = urlopen(req).read()
+
+    data = json.loads(response.decode('utf-8'))
 
     for x in data['launches']:
         rocket = x['name']

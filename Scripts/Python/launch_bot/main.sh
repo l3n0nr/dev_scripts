@@ -31,7 +31,7 @@ twitt_post()
 		printf "NOT CHECK   - " >> $log_twitter && date >> $log_twitter
 	elif [[ $check_date != $validation_launch_check ]]; then
 		## read file
-		acao=$(python read.py)		
+		acao=$(python3 read.py)		
 		cat $entrada | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
 
 		## write file
