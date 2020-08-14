@@ -5,18 +5,15 @@ from urllib.request import Request, urlopen
 
 ##############################
 # create date:       13/03/19
-# last modification: 03/06/20
-# version:              0.28
+# last modification: 14/08/20
+# version:              0.30
 ##############################
 
-def launches():
+def launch_single():
     path_input_launch = "/tmp/launch"
     url = "https://launchlibrary.net/1.2/launch?next=01&mode=verbose"
-    
-    # response = urllib.request.urlopen(url)
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     response = urlopen(req).read()
-
     data = json.loads(response.decode('utf-8'))
 
     for x in data['launches']:
@@ -28,4 +25,4 @@ def launches():
     file.write(", Date: "+ date + "(EDT: -3)") 
     file.close() 
 
-launches()
+launch_single()

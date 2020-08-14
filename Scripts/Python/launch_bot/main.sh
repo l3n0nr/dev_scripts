@@ -8,6 +8,12 @@ check_files()
 		touch $entrada
 	fi
 
+	if [[ ! -e $entrada_n ]]; then
+		touch $entrada_n
+	else
+		echo "" > $entrada_n
+	fi
+
 	if [[ ! -e $saida ]]; then
 		touch $saida
 	fi
@@ -47,6 +53,38 @@ twitt_post()
 	fi	
 }
 
+twitt_post_n()
+{	
+	check_files
+
+	# validation_launch_check=$(cat $validation_launch)	
+	
+	# if [[ $check_date == $validation_launch_check ]]; then
+	# 	printf "NOT CHECK   - " >> $log_twitter && date >> $log_twitter
+	# elif [[ $check_date != $validation_launch_check ]]; then
+	# 	## read file
+	# 	acao=$(python3 read_n.py)		
+	# 	cat $entrada | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
+
+	# 	## write file
+	# 	acao1=$(python post.py)		
+
+	# 	## check
+	# 	if [[ $acao1 != "" ]]; then			
+	# 		printf "CHECK       - " >> $log_twitter && date >> $log_twitter
+	# 		echo $check_date > $validation_launch
+	# 	fi
+	# else		
+	# 	printf "ERROR       - " >> $log_twitter && date >> $log_twitter
+	# fi	
+
+	acao=$(python3 read_n.py)		
+	cat $entrada_n | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
+
+	## write file
+	acao1=$(python post.py)
+}
+
 notify()
 {		
 	if [[ -e $entrada ]]; then
@@ -62,6 +100,8 @@ main()
 {
 	if [[ $1 == "notify" ]]; then
 		notify
+	elif [[ $1 == "top5" ]]; then
+		twitt_post_n
 	else
 		twitt_post
 	fi	
