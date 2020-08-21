@@ -27,10 +27,11 @@ if [[ -e $output_crewISS_file ]]; then
 						  sed -e 's/..$//g' $output_crewISS_tmp && \
 						  printf "." && echo " (BOT CHECK:"$(date +%d-%h_%H:%M)')')	
 		
+		# logs
 		echo $check_date > $validation_iss
 		echo $output_crewISS > $output_crewISS_file
 
-		## TESTES
+		# action
 		cat $output_crewISS_file
 		# python $call_twitt "$(echo $output_crewISS)"
 	else
