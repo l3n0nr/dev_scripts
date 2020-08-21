@@ -14,8 +14,16 @@ check_files()
 		touch $validation_iss
 	fi
 
+	if [[ ! -e $validation_repot ]]; then
+		touch $validation_report
+	fi
+
 	if [[ ! -e $output_crewISS_file ]]; then
 		touch $output_crewISS_file
+	fi
+
+	if [[ ! -e $output_reportISS_file ]]; then
+		touch $output_reportISS_file
 	fi
 }
 
@@ -33,6 +41,8 @@ crew_ISS()
 
 report_ISS()
 {
+	check_files
+	
 	source report.sh
 }
 
