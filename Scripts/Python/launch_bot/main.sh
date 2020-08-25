@@ -25,6 +25,10 @@ check_files()
 	if [[ ! -e $validation_launch ]]; then
 		touch $validation_launch
 	fi
+
+	if [[ ! -e $validation_launch_top5 ]]; then
+		touch $validation_launch_top5
+	fi
 }
 
 twitt_post()
@@ -57,32 +61,26 @@ twitt_post_n()
 {	
 	check_files
 
-	# validation_launch_check=$(cat $validation_launch)	
+	validation_launch_check_top5=$(cat $validation_launch_top5)	
 	
-	# if [[ $check_date == $validation_launch_check ]]; then
-	# 	printf "NOT CHECK   - " >> $log_twitter && date >> $log_twitter
-	# elif [[ $check_date != $validation_launch_check ]]; then
-	# 	## read file
-	# 	acao=$(python3 read_n.py)		
-	# 	cat $entrada | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
+	if [[ $check_date_top5 == $validation_launch_check_top5 ]]; then
+		printf "NOT CHECK   - " >> $log_twitter_top5 && echo $check_date_top5 >> $log_twitter_top5
+	elif [[ $check_date != $validation_launch_check_top5 ]]; then
+		## read file
+		acao=$(python3 read_n.py)		
+		cat $entrada_n | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
 
-	# 	## write file
-	# 	acao1=$(python post.py)		
+		## write file
+		acao1=$(python post.py)
 
-	# 	## check
-	# 	if [[ $acao1 != "" ]]; then			
-	# 		printf "CHECK       - " >> $log_twitter && date >> $log_twitter
-	# 		echo $check_date > $validation_launch
-	# 	fi
-	# else		
-	# 	printf "ERROR       - " >> $log_twitter && date >> $log_twitter
-	# fi	
-
-	acao=$(python3 read_n.py)		
-	cat $entrada_n | sed 's/$/ (BOT CHECK:'$(date +%d-%h_%H:%M)')/' > $saida
-
-	## write file
-	acao1=$(python post.py)
+		## check
+		if [[ $acao1 != "" ]]; then			
+			printf "CHECK       - " >> $log_twitter_top5 && echo $check_date_top5 >> $log_twitter_top5
+			echo $check_date_top5 > $validation_launch_top5
+		fi
+	else		
+		printf "ERROR       - " >> $log_twitter_top5 && echo $check_date_top5 >> $log_twitter_top5
+	fi	
 }
 
 notify()

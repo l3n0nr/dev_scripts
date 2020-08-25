@@ -5,8 +5,8 @@ from urllib.request import Request, urlopen
 
 ##############################
 # create date:       14/08/20
-# last modification: 14/08/20
-# version:              0.10
+# last modification: 25/08/20
+# version:              0.15
 ##############################
 
 def launches_n():
@@ -16,6 +16,7 @@ def launches_n():
     file.write("#NEXT_LAUNCH_TOP5:") 
     file.close() 
 
+    # top 5
     for y in range(1,6):
         url = "https://launchlibrary.net/1.2/launch?next=" + str(y) + "&mode=verbose"
         req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
