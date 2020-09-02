@@ -4,30 +4,31 @@ source variables.conf
 #
 check_files()
 {
+	# cria caminho + arquivo
 	if [[ ! -e $entrada ]]; then
-		touch $entrada
+		mkdir -p "${entrada%/*}" && touch "$entrada"
 	fi
 
 	if [[ ! -e $entrada_n ]]; then
-		touch $entrada_n
+		mkdir -p "${entrada_n%/*}" && touch "$entrada_n"
 	else
 		echo "" > $entrada_n
 	fi
 
 	if [[ ! -e $saida ]]; then
-		touch $saida
+		mkdir -p "${saida%/*}" && touch "$saida"
 	fi
 
 	if [[ ! -e $log_twitter ]]; then
-		touch $log_twitter
+		mkdir -p "${log_twitter%/*}" && touch "$log_twitter"
 	fi
 
 	if [[ ! -e $validation_launch ]]; then
-		touch $validation_launch
+		mkdir -p "${validation_launch%/*}" && touch "$validation_launch"
 	fi
 
 	if [[ ! -e $validation_launch_top5 ]]; then
-		touch $validation_launch_top5
+		mkdir -p "${validation_launch_top5%/*}" && touch "$validation_launch_top5"
 	fi
 }
 
