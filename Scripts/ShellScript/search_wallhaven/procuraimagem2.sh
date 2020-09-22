@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 ####################
 # DESENVOLVIDO POR #
@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		27/07/19
-# versão do script: 			1.12
+# ultima modificacao: 		22/09/20
+# versão do script: 			1.15
 ####################################
 #
 ################################################################################
@@ -52,12 +52,14 @@ procura()
 	#mostrando localização da pasta para o usuário
 	cat .caminho.txt
 
-	#removendo raiz
-	echo "Por favor, digite o caminho da imagem"
-	read -p "" local
+	if [[ $escolha == "0" ]]; then
+		#removendo raiz
+		echo "Por favor, digite o caminho da imagem"
+		read -p "" local	
+	fi
 
 	#extraindo caminho base
-	cat .caminho.txt | sed -e "s;$local;;g" > .base.txt 
+	cat .caminho.txt | sed -e "s;People/;;g" > .base.txt 
 
 	#extraindo wallhaven
 	cat .base.txt | sed -e "s;wallhaven-;;g" > .imagem.txt
