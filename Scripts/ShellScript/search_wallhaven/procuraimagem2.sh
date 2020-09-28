@@ -4,7 +4,7 @@
 # DESENVOLVIDO POR #
 ####################
 #
-# por lenonr(Lenon Ricardo) 
+# por l3n0nr(Lenon Ricardo) 
 # 	contato: <lenonrmsouza@gmail.com>
 #
 #################################################################################
