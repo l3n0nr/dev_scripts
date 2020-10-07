@@ -3,8 +3,8 @@
 # # Receitinha de bolo para criar senha simples e faceis de lembrar, XD.
 #
 # DATA_CRIACAO: 	11/06/18
-# ULTM_MODIFICACAO: 31/12/19
-# AUTOR:			lenonr
+# ULTM_MODIFICACAO: 07/10/20
+# AUTOR:			l3n0nr
 #
 # HEAD
 import os
@@ -26,10 +26,10 @@ def main():
         "Digite a qtd_caracteres utilizar, partindo do nome do servico como base: ")
     ano = str(date.today().year)
     print "Opcoes de senhas"
-    print "{" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "*" + str(len(nome_servico)) + "_" + ano + "}"
-    print "[" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "+" + str(len(nome_servico)) + "_" + ano + "]"
-    print "(" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "#" + str(len(nome_servico)) + "_" + ano + ")"
-    print "|" + nome_servico.upper()[0:qtd_caracteres] + palavra_chave + "-" + str(len(nome_servico)) + "_" + ano + "|"
+    print "{" + nome_servico.upper()[0:qtd_caracteres] + "_" + palavra_chave + "#" + str(len(nome_servico)) + "_" + ano + "}"
+    print "[" + nome_servico.upper()[0:qtd_caracteres] + "_" + palavra_chave + "#" + str(len(nome_servico)) + "_" + ano + "]"
+    print "(" + nome_servico.upper()[0:qtd_caracteres] + "_" + palavra_chave + "#" + str(len(nome_servico)) + "_" + ano + ")"
+    print "|" + nome_servico.upper()[0:qtd_caracteres] + "_" + palavra_chave + "#" + str(len(nome_servico)) + "_" + ano + "|"
 
     pass
 
