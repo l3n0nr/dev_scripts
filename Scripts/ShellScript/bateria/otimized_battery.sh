@@ -5,43 +5,43 @@
 #   DEVELOPMENT BY 	  #
 # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
+# por l3n0nr(Lenon Ricardo)
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[07/03/19]       #
+# Last modification script: 		[08/10/20]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
 # 	Otimiza recursos da maquina, para economizar bateria(notebook)
 # 		- Desliga/Liga nucleos extras(1-2-3) 
-# 			Nucleo 0 sempre ligado - CUIDADO, nunca desliga-lo!!
+# 			Nucleo 0 sempre ligado - CUIDADO, nunca desliga-lo - QUEBRA O SISTEMA!
 # 		- Desliga/Liga Wifi
 # 		- Reduz/Aumenta o brilho automaticamente
 #
 ## variaveis do script
-	versao="0.65"
+versao="0.70"
 
-	# nome da maquina
-	hostname=$(echo $HOSTNAME)
+# nome da maquina
+hostname=$(echo $HOSTNAME)
 
-	# configuracoes de brilho padrao
-	brightness_med="2000"
-	brightness_max="4000"
+# configuracoes de brilho padrao
+brightness_med="2000"
+brightness_max="4000"
 
-	# arquivo do bluetooth
-	bluetooh="/etc/init.d/bluetooth"
+# arquivo do bluetooth
+bluetooh="/etc/init.d/bluetooth"
 
-	# chave do script
-	chave=1
+# chave do script
+chave=1
 
-	# status script
-	modo="OFF"
+# status script
+modo="OFF"
 
-	# ibam
-	time="$(ibam --bios | grep "Bios time left:"| awk {'print $4'})"
-	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
+# ibam
+time="$(ibam --bios | grep "Bios time left:"| awk {'print $4'})"
+percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
 
 ## funcao de verificacao
 f_verifica()
@@ -54,9 +54,11 @@ f_ativa()
 	if [[ $modo == "OFF" ]]; then		
 		## processador
 		echo "| ======================================================= |"
-		echo "| Desativando nucleo do processador 2,3 respectivamente |"
+		echo "| Desativando nucleo do processador 2,3,4 respectivamente |"
+		echo 0 >> /sys/devices/system/cpu/cpu1/online  
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
-		echo 0 >> /sys/devices/system/cpu/cpu3/online       
+		echo 0 >> /sys/devices/system/cpu/cpu3/online  
+		cpufreq-set -g powersave
 		echo "| ======================================================= |"		
 
 		## wifi
@@ -91,6 +93,7 @@ f_desativa()
 		echo 1 >>  /sys/devices/system/cpu/cpu1/online
 		echo 1 >>  /sys/devices/system/cpu/cpu2/online
 		echo 1 >>  /sys/devices/system/cpu/cpu3/online
+		cpufreq-set -g ondemand
 		echo "| ======================================================= |"
 
 		## wifi
