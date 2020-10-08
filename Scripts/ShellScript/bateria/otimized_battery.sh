@@ -54,11 +54,10 @@ f_ativa()
 	if [[ $modo == "OFF" ]]; then		
 		## processador
 		echo "| ======================================================= |"
-		echo "| Desativando nucleo do processador 2,3,4 respectivamente |"
-		echo 0 >> /sys/devices/system/cpu/cpu1/online  
+		echo "| Desativando nucleo do processador 2,3 respectivamente |"
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
 		echo 0 >> /sys/devices/system/cpu/cpu3/online  
-		cpufreq-set -g powersave
+		cpufreq-set -g conservative
 		echo "| ======================================================= |"		
 
 		## wifi
@@ -90,7 +89,6 @@ f_desativa()
 		## processador
 		echo "| ======================================================= |"
 		echo "| Ativando nucleo do processador 2,3 respectivamente    	|"
-		echo 1 >>  /sys/devices/system/cpu/cpu1/online
 		echo 1 >>  /sys/devices/system/cpu/cpu2/online
 		echo 1 >>  /sys/devices/system/cpu/cpu3/online
 		cpufreq-set -g ondemand
