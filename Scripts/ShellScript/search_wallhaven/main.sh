@@ -16,20 +16,29 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		20/02/21
-# versão do script: 			1.20
+# ultima modificacao: 		21/02/21
+# versão do script: 			1.21
 ####################################
 #
 ################################################################################
 # FUNCOES
 #   - Captura imagem da area de trabalho 1(segunda area de trabalho)
-#	- Abre diretamente no $site ou remove arquivo
+#	- Abre diretamente no $site, salva em $tmp_wallpaper ou remove $nome_arquivo
 ################################################################################
+
+tmp_wallpaper="/tmp/wallpaper_list"
 
 func_verifica()
 {
 	if [[ $? == "1" ]]; then
 		exit 0
+	fi
+}
+
+check_file()
+{
+	if [[ -e $tmp_wallpaper ]]; then
+		touch $tmp_wallpaper
 	fi
 }
 
@@ -70,11 +79,16 @@ procura()
             --menu "Select one option:" \
             0 0 0 \
             "0" "Search" \
-            "1" "Remove" ) ;
+            "1" "Save" \
+            "2" "Remove" ) ;
 
 	if [[ $executa == "0" ]]; then
 		echo "Imagem identificada! Abrindo o Firefox..."
 		firefox $site/w/$url
+	elif [[ $executa == "1" ]]; then
+		echo "Salvando arquivo em " $tmp_wallpaper
+		sleep 3
+		echo $nome_arquivo >> $tmp_wallpaper
 	else
 		echo "Removendo arquivo:" $nome_arquivo	
 		sleep 5
@@ -89,7 +103,7 @@ main()
 {
 	clear
 
-	func_verifica && procura
+	func_verifica && check_file && procura
 }
 
 
