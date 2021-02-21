@@ -88,7 +88,7 @@ procura()
 	elif [[ $executa == "1" ]]; then
 		echo "Salvando arquivo em " $tmp_wallpaper
 		sleep 3
-		echo $nome_arquivo >> $tmp_wallpaper
+		echo $site/w/$url >> $tmp_wallpaper
 	else
 		echo "Removendo arquivo:" $nome_arquivo	
 		sleep 5
