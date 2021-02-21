@@ -16,15 +16,14 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		03/10/20
-# versão do script: 			1.15
+# ultima modificacao: 		20/02/21
+# versão do script: 			1.20
 ####################################
 #
 ################################################################################
 # FUNCOES
-#   - Captura imagem da area de trabalho(Xfce4)
-#	- Mostra caminho da imagem 
-#	- Abre diretamente no $site
+#   - Captura imagem da area de trabalho 1(segunda area de trabalho)
+#	- Abre diretamente no $site ou remove arquivo
 ################################################################################
 
 func_verifica()
@@ -38,6 +37,7 @@ procura()
 {
 	site="https://wallhaven.cc"
 	local="/home/lenonr/Imagens/Pictures/"
+	escolha="1"
 
 	#criando arquivos temporarios
 	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
@@ -52,11 +52,7 @@ procura()
 	#mostrando localização da pasta para o usuário
 	cat .caminho.txt
 
-	if [[ $escolha == "0" ]]; then
-		#removendo raiz
-		echo "Por favor, digite o caminho da imagem"
-		read -p "" local	
-	fi
+	nome_arquivo=$(printf $local && cat .caminho.txt)
 
 	#extraindo caminho base
 	cat .caminho.txt | sed -e "s;People/;;g" > .base.txt 
@@ -70,31 +66,30 @@ procura()
 	# salvando numero da imagem em uma variavel
 	url=`cat .numero.txt` 
 
+ 	executa=$(dialog --stdout --ok-label "Choice" --cancel-label "Exit" \
+            --menu "Select one option:" \
+            0 0 0 \
+            "0" "Search" \
+            "1" "Remove" ) ;
+
+	if [[ $executa == "0" ]]; then
+		echo "Imagem identificada! Abrindo o Firefox..."
+		firefox $site/w/$url
+	else
+		echo "Removendo arquivo:" $nome_arquivo	
+		sleep 5
+		rm $nome_arquivo
+	fi   
+
 	# removendo arquivos temporarios
 	rm -r .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
-
-	#iniciando o firefox
-	echo "Imagem identificada! Abrindo o Firefox..."
-	firefox $site/w/$url
-}
-
-interface()
-{
-	escolha=$(dialog \
-            --stdout --ok-label "Choice" --cancel-label "Exit" \
-            --menu "Select workspace:" \
-            0 0 0 \
-            "0" "First" \
-            "1" "Second" ) ; 
-
-    func_verifica && procura
 }
 
 main()
 {
 	clear
 
-	interface
+	func_verifica && procura
 }
 
 
