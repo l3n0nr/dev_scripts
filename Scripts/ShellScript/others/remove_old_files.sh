@@ -9,7 +9,7 @@
 #
 # DATA_CRIACAO: 19/02/21
 # ULT_MODIFIC:  22/02/21
-# VERSAO:		0.40
+# VERSAO:		0.41
 #
 ##########################################
 #
@@ -47,7 +47,7 @@ remove()
 		if [[ $? == 0 ]]; then
 			printf "+ Diretorio removido\n"
 		else
-			printf "- Erro ao remover\n"
+			printf "- Erro ao remover diretorio\n"
 		fi
 	elif [[ -e $remove_file ]]; then
 		echo "$i Removendo arquivo" $remove_file
@@ -56,7 +56,7 @@ remove()
 		if [[ $? == 0 ]]; then
 			printf "+ Arquivo removido\n"
 		else
-			printf "- Erro ao remover\n"
+			printf "- Erro ao remover arquivo\n"
 		fi
 	else
 		echo "$i Nao existe." $remove_file
