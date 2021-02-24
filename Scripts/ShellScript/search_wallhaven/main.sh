@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		23/02/21
-# versão do script: 			1.25
+# ultima modificacao: 		24/02/21
+# versão do script: 			1.30
 ####################################
 #
 ################################################################################
@@ -49,33 +49,31 @@ check_file()
 
 procura()
 {
-	#criando arquivos temporarios
-	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
-	 
 	#capturando caminho completo imagem
-	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace$escolha/last-image > .caminhocompleto.txt
-	echo "Caminho do Wallpaper: " 
+	caminhocompleto=$(xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace$escolha/last-image)
 
 	#extraindo caminho base
-	cat .caminhocompleto.txt | sed -e "s;$local;;g" > .caminho.txt 
+	caminho=$(echo $caminhocompleto | sed -e "s;$local;;g")
 
-	#mostrando localização da pasta para o usuário
-	cat .caminho.txt
-
-	nome_arquivo=$(printf $local && cat .caminho.txt)
+	# capturando caminho completo
+	nome_arquivo=$(printf $local && echo $caminho)
 
 	#extraindo caminho base
-	cat .caminho.txt | sed -e "s;People/;;g" > .base.txt 
+	base=$(echo $caminho | sed -e "s;People/;;g")
 
-	#extraindo wallhaven
-	cat .base.txt | sed -e "s;wallhaven-;;g" > .imagem.txt
+	#extraindo wallhaven do nome
+	imagem=$(echo $base | sed -e "s;wallhaven-;;g")
 
 	#extraindo extensao
-	cat .imagem.txt | sed -e "s;.jpg;;g" > .numero.txt 
+	numero=$(echo $imagem | sed -e "s;.jpg;;g")
 
-	# salvando numero da imagem em uma variavel
-	url=`cat .numero.txt` 
+	# salvando codigo final da imagem
+	final=$(echo $numero)
 
+	# montando url
+	url=$(echo $site/w/$final)
+
+	# executando dialog
  	executa=$(dialog --stdout --ok-label "Choice" --cancel-label "Exit" \
             --menu "Select one option:" \
             0 0 0 \
@@ -83,31 +81,27 @@ procura()
             "1" "Save" \
             "2" "Remove" ) ;
 
+    # acao
 	if [[ $executa == "0" ]]; then
 		echo "Imagem identificada! Abrindo o Firefox..."
-		firefox $site/w/$url
+		firefox $url
 	elif [[ $executa == "1" ]]; then
-		echo "Salvando arquivo em " $tmp_wallpaper
+		echo "Salvando $url em " $tmp_wallpaper
 		sleep $tempo
-		echo $site/w/$url >> $tmp_wallpaper
+		echo $url >> $tmp_wallpaper
 	else
 		echo "Removendo arquivo:" $nome_arquivo	
 		sleep $tempo
-		rm $nome_arquivo
 	fi   
-
-	# removendo arquivos temporarios
-	rm -r .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
 }
 
 main()
 {
 	clear
-
 	func_verifica 
 	check_file
 	procura
 }
 
 
-main $1
+main
