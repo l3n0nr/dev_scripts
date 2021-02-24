@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		21/02/21
-# versão do script: 			1.21
+# ultima modificacao: 		23/02/21
+# versão do script: 			1.25
 ####################################
 #
 ################################################################################
@@ -25,6 +25,11 @@
 #   - Captura imagem da area de trabalho 1(segunda area de trabalho)
 #	- Abre diretamente no $site, salva em $tmp_wallpaper ou remove $nome_arquivo
 ################################################################################
+
+site="https://wallhaven.cc"
+local="$HOME/MEGA/Imagens/Pictures/"
+escolha="1"
+tempo="3"
 
 tmp_wallpaper="/tmp/wallpaper_list"
 
@@ -44,10 +49,6 @@ check_file()
 
 procura()
 {
-	site="https://wallhaven.cc"
-	local="/home/lenonr/Imagens/Pictures/"
-	escolha="1"
-
 	#criando arquivos temporarios
 	touch .caminho.txt .caminhocompleto.txt .base.txt .imagem.txt .numero.txt
 	 
@@ -56,7 +57,7 @@ procura()
 	echo "Caminho do Wallpaper: " 
 
 	#extraindo caminho base
-	cat .caminhocompleto.txt | sed -e "s;$local;;g" >  .caminho.txt 
+	cat .caminhocompleto.txt | sed -e "s;$local;;g" > .caminho.txt 
 
 	#mostrando localização da pasta para o usuário
 	cat .caminho.txt
@@ -87,11 +88,11 @@ procura()
 		firefox $site/w/$url
 	elif [[ $executa == "1" ]]; then
 		echo "Salvando arquivo em " $tmp_wallpaper
-		sleep 3
+		sleep $tempo
 		echo $site/w/$url >> $tmp_wallpaper
 	else
 		echo "Removendo arquivo:" $nome_arquivo	
-		sleep 5
+		sleep $tempo
 		rm $nome_arquivo
 	fi   
 
@@ -103,7 +104,9 @@ main()
 {
 	clear
 
-	func_verifica && check_file && procura
+	func_verifica 
+	check_file
+	procura
 }
 
 
