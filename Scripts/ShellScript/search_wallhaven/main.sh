@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		24/02/21
-# versão do script: 			1.30
+# ultima modificacao: 		07/03/21
+# versão do script: 			1.31
 ####################################
 #
 ################################################################################
@@ -31,7 +31,7 @@ local="$HOME/MEGA/Imagens/Pictures/"
 escolha="1"
 tempo="3"
 
-tmp_wallpaper="/tmp/wallpaper_list"
+tmp_wallpaper="$HOME/Downloads/wallpaper_list"
 
 func_verifica()
 {
