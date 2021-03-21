@@ -16,8 +16,8 @@
 #################################################################################
 #
 ####################################
-# ultima modificacao: 		07/03/21
-# versão do script: 			1.31
+# ultima modificacao: 		21/03/21
+# versão do script: 			1.32
 ####################################
 #
 ################################################################################
@@ -30,7 +30,6 @@ site="https://wallhaven.cc"
 local="$HOME/MEGA/Imagens/Pictures/"
 escolha="1"
 tempo="3"
-
 tmp_wallpaper="$HOME/Downloads/wallpaper_list"
 
 func_verifica()
@@ -86,12 +85,16 @@ procura()
 		echo "Imagem identificada! Abrindo o Firefox..."
 		firefox $url
 	elif [[ $executa == "1" ]]; then
-		echo "Salvando $url em " $tmp_wallpaper
+		echo "Salvando $url em" $tmp_wallpaper
 		sleep $tempo
 		echo $url >> $tmp_wallpaper
-	else
-		echo "Removendo arquivo:" $nome_arquivo	
+	elif [[ $executa == "2" ]]; then
+		echo "Removendo arquivo" $nome_arquivo	
 		sleep $tempo
+	else
+		echo "Saindo do programa..."
+		sleep $tempo
+		exit 0
 	fi   
 }
 
